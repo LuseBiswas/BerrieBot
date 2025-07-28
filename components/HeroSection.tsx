@@ -1,10 +1,11 @@
 import { ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center pt-24 px-4 sm:px-6">
       {/* Beta Badge */}
-      <div className="mb-8 sm:mb-12">
+      <div className="mb-8 sm:mb-12 mt-10">
         <div className="inline-flex items-center bg-[#6FB5B27A] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm font-medium">
           <span className="font-bold">BerriBot</span>
           <span className="ml-2 text-white/90">is currently in beta</span>
@@ -45,6 +46,20 @@ export default function HeroSection() {
           Book a Demo
           <ChevronRight className="inline-block ml-2 w-4 sm:w-5 h-4 sm:h-5" />
         </button>
+      </div>
+
+      {/* Screenshot */}
+      <div className="w-full max-w-8xl mx-auto px-4 sm:px-6">
+        <div className="relative w-full rounded-lg overflow-hidden shadow-2xl">
+          <Image
+            src="/image/screenshot_1.png"
+            alt="BerriBot Dashboard Screenshot"
+            width={1920}
+            height={1080}
+            className="w-full h-auto"
+            priority
+          />
+        </div>
       </div>
     </section>
   );
