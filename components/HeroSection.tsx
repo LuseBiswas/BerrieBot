@@ -14,24 +14,28 @@ export default function HeroSection() {
 
       {/* Main Heading */}
       <div className="text-center max-w-5xl mx-auto px-6">
-        <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold leading-tight mb-16">
-          <span className="bg-gradient-to-r from-gray-300 via-white to-gray-400 bg-clip-text text-transparent">
+        <h1 className="text-6xl sm:text-7xl lg:text-8xl font-medium tracking-[-3.69px] mb-16">
+          <span className="bg-gradient-to-br from-[#FFFFFF] to-[#037F79] bg-clip-text text-transparent">
             Meet the most
           </span>
           <br />
-          <span className="bg-gradient-to-r from-teal-300 via-teal-400 to-teal-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-br from-[#FFFFFF] to-[#037F79] bg-clip-text text-transparent">
             complete AI
           </span>
           <br />
-          <span className="bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-br from-[#FFFFFF] to-[#037F79] bg-clip-text text-transparent">
             recruiting platform
           </span>
         </h1>
+
+        <p className="text-[20px] leading-[26px] font-normal text-white/90 max-w-3xl mx-auto mb-8">
+          Hire high-quality candidates at scale with AI that <br /> screens, verifies and interviews with a human touch.
+        </p>
       </div>
 
       {/* CTA Button */}
       <div className="mt-8">
-        <button className="bg-teal-400 text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-teal-500 transition-colors">
+        <button className="bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-teal-500 transition-colors">
           Book a Demo
           <ChevronRight className="inline-block ml-2 w-5 h-5" />
         </button>
