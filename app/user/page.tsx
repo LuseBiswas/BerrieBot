@@ -1,5 +1,6 @@
 import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
+import CompaniesSection from "@/components/CompaniesSection";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <NavBar />
       <main className="flex-1 w-full">
         <HeroSection />
+        <CompaniesSection />
       </main>
     </div>
   );
