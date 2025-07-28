@@ -15,8 +15,8 @@ export default function NavBar() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50">
-        <div className="mx-4 my-4 rounded-2xl bg-[#00C7BEE0]">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-4">
+        <div className="mx-2 my-3 rounded-2xl bg-[#00C7BEE0]">
+          <div className="mx-auto flex max-w-8xl items-center justify-between px-16 py-3">
             {/* Desktop - Left side - Navigation Links */}
             <div className="hidden lg:flex items-center space-x-8">
               <Link href="/product" className="text-black/80 font-medium hover:text-black transition-colors">
