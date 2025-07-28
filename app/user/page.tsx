@@ -1,6 +1,7 @@
 import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
 import CompaniesSection from "@/components/CompaniesSection";
+import Thought from "@/components/Thought";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <main className="flex-1 w-full">
         <HeroSection />
         <CompaniesSection />
+        <Thought />
       </main>
     </div>
   );
