@@ -4,6 +4,7 @@ import CompaniesSection from "@/components/CompaniesSection";
 import Thought from "@/components/Thought";
 import FeaturesSection from "@/components/FeaturesSection";
 import TestimonialSection from "@/components/TestimonialSection";
+import Message from "@/components/Message";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Thought />
         <FeaturesSection />
         <TestimonialSection />
+        <Message />
       </main>
     </div>
   );

@@ -30,7 +30,7 @@ export default function TestimonialSection() {
         </div>
 
         {/* Overlapping Cards Layout */}
-        <div className="relative min-h-[950px] max-w-5xl mx-auto">
+        <div className="relative min-h-[750px] max-w-5xl mx-auto">
           {/* Recruiters Card (top-left) */}
           <div className="my-8 lg:my-0 lg:absolute lg:top-0 lg:left-[-300] lg:w-[48%] z-20">
             <TestimonialCard
@@ -52,7 +52,7 @@ export default function TestimonialSection() {
           </div>
 
            {/* CHROs & Leaders Card (bottom-left) */}
-           <div className="my-8 lg:my-0 lg:absolute lg:bottom-[350] lg:left-[120] lg:w-[48%] z-10">
+           <div className="my-8 lg:my-0 lg:absolute lg:bottom-[150] lg:left-[120] lg:w-[48%] z-10">
             <TestimonialCard
               variant="gray"
               title="CHROs & Leaders"
@@ -91,7 +91,7 @@ export default function TestimonialSection() {
          
 
           {/* Compliance Card (bottom-right) */}
-          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[300] lg:right-[-280] lg:w-[48%] z-40">
+          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[80] lg:right-[-280] lg:w-[48%] z-40">
             <TestimonialCard
               variant="gray"
               title="Compliance"
