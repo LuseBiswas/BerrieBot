@@ -13,10 +13,10 @@ export default function TestimonialCard({
   variant,
   icon 
 }: TestimonialCardProps) {
-  const baseClasses = "rounded-[32px] p-8 relative overflow-hidden";
+  const baseClasses = "rounded-[32px] p-8 relative overflow-hidden backdrop-blur-md";
   const variantClasses = variant === 'blue' 
-    ? "bg-[#6FB5B2]" 
-    : "bg-gray-800/30 border border-gray-600/30";
+    ? "bg-[#04BBA6]" 
+    : "bg-gray-800/10 border border-gray-600/50";
   
   const textColor = variant === 'blue' ? "text-black" : "text-white";
   const buttonClasses = variant === 'blue'
@@ -26,7 +26,7 @@ export default function TestimonialCard({
   return (
     <div className={`${baseClasses} ${variantClasses}`}>
       {/* Background decorative circle */}
-      <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/10"></div>
+      {/* <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/10"></div> */}
       
       {/* Icon */}
       {icon && (
