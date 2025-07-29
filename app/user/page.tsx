@@ -5,6 +5,7 @@ import Thought from "@/components/Thought";
 import FeaturesSection from "@/components/FeaturesSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import Message from "@/components/Message";
+import DemoCarousel from "@/components/DemoCarousel";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <FeaturesSection />
         <TestimonialSection />
         <Message />
+        <DemoCarousel />
       </main>
     </div>
   );
