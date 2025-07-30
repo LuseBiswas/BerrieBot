@@ -1,7 +1,7 @@
 'use client';
 import { ChevronRight } from 'lucide-react';
-import { motion, useReducedMotion, easeInOut, useScroll, useSpring } from 'framer-motion';
-import React from 'react';
+import { motion, useReducedMotion, easeInOut, useScroll, useSpring, useTransform } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
 
 /* ---------- animation preset ---------- */
 const BOX_VARIANTS = {
@@ -11,6 +11,42 @@ const BOX_VARIANTS = {
     transition: { duration: 3, repeat: Infinity, ease: easeInOut },
   },
 };
+
+// Characters to cycle through during scramble
+const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+function TextScramble({ currentText }: { currentText: string }) {
+  const [displayText, setDisplayText] = useState(currentText);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    if (displayText === currentText) return;
+    setIsAnimating(true);
+
+    const interval = setInterval(() => {
+      setDisplayText(prev => {
+        if (prev === currentText) {
+          clearInterval(interval);
+          setIsAnimating(false);
+          return prev;
+        }
+
+        return prev.split('').map((char, i) => {
+          if (char === currentText[i]) return char;
+          return chars[Math.floor(Math.random() * chars.length)];
+        }).join('');
+      });
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [currentText]);
+
+  return (
+    <div className="font-['Dogica_Pixel'] text-[24px] tracking-[1px]">
+      {displayText}
+    </div>
+  );
+}
 
 /* ---------- box positions (unchanged) ---------- */
 const BOXES = [
@@ -27,11 +63,34 @@ export default function HeroSection() {
     target: ref,
     offset: ["start start", "end start"]
   });
+  
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001
   });
+
+  const [displayText, setDisplayText] = useState("APPLY");
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.onChange(latest => {
+      // APPLY->OFFER: trigger at 60%, complete at 65% (scroll down)
+      // OFFER->APPLY: trigger at 65%, complete at 60% (scroll up)
+      if (latest >= 0.65) {
+        setDisplayText("OFFER");
+      } else if (latest <= 0.6) {
+        setDisplayText("APPLY");
+      } else {
+        // Between 0.6 and 0.65, trigger scramble effect
+        setDisplayText(prev => {
+          if (prev === "APPLY") return "OFFER";
+          if (prev === "OFFER") return "APPLY";
+          return prev;
+        });
+      }
+    });
+    return unsubscribe;
+  }, [scrollYProgress]);
 
   return (
     <section
@@ -93,9 +152,9 @@ export default function HeroSection() {
         </motion.button>
       </div>
 
-      {/* OFFER text */}
-      <div className="absolute -bottom-20 right-4 text-white" style={{ fontFamily: 'Dogica Pixel', fontSize: '24px', letterSpacing: '1px' }}>
-        OFFER
+      {/* Text scramble effect */}
+      <div className="absolute -bottom-20 right-4 text-white">
+        <TextScramble currentText={displayText} />
       </div>
 
       {/* Progress bar at bottom of section */}
