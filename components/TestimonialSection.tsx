@@ -19,59 +19,51 @@ export default function TestimonialSection() {
             />
             
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-inter font-[500] leading-snug">
-              <span className="text-white">Wondering why</span><br />
-              <span className="text-[#04BBA6]">BerriBot</span>{" "}
+              <span className="text-[#04BBA6]">One Platform.</span>{" "}
+              <span className="text-white">Every</span><br />
+              
               <span className="bg-gradient-to-b from-white to-gray-500 bg-clip-text text-transparent">
-                is built for<br />
-                modern hiring?
+               Recruiting Task.
               </span>
             </h2>
+            <p className="mt-6 text-lg sm:text-xl lg:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+              From outreach to offer, the Berri Suite delivers speed, <br /> accuracy, and security—on autopilot.
+            </p>
           </div>
         </div>
 
         {/* Overlapping Cards Layout */}
         <div className="relative min-h-[750px] max-w-5xl mx-auto">
           {/* Recruiters Card (top-left) */}
-          <div className="my-8 lg:my-0 lg:absolute lg:top-0 lg:left-[-300] lg:w-[48%] z-20">
+          <div className="my-8 lg:my-0 lg:absolute lg:top-0 lg:left-[-200] lg:w-[48%] z-20">
             <TestimonialCard
               variant="gray"
               title="Recruiters"
               description="Let AI handle repetitive tasks, so you can focus on decisions."
               buttonText="Learn More"
-              icon={
-                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2"/>
-                  <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2"/>
-                </svg>
-              </div>
-            }
-          />
+              profileImage={{
+                src: "/image/profile/profile_3.jpg",
+                alt: "Recruiter Profile"
+              }}
+            />
           </div>
 
-           {/* CHROs & Leaders Card (bottom-left) */}
-           <div className="my-8 lg:my-0 lg:absolute lg:bottom-[150] lg:left-[120] lg:w-[48%] z-10">
+          {/* CHROs & Leaders Card (bottom-left) */}
+          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[110] lg:left-[220] lg:w-[48%] z-10">
             <TestimonialCard
               variant="gray"
               title="CHROs & Leaders"
               description="Reduce cost per hire, stop fraud, and deliver enterprise-wide scale—without adding headcount."
               buttonText="Learn More"
-              icon={
-                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2"/>
-                  <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2"/>
-                  <polyline points="16,11 18,13 22,9" stroke="currentColor" strokeWidth="2"/>
-                </svg>
-              </div>
-            }
-          />
+              profileImage={{
+                src: "/image/profile/profile_2.jpg",
+                alt: "CHRO Profile"
+              }}
+            />
           </div>
 
           {/* Candidates Card (center, prominent) */}
-          <div className="my-8 lg:my-0 lg:absolute lg:top-[100] lg:left-[650] lg:-translate-x-1/2 lg:w-[48%] z-30">
+          {/* <div className="my-8 lg:my-0 lg:absolute lg:top-[100] lg:left-[650] lg:-translate-x-1/2 lg:w-[48%] z-30">
             <TestimonialCard
               variant="blue"
               title="Candidates"
@@ -86,27 +78,22 @@ export default function TestimonialSection() {
               </div>
             }
           />
-          </div>
+          </div> */}
 
          
 
           {/* Compliance Card (bottom-right) */}
-          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[80] lg:right-[-280] lg:w-[48%] z-40">
+          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[350] lg:right-[-80] lg:w-[48%] z-40">
             <TestimonialCard
               variant="gray"
               title="Compliance"
               description="Bias-tested. Audit-ready. Secure by design. Built for DDPR, GDPR, NYC 144."
               buttonText="Learn More"
-              icon={
-                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" strokeWidth="2"/>
-                  <circle cx="12" cy="16" r="1" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" strokeWidth="2"/>
-                </svg>
-              </div>
-            }
-          />
+              profileImage={{
+                src: "/image/profile/profile_1.jpg",
+                alt: "Compliance Profile"
+              }}
+            />
           </div>
         </div>
       </div>

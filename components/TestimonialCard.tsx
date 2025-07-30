@@ -1,9 +1,14 @@
+import Image from 'next/image';
+
 interface TestimonialCardProps {
   title: string;
   description: string;
   buttonText: string;
   variant: 'blue' | 'gray';
-  icon?: React.ReactNode;
+  profileImage?: {
+    src: string;
+    alt: string;
+  };
 }
 
 export default function TestimonialCard({ 
@@ -11,7 +16,7 @@ export default function TestimonialCard({
   description, 
   buttonText, 
   variant,
-  icon 
+  profileImage 
 }: TestimonialCardProps) {
   const baseClasses = "rounded-[32px] p-8 relative overflow-hidden backdrop-blur-md";
   const variantClasses = variant === 'blue' 
@@ -25,13 +30,18 @@ export default function TestimonialCard({
 
   return (
     <div className={`${baseClasses} ${variantClasses}`}>
-      {/* Background decorative circle */}
-      {/* <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/10"></div> */}
-      
-      {/* Icon */}
-      {icon && (
+      {/* Profile Image */}
+      {profileImage && (
         <div className="mb-6">
-          {icon}
+          <div className={`w-20 h-20 rounded-full overflow-hidden ${variant === 'blue' ? 'bg-white/20' : 'bg-white/10'} flex items-center justify-center`}>
+            <Image
+              src={profileImage.src}
+              alt={profileImage.alt}
+              width={80}
+              height={80}
+              className="object-cover w-full h-full"
+            />
+          </div>
         </div>
       )}
 

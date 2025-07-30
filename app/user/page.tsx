@@ -14,8 +14,8 @@ export default function Home() {
       <main className="flex-1 w-full">
         <HeroSection />
         <CompaniesSection />
-        <Thought />
-        <FeaturesSection />
+        {/* <Thought />
+        <FeaturesSection /> */}
         <TestimonialSection />
         <Message />
         <DemoCarousel />
