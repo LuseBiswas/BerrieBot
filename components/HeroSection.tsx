@@ -93,6 +93,11 @@ export default function HeroSection() {
         </motion.button>
       </div>
 
+      {/* OFFER text */}
+      <div className="absolute -bottom-28 right-4 text-white" style={{ fontFamily: 'Dogica Pixel', fontSize: '24px', letterSpacing: '1px' }}>
+        OFFER
+      </div>
+
       {/* Progress bar at bottom of section */}
       <div className="absolute -bottom-36 left-0 right-0 h-2 bg-[#04BBA6]">
         <motion.div
