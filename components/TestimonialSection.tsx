@@ -38,8 +38,8 @@ export default function TestimonialSection() {
           <div className="my-8 lg:my-0 lg:absolute lg:top-0 lg:left-[-200] lg:w-[48%] z-20">
             <TestimonialCard
               variant="gray"
-              title="Recruiters"
-              description="Let AI handle repetitive tasks, so you can focus on decisions."
+              title="Digital Recruiter"
+              description="Automatically search, connect and followup with candidates without getting overwhelmed."
               buttonText="Learn More"
               profileImage={{
                 src: "/image/profile/profile_3.jpg",
@@ -49,11 +49,11 @@ export default function TestimonialSection() {
           </div>
 
           {/* CHROs & Leaders Card (bottom-left) */}
-          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[110] lg:left-[220] lg:w-[48%] z-10">
+          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[310] lg:left-[220] lg:w-[48%] z-10">
             <TestimonialCard
               variant="gray"
-              title="CHROs & Leaders"
-              description="Reduce cost per hire, stop fraud, and deliver enterprise-wide scale—without adding headcount."
+              title="Digital Interviewer"
+              description="Schedule and assess candidate skills with a 24/7 Agentic interviewer."
               buttonText="Learn More"
               profileImage={{
                 src: "/image/profile/profile_2.jpg",
@@ -83,11 +83,11 @@ export default function TestimonialSection() {
          
 
           {/* Compliance Card (bottom-right) */}
-          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[350] lg:right-[-80] lg:w-[48%] z-40">
+          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[450] lg:right-[-80] lg:w-[48%] z-40">
             <TestimonialCard
               variant="gray"
-              title="Compliance"
-              description="Bias-tested. Audit-ready. Secure by design. Built for DDPR, GDPR, NYC 144."
+              title="Digital Proctor"
+              description="Find verified candidates with advanced fraud detection, biometrics and authentication systems."
               buttonText="Learn More"
               profileImage={{
                 src: "/image/profile/profile_1.jpg",
