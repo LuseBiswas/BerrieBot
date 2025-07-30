@@ -2,20 +2,20 @@ import Image from "next/image";
 
 export default function CompaniesSection() {
   return (
-    <section className="py-16 sm:py-24">
+    <section className="py-16 sm:py-3.5 bg-[#E0E0E0]">
       <div className="relative">
         {/* Horizontal lines that extend full width */}
-        <div className="absolute left-0 right-0 top-0 h-[1px] bg-white/30" />
-        <div className="absolute left-0 right-0 top-[96px] h-[1px] bg-white/30" />
-        <div className="absolute left-0 right-0 bottom-[96px] h-[1px] bg-white/30" />
-        <div className="absolute left-0 right-0 bottom-0 h-[1px] bg-white/30" />
+        <div className="absolute left-0 right-0 top-0 h-[1px] bg-black" />
+        <div className="absolute left-0 right-0 top-[96px] h-[1px] bg-black" />
+        <div className="absolute left-0 right-0 bottom-[96px] h-[1px] bg-black" />
+        <div className="absolute left-0 right-0 bottom-0 h-[1px] bg-black" />
         
         {/* Content container with vertical lines */}
         <div className="px-4 sm:px-6">
           <div className="max-w-7xl mx-auto relative">
             {/* Vertical lines */}
-            <div className="absolute inset-y-0 left-[16.666%] border-l border-white/30 pointer-events-none hidden lg:block" />
-            <div className="absolute inset-y-0 right-0 border-l border-white/30 pointer-events-none hidden lg:block" />
+            <div className="absolute inset-y-0 left-[16.666%] border-l border-black pointer-events-none hidden lg:block" />
+            <div className="absolute inset-y-0 right-0 border-l border-black pointer-events-none hidden lg:block" />
 
             {/* Single grid controlling all three rows */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
@@ -32,7 +32,7 @@ export default function CompaniesSection() {
                   key={c.alt}
                   className={`p-8 flex items-center justify-center h-24 ${
                     i < 5 ? "lg:border-r" : ""
-                  } lg:border-white/30`}
+                  } lg:border-black`}
                 >
                   <Image
                     src={c.src}
@@ -46,7 +46,7 @@ export default function CompaniesSection() {
 
               {/* --- Testimonial row (spans full width) --- */}
               <div className="col-span-2 sm:col-span-3 lg:col-span-6 relative py-16 px-8 text-center">
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-white leading-tight mx-auto max-w-2xl">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#3D3D3D] leading-tight mx-auto max-w-2xl">
                   Used by teams at Cognizant,
                   <br />
                   Wipro, LTIMindtree,
@@ -57,7 +57,7 @@ export default function CompaniesSection() {
 
               {/* --- Bottom logos row --- */}
               {/* Col 1 spacer to keep the first vertical line continuous */}
-              <div className="hidden lg:block border-r border-white/30" />
+              <div className="hidden lg:block border-r border-black" />
 
               {/* Cols 2–6: 5 logos */}
               {[
@@ -71,7 +71,7 @@ export default function CompaniesSection() {
                   key={c.alt}
                   className={`p-8 flex items-center justify-center h-24 ${
                     i < 4 ? "lg:border-r" : ""
-                  } lg:border-white/30`}
+                  } lg:border-black`}
                 >
                   <Image
                     src={c.src}

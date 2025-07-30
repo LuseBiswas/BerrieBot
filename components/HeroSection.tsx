@@ -94,12 +94,12 @@ export default function HeroSection() {
       </div>
 
       {/* OFFER text */}
-      <div className="absolute -bottom-28 right-4 text-white" style={{ fontFamily: 'Dogica Pixel', fontSize: '24px', letterSpacing: '1px' }}>
+      <div className="absolute -bottom-20 right-4 text-white" style={{ fontFamily: 'Dogica Pixel', fontSize: '24px', letterSpacing: '1px' }}>
         OFFER
       </div>
 
       {/* Progress bar at bottom of section */}
-      <div className="absolute -bottom-36 left-0 right-0 h-2 bg-[#04BBA6]">
+      <div className="absolute -bottom-25 left-0 right-0 h-2 bg-[#04BBA6]">
         <motion.div
           className="h-full bg-white origin-left"
           style={{ scaleX }}
