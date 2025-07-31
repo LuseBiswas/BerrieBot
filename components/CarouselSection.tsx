@@ -47,7 +47,7 @@ export default function CarouselSection() {
   }, []);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center py-20">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center ">
       {/* Background grid pattern */}
       <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-20" />
       
