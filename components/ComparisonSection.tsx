@@ -1,5 +1,5 @@
 "use client";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -25,6 +25,15 @@ const COMPARISON_DATA = [
 export default function ComparisonSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  
+  // Scroll progress for the line animation
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  // Transform scroll progress to line height
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section
@@ -34,8 +43,11 @@ export default function ComparisonSection() {
       {/* Background grid pattern */}
       <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-0" />
 
-      {/* Central green line */}
-      <div className="pointer-events-none absolute left-1/2 top-0 bottom-0 w-px bg-[#04BBA6]" />
+      {/* Central green line - animated with scroll */}
+      <motion.div 
+        className="pointer-events-none absolute left-1/2 top-0 w-px bg-[#04BBA6]"
+        style={{ height: lineHeight }}
+      />
 
       <motion.div
         className="relative z-10 w-full max-w-6xl mx-auto text-center"
@@ -61,7 +73,7 @@ export default function ComparisonSection() {
           </h2>
 
                      {/* Before/After indicator with arrows */}
-           <div className="flex items-center justify-center gap-8 px-8 py-64">
+           <div className="flex items-center justify-center gap-8 px-8 pt-64">
              {/* Left Side - Arrow with text below */}
              <div className="flex flex-col items-center gap-4">
                <div className="flex items-center">
@@ -91,48 +103,42 @@ export default function ComparisonSection() {
            </div>
         </div>
 
-        {/* Comparison grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {COMPARISON_DATA.map((item, index) => (
-            <motion.div
-              key={index}
-              className="relative"
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={
-                isInView
-                  ? { opacity: 1, x: 0 }
-                  : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }
-              }
-              transition={{
-                duration: 0.6,
-                delay: index * 0.1,
-                ease: "easeOut",
-              }}
-            >
-              <div className="bg-[#101010] border border-gray-700 rounded-xl p-8 text-center">
-                <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-gray-400 mb-2">
-                    BEFORE
-                  </h3>
-                  <p className="text-white text-xl leading-relaxed">
-                    {item.before}
-                  </p>
-                </div>
+                 {/* Comparison table */}
+         <div className="w-[1054px] mx-auto mt-16 relative">
+           <table className="w-full">
+             <tbody>
+               {COMPARISON_DATA.map((item, index) => (
+                 <motion.tr
+                   key={index}
+                   initial={{ opacity: 0, y: 50 }}
+                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                   transition={{
+                     duration: 0.6,
+                     delay: index * 0.1,
+                     ease: "easeOut",
+                   }}
+                 >
+                   <td className="p-8 text-center border-t border-white/20">
+                     <div className="w-[180px] mx-auto">
+                       <p className="text-white text-[22px] leading-relaxed ">
+                         {item.before}
+                       </p>
+                     </div>
+                   </td>
+                   <td className="p-8 text-center border-t border-white/20">
+                     <div className="w-[180px] mx-auto">
+                       <p className="text-white text-[22px] leading-relaxed">
+                         {item.after}
+                       </p>
+                     </div>
+                   </td>
+                 </motion.tr>
+               ))}
+             </tbody>
+           </table>
+           
 
-                <div className="w-px h-8 bg-gray-600 mx-auto my-4"></div>
-
-                <div>
-                  <h3 className="text-lg font-semibold text-green-400 mb-2">
-                    AFTER
-                  </h3>
-                  <p className="text-white text-xl leading-relaxed">
-                    {item.after}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+         </div>
       </motion.div>
     </section>
   );
