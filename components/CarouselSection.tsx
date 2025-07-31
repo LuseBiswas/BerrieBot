@@ -1,6 +1,7 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
+import { Clock } from 'lucide-react';
 
 const SLIDES = [
   {
@@ -65,38 +66,56 @@ export default function CarouselSection() {
           </div>
 
         {/* Slide indicators - centered */}
-        <div className="flex justify-center flex-wrap gap-4 mb-12">
+        <div className="flex justify-center items-center gap-4 mb-12">
           {SLIDES.map((slide, index) => (
             <div key={slide.id} className="relative">
-              <motion.div
-                className={`px-6 py-3 rounded-lg border-2 cursor-pointer transition-all duration-300 ${
-                  index === currentSlide 
-                    ? 'border-teal-400 bg-teal-400/10' 
-                    : 'border-gray-600 hover:border-gray-500'
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  setCurrentSlide(index);
-                  setProgress(0);
-                }}
-              >
-                <span className={`font-semibold text-sm ${
-                  index === currentSlide ? 'text-teal-400' : 'text-gray-400'
-                }`}>
-                  {slide.title}
-                </span>
-                
-                {/* Progress fill animation */}
-                {index === currentSlide && (
+              {index === currentSlide ? (
+                // Active slide - wider box with teal background
+                <motion.div
+                  layout
+                  className="border-2 border-[#04BBA6] rounded-lg cursor-pointer relative overflow-hidden bg-[#181818]"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setCurrentSlide(index);
+                    setProgress(0);
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  {/* Teal fill animation - fills from left to right */}
                   <motion.div
-                    className="absolute bottom-0 left-0 h-1 bg-teal-400 rounded-b-lg"
+                    className="absolute top-0 left-0 bottom-0 bg-[#04BBA6]"
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.1, ease: "linear" }}
                   />
-                )}
-              </motion.div>
+                  
+                  <div className="px-8 py-4 relative z-10">
+                    <span className="font-medium font-inter text-base text-[#181818]">
+                      {slide.title}
+                    </span>
+                  </div>
+                </motion.div>
+              ) : (
+                // Inactive slide - square box with icon
+                <motion.div
+                  layout
+                  className="w-16 h-16 border-2 border-teal-400 rounded-lg cursor-pointer flex items-center justify-center bg-[#181818]"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setCurrentSlide(index);
+                    setProgress(0);
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                  <Clock className="w-6 h-6 text-gray-400" />
+                </motion.div>
+              )}
             </div>
           ))}
         </div>
