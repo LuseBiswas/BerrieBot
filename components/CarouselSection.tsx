@@ -1,7 +1,7 @@
 'use client';
-import { motion, AnimatePresence } from 'framer-motion';
-import React, { useState, useEffect } from 'react';
-import { Clock } from 'lucide-react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { Clock, Plus } from 'lucide-react';
 
 const SLIDES = [
   {
@@ -29,6 +29,8 @@ const SLIDE_DURATION = 5000; // 5 seconds
 export default function CarouselSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progress, setProgress] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -45,11 +47,44 @@ export default function CarouselSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 py-20">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center py-20">
       {/* Background grid pattern */}
       <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-20" />
       
-      <div className="relative z-10 w-full max-w-6xl mx-auto text-center">
+      <motion.div 
+        className="relative z-10 w-full text-center bg-[#101010] rounded-3xl p-12"
+        initial={{ opacity: 0, y: 100, scale: 0.9 }}
+        animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 100, scale: 0.9 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        {/* Grid pattern with + signs at grid intersections */}
+        <div className="absolute inset-0 rounded-3xl overflow-hidden -z-10">
+          {/* Grid lines */}
+          <div className="absolute inset-0 grid grid-cols-12 grid-rows-12">
+            {Array.from({ length: 144 }, (_, i) => (
+              <div key={i} className="border border-[#191919]" />
+            ))}
+          </div>
+          
+          {/* + signs at every grid intersection */}
+          <div className="absolute top-0 left-0 w-full h-full">
+            {Array.from({ length: 13 }, (_, row) => 
+              Array.from({ length: 13 }, (_, col) => (
+                <div 
+                  key={`${row}-${col}`}
+                  className="absolute text-[#191919]"
+                  style={{
+                    top: `${row * (100/12)}%`,
+                    left: `${col * (100/12)}%`,
+                    transform: 'translate(-50%, -50%)'
+                  }}
+                >
+                  <Plus className="w-9 h-9" />
+                </div>
+              ))
+            )}
+          </div>
+        </div>
         
                   {/* Headline */}
           <div className="space-y-4 mb-12">
@@ -149,7 +184,7 @@ export default function CarouselSection() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 } 
