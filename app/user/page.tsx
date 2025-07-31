@@ -1,6 +1,7 @@
 import NavBar from "@/components/NavBar";
 import HeroSection from "@/components/HeroSection";
 import CompaniesSection from "@/components/CompaniesSection";
+import CarouselSection from "@/components/CarouselSection";
 import Thought from "@/components/Thought";
 import FeaturesSection from "@/components/FeaturesSection";
 import TestimonialSection from "@/components/TestimonialSection";
@@ -14,6 +15,7 @@ export default function Home() {
       <main className="flex-1 w-full">
         <HeroSection />
         <CompaniesSection />
+        <CarouselSection />
         {/* <Thought />
         <FeaturesSection /> */}
         <TestimonialSection />
