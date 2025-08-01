@@ -10,6 +10,7 @@ import TestimonialSection from "@/components/TestimonialSection";
 import Message from "@/components/Message";
 import DemoCarousel from "@/components/DemoCarousel";
 import ProductFeature from "@/components/ProductFeature";
+import StatsSection from "@/components/StatsSection";
 
 export default function Home() {
 
@@ -26,6 +27,7 @@ export default function Home() {
         <FeatureCard />
         <ComparisonSection />
         <ProductFeature />
+        <StatsSection />
         <Message />
         <DemoCarousel />
       </main>
