@@ -35,6 +35,17 @@ export default function ComparisonSection() {
   // Transform scroll progress to line height
   const lineHeight = useTransform(scrollYProgress, [0.18, 1], ["0%", "100%"]);
 
+  // Create scroll-based animations for each row with staggered timing
+  const createRowAnimations = (index: number) => {
+    const baseStart = 0.4 + (index * 0.08); // Stagger start times - delayed start
+    const baseEnd = 0.8 - (index * 0.05);   // Stagger end times
+    
+    const opacity = useTransform(scrollYProgress, [baseStart, baseStart + 0.3, baseEnd, baseEnd + 0.15], [0, 1, 1, 0]);
+    const y = useTransform(scrollYProgress, [baseStart, baseStart + 0.3, baseEnd, baseEnd + 0.15], [40, 0, 0, -40]);
+    
+    return { opacity, y };
+  };
+
   return (
     <section
       ref={ref}
@@ -103,37 +114,46 @@ export default function ComparisonSection() {
            </div>
         </div>
 
-                 {/* Comparison table */}
+                 {/* Comparison table with individual content animations */}
          <div className="w-[1054px] mx-auto mt-16 relative">
            <table className="w-full">
              <tbody>
-               {COMPARISON_DATA.map((item, index) => (
-                 <motion.tr
-                   key={index}
-                   initial={{ opacity: 0, y: 50 }}
-                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                   transition={{
-                     duration: 0.6,
-                     delay: index * 0.1,
-                     ease: "easeOut",
-                   }}
-                 >
-                   <td className="p-8 text-center border-t border-white/20">
-                     <div className="w-[180px] mx-auto">
-                       <p className="text-white text-[22px] leading-relaxed ">
-                         {item.before}
-                       </p>
-                     </div>
-                   </td>
-                   <td className="p-8 text-center border-t border-white/20">
-                     <div className="w-[180px] mx-auto">
-                       <p className="text-white text-[22px] leading-relaxed">
-                         {item.after}
-                       </p>
-                     </div>
-                   </td>
-                 </motion.tr>
-               ))}
+               {COMPARISON_DATA.map((item, index) => {
+                 const { opacity, y } = createRowAnimations(index);
+                 
+                 return (
+                   <tr key={index}>
+                     <td className="p-8 text-center border-t border-white/20">
+                       <div className="w-[180px] mx-auto">
+                         <motion.p 
+                           className="text-white text-[22px] leading-relaxed"
+                           style={{ 
+                             opacity, 
+                             y,
+                             willChange: 'transform'
+                           }}
+                         >
+                           {item.before}
+                         </motion.p>
+                       </div>
+                     </td>
+                     <td className="p-8 text-center border-t border-white/20">
+                       <div className="w-[180px] mx-auto">
+                         <motion.p 
+                           className="text-white text-[22px] leading-relaxed"
+                           style={{ 
+                             opacity, 
+                             y,
+                             willChange: 'transform'
+                           }}
+                         >
+                           {item.after}
+                         </motion.p>
+                       </div>
+                     </td>
+                   </tr>
+                 );
+               })}
              </tbody>
            </table>
            

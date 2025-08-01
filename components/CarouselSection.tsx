@@ -128,7 +128,7 @@ export default function CarouselSection() {
                   />
                   
                   <div className="px-8 py-4 relative z-10">
-                    <span className="font-medium font-inter text-base text-[#181818]">
+                    <span className="font-medium font-inter text-base text-white">
                       {slide.title}
                     </span>
                   </div>
