@@ -43,7 +43,7 @@ const FEATURES = [
 
 export default function FeatureCard() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { margin: "-100px" });
   
   // Scroll progress for the line animation
   const { scrollYProgress } = useScroll({
@@ -51,13 +51,18 @@ export default function FeatureCard() {
     offset: ["start end", "end start"]
   });
   
-  // Transform scroll progress to line height
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  // Transform scroll progress to line height - sync with CompaniesSection
+  const lineHeight = useTransform(scrollYProgress, [0, 0.8], ["0%", "100%"]);
+
+  // Transform scroll progress for card animations
+  const leftCardX = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [-400, 0, 0, -400]);
+  const rightCardX = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [400, 0, 0, 400]);
+  const cardOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
   return (
     <section
       ref={ref}
-      className="relative h-[1930px] flex items-center justify-center py-20 mb-11"
+      className="relative h-[1930px] flex items-center justify-center py-20 "
     >
       {/* background grid */}
       <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-20" />
@@ -95,9 +100,21 @@ export default function FeatureCard() {
         {/* Top Left */}
         <motion.div 
           className="absolute bottom-200 right-290 w-80"
-          initial={{ x: -400, opacity: 0 }}
-          animate={isInView ? { x: 0, opacity: 1 } : { x: -400, opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          style={{ 
+            x: leftCardX,
+            opacity: cardOpacity
+          }}
+          animate={isInView ? { 
+            y: [0, -8, 0] // Floating up and down
+          } : {}}
+          transition={{ 
+            y: { 
+              duration: 5, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: 2
+            }
+          }}
         >
           <FeatureCardItem
             icon="/image/icons/clock.png"
@@ -111,10 +128,21 @@ export default function FeatureCard() {
         {/* Top Right */}
         <motion.div 
           className="absolute bottom-180 left-235 w-80"
-          initial={{ x: 200, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
+          style={{ 
+            x: rightCardX,
+            opacity: cardOpacity
+          }}
+          animate={isInView ? { 
+            y: [0, -6, 0] // Floating up and down
+          } : {}}
+          transition={{ 
+            y: { 
+              duration: 6, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: 2.5
+            }
+          }}
         >
           <FeatureCardItem
             icon="/image/icons/contact.png"
@@ -128,10 +156,21 @@ export default function FeatureCard() {
         {/* Middle Left */}
         <motion.div 
           className="absolute top-20 right-340 transform -translate-y-1/2 w-80"
-          initial={{ x: -200, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
+          style={{ 
+            x: leftCardX,
+            opacity: cardOpacity
+          }}
+          animate={isInView ? { 
+            y: [0, -10, 0] // Floating up and down
+          } : {}}
+          transition={{ 
+            y: { 
+              duration: 4, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: 1.5
+            }
+          }}
         >
           <FeatureCardItem
           icon="/image/icons/contact.png"
@@ -145,10 +184,21 @@ export default function FeatureCard() {
         {/* Bottom Left */}
         <motion.div 
           className="absolute top-192 right-280 w-80"
-          initial={{ x: -200, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
+          style={{ 
+            x: leftCardX,
+            opacity: cardOpacity
+          }}
+          animate={isInView ? { 
+            y: [0, -7, 0] // Floating up and down
+          } : {}}
+          transition={{ 
+            y: { 
+              duration: 5.5, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: 3
+            }
+          }}
         >
           <FeatureCardItem
             icon="/image/icons/computer.png"
@@ -162,10 +212,21 @@ export default function FeatureCard() {
         {/* Bottom Right */}
         <motion.div 
           className="absolute top-135 right-[-40] w-80"
-          initial={{ x: 200, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true, margin: "-100px" }}
+          style={{ 
+            x: rightCardX,
+            opacity: cardOpacity
+          }}
+          animate={isInView ? { 
+            y: [0, -9, 0] // Floating up and down
+          } : {}}
+          transition={{ 
+            y: { 
+              duration: 4.5, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: 1
+            }
+          }}
         >
           <FeatureCardItem
             icon="/image/icons/bill.png"

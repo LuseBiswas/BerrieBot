@@ -33,7 +33,7 @@ export default function ComparisonSection() {
   });
   
   // Transform scroll progress to line height
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineHeight = useTransform(scrollYProgress, [0.18, 1], ["0%", "100%"]);
 
   return (
     <section
