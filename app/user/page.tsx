@@ -12,6 +12,7 @@ import DemoCarousel from "@/components/DemoCarousel";
 import ProductFeature from "@/components/ProductFeature";
 import StatsSection from "@/components/StatsSection";
 import CompanyTestimonialSection from "@/components/CompanyTestimonialSection";
+import CTASection from "@/components/CTASection";
 
 export default function Home() {
 
@@ -30,8 +31,8 @@ export default function Home() {
         <ProductFeature />
         <StatsSection />
         <CompanyTestimonialSection />
-        <Message />
-        <DemoCarousel />
+        <CTASection />
+        
       </main>
     </div>
   );
