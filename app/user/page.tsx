@@ -13,6 +13,7 @@ import ProductFeature from "@/components/ProductFeature";
 import StatsSection from "@/components/StatsSection";
 import CompanyTestimonialSection from "@/components/CompanyTestimonialSection";
 import CTASection from "@/components/CTASection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
 
@@ -32,8 +33,8 @@ export default function Home() {
         <StatsSection />
         <CompanyTestimonialSection />
         <CTASection />
-        
       </main>
+      <Footer />
     </div>
   );
 } 
