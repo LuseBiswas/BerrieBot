@@ -15,34 +15,9 @@ export default function NavBar() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50">
-        <div className="mx-2 my-3 rounded-2xl bg-[#00C7BEE0]">
+        <div className="mx-2 my-3 rounded-2xl bg-[#04BBA6]">
           <div className="mx-auto flex max-w-8xl items-center justify-between px-16 py-3">
-            {/* Desktop - Left side - Navigation Links */}
-            <div className="hidden lg:flex items-center space-x-8">
-              <Link href="/product" className="text-black/80 font-medium hover:text-black transition-colors">
-                Product
-              </Link>
-              <Link href="/solution" className="text-black/80 font-medium hover:text-black transition-colors">
-                Solution
-              </Link>
-              <Link href="/resources" className="text-black/80 font-medium hover:text-black transition-colors">
-                Resources
-              </Link>
-              <Link href="/pricing" className="text-black/80 font-medium hover:text-black transition-colors">
-                Pricing
-              </Link>
-            </div>
-
-            {/* Mobile - Hamburger Menu */}
-            <button
-              onClick={toggleMobileMenu}
-              className="lg:hidden text-black hover:text-black/80 transition-colors"
-              aria-label="Toggle mobile menu"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-
-            {/* Center - Logo */}
+            {/* Left side - Logo */}
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 flex items-center justify-center">
                 <Image
@@ -57,17 +32,56 @@ export default function NavBar() {
               <span className="text-xl font-bold text-white">BerriBot</span>
             </Link>
 
-            {/* Desktop - Right side - Action Buttons */}
-            <div className="hidden lg:flex items-center space-x-4">
-              <Link 
-                href="/login" 
-                className="px-8 py-2 text-black border-2 border-black/80 rounded-full font-medium hover:bg-black/5 transition-colors"
-              >
-                Login
-              </Link>
+            {/* Center - Navigation Links */}
+            <div className="hidden lg:flex items-center space-x-8">
+              <div className="relative group">
+                <Link href="/product" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                  Product
+                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </Link>
+              </div>
+              <div className="relative group">
+                <Link href="/solution" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                  Solution
+                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </Link>
+              </div>
+              <div className="relative group">
+                <Link href="/resources" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                  Resource
+                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </Link>
+              </div>
+              <div className="relative group">
+                <Link href="/about" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                  About
+                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Mobile - Hamburger Menu */}
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden text-white hover:text-white/80 transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
+            {/* Right side - Get Started Button */}
+            <div className="hidden lg:flex items-center">
               <Link 
                 href="/signup" 
-                className="px-8 py-2 bg-white rounded-full font-medium text-lg hover:bg-gray-50 transition-colors text-black"
+                className="px-6 py-2 bg-white rounded-full font-medium text-black hover:bg-gray-50 transition-colors"
               >
                 Get Started Free
               </Link>
