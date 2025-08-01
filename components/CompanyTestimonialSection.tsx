@@ -1,5 +1,5 @@
 'use client';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
 import React, { useRef, useState } from 'react';
 
 const TESTIMONIALS = [
@@ -47,7 +47,7 @@ const TESTIMONIALS = [
 
 export default function CompanyTestimonialSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, amount: 0.5 }); // Triggers when 50% of component is in view (centered)
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   const { scrollYProgress } = useScroll({
@@ -58,49 +58,75 @@ export default function CompanyTestimonialSection() {
   // Transform scroll progress for different animations
   const horizontalLinesProgress = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
   const verticalLinesProgress = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
-  const contentProgress = useTransform(scrollYProgress, [0.4, 0.7], [0, 1]);
+  const contentProgress = useTransform(scrollYProgress, [0.3, 0.6], [0, 1]); // Content reveals when component is centered
+  // 0 → 1 between 0 % and 30 % scroll
+const topLineProgress    = useTransform(scrollYProgress, [0.00, 0.30], [0, 1]);
+
+// 0 → 1 between 15 % and 45 % scroll  (starts later, ends later)
+const bottomLineProgress = useTransform(scrollYProgress, [0.25, 0.55], [0, 1]);
 
   return (
     <section ref={ref} className="py-16 sm:py-20 bg-black text-white">
       <div className="relative">
         {/* Horizontal lines that extend full width */}
-        <motion.div 
-          className="absolute left-0 right-0 top-0 h-[1px] bg-white origin-left"
-          style={{ scaleX: horizontalLinesProgress }}
-        />
-        <motion.div 
-          className="absolute left-0 right-0 bottom-0 h-[1px] bg-white origin-left"
-          style={{ scaleX: horizontalLinesProgress }}
-        />
+{/* TOP — grows left → right immediately */}
+<motion.div
+  className="absolute inset-x-0 top-0 h-px bg-white origin-left"
+  style={{ scaleX: topLineProgress }}
+/>
+
+{/* BOTTOM — grows right → left, but only after the delay */}
+<motion.div
+  className="absolute inset-x-0 bottom-0 h-px bg-white origin-right"
+  style={{ scaleX: bottomLineProgress }}
+/>
+
         
         {/* Content container with vertical lines */}
         <div className="px-4 sm:px-6">
           <div className="max-w-7xl mx-auto relative">
             {/* Vertical lines */}
             <motion.div 
-              className="absolute inset-y-0 left-[16.666%] border-l border-white pointer-events-none hidden lg:block origin-top"
+              className="absolute top-[-10%] bottom-[80%] right-[100%] border-l border-white pointer-events-none hidden lg:block origin-top"
               style={{ scaleY: verticalLinesProgress }}
             />
             <motion.div 
-              className="absolute inset-y-0 right-0 border-l border-white pointer-events-none hidden lg:block origin-top"
+              className="absolute top-[80%] bottom-[-10%] right-0 border-l border-white pointer-events-none hidden lg:block origin-bottom"
               style={{ scaleY: verticalLinesProgress }}
             />
 
             {/* Main content */}
-            <motion.div 
-              className="py-20"
-              style={{ opacity: contentProgress }}
-            >
+            <motion.div className="py-20" style={{ opacity: contentProgress }}>
               {/* Floating quote icon */}
               <motion.div
-                className="flex justify-center mb-12"
+                className="absolute top-0 left-[12%] mt-10"
                 initial={{ opacity: 0, y: -20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                animate={isInView ? { 
+                  opacity: 1, 
+                  y: [0, -8, 0], // Floating up and down
+                  rotate: [0, 2, -2, 0] // Slight rotation
+                } : { opacity: 0, y: -20 }}
+                transition={{ 
+                  opacity: { duration: 0.8, delay: 0.2 },
+                  y: { 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    ease: "easeInOut",
+                    delay: 1
+                  },
+                  rotate: { 
+                    duration: 4, 
+                    repeat: Infinity, 
+                    ease: "easeInOut",
+                    delay: 1.5
+                  }
+                }}
               >
-                <div className="text-6xl text-[#04BBA6] transform rotate-12">
-                  "
-                </div>
+                <img 
+                  src="/image/components/inverted_comma.png" 
+                  alt="Quote" 
+                  className="w-16 h-16 object-contain"
+                />
               </motion.div>
 
               {/* Testimonial content */}
@@ -109,30 +135,46 @@ export default function CompanyTestimonialSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
+                layout
               >
-                <motion.h2 
-                  key={activeTestimonial}
-                  className="text-4xl sm:text-5xl lg:text-6xl font-inter font-light leading-tight mb-12"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  "{TESTIMONIALS[activeTestimonial].quote}"
-                </motion.h2>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTestimonial}
+                    className="min-h-[200px] flex flex-col justify-center"
+                    layout
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                  >
+                    <motion.h2 
+                      className="text-4xl sm:text-5xl lg:text-6xl font-inter font-light leading-tight mb-12"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      layout
+                    >
+                      "{TESTIMONIALS[activeTestimonial].quote}"
+                    </motion.h2>
+                  </motion.div>
+                </AnimatePresence>
                 
-                <motion.div
-                  key={`author-${activeTestimonial}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <h3 className="text-2xl font-inter font-medium text-[#04BBA6] mb-2">
-                    {TESTIMONIALS[activeTestimonial].author}
-                  </h3>
-                  <p className="text-lg text-gray-400">
-                    {TESTIMONIALS[activeTestimonial].title}
-                  </p>
-                </motion.div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`author-${activeTestimonial}`}
+                    className="min-h-[80px] flex flex-col justify-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    layout
+                  >
+                    <h3 className="text-2xl font-inter font-medium text-[#04BBA6] mb-2">
+                      {TESTIMONIALS[activeTestimonial].author}
+                    </h3>
+                    <p className="text-lg text-gray-400">
+                      {TESTIMONIALS[activeTestimonial].title}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
               </motion.div>
 
               {/* Company logos */}
