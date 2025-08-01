@@ -20,7 +20,9 @@ interface DropdownProps {
 
 export default function Dropdown({ trigger, sections, className = '' }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOffset, setDropdownOffset] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -45,7 +47,7 @@ export default function Dropdown({ trigger, sections, className = '' }: Dropdown
       className={`relative ${className}`}
     >
       {/* Trigger */}
-      <div className="cursor-pointer" onClick={handleClick}>
+      <div ref={triggerRef} className="cursor-pointer" onClick={handleClick}>
         {trigger}
       </div>
 
@@ -57,9 +59,17 @@ export default function Dropdown({ trigger, sections, className = '' }: Dropdown
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-50"
+            className="absolute top-full left-0 mt-12 z-50"
+            style={{ 
+              transform: `translateX(-76.24px)` 
+            }}
           >
-            <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8 min-w-[600px]">
+            {/* Arrow pointing up */}
+            <div className="absolute -top-2" style={{ left: '30px' }}>
+              <div className="w-4 h-4 bg-white border-l border-t border-gray-100 rotate-45"></div>
+            </div>
+            
+            <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8 min-w-[600px] relative">
               {/* Grid layout for sections */}
               <div className={`grid gap-8 ${sections.length === 2 ? 'grid-cols-2' : sections.length === 3 ? 'grid-cols-3' : 'grid-cols-1'}`}>
                 {sections.map((section, index) => (
