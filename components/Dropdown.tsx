@@ -71,16 +71,20 @@ export default function Dropdown({ trigger, sections, className = '' }: Dropdown
             
             <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-8 min-w-[600px] relative">
               {/* Grid layout for sections */}
-              <div className={`grid gap-8 ${sections.length === 2 ? 'grid-cols-2' : sections.length === 3 ? 'grid-cols-3' : 'grid-cols-1'}`}>
+              <div className={`grid gap-12 ${sections.length === 2 ? 'grid-cols-2' : sections.length === 3 ? 'grid-cols-3' : 'grid-cols-1'}`}>
                 {sections.map((section, index) => (
-                  <div key={index} className="space-y-4">
+                  <div key={index} className="space-y-6">
                     {/* Section Title */}
-                    <h3 className="text-[#04BBA6] font-semibold text-lg uppercase tracking-wide">
-                      {section.title}
-                    </h3>
+                    <div className="h-[20px]">
+                      {section.title && (
+                        <h3 className="text-[#04BBA6] font-inter font-semibold text-[14px] uppercase tracking-wide">
+                          {section.title}
+                        </h3>
+                      )}
+                    </div>
                     
                     {/* Section Items */}
-                    <div className="space-y-3">
+                    <div className="space-y-6">
                       {section.items.map((item, itemIndex) => (
                         <Link
                           key={itemIndex}
@@ -88,11 +92,11 @@ export default function Dropdown({ trigger, sections, className = '' }: Dropdown
                           className="block group"
                           onClick={() => setIsOpen(false)}
                         >
-                          <div className="text-gray-700 font-medium group-hover:text-[#04BBA6] transition-colors duration-200">
+                          <div className="text-gray-800 font-inter font-medium text-[14px] group-hover:text-[#04BBA6] transition-colors duration-200 mb-2">
                             {item.name}
                           </div>
                           {item.description && (
-                            <div className="text-gray-500 text-sm mt-1 leading-relaxed">
+                            <div className="text-[#3D3D3D94] font-inter text-[14px] leading-relaxed">
                               {item.description}
                             </div>
                           )}
@@ -102,6 +106,11 @@ export default function Dropdown({ trigger, sections, className = '' }: Dropdown
                   </div>
                 ))}
               </div>
+              
+              {/* Divider line between sections (only for 2-column layout) */}
+              {sections.length === 2 && (
+                <div className="absolute top-8 bottom-8 left-1/2 w-px bg-gray-200 transform -translate-x-1/2"></div>
+              )}
             </div>
           </motion.div>
         )}
