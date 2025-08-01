@@ -11,7 +11,7 @@ export default function CompaniesSection() {
   });
 
   // Transform scroll progress for different animations
-  const horizontalLinesProgress = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const horizontalLinesProgress = useTransform(scrollYProgress, [0.1, 0.4], [0, 1]);
   const verticalLinesProgress = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
   const contentProgress = useTransform(scrollYProgress, [0.4, 0.7], [0, 1]);
 
@@ -20,7 +20,7 @@ export default function CompaniesSection() {
       <div className="relative">
         {/* Horizontal lines that extend full width */}
         <motion.div 
-          className="absolute left-0 right-0 top-0 h-[1px] bg-black origin-left"
+          className="absolute left-0 right-0 top-0 h-[1px] bg-black origin-right"
           style={{ scaleX: horizontalLinesProgress }}
         />
         <motion.div 
@@ -28,7 +28,7 @@ export default function CompaniesSection() {
           style={{ scaleX: horizontalLinesProgress }}
         />
         <motion.div 
-          className="absolute left-0 right-0 bottom-[96px] h-[1px] bg-black origin-left"
+          className="absolute left-0 right-0 bottom-[96px] h-[1px] bg-black origin-right"
           style={{ scaleX: horizontalLinesProgress }}
         />
         <motion.div 
@@ -41,7 +41,7 @@ export default function CompaniesSection() {
           <div className="max-w-7xl mx-auto relative">
             {/* Vertical lines */}
             <motion.div 
-              className="absolute inset-y-0 left-[16.666%] border-l border-black pointer-events-none hidden lg:block origin-top"
+              className="absolute inset-y-0 left-[16.666%] border-l border-black pointer-events-none hidden lg:block origin-bottom"
               style={{ scaleY: verticalLinesProgress }}
             />
             <motion.div 
