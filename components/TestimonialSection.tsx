@@ -1,22 +1,53 @@
+"use client"
 import Image from "next/image";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import TestimonialCard from "./TestimonialCard";
 
 export default function TestimonialSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+
   return (
-    <section className="py-24 sm:py-32 px-4 sm:px-6 relative overflow-hidden">
+    <section ref={ref} className="py-24 sm:py-32 px-4 sm:px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16 relative">
           {/* Heading Text with Inverted Comma */}
           <div className="relative inline-block">
-            {/* Inverted Comma Image - positioned at top left */}
-            <Image
-              src="/image/components/inverted_comma.png"
-              alt="Inverted Comma"
-              width={40}
-              height={40}
-              className="absolute -top-8 -left-10 w-12 h-12 sm:w-14 sm:h-14"
-            />
+            {/* Floating Inverted Comma Image */}
+            <motion.div
+              className="absolute -top-8 -left-10"
+              initial={{ opacity: 0, y: -20 }}
+              animate={isInView ? { 
+                opacity: 1, 
+                y: [0, -8, 0], // Floating up and down
+                rotate: [0, 2, -2, 0] // Slight rotation
+              } : { opacity: 0, y: -20 }}
+              transition={{ 
+                opacity: { duration: 0.8, delay: 0.2 },
+                y: { 
+                  duration: 3, 
+                  repeat: Infinity, 
+                  ease: "easeInOut",
+                  delay: 1
+                },
+                rotate: { 
+                  duration: 4, 
+                  repeat: Infinity, 
+                  ease: "easeInOut",
+                  delay: 1.5
+                }
+              }}
+            >
+              <Image
+                src="/image/components/inverted_comma.png"
+                alt="Inverted Comma"
+                width={40}
+                height={40}
+                className="w-12 h-12 sm:w-14 sm:h-14"
+              />
+            </motion.div>
             
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-inter font-[500] leading-snug">
               <span className="text-[#04BBA6]">One Platform.</span>{" "}
@@ -35,7 +66,23 @@ export default function TestimonialSection() {
         {/* Overlapping Cards Layout */}
         <div className="relative min-h-[750px] max-w-5xl mx-auto">
           {/* Recruiters Card (top-left) */}
-          <div className="my-8 lg:my-0 lg:absolute lg:top-0 lg:left-[-200] lg:w-[48%] z-20">
+          <motion.div 
+            className="my-8 lg:my-0 lg:absolute lg:top-0 lg:left-[-200] lg:w-[48%] z-20"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { 
+              opacity: 1, 
+              y: [0, -8, 0] // Floating up and down
+            } : { opacity: 0, y: 30 }}
+            transition={{ 
+              opacity: { duration: 0.8, delay: 0.4 },
+              y: { 
+                duration: 5, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 2
+              }
+            }}
+          >
             <TestimonialCard
               variant="gray"
               title="Digital Recruiter"
@@ -46,10 +93,26 @@ export default function TestimonialSection() {
                 alt: "Recruiter Profile"
               }}
             />
-          </div>
+          </motion.div>
 
           {/* CHROs & Leaders Card (bottom-left) */}
-          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[310] lg:left-[220] lg:w-[48%] z-10">
+          <motion.div 
+            className="my-8 lg:my-0 lg:absolute lg:bottom-[310] lg:left-[220] lg:w-[48%] z-10"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { 
+              opacity: 1, 
+              y: [0, -6, 0] // Floating up and down
+            } : { opacity: 0, y: 30 }}
+            transition={{ 
+              opacity: { duration: 0.8, delay: 0.6 },
+              y: { 
+                duration: 6, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 3
+              }
+            }}
+          >
             <TestimonialCard
               variant="gray"
               title="Digital Interviewer"
@@ -60,7 +123,7 @@ export default function TestimonialSection() {
                 alt: "CHRO Profile"
               }}
             />
-          </div>
+          </motion.div>
 
           {/* Candidates Card (center, prominent) */}
           {/* <div className="my-8 lg:my-0 lg:absolute lg:top-[100] lg:left-[650] lg:-translate-x-1/2 lg:w-[48%] z-30">
@@ -83,7 +146,23 @@ export default function TestimonialSection() {
          
 
           {/* Compliance Card (bottom-right) */}
-          <div className="my-8 lg:my-0 lg:absolute lg:bottom-[450] lg:right-[-80] lg:w-[48%] z-40">
+          <motion.div 
+            className="my-8 lg:my-0 lg:absolute lg:bottom-[450] lg:right-[-80] lg:w-[48%] z-40"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { 
+              opacity: 1, 
+              y: [0, -10, 0] // Floating up and down
+            } : { opacity: 0, y: 30 }}
+            transition={{ 
+              opacity: { duration: 0.8, delay: 0.8 },
+              y: { 
+                duration: 4, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 2.5
+              }
+            }}
+          >
             <TestimonialCard
               variant="gray"
               title="Digital Proctor"
@@ -94,7 +173,7 @@ export default function TestimonialSection() {
                 alt: "Compliance Profile"
               }}
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
