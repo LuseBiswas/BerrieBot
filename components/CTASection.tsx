@@ -8,7 +8,7 @@ export default function CTASection() {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section ref={ref} className="flex items-center justify-center min-h-screen pb-20">
+    <section ref={ref} className="flex items-center justify-center mt-44 ">
       <motion.div 
         className="bg-[#D9D9D9] rounded-t-3xl p-12 flex items-center justify-between shadow-lg"
         style={{ width: '996px', height: '307px' }}
