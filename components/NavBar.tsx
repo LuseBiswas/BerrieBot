@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import Dropdown, { DropdownSection } from "./Dropdown";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -11,6 +12,104 @@ export default function NavBar() {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  // Define dropdown data
+  const productSections: DropdownSection[] = [
+    {
+      title: "PRODUCTS",
+      items: [
+        {
+          name: "Berri Search & Match",
+          href: "/products/search-match",
+          description: "Text here."
+        },
+        {
+          name: "Berri Connect",
+          href: "/products/connect",
+          description: "Our Conversational AI platform - BerriConnect, exemplifies the future of communication."
+        }
+      ]
+    },
+    {
+      title: "",
+      items: [
+        {
+          name: "Berri Mastermind",
+          href: "/products/mastermind",
+          description: "In realm of Generative AI, we proudly present Berri's Interview MasterMind."
+        },
+        {
+          name: "Berri Proctor",
+          href: "/products/proctor",
+          description: "BerriProctor stands as a crucial asset, introducing an essential layer of cybersecurity."
+        }
+      ]
+    }
+  ];
+
+  const solutionSections: DropdownSection[] = [
+    {
+      title: "SOLUTIONS",
+      items: [
+        {
+          name: "Latest Updates",
+          href: "/solutions/updates",
+          description: "Explore latest updates in our products."
+        },
+        {
+          name: "The Technology",
+          href: "/solutions/technology",
+          description: "Deep tech behind our product, fascinates us every single day."
+        }
+      ]
+    }
+  ];
+
+  const resourceSections: DropdownSection[] = [
+    {
+      title: "RESOURCES",
+      items: [
+        {
+          name: "Documentation",
+          href: "/resources/docs",
+          description: "Complete guides and API references."
+        },
+        {
+          name: "Blog",
+          href: "/resources/blog",
+          description: "Latest insights and updates."
+        },
+        {
+          name: "Support",
+          href: "/resources/support",
+          description: "Get help when you need it."
+        }
+      ]
+    }
+  ];
+
+  const aboutSections: DropdownSection[] = [
+    {
+      title: "ABOUT",
+      items: [
+        {
+          name: "Our Story",
+          href: "/about/story",
+          description: "Learn about our journey and mission."
+        },
+        {
+          name: "Team",
+          href: "/about/team",
+          description: "Meet the people behind BerriBot."
+        },
+        {
+          name: "Careers",
+          href: "/about/careers",
+          description: "Join our growing team."
+        }
+      ]
+    }
+  ];
 
   return (
     <>
@@ -34,38 +133,38 @@ export default function NavBar() {
 
             {/* Center - Navigation Links */}
             <div className="hidden lg:flex items-center space-x-8">
-              <div className="relative group">
-                <Link href="/product" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
-                  Product
-                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </Link>
-              </div>
-              <div className="relative group">
-                <Link href="/solution" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
-                  Solution
-                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </Link>
-              </div>
-              <div className="relative group">
-                <Link href="/resources" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
-                  Resource
-                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </Link>
-              </div>
-              <div className="relative group">
-                <Link href="/about" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
-                  About
-                  <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </Link>
-              </div>
+              <Dropdown
+                trigger={
+                  <div className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                    Product
+                    <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                }
+                sections={productSections}
+              />
+              
+              <Link href="/solution" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                Solution
+                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </Link>
+              
+              <Link href="/resources" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                Resource
+                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </Link>
+              
+              <Link href="/about" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                About
+                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </Link>
             </div>
 
             {/* Mobile - Hamburger Menu */}
