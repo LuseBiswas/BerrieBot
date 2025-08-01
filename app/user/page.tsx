@@ -9,29 +9,9 @@ import FeaturesSection from "@/components/FeaturesSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import Message from "@/components/Message";
 import DemoCarousel from "@/components/DemoCarousel";
-import StackByStack, { StackCard } from "@/components/StackByStack";
+import ProductFeature from "@/components/ProductFeature";
 
 export default function Home() {
-  const cards: StackCard[] = [
-    {
-      id: 'sec-speed',
-      top:   <>Enterprise-Grade<br/><span className="text-teal-400">Security</span></>,
-      ribbon: <>SOC 2&nbsp;•&nbsp;ISO&nbsp;27001</>,
-      bottom: <>Startup-Grade<br/><span className="text-teal-400">Speed</span></>,
-    },
-    {
-      id: 'ai-ready',
-      top: 'AI-Ready APIs',
-      ribbon: '99.99 % uptime',
-      bottom: 'Scale without ops',
-    },
-    {
-      id: 'obs-five',
-      top: 'Observability',
-      ribbon: 'Zero-config tracing',
-      bottom: 'Data-driven fixes',
-    },
-  ];
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-pinstripes bg-fixed text-white overflow-x-hidden">
@@ -45,7 +25,7 @@ export default function Home() {
         <CarouselSection />
         <FeatureCard />
         <ComparisonSection />
-        <StackByStack cards={cards} />
+        <ProductFeature />
         <Message />
         <DemoCarousel />
       </main>

@@ -48,10 +48,7 @@ export default function StackByStack({
     .filter((_, i) => Math.abs(i - index) < visibleCount);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-neutral-100 to-neutral-200 p-8">
-      <div 
-        className={`relative mx-auto ${width} ${height} select-none`}
-      >
+    <div className={`relative mx-auto ${width} ${height} select-none`}>
         {visible.map(({ card, offset }) => {
           const isFront = offset === 0;
           const depth = Math.min(Math.max(offset, 0), visibleCount - 1);
@@ -177,16 +174,10 @@ export default function StackByStack({
           );
         })}
 
-        {/* Click blocker */}
-        {isDismissing && (
-          <div className="absolute inset-0 z-50 pointer-events-auto" />
-        )}
-
-        {/* Instruction text */}
-        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-neutral-500 text-sm font-medium">
-          Click to advance
-        </div>
-      </div>
-    </div>
+                 {/* Click blocker */}
+         {isDismissing && (
+           <div className="absolute inset-0 z-50 pointer-events-auto" />
+         )}
+       </div>
   );
 }
