@@ -111,7 +111,7 @@ export default function StatsSection() {
           {/* Grid lines */}
           <div className="absolute inset-0 grid grid-cols-12 grid-rows-12">
             {Array.from({ length: 144 }, (_, i) => (
-              <div key={i} className="border border-[#191919]" />
+              <div key={i} className="border border-white/20 opacity-[5%]" />
             ))}
           </div>
           
@@ -121,7 +121,7 @@ export default function StatsSection() {
               Array.from({ length: 13 }, (_, col) => (
                 <div 
                   key={`${row}-${col}`}
-                  className="absolute text-[#191919]"
+                  className="absolute text-white/20 opacity-[10%]"
                   style={{
                     top: `${row * (100/12)}%`,
                     left: `${col * (100/12)}%`,
