@@ -144,7 +144,7 @@ export default function HeroSection() {
 
       {/* ---- Tag line ---- */}
       <div className="mb-2 mt-10 relative z-10">
-        <span className="inline-block text-white font-bold text-3xl">
+        <span className="inline-blocktext-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto">
           Automate Interviews. Verify Talent. Hire Smarter.
         </span>
       </div>
@@ -154,7 +154,7 @@ export default function HeroSection() {
         <h1 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8">
           <span className="text-white">The future of</span>
           <br />
-          <span className="bg-gradient-to-br from-gray-500 to-gray-800 text-transparent bg-clip-text">
+          <span className="bg-gradient-to-br from-white to-gray-500 text-transparent bg-clip-text">
             Recruiting&nbsp;
           </span>
           <span className="text-teal-400">is here.</span>

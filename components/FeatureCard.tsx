@@ -59,6 +59,11 @@ export default function FeatureCard() {
   const rightCardX = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [400, 0, 0, 400]);
   const cardOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
+  // Separate transforms for bottom cards
+  const bottomLeftCardX = useTransform(scrollYProgress, [0, 0.8, 0.85, 1], [-400, 0, 0, -400]);
+  const bottomRightCardX = useTransform(scrollYProgress, [0, 0.7, 0.8, 1], [400, 0, 0, 400]);
+  const bottomCardOpacity = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0, 1, 1, 0]);
+
   return (
     <section
       ref={ref}
@@ -78,7 +83,7 @@ export default function FeatureCard() {
         <div className="bg-black px-8 py-4 inline-block text-center">
           <div className="flex items-center gap-3 justify-center">
             
-            <h2 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl font-inter font-medium leading-24">
+            <h2 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]">
               <span className="bg-gradient-to-r from-white to-gray-950 text-transparent bg-clip-text">Recruiting</span>
               <br />
               <span className="bg-gradient-to-r from-white to-gray-950 text-transparent bg-clip-text">designed for the</span>
@@ -88,7 +93,7 @@ export default function FeatureCard() {
             
           </div>
           
-          <p className="mt-6 text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-3xl mx-auto">
+          <p className="mt-6 text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto">
             From outreach to offer, the BerriSuite delivers speed, 
             accuracy, and security&nbsp;— on autopilot.
           </p>
@@ -185,8 +190,8 @@ export default function FeatureCard() {
         <motion.div 
           className="absolute top-192 right-280 w-80"
           style={{ 
-            x: leftCardX,
-            opacity: cardOpacity
+            x: bottomLeftCardX,
+            opacity: bottomCardOpacity
           }}
           animate={isInView ? { 
             y: [0, -7, 0] // Floating up and down
@@ -213,8 +218,8 @@ export default function FeatureCard() {
         <motion.div 
           className="absolute top-135 right-[-40] w-80"
           style={{ 
-            x: rightCardX,
-            opacity: cardOpacity
+            x: bottomRightCardX,
+            opacity: bottomCardOpacity
           }}
           animate={isInView ? { 
             y: [0, -9, 0] // Floating up and down

@@ -6,21 +6,26 @@ import { Clock, Plus } from 'lucide-react';
 const SLIDES = [
   {
     id: 1,
-    title: "SEARCH & MATCH",
-    description: "AI-powered candidate matching and screening",
-    image: "/image/screenshot_1.png"
+    title: "INTERVIEW & VERIFY",
+    image: "/image/prodcut/ProductImagery_1.png"
   },
   {
     id: 2,
     title: "INTERVIEW & VERIFY",
     description: "Automated interviews with human-like interactions",
-    image: "/image/screenshot_2.png"
+    image: "/image/prodcut/ProductImagery_1.png"
   },
   {
     id: 3,
     title: "HIRE & ONBOARD",
     description: "Streamlined hiring process with smart onboarding",
-    image: "/image/screenshot_3.png"
+    image: "/image/prodcut/ProductImagery_1.png"
+  },
+  {
+    id: 4,
+    title: "HIRE & ONBOARD",
+    description: "Streamlined hiring process with smart onboarding",
+    image: "/image/prodcut/ProductImagery_1.png"
   }
 ];
 
@@ -36,7 +41,7 @@ export default function CarouselSection() {
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
-          setCurrentSlide(prevSlide => (prevSlide + 1) % SLIDES.length);
+          setCurrentSlide(prevSlide => (prevSlide - 1 + SLIDES.length) % SLIDES.length);
           return 0;
         }
         return prev + 2; // Increment by 2% every 100ms for smooth animation
@@ -88,12 +93,12 @@ export default function CarouselSection() {
         
                   {/* Headline */}
           <div className="space-y-4 mb-12">
-            <h2 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl font-inter font-medium leading-24">
+            <h2 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]">
               <span className="text-teal-400">The Agentic Hiring</span>
               <br />
               <span className="text-teal-400">Stack {""}</span>
-              <span className="bg-gradient-to-r from-white to-gray-950 text-transparent bg-clip-text">that Does the <br /></span>
-              <span className="bg-gradient-to-r from-white to-gray-950 text-transparent bg-clip-text">Work for You</span>
+              <span className="bg-gradient-to-r from-white to-gray-500 text-transparent bg-clip-text">that Does the <br /></span>
+              <span className="bg-gradient-to-r from-white to-gray-500 text-transparent bg-clip-text">Work for You</span>
             </h2>
             <p className="text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto mb-8">
               From outreach to offer, the Berri Suite delivers speed, <br /> accuracy, and security—on autopilot.
@@ -108,7 +113,7 @@ export default function CarouselSection() {
                 // Active slide - wider box with teal background
                 <motion.div
                   layout
-                  className="border-2 border-[#04BBA6] rounded-lg cursor-pointer relative overflow-hidden bg-[#181818]"
+                  className="w-[434px] h-[87px] border-2 border-[#04BBA6] rounded-lg cursor-pointer relative overflow-hidden bg-[#181818]"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
@@ -127,7 +132,7 @@ export default function CarouselSection() {
                     transition={{ duration: 0.1, ease: "linear" }}
                   />
                   
-                  <div className="px-8 py-4 relative z-10">
+                  <div className="flex items-center justify-center h-full relative z-10">
                     <span className="font-medium font-inter text-base text-white">
                       {slide.title}
                     </span>
@@ -137,7 +142,7 @@ export default function CarouselSection() {
                 // Inactive slide - square box with icon
                 <motion.div
                   layout
-                  className="w-16 h-16 border-2 border-teal-400 rounded-lg cursor-pointer flex items-center justify-center bg-[#181818]"
+                  className="w-[93px] h-[87px] border-2 border-teal-400 rounded-lg cursor-pointer flex items-center justify-center bg-[#181818]"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
@@ -148,7 +153,7 @@ export default function CarouselSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                 >
-                  <Clock className="w-6 h-6 text-gray-400" />
+                  <img src="/image/icons/clock.png" alt="Clock" className="w-6 h-6" />
                 </motion.div>
               )}
             </div>
@@ -156,20 +161,20 @@ export default function CarouselSection() {
         </div>
 
         {/* Image carousel - below the boxes */}
-        <div className="relative h-[400px] rounded-2xl overflow-hidden max-w-4xl mx-auto">
+        <div className="relative w-[1027px] h-[471px] rounded-2xl overflow-hidden mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.1 }}
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="absolute inset-0"
+              className="relative"
             >
               <img
                 src={SLIDES[currentSlide].image}
                 alt={SLIDES[currentSlide].title}
-                className="w-full h-full object-cover"
+                className="w-full h-auto object-cover"
               />
               
               {/* Overlay with slide info */}

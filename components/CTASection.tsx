@@ -1,17 +1,32 @@
 'use client';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 export default function CTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  
+  // Scroll progress for this specific section
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  // Transform scroll progress to slide up from behind footer
+  const y = useTransform(scrollYProgress, [0, 0.7, 1], [400, 0, -200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={ref} className="flex items-center justify-center mt-44 ">
+    <section ref={ref} className="relative flex items-center justify-center mt-44 z-0">
       <motion.div 
         className="bg-[#D9D9D9] rounded-t-3xl p-12 flex items-center justify-between shadow-lg"
-        style={{ width: '996px', height: '307px' }}
+        style={{ 
+          width: '996px', 
+          height: '307px',
+          y: y,
+          opacity: opacity
+        }}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
         transition={{ duration: 0.8, delay: 0.2 }}

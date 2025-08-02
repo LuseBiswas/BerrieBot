@@ -49,7 +49,7 @@ export default function TestimonialSection() {
               />
             </motion.div>
             
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-inter font-[500] leading-snug">
+            <h2 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]">
               <span className="text-[#04BBA6]">One Platform.</span>{" "}
               <span className="text-white">Every</span><br />
               
@@ -57,7 +57,7 @@ export default function TestimonialSection() {
                Recruiting Task.
               </span>
             </h2>
-            <p className="mt-6 text-lg sm:text-xl lg:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+            <p className="mt-6 text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto ">
               From outreach to offer, the Berri Suite delivers speed, <br /> accuracy, and security—on autopilot.
             </p>
           </div>
