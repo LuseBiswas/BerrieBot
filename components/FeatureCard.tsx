@@ -74,8 +74,12 @@ export default function FeatureCard() {
 
       {/* vertical teal line - animated with scroll */}
       <motion.div 
-        className="pointer-events-none absolute left-1/2 top-0 w-px bg-[#04BBA6]"
-        style={{ height: lineHeight }}
+        className="pointer-events-none absolute left-1/2 top-0 w-[2px] bg-[#04BBA6] transform -translate-x-1/2"
+        style={{ 
+          height: lineHeight,
+          boxShadow: '0 0 10px #04BBA6, 0 0 20px #04BBA6, 0 0 40px #04BBA6, 0 0 80px rgba(4, 187, 166, 0.5)',
+          filter: 'blur(0.5px)'
+        }}
       />
 
       {/* ---------- CENTERED HEADLINE + SUBTITLE (only change) ---------- */}

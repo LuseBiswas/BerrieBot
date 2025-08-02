@@ -1,7 +1,7 @@
 "use client";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Plus } from "lucide-react";
 
 const COMPARISON_DATA = [
   {
@@ -52,12 +52,45 @@ export default function ComparisonSection() {
       className="relative min-h-screen flex items-center justify-center py-20 bg-[#101010]"
     >
       {/* Background grid pattern */}
-      <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-0" />
+      <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-20" />
+
+      {/* Grid pattern with + signs at grid intersections */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Grid lines */}
+        <div className="absolute inset-0 grid grid-cols-12 grid-rows-12">
+          {Array.from({ length: 144 }, (_, i) => (
+            <div key={i} className="border border-[#191919]" />
+          ))}
+        </div>
+        
+        {/* + signs at every grid intersection */}
+        <div className="absolute top-0 left-0 w-full h-full">
+          {Array.from({ length: 13 }, (_, row) => 
+            Array.from({ length: 13 }, (_, col) => (
+              <div 
+                key={`${row}-${col}`}
+                className="absolute text-[#191919]"
+                style={{
+                  top: `${row * (100/12)}%`,
+                  left: `${col * (100/12)}%`,
+                  transform: 'translate(-50%, -50%)'
+                }}
+              >
+                <Plus className="w-9 h-9" />
+              </div>
+            ))
+          )}
+        </div>
+      </div>
 
       {/* Central green line - animated with scroll */}
       <motion.div 
-        className="pointer-events-none absolute left-1/2 top-0 w-px bg-[#04BBA6]"
-        style={{ height: lineHeight }}
+        className="pointer-events-none absolute left-1/2 top-0 w-[2px] bg-[#04BBA6] transform -translate-x-1/2"
+        style={{ 
+          height: lineHeight,
+          boxShadow: '0 0 10px #04BBA6, 0 0 20px #04BBA6, 0 0 40px #04BBA6, 0 0 80px rgba(4, 187, 166, 0.5)',
+          filter: 'blur(0.5px)'
+        }}
       />
 
       <motion.div
@@ -73,18 +106,25 @@ export default function ComparisonSection() {
         {/* Header with icon and arrows */}
         <div className="relative mb-16">
           {/* Title */}
-          <h2 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl font-inter font-light leading-24 bg-[#101010] mb-8">
-            <span className="bg-gradient-to-r from-white to-[#ADADAEB0] text-transparent bg-clip-text">
-              Proven to
-            </span>{" "}
-            <br />
-            <span className="bg-gradient-to-r from-white to-[#ADADAEB0] text-transparent bg-clip-text">
-              deliver at scale.
-            </span>
-          </h2>
+          <div className="relative inline-block mb-8">
+            {/* Background to block the line but preserve grid with fading effect */}
+            <div className="absolute inset-0 -mx-12 -my-6 rounded-lg" 
+                 style={{
+                   background: 'radial-gradient(ellipse 70% 60% at center, #101010 30%, #101010 50%, transparent 80%)'
+                 }}></div>
+            <h2 className="relative z-10 text-[64px] sm:text-6xl md:text-7xl lg:text-8xl font-inter font-light leading-24">
+              <span className="bg-gradient-to-r from-white to-[#ADADAEB0] text-transparent bg-clip-text">
+                Proven to
+              </span>{" "}
+              <br />
+              <span className="bg-gradient-to-r from-white to-[#ADADAEB0] text-transparent bg-clip-text">
+                deliver at scale.
+              </span>
+            </h2>
+          </div>
 
                      {/* Before/After indicator with arrows */}
-           <div className="flex items-center justify-center gap-8 px-8 pt-64">
+           <div className="flex items-center justify-center gap-32 px-8 pt-64">
              {/* Left Side - Arrow with text below */}
              <div className="flex flex-col items-center gap-4">
                <div className="flex items-center">
@@ -95,11 +135,16 @@ export default function ComparisonSection() {
              </div>
              
              {/* Center Icon */}
-             <div className="w-52 h-52 bg-[#101010] rounded-full flex items-center justify-center">
+             <div className="relative w-24 h-24 flex items-center justify-center">
+               {/* Background with fading effect */}
+               <div className="absolute inset-0 -m-16 rounded-full" 
+                    style={{
+                      background: 'radial-gradient(circle, #101010 20%, #101010 40%, transparent 70%)'
+                    }}></div>
                <img
                  src="/image/logo.png"
                  alt="Clock Icon"
-                 className="w-24 h-24 mr-10"
+                 className="relative z-10 w-24 h-24 mr-10"
                />
              </div>
              

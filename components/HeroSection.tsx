@@ -1,13 +1,13 @@
-'use client';
-import { ChevronRight } from 'lucide-react';
+"use client";
+import { ChevronRight } from "lucide-react";
 import {
   motion,
   useReducedMotion,
   easeInOut,
   useScroll,
   useSpring,
-} from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+} from "framer-motion";
+import React, { useEffect, useState } from "react";
 
 /* ---------- inner-box pulse ---------- */
 const CORE_VARIANTS = {
@@ -20,31 +20,31 @@ const CORE_VARIANTS = {
 
 /* ---------- decorative-box positions ---------- */
 const BOXES = [
-  { pos: 'top-[260px] left-[120px]', delay: 0 },
-  { pos: 'top-[170px] right-[100px]', delay: 0.5 },
-  { pos: 'bottom-[-30px] left-[450px]', delay: 1 },
-  { pos: 'bottom-[50px] right-[275px]', delay: 1.5 },
+  { pos: "top-[260px] left-[60px]", delay: 0 },
+  { pos: "top-[170px] right-[50px]", delay: 0.5 },
+  { pos: "bottom-[-150px] left-[450px]", delay: 1 },
+  { pos: "bottom-[-20px] right-[175px]", delay: 1.5 },
 ];
 
 /* ---------- text-scramble helper ---------- */
-const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 function TextScramble({ currentText }: { currentText: string }) {
   const [displayText, setDisplayText] = useState(currentText);
 
   useEffect(() => {
     if (displayText === currentText) return;
     const id = setInterval(() => {
-      setDisplayText(prev =>
+      setDisplayText((prev) =>
         prev === currentText
           ? prev
           : prev
-              .split('')
+              .split("")
               .map((ch, i) =>
                 ch === currentText[i]
                   ? ch
-                  : chars[Math.floor(Math.random() * chars.length)],
+                  : chars[Math.floor(Math.random() * chars.length)]
               )
-              .join(''),
+              .join("")
       );
     }, 50);
     return () => clearInterval(id);
@@ -64,7 +64,7 @@ export default function HeroSection() {
   /* ---------- scroll-linked progress bar ---------- */
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end start'],
+    offset: ["start start", "end start"],
   });
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -73,21 +73,17 @@ export default function HeroSection() {
   });
 
   /* ---------- headline word swap ---------- */
-  const [displayText, setDisplayText] = useState('APPLY');
+  const [displayText, setDisplayText] = useState("APPLY");
   useEffect(() => {
-    const unsub = scrollYProgress.onChange(v => {
-      if (v >= 0.65) setDisplayText('OFFER');
-      else if (v <= 0.6) setDisplayText('APPLY');
+    const unsub = scrollYProgress.onChange((v) => {
+      if (v >= 0.65) setDisplayText("OFFER");
+      else if (v <= 0.6) setDisplayText("APPLY");
     });
     return unsub;
   }, [scrollYProgress]);
 
   return (
-    <section
-      ref={ref}
-      className="relative min-h-screen flex flex-col items-center justify-center
-                 px-4 sm:px-6 pb-48 mb-32 overflow-visible"
-    >
+    <section ref={ref} className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pb-48 mb-80 overflow-visible">
       {/* ---- Decorative boxes: thin dash races around border ---- */}
       <div className="absolute inset-0 pointer-events-none">
         {BOXES.map(({ pos, delay }, idx) => (
@@ -110,7 +106,7 @@ export default function HeroSection() {
                       strokeDashoffset: -384, // perimeter ≈ 384
                       transition: {
                         duration: 6,
-                        ease: 'linear',
+                        ease: "linear",
                         repeat: Infinity,
                         delay,
                       },
@@ -135,7 +131,7 @@ export default function HeroSection() {
             <motion.div
               className="absolute inset-0 rounded-xl border border-white/15"
               variants={CORE_VARIANTS}
-              animate={prefersReduced ? undefined : 'pulse'}
+              animate={prefersReduced ? undefined : "pulse"}
               transition={{ ...CORE_VARIANTS.pulse.transition, delay }}
             />
           </div>
@@ -183,13 +179,16 @@ export default function HeroSection() {
       </div>
 
       {/* ---- Text scramble ---- */}
-      <div className="absolute -bottom-20 right-4 text-white">
+      <div className="absolute -bottom-65 right-4 text-white">
         <TextScramble currentText={displayText} />
       </div>
 
       {/* ---- Progress bar ---- */}
-      <div className="absolute -bottom-25 left-0 right-0 h-2 bg-[#04BBA6]">
-        <motion.div className="h-full bg-white origin-left" style={{ scaleX }} />
+      <div className="absolute   -bottom-70 left-0 right-0 h-2 bg-[#04BBA6]">
+        <motion.div
+          className="h-full bg-white origin-left "
+          style={{ scaleX }}
+        />
       </div>
     </section>
   );
