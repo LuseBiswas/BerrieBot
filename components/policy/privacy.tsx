@@ -1,15 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 
-const PrivacyPolicyComponent = () => {
-  const [state, setState] = useState<'initial' | 'expanded' | 'confirmation'>('initial');
+interface PrivacyPolicyComponentProps {
+  state: 'initial' | 'expanded' | 'confirmation';
+  onStateChange?: (state: 'initial' | 'expanded' | 'confirmation') => void;
+}
 
+const PrivacyPolicyComponent = ({ state, onStateChange }: PrivacyPolicyComponentProps) => {
   const handleDragEnd = (event: any, info: PanInfo) => {
     // Close if dragged down more than 100px
     if (info.offset.y > 100) {
-      setState('confirmation');
+      onStateChange?.('confirmation');
     }
   };
 
@@ -67,45 +70,23 @@ If you have any questions about this Privacy Policy or our data practices, pleas
 `;
 
   return (
-    <div className="relative py-16">
-      <AnimatePresence mode="wait">
-        {state === 'initial' && (
-          // Initial Button State
-          <motion.div
-            key="button"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.3 }}
-            className="flex justify-center"
-          >
-            <motion.button
-              onClick={() => setState('expanded')}
-              className="bg-white border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 flex items-center justify-center text-gray-700 font-medium"
-              style={{ width: '268px', height: '73px' }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Read Privacy Policy
-            </motion.button>
-          </motion.div>
-        )}
-
+    <>
+      {/* Content Sheet - appears below footer in document flow */}
+      <AnimatePresence>
         {state === 'expanded' && (
-          // Bottom Sheet from Footer
           <motion.div
-            key="bottomsheet"
-            initial={{ y: "100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
+            key="contentsheet"
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed bottom-0 left-0 right-0 z-50"
+            className="w-full bg-white"
           >
             <motion.div
               drag="y"
               dragConstraints={{ top: 0, bottom: 0 }}
               onDragEnd={handleDragEnd}
-              className="bg-white w-full h-[70vh] flex flex-col overflow-hidden shadow-2xl"
+              className="w-full h-[70vh] flex flex-col overflow-hidden shadow-2xl"
               style={{ borderTopLeftRadius: '24px', borderTopRightRadius: '24px' }}
             >
               {/* Gray Capsule for Dragging */}
@@ -129,55 +110,8 @@ If you have any questions about this Privacy Policy or our data practices, pleas
             </motion.div>
           </motion.div>
         )}
-
-        {state === 'confirmation' && (
-          // Confirmation State
-          <motion.div
-            key="confirmation"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8 }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col items-center space-y-8"
-          >
-            <motion.h2 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-2xl font-bold text-white text-center"
-            >
-              Did you definitely read it?
-            </motion.h2>
-            
-            <div className="flex flex-col space-y-4">
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                onClick={() => setState('initial')}
-                className="bg-white text-gray-800 px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 font-medium min-w-[300px]"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Yes, take me back
-              </motion.button>
-              
-              <motion.button
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                onClick={() => setState('expanded')}
-                className="bg-gray-600 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all duration-200 font-medium min-w-[300px]"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                No, now I'm worried that you'll quiz me, let me read that again!
-              </motion.button>
-            </div>
-          </motion.div>
-        )}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 
