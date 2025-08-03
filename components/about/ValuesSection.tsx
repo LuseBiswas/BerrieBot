@@ -13,7 +13,7 @@ export default function ValuesSection() {
   // Transform scroll progress for different animations
   const horizontalLinesProgress = useTransform(scrollYProgress, [0.1, 0.4], [0, 1]);
   const verticalLinesProgress = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
-  const contentProgress = useTransform(scrollYProgress, [0.4, 0.7], [0, 1]);
+  const contentProgress = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
 
   // Carousel state
   const [currentSection, setCurrentSection] = useState(0); // 0: Mission, 1: Vision, 2: Values
