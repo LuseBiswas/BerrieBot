@@ -3,7 +3,7 @@ import React from "react";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 bg-black">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent">
       {/* ---- "We are Berribot" pill ---- */}
       <div className="mb-12 relative z-10">
         <div className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
