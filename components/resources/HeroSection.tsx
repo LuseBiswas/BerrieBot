@@ -1,9 +1,22 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function HeroSection() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Force consistent className after hydration
+  const sectionClassName = "relative mt-36 flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent";
+
   return (
-    <section className="relative mt-36 flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent">
+    <section 
+      className={sectionClassName}
+      suppressHydrationWarning={true}
+      style={isMounted ? {} : { marginTop: '9rem' }}
+    >
       {/* ---- "We are Berribot" pill ---- */}
       <div className="mb-12 relative z-10">
         <div className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
@@ -26,7 +39,7 @@ export default function HeroSection() {
           <span className="text-[#00C7BEB2]">Welcome to your go-to hub for all </span> things Berribot and beyond. <br />
           Whether you're curious about AI, exploring automation strategies, <br />
           or just want to see how others are scaling smarter —not harder <br />
-          —you’re in the right place.
+          —you're in the right place.
         </p>
       </div>
     </section>
