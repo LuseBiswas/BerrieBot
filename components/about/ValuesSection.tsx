@@ -195,8 +195,8 @@ export default function ValuesSection() {
                   viewport={{ once: true }}
                   onClick={() => goToSection(i)}
                 >
-                  <h3 className={`text-2xl font-medium transition-colors ${
-                    currentSection === i ? 'text-black' : 'text-gray-400'
+                  <h3 className={`text-2xl font-inter font-light transition-colors ${
+                    currentSection === i ? 'text-black' : 'text-[#3D3D3D94]'
                   }`}>
                     {section.title}
                   </h3>
@@ -266,7 +266,7 @@ export default function ValuesSection() {
                     </p>
                     
                     {/* Slide indicators */}
-                    <div className="flex justify-center mt-8 space-x-2">
+                    {/* <div className="flex justify-center mt-8 space-x-2">
                       {sections[currentSection].slides.map((_, slideIndex) => (
                         <button
                           key={slideIndex}
@@ -276,7 +276,7 @@ export default function ValuesSection() {
                           onClick={() => goToSlide(slideIndex)}
                         />
                       ))}
-                    </div>
+                    </div> */}
                   </motion.div>
                 </AnimatePresence>
               </div>
