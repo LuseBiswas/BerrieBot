@@ -140,23 +140,25 @@ function BlogCard({ post, isLarge }: BlogCardProps) {
       {/* <div className="absolute inset-0 bg-black/40" /> */}
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-between p-8 text-white">
+      <div className={`font-inter relative z-10 h-full flex flex-col justify-between p-8 ${
+        isLarge ? "text-black" : "text-white"
+      }`}>
         
         {/* Date */}
-        <div className="text-sm font-medium opacity-90 mb-4">
+        <div className="text-[20px] font-medium opacity-90 mb-4">
           {post.date}
         </div>
 
         {/* Title and Description */}
         <div className="flex-1 flex flex-col justify-center">
-          <h3 className={`font-bold mb-4 leading-tight ${
-            isLarge ? "text-4xl" : "text-2xl"
+          <h3 className={`font-light mb-4 leading-tight ${
+            isLarge ? "text-[48px]" : "text-2xl"
           }`}>
             {post.title}
           </h3>
           
-          <p className={`opacity-90 leading-relaxed ${
-            isLarge ? "text-lg" : "text-base"
+          <p className={`opacity-90 leading-relaxed font-light ${
+            isLarge ? "text-[22px]" : "text-base"
           }`}>
             {post.description}
           </p>
@@ -170,7 +172,7 @@ function BlogCard({ post, isLarge }: BlogCardProps) {
               height="16" 
               viewBox="0 0 16 16" 
               fill="none"
-              className="text-white"
+              className={isLarge ? "text-black" : "text-white"}
             >
               <path 
                 d="M6 3l5 5-5 5" 
