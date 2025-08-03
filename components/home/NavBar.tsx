@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import Dropdown, { DropdownSection } from "./home/Dropdown";
+import Dropdown, { DropdownSection } from "./Dropdown";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

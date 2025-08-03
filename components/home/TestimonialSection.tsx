@@ -1,12 +1,26 @@
 "use client"
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import TestimonialCard from "./TestimonialCard";
 
 export default function TestimonialSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  // Scroll progress for animations
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  // Scroll-based animations for heading (entrance and outro)
+  const headingOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [0, 1, 1, 0]);
+  const headingY = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [50, 0, 0, -50]);
+
+  // Scroll-based animations for description (entrance and outro)
+  const descriptionOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
+  const descriptionY = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [30, 0, 0, -30]);
 
   return (
     <section ref={ref} className="py-24 sm:py-32 px-4 sm:px-6 relative overflow-hidden">
@@ -49,17 +63,31 @@ export default function TestimonialSection() {
               />
             </motion.div>
             
-            <h2 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]">
+            <motion.h2 
+              className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]"
+              style={{ 
+                opacity: headingOpacity, 
+                y: headingY,
+                willChange: 'transform'
+              }}
+            >
               <span className="text-[#04BBA6]">One Platform.</span>{" "}
               <span className="text-white">Every</span><br />
               
               <span className="bg-gradient-to-b from-white to-gray-500 bg-clip-text text-transparent">
                Recruiting Task.
               </span>
-            </h2>
-            <p className="mt-6 text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto ">
+            </motion.h2>
+            <motion.p 
+              className="mt-6 text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto "
+              style={{ 
+                opacity: descriptionOpacity, 
+                y: descriptionY,
+                willChange: 'transform'
+              }}
+            >
               From outreach to offer, the Berri Suite delivers speed, <br /> accuracy, and security—on autopilot.
-            </p>
+            </motion.p>
           </div>
         </div>
 

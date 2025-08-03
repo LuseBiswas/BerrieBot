@@ -1,5 +1,5 @@
 'use client';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useState, useEffect, useRef } from 'react';
 import { Clock, Plus } from 'lucide-react';
 
@@ -36,6 +36,20 @@ export default function CarouselSection() {
   const [progress, setProgress] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  // Scroll progress for animations
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  // Scroll-based animations for heading (entrance and outro)
+  const headingOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [0, 1, 1, 0]);
+  const headingY = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [50, 0, 0, -50]);
+
+  // Scroll-based animations for description (entrance and outro)
+  const descriptionOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
+  const descriptionY = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [30, 0, 0, -30]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -93,16 +107,30 @@ export default function CarouselSection() {
         
                   {/* Headline */}
           <div className="space-y-4 mb-12">
-            <h2 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]">
+            <motion.h2 
+              className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]"
+              style={{ 
+                opacity: headingOpacity, 
+                y: headingY,
+                willChange: 'transform'
+              }}
+            >
               <span className="text-teal-400">The Agentic Hiring</span>
               <br />
               <span className="text-teal-400">Stack {""}</span>
               <span className="bg-gradient-to-r from-white to-gray-500 text-transparent bg-clip-text">that Does the <br /></span>
               <span className="bg-gradient-to-r from-white to-gray-500 text-transparent bg-clip-text">Work for You</span>
-            </h2>
-            <p className="text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto mb-8">
+            </motion.h2>
+            <motion.p 
+              className="text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto mb-8"
+              style={{ 
+                opacity: descriptionOpacity, 
+                y: descriptionY,
+                willChange: 'transform'
+              }}
+            >
               From outreach to offer, the Berri Suite delivers speed, <br /> accuracy, and security—on autopilot.
-            </p>
+            </motion.p>
           </div>
 
         {/* Slide indicators - centered */}

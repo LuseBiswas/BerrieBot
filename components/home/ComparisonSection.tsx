@@ -35,6 +35,14 @@ export default function ComparisonSection() {
   // Transform scroll progress to line height
   const lineHeight = useTransform(scrollYProgress, [0.18, 1], ["0%", "100%"]);
 
+  // Scroll-based animations for heading (entrance and outro)
+  const headingOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [0, 1, 1, 0]);
+  const headingY = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [50, 0, 0, -50]);
+
+  // Scroll-based animations for BEFORE/AFTER labels (entrance and outro)
+  const labelsOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
+  const labelsY = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [30, 0, 0, -30]);
+
   // Create scroll-based animations for each row with staggered timing
   const createRowAnimations = (index: number) => {
     const baseStart = 0.4 + (index * 0.08); // Stagger start times - delayed start
@@ -112,7 +120,14 @@ export default function ComparisonSection() {
                  style={{
                    background: 'radial-gradient(ellipse 70% 60% at center, #101010 30%, #101010 50%, transparent 80%)'
                  }}></div>
-            <h2 className="relative z-10 text-[64px] sm:text-6xl md:text-7xl lg:text-8xl font-inter font-light leading-24">
+            <motion.h2 
+              className="relative z-10 text-[64px] sm:text-6xl md:text-7xl lg:text-8xl font-inter font-light leading-24"
+              style={{ 
+                opacity: headingOpacity, 
+                y: headingY,
+                willChange: 'transform'
+              }}
+            >
               <span className="bg-gradient-to-r from-white to-[#ADADAEB0] text-transparent bg-clip-text">
                 Proven to
               </span>{" "}
@@ -120,7 +135,7 @@ export default function ComparisonSection() {
               <span className="bg-gradient-to-r from-white to-[#ADADAEB0] text-transparent bg-clip-text">
                 deliver at scale.
               </span>
-            </h2>
+            </motion.h2>
           </div>
 
                      {/* Before/After indicator with arrows */}
@@ -131,7 +146,16 @@ export default function ComparisonSection() {
                  <ArrowLeft className="w-8 h-8 text-white -mr-2" strokeWidth={2} />
                  <div className="w-24 h-0.5 bg-white"></div>
                </div>
-               <span className="text-white font-medium font-inter text-[48px] mt-10">BEFORE</span>
+               <motion.span 
+                 className="text-white font-medium font-inter text-[48px] mt-10"
+                 style={{ 
+                   opacity: labelsOpacity, 
+                   y: labelsY,
+                   willChange: 'transform'
+                 }}
+               >
+                 BEFORE
+               </motion.span>
              </div>
              
              {/* Center Icon */}
@@ -154,7 +178,16 @@ export default function ComparisonSection() {
                  <div className="w-24 h-0.5 bg-white"></div>
                  <ArrowRight className="w-8 h-8 text-white -ml-2" strokeWidth={2} />
                </div>
-               <span className="text-white font-medium font-inter text-[48px] mt-10">AFTER</span>
+               <motion.span 
+                 className="text-white font-medium font-inter text-[48px] mt-10"
+                 style={{ 
+                   opacity: labelsOpacity, 
+                   y: labelsY,
+                   willChange: 'transform'
+                 }}
+               >
+                 AFTER
+               </motion.span>
              </div>
            </div>
         </div>
