@@ -26,14 +26,9 @@ export default function ValuesSection() {
       title: "Mission",
       slides: [
         {
-          title: "Mission Slide 1",
-          subtitle: "Our Purpose & Direction",
-          content: "We're here to rescue teams from soul-sucking tasks. Berribot automates the repetitive stuff—calls, scheduling, sorting, screening - so real humans (aka you) can shine where it matters most."
-        },
-        {
-          title: "Mission Slide 2", 
-          subtitle: "Impact & Goals",
-          content: "Basically, we help people do less busywork and more 'heck yes' work. Our mission is to transform how teams work by eliminating the mundane."
+          title: "Automate. Innovate. Transform.<br/>(And maybe make your Mondays better)",
+          
+          content: "We're here to rescue teams from soul-sucking tasks. Berribot automates the repetitive stuff—calls, scheduling, sorting, screening - so real humans (aka you) can shine where it matters most. Basically, we help people do less busywork and more \"heck yes\" work."
         }
       ]
     },
@@ -41,19 +36,9 @@ export default function ValuesSection() {
       title: "Vision",
       slides: [
         {
-          title: "Vision Slide 1",
-          subtitle: "Future of Work",
-          content: "We envision a world where AI handles the boring stuff, freeing humans to focus on creativity, strategy, and meaningful connections."
-        },
-        {
-          title: "Vision Slide 2",
-          subtitle: "Global Impact",
-          content: "Our vision extends to transforming workplaces globally, making every Monday feel like a breakthrough instead of a breakdown."
-        },
-        {
-          title: "Vision Slide 3",
-          subtitle: "Innovation Leadership",
-          content: "Leading the charge in AI-powered automation, we're building the future where technology serves humanity's highest potential."
+          title: "Let the Bots Handle the Blah, <br/> You Handle the Brilliance.",
+         
+          content: "We imagine a future where machines do what they’re built for—and people do what only people can do: dream, solve, create, and connect.  At Berribot, we’re all about that sweet spot where AI and humans tag-team like champions."
         }
       ]
     },
@@ -61,9 +46,19 @@ export default function ValuesSection() {
       title: "Values",
       slides: [
         {
-          title: "Values Slide 1",
-          subtitle: "Core Principles",
-          content: "Human-first automation. Transparency. Innovation with purpose. We believe technology should amplify human capabilities, not replace human judgment."
+          subtitle: "We believe",
+          title: "Integrity",
+          content: "We keep it real. We do the right thing even when no one's watching (but let’s be honest, someone’s always watching)."
+        },
+        {
+          subtitle: "We believe",
+          title: "Togetherness",
+          content: "Teamwork makes the Berri work. We like working with nice people who listen, share snacks, and cheer each other on."
+        },
+        {
+          subtitle: "We believe",
+          title: "Ambition",
+          content: "We're not here to be average. We’re here to be awesome. We ask questions, break things (on purpose), and always aim higher."
         }
       ]
     }
@@ -80,9 +75,6 @@ export default function ValuesSection() {
     setSlideDirection(-1);
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
-    } else if (currentSection > 0) {
-      setCurrentSection(currentSection - 1);
-      setCurrentSlide(sections[currentSection - 1].slides.length - 1);
     }
   };
 
@@ -90,9 +82,6 @@ export default function ValuesSection() {
     setSlideDirection(1);
     if (currentSlide < sections[currentSection].slides.length - 1) {
       setCurrentSlide(currentSlide + 1);
-    } else if (currentSection < sections.length - 1) {
-      setCurrentSection(currentSection + 1);
-      setCurrentSlide(0);
     }
   };
 
@@ -215,28 +204,42 @@ export default function ValuesSection() {
               </motion.div>
 
               {/* --- Left Navigation Arrow (Column 1) --- */}
-              <motion.div 
-                className="flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.button
-                  onClick={goToPrevSlide}
-                  disabled={currentSection === 0 && currentSlide === 0}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-2 rounded-full transition-all duration-200"
+              {sections[currentSection].slides.length > 1 && (
+                <motion.div 
+                  className="flex items-center justify-center"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
                 >
-                  <ChevronLeft 
-                    className={`w-8 h-8 transition-colors ${
-                      (currentSection === 0 && currentSlide === 0) 
-                        ? 'text-gray-300 cursor-not-allowed' 
-                        : 'text-[#04BBA6] hover:text-[#03A094] hover:cursor-pointer'
-                    }`}
-                  />
-                </motion.button>
-              </motion.div>
+                  <motion.button
+                    onClick={goToPrevSlide}
+                    disabled={currentSlide === 0}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-2 rounded-full transition-all duration-200"
+                  >
+                    <ChevronLeft 
+                      className={`w-8 h-8 transition-colors ${
+                        currentSlide === 0
+                          ? 'text-gray-300 cursor-not-allowed' 
+                          : 'text-[#04BBA6] hover:text-[#03A094] hover:cursor-pointer'
+                      }`}
+                    />
+                  </motion.button>
+                </motion.div>
+              )}
+
+              {/* Show empty div when no arrows needed to maintain grid layout */}
+              {sections[currentSection].slides.length <= 1 && (
+                <motion.div 
+                  className="flex items-center justify-center"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                >
+                  {/* Empty */}
+                </motion.div>
+              )}
 
               {/* --- Middle section with content (spans middle 3 columns) --- */}
               <div className="col-span-1 sm:col-span-3 relative bg-black overflow-hidden">
@@ -255,13 +258,16 @@ export default function ValuesSection() {
                     }}
                     className="py-16 px-4 text-center"
                   >
-                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-teal-400 leading-tight mx-auto max-w-2xl mb-4">
-                      {currentSlideData.title}
-                    </h2>
-                    <h3 className="text-lg sm:text-xl font-medium text-white mb-6">
-                      {currentSlideData.subtitle}
-                    </h3>
-                    <p className="text-base sm:text-lg text-white leading-relaxed mx-auto max-w-2xl">
+                    {'subtitle' in currentSlideData && currentSlideData.subtitle && (
+                      <h3 className="text-[24px] sm:text-[24px] font-extralight text-white font-inter">
+                        {currentSlideData.subtitle}
+                      </h3>
+                    )}
+                    <h2 
+                      className="text-[48px] sm:text-[48px] lg:text-[48px] font-inter font-medium text-teal-400 leading-tight mx-auto max-w-2xl mb-10"
+                      dangerouslySetInnerHTML={{ __html: currentSlideData.title }}
+                    />
+                    <p className="text-base sm:text-xl font-inter font-thin text-white leading-relaxed mx-auto max-w-2xl">
                       {currentSlideData.content}
                     </p>
                     
@@ -282,28 +288,42 @@ export default function ValuesSection() {
               </div>
 
               {/* --- Right Navigation Arrow (Column 5) --- */}
-              <motion.div 
-                className="flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-              >
-                <motion.button
-                  onClick={goToNextSlide}
-                  disabled={currentSection === sections.length - 1 && currentSlide === sections[currentSection].slides.length - 1}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-2 rounded-full transition-all duration-200"
+              {sections[currentSection].slides.length > 1 && (
+                <motion.div 
+                  className="flex items-center justify-center"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
                 >
-                  <ChevronRight 
-                    className={`w-8 h-8 transition-colors ${
-                      (currentSection === sections.length - 1 && currentSlide === sections[currentSection].slides.length - 1) 
-                        ? 'text-gray-300 cursor-not-allowed' 
-                        : 'text-[#04BBA6] hover:text-[#03A094] hover:cursor-pointer'
-                    }`}
-                  />
-                </motion.button>
-              </motion.div>
+                  <motion.button
+                    onClick={goToNextSlide}
+                    disabled={currentSlide === sections[currentSection].slides.length - 1}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-2 rounded-full transition-all duration-200"
+                  >
+                    <ChevronRight 
+                      className={`w-8 h-8 transition-colors ${
+                        currentSlide === sections[currentSection].slides.length - 1
+                          ? 'text-gray-300 cursor-not-allowed' 
+                          : 'text-[#04BBA6] hover:text-[#03A094] hover:cursor-pointer'
+                      }`}
+                    />
+                  </motion.button>
+                </motion.div>
+              )}
+
+              {/* Show empty div when no arrows needed to maintain grid layout */}
+              {sections[currentSection].slides.length <= 1 && (
+                <motion.div 
+                  className="flex items-center justify-center"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                >
+                  {/* Empty */}
+                </motion.div>
+              )}
 
               {/* --- Bottom row: 5 empty sections --- */}
               {[1, 2, 3, 4, 5].map((item, i) => (
