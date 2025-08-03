@@ -4,7 +4,7 @@ import ResourceCard from "@/components/resources/resourceCard";
 import ResourcesCardItems from "@/components/resources/resourcesCardItems";
 
 
-export default function AboutPage() {
+export default function ResourcePage() {
   return (
     <>
     <HeroSection />
