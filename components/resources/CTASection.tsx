@@ -20,7 +20,7 @@ export default function CTASection() {
   return (
     <section ref={ref} className="relative flex items-center justify-center  z-0">
               <motion.div 
-          className="bg-[url('/image/bg_image.png')] bg-cover bg-center rounded-t-3xl p-12 flex items-center justify-between shadow-lg"
+          className="bg-[url('/image/background/bg_image.png')] bg-cover bg-center rounded-t-3xl p-12 flex items-center justify-between shadow-lg"
         style={{ 
           width: '1176px', 
           height: '307px',

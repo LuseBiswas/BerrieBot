@@ -84,8 +84,13 @@ export default function FeatureCard() {
 
       {/* ---------- CENTERED HEADLINE + SUBTITLE (only change) ---------- */}
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center z-20">
-        <div className="bg-black px-8 py-4 inline-block text-center">
-          <div className="flex items-center gap-3 justify-center">
+        <div className="relative px-8 py-4 inline-block text-center">
+          {/* Background to block the line but preserve grid with fading effect */}
+          <div className="absolute inset-0 -mx-12 -my-6 rounded-lg" 
+               style={{
+                 background: 'radial-gradient(ellipse 70% 60% at center, #000000 40%, #000000 70%, transparent 80%)'
+               }}></div>
+          <div className="relative z-10 flex items-center gap-3 justify-center">
             
             <h2 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]">
               <span className="bg-gradient-to-r from-white to-gray-950 text-transparent bg-clip-text">Recruiting</span>
@@ -97,7 +102,7 @@ export default function FeatureCard() {
             
           </div>
           
-          <p className="mt-6 text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto">
+          <p className="relative z-10 mt-6 text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto">
             From outreach to offer, the BerriSuite delivers speed, 
             accuracy, and security&nbsp;— on autopilot.
           </p>

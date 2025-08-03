@@ -4,7 +4,12 @@ import React, { useRef, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 
 // Custom component to display animated numbers
-function AnimatedNumber({ targetValue, format, showActual }: { targetValue: number, format: (num: number) => string, showActual: boolean }) {
+function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: { 
+  targetValue: number, 
+  format: (num: number) => string, 
+  showActual: boolean,
+  dynamicFormat?: (num: number, showActual: boolean) => string 
+}) {
   const [randomValue, setRandomValue] = React.useState(0);
   const [displayValue, setDisplayValue] = React.useState(0);
 
@@ -61,7 +66,7 @@ function AnimatedNumber({ targetValue, format, showActual }: { targetValue: numb
         textShadow: showActual ? '0 0 20px rgba(4, 187, 166, 0.3)' : 'none'
       }}
     >
-      {format(displayValue)}
+      {dynamicFormat ? dynamicFormat(displayValue, showActual) : format(displayValue)}
     </motion.span>
   );
 }
@@ -224,6 +229,16 @@ export default function StatsSection() {
                       targetValue={2}
                       format={(num) => `${Math.round(num)}x↑`}
                       showActual={showActualValues}
+                      dynamicFormat={(num, showActual) => {
+                        if (showActual) {
+                          return `${Math.round(num)}x↑`;
+                        } else {
+                          // Random letters but keep ↑ static
+                          const letters = ['x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+                          const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+                          return `${Math.round(num)}${randomLetter}↑`;
+                        }
+                      }}
                     />
                   </div>
                   <div className="text-[22px] font-manrope font-extralight text-[#060606] leading-tight">
@@ -238,6 +253,16 @@ export default function StatsSection() {
                       targetValue={3}
                       format={(num) => `$${Math.round(num)}M+`}
                       showActual={showActualValues}
+                      dynamicFormat={(num, showActual) => {
+                        if (showActual) {
+                          return `$${Math.round(num)}M+`;
+                        } else {
+                          // Random units but keep $ and + static
+                          const units = ['M', 'K', 'B', 'T', 'G', 'P', 'Z', 'E', 'Y', 'X', 'W'];
+                          const randomUnit = units[Math.floor(Math.random() * units.length)];
+                          return `$${Math.round(num)}${randomUnit}+`;
+                        }
+                      }}
                     />
                   </div>
                   <div className="text-[22px] font-manrope font-extralight text-[#060606] leading-tight">

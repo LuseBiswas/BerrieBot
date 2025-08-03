@@ -23,7 +23,7 @@ export default function TestimonialSection() {
   const descriptionY = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [30, 0, 0, -30]);
 
   return (
-    <section ref={ref} className="py-24 sm:py-32 px-4 sm:px-6 relative overflow-hidden">
+    <section ref={ref} className="pt-24 sm:pt-32 px-4 sm:px-6 relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16 relative">
@@ -95,7 +95,7 @@ export default function TestimonialSection() {
         <div className="relative min-h-[750px] max-w-5xl mx-auto">
           {/* Recruiters Card (top-left) */}
           <motion.div 
-            className="my-8 lg:my-0 lg:absolute lg:top-0 lg:left-[-200] lg:w-[48%] z-20"
+            className="my-8 lg:my-0 lg:absolute lg:top-0 lg:left-[-180] lg:w-[48%] z-20"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { 
               opacity: 1, 
@@ -125,7 +125,7 @@ export default function TestimonialSection() {
 
           {/* CHROs & Leaders Card (bottom-left) */}
           <motion.div 
-            className="my-8 lg:my-0 lg:absolute lg:bottom-[310] lg:left-[220] lg:w-[48%] z-10"
+            className="my-8 lg:my-0 lg:absolute lg:bottom-[310] lg:left-[250] lg:w-[48%] z-10"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { 
               opacity: 1, 
@@ -151,31 +151,11 @@ export default function TestimonialSection() {
                 alt: "CHRO Profile"
               }}
             />
-          </motion.div>
-
-          {/* Candidates Card (center, prominent) */}
-          {/* <div className="my-8 lg:my-0 lg:absolute lg:top-[100] lg:left-[650] lg:-translate-x-1/2 lg:w-[48%] z-30">
-            <TestimonialCard
-              variant="blue"
-              title="Candidates"
-              description="Interview anytime, anywhere. No waiting. No awkward silence. Just a conversation with our AI."
-              buttonText="Learn More"
-              icon={
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="8" r="3" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="currentColor" strokeWidth="2"/>
-                </svg>
-              </div>
-            }
-          />
-          </div> */}
-
-         
+          </motion.div>        
 
           {/* Compliance Card (bottom-right) */}
           <motion.div 
-            className="my-8 lg:my-0 lg:absolute lg:bottom-[450] lg:right-[-80] lg:w-[48%] z-40"
+            className="my-8 lg:my-0 lg:absolute lg:bottom-[450] lg:right-[-180] lg:w-[48%] z-40"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { 
               opacity: 1, 

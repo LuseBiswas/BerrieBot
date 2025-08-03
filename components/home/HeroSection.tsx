@@ -89,7 +89,7 @@ export default function HeroSection() {
         {BOXES.map(({ pos, delay }, idx) => (
           <div
             key={idx}
-            className={`absolute ${pos} w-[320px] h-[320px] rounded-2xl bg-[#0a0908]`}
+            className={`absolute ${pos} w-[156px] h-[156px] rounded-2xl bg-[#0a0908]`}
           >
             {/* SVG border highlight */}
             <motion.svg

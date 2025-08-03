@@ -118,7 +118,7 @@ export default function ComparisonSection() {
             {/* Background to block the line but preserve grid with fading effect */}
             <div className="absolute inset-0 -mx-12 -my-6 rounded-lg" 
                  style={{
-                   background: 'radial-gradient(ellipse 70% 60% at center, #101010 30%, #101010 50%, transparent 80%)'
+                   background: 'radial-gradient(ellipse 70% 60% at center, #101010 30%, #101010 60%, transparent 80%)'
                  }}></div>
             <motion.h2 
               className="relative z-10 text-[64px] sm:text-6xl md:text-7xl lg:text-8xl font-inter font-light leading-24"
