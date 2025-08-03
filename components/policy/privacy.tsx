@@ -77,10 +77,10 @@ If you have any questions about this Privacy Policy or our data practices, pleas
           <motion.div
             key="contentsheet"
             initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            animate={{ y: "-23vh", opacity: 1 }}
             exit={{ y: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="w-full bg-white"
+            className="w-full bg-white relative z-[100] -mb-[23vh]"
           >
             <motion.div
               drag="y"
