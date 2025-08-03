@@ -1,5 +1,5 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -18,6 +18,7 @@ export default function ValuesSection() {
   // Carousel state
   const [currentSection, setCurrentSection] = useState(0); // 0: Mission, 1: Vision, 2: Values
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [slideDirection, setSlideDirection] = useState(0); // -1: left, 1: right
 
   // Dummy slide data
   const sections = [
@@ -70,11 +71,13 @@ export default function ValuesSection() {
 
   // Navigation functions
   const goToSection = (sectionIndex: number) => {
+    setSlideDirection(sectionIndex > currentSection ? 1 : -1);
     setCurrentSection(sectionIndex);
     setCurrentSlide(0);
   };
 
   const goToPrevSlide = () => {
+    setSlideDirection(-1);
     if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
     } else if (currentSection > 0) {
@@ -84,6 +87,7 @@ export default function ValuesSection() {
   };
 
   const goToNextSlide = () => {
+    setSlideDirection(1);
     if (currentSlide < sections[currentSection].slides.length - 1) {
       setCurrentSlide(currentSlide + 1);
     } else if (currentSection < sections.length - 1) {
@@ -92,7 +96,28 @@ export default function ValuesSection() {
     }
   };
 
+  const goToSlide = (slideIndex: number) => {
+    setSlideDirection(slideIndex > currentSlide ? 1 : -1);
+    setCurrentSlide(slideIndex);
+  };
+
   const currentSlideData = sections[currentSection].slides[currentSlide];
+
+  // Slide animation variants
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? -300 : 300,
+      opacity: 0
+    })
+  };
 
   // Keyboard navigation
   useEffect(() => {
@@ -134,7 +159,7 @@ export default function ValuesSection() {
           <div className="max-w-7xl mx-auto relative">
             {/* Vertical lines */}
             <motion.div 
-              className="absolute inset-y-0 left-[12.5%] border-l border-black pointer-events-none hidden lg:block origin-bottom"
+              className="absolute inset-y-0 left-[12.42%] border-l border-black pointer-events-none hidden lg:block origin-bottom"
               style={{ scaleY: verticalLinesProgress }}
             />
             <motion.div 
@@ -191,69 +216,93 @@ export default function ValuesSection() {
 
               {/* --- Left Navigation Arrow (Column 1) --- */}
               <motion.div 
-                className="flex items-center justify-center cursor-pointer"
+                className="flex items-center justify-center"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                onClick={goToPrevSlide}
               >
-                <ChevronLeft 
-                  className={`w-8 h-8 transition-colors ${
-                    (currentSection === 0 && currentSlide === 0) 
-                      ? 'text-gray-300 cursor-not-allowed' 
-                      : 'text-black hover:text-gray-600'
-                  }`}
-                />
+                <motion.button
+                  onClick={goToPrevSlide}
+                  disabled={currentSection === 0 && currentSlide === 0}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-2 rounded-full transition-all duration-200"
+                >
+                  <ChevronLeft 
+                    className={`w-8 h-8 transition-colors ${
+                      (currentSection === 0 && currentSlide === 0) 
+                        ? 'text-gray-300 cursor-not-allowed' 
+                        : 'text-[#04BBA6] hover:text-[#03A094] hover:cursor-pointer'
+                    }`}
+                  />
+                </motion.button>
               </motion.div>
 
               {/* --- Middle section with content (spans middle 3 columns) --- */}
-              <motion.div 
-                className="col-span-1 sm:col-span-3 relative py-16 px-4 text-center bg-black"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                viewport={{ once: true }}
-                key={`${currentSection}-${currentSlide}`}
-              >
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-teal-400 leading-tight mx-auto max-w-2xl mb-4">
-                  {currentSlideData.title}
-                </h2>
-                <h3 className="text-lg sm:text-xl font-medium text-white mb-6">
-                  {currentSlideData.subtitle}
-                </h3>
-                <p className="text-base sm:text-lg text-white leading-relaxed mx-auto max-w-2xl">
-                  {currentSlideData.content}
-                </p>
-                
-                {/* Slide indicators */}
-                <div className="flex justify-center mt-8 space-x-2">
-                  {sections[currentSection].slides.map((_, slideIndex) => (
-                    <button
-                      key={slideIndex}
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        slideIndex === currentSlide ? 'bg-teal-400' : 'bg-gray-600'
-                      }`}
-                      onClick={() => setCurrentSlide(slideIndex)}
-                    />
-                  ))}
-                </div>
-              </motion.div>
+              <div className="col-span-1 sm:col-span-3 relative bg-black overflow-hidden">
+                <AnimatePresence mode="wait" custom={slideDirection}>
+                  <motion.div
+                    key={`${currentSection}-${currentSlide}`}
+                    custom={slideDirection}
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      type: "tween",
+                      ease: "easeInOut",
+                      duration: 0.3
+                    }}
+                    className="py-16 px-4 text-center"
+                  >
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-teal-400 leading-tight mx-auto max-w-2xl mb-4">
+                      {currentSlideData.title}
+                    </h2>
+                    <h3 className="text-lg sm:text-xl font-medium text-white mb-6">
+                      {currentSlideData.subtitle}
+                    </h3>
+                    <p className="text-base sm:text-lg text-white leading-relaxed mx-auto max-w-2xl">
+                      {currentSlideData.content}
+                    </p>
+                    
+                    {/* Slide indicators */}
+                    <div className="flex justify-center mt-8 space-x-2">
+                      {sections[currentSection].slides.map((_, slideIndex) => (
+                        <button
+                          key={slideIndex}
+                          className={`w-2 h-2 rounded-full transition-colors ${
+                            slideIndex === currentSlide ? 'bg-teal-400' : 'bg-gray-600'
+                          }`}
+                          onClick={() => goToSlide(slideIndex)}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
 
               {/* --- Right Navigation Arrow (Column 5) --- */}
               <motion.div 
-                className="flex items-center justify-center cursor-pointer"
+                className="flex items-center justify-center"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                onClick={goToNextSlide}
               >
-                <ChevronRight 
-                  className={`w-8 h-8 transition-colors ${
-                    (currentSection === sections.length - 1 && currentSlide === sections[currentSection].slides.length - 1) 
-                      ? 'text-gray-300 cursor-not-allowed' 
-                      : 'text-black hover:text-gray-600'
-                  }`}
-                />
+                <motion.button
+                  onClick={goToNextSlide}
+                  disabled={currentSection === sections.length - 1 && currentSlide === sections[currentSection].slides.length - 1}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-2 rounded-full transition-all duration-200"
+                >
+                  <ChevronRight 
+                    className={`w-8 h-8 transition-colors ${
+                      (currentSection === sections.length - 1 && currentSlide === sections[currentSection].slides.length - 1) 
+                        ? 'text-gray-300 cursor-not-allowed' 
+                        : 'text-[#04BBA6] hover:text-[#03A094] hover:cursor-pointer'
+                    }`}
+                  />
+                </motion.button>
               </motion.div>
 
               {/* --- Bottom row: 5 empty sections --- */}

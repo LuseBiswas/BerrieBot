@@ -41,7 +41,7 @@ export default function CompaniesSection() {
           <div className="max-w-7xl mx-auto relative">
             {/* Vertical lines */}
             <motion.div 
-              className="absolute inset-y-0 left-[16.666%] border-l border-black pointer-events-none hidden lg:block origin-bottom"
+              className="absolute inset-y-0 left-[16.59%] border-l border-black pointer-events-none hidden lg:block origin-bottom"
               style={{ scaleY: verticalLinesProgress }}
             />
             <motion.div 
