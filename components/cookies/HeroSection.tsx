@@ -21,20 +21,20 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-12">
         <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium bg-gradient-to-b from-[#252527] to-[#ADADAEB0] text-transparent bg-clip-text">
-          No Secrets, Just 
+          Not the Choclate 
           <br />
-          Privacy
+          Chip Kind
         </h1>
       </div>
 
       {/* ---- Description ---- */}
       <div className="text-center w-full max-w-4xl mx-auto relative z-10 mb-28">
-        <p className="font-inter text-[36px] sm:text-2xl md:text-[36px] leading-[1.4] sm:leading-[1.5] font-light text-white max-w-5xl mx-auto">
+        <p className=" font-inter text-[34px] sm:text-2xl md:text-[28px] leading-[1.4] sm:leading-[1.5] font-light text-white max-w-5xl mx-auto">
           {showConfirmationText ? (
-            "Did you definitely read it?"
+            "You definetly read some?"
           ) : (
             <>
-              We read the fine print so you don't have to and we <br /> definitely Guard your Data like it's Cake.
+              Let’s be real: we use cookies - but not the chewy, gooey kind <br /> (unfortunately). <br /> These are the digital kind that help Berribot understand how people use our <br /> website so we can make things better, faster, and smoother for you.
             </>
           )}
         </p>
@@ -56,7 +56,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Read Privacy Policy
+              Let's read some?
             </motion.button>
           </motion.div>
         )}
@@ -64,7 +64,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
 
       {/* Confirmation Buttons */}
       {showConfirmationText && (
-        <div className="flex flex-col space-y-4 mt-[-80px] relative z-10 mb-28 items-center">
+       <div className="flex flex-col space-y-4 mt-[-80px] relative z-10 mb-28 items-center">
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -86,7 +86,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            No, now I'm worried that you'll <br />quiz me, let me read that again!
+            NO, AGAINNNNN!!!
           </motion.button>
         </div>
       )}
