@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import HeroSection from "@/components/policy/HeroSection";
-import ValuesSection from "@/components/about/ValuesSection";
 import PrivacyPolicyComponent from "@/components/policy/privacy";
 
 export default function PolicyPage() {

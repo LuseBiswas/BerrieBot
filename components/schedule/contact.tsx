@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -39,7 +40,6 @@ const Contact = () => {
     
     // First day of current month
     const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
     
     // Start date (might be from previous month)
     const startDate = new Date(firstDay);
@@ -164,18 +164,22 @@ const Contact = () => {
             {/* Meeting details */}
             <div className="space-y-2 mb-2" style={{ paddingLeft: '66px' }}>
               <div className="flex items-center gap-3">
-                <img 
+                <Image 
                   src="/image/icons/stopwatch.png" 
                   alt="Duration" 
+                  width={16}
+                  height={16}
                   className="w-4 h-4" 
                   style={{ marginLeft: '0px' }}
                 />
                 <span className="text-teal-500 font-medium text-[14px]">30 mins</span>
               </div>
               <div className="flex items-center gap-1">
-                <img 
+                <Image 
                   src="/image/icons/web.png" 
                   alt="Web conferencing" 
+                  width={16}
+                  height={16}
                   className="w-4 h-4" 
                   style={{ marginLeft: '0px' }}
                 />

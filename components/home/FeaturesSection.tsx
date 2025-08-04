@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import FeatureCard from "./FeatureCard";
+import { useEffect, useRef, useCallback } from "react";
+import FeatureCardItem from "./FeatureCardItem";
 
 export default function FeaturesSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -61,7 +61,7 @@ export default function FeaturesSection() {
     });
   };
 
-  const ensureInfiniteLoop = () => {
+  const ensureInfiniteLoop = useCallback(() => {
     const container = scrollRef.current;
     if (!container) return;
 
@@ -79,7 +79,7 @@ export default function FeaturesSection() {
     else if (scrollLeft < 0) {
       silentSetScrollLeft(totalWidth - step);
     }
-  };
+  }, [L]);
 
   const scrollRight = () => {
     const container = scrollRef.current;
@@ -114,7 +114,7 @@ export default function FeaturesSection() {
       ro.disconnect();
       container.removeEventListener("scroll", onScroll);
     };
-  }, [L]);
+  }, [L, ensureInfiniteLoop]);
 
   return (
     <>
@@ -173,10 +173,12 @@ export default function FeaturesSection() {
                     key={index}
                     className="shrink-0 w-[280px] md:w-[320px] lg:w-[360px]"
                   >
-                    <FeatureCard
-                      image={feature.image}
+                    <FeatureCardItem
+                      icon={feature.image}
                       title={feature.title}
                       description={feature.description}
+                      index={index}
+                      isInView={true}
                     />
                   </div>
                 ))}

@@ -1,6 +1,6 @@
 "use client";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function ValuesSection() {
@@ -21,7 +21,7 @@ export default function ValuesSection() {
   const [slideDirection, setSlideDirection] = useState(0); // -1: left, 1: right
 
   // Dummy slide data
-  const sections = [
+  const sections = useMemo(() => [
     {
       title: "Mission",
       slides: [
@@ -62,7 +62,7 @@ export default function ValuesSection() {
         }
       ]
     }
-  ];
+  ], []);
 
   // Navigation functions
   const goToSection = (sectionIndex: number) => {
@@ -71,24 +71,25 @@ export default function ValuesSection() {
     setCurrentSlide(0);
   };
 
-  const goToPrevSlide = () => {
-    setSlideDirection(-1);
+  const goToPrevSlide = useCallback(() => {
     if (currentSlide > 0) {
+      setSlideDirection(-1);
       setCurrentSlide(currentSlide - 1);
+    } else {
+      setSlideDirection(-1);
+      setCurrentSlide(sections[currentSection].slides.length - 1);
     }
-  };
+  }, [currentSlide, currentSection, sections]);
 
-  const goToNextSlide = () => {
-    setSlideDirection(1);
+  const goToNextSlide = useCallback(() => {
     if (currentSlide < sections[currentSection].slides.length - 1) {
+      setSlideDirection(1);
       setCurrentSlide(currentSlide + 1);
+    } else {
+      setSlideDirection(1);
+      setCurrentSlide(0);
     }
-  };
-
-  const goToSlide = (slideIndex: number) => {
-    setSlideDirection(slideIndex > currentSlide ? 1 : -1);
-    setCurrentSlide(slideIndex);
-  };
+  }, [currentSlide, currentSection, sections]);
 
   const currentSlideData = sections[currentSection].slides[currentSlide];
 
@@ -120,7 +121,7 @@ export default function ValuesSection() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentSection, currentSlide]);
+  }, [currentSection, currentSlide, goToPrevSlide, goToNextSlide]);
 
   return (
     <section ref={ref} className="py-16 sm:py-3.5 bg-[#E0E0E0]">

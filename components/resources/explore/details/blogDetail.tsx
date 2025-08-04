@@ -56,7 +56,7 @@ export default function BlogDetail() {
                 So... What Can AI Actually Do for Hiring?
               </h1>
               <p className="text-[22px] font-light text-black/90 max-w-2xl">
-                Here's what smart teams are automating with tools like Berribot!
+                Here&apos;s what smart teams are automating with tools like Berribot!
               </p>
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function BlogDetail() {
         <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
-              Let's cut through the buzz. Everyone's talking about AI like it's the solution to everything from your inbox overload to world peace. But when it comes to hiring, what can it actually do—like, in real life, on your real team, with your real "we-needed-this-yesterday" timelines?
+              Let&apos;s cut through the buzz. Everyone&apos;s talking about AI like it&apos;s the solution to everything from your inbox overload to world peace. But when it comes to hiring, what can it actually &ldquo;do&rdquo;—like, in real life, on your real team, with your real &ldquo;we-needed-this-yesterday&rdquo; timelines?
             </p>
             
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
@@ -107,7 +107,7 @@ export default function BlogDetail() {
             </h2>
             
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
-              Sending messages to 200+ candidates manually is... well, not the best use of anyone's day. AI tools like Berribot can personalise outreach at scale—without sounding like a robot from 1999. It remembers names, roles, and context, and even nudges candidates who haven't responded.
+              Sending messages to 200+ candidates manually is... well, not the best use of anyone&apos;s day. AI tools like Berribot can personalise outreach at scale—without sounding like a robot from 1999. It remembers names, roles, and context, and even nudges candidates who haven&apos;t responded.
             </p>
             
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
@@ -119,11 +119,11 @@ export default function BlogDetail() {
             </h2>
             
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
-              AI doesn't get bored reading résumés. It doesn't zone out after the 17th bullet point. It just reads, ranks, and sorts based on skills, keywords, experience, and relevance. Bonus: It does this in seconds, not hours.
+              AI doesn&apos;t get bored reading résumés. It doesn&apos;t zone out after the 17th bullet point. It just reads, ranks, and sorts based on skills, keywords, experience, and relevance. Bonus: It does this in seconds, not hours.
             </p>
             
             <p className="text-gray-600 text-lg leading-relaxed mb-8">
-              Double bonus: It's not judging fonts.
+              Double bonus: It&apos;s not judging fonts.
             </p>
 
             

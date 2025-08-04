@@ -37,9 +37,9 @@ export default function HeroSection() {
       <div className="text-center w-full max-w-4xl mx-auto relative z-10">
         <p className="font-inter text-[20px] sm:text-2xl md:text-[32px] leading-[1.4] sm:leading-[1.5] font-light text-[#969696] max-w-5xl mx-auto">
           <span className="text-[#00C7BEB2]">Welcome to your go-to hub for all </span> things Berribot and beyond. <br />
-          Whether you're curious about AI, exploring automation strategies, <br />
+          Whether you&apos;re curious about AI, exploring automation strategies, <br />
           or just want to see how others are scaling smarter —not harder <br />
-          —you're in the right place.
+          —you&apos;re in the right place.
         </p>
       </div>
     </section>

@@ -2,6 +2,7 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 import { ArrowLeft, ArrowRight, Plus } from "lucide-react";
+import Image from "next/image";
 
 const COMPARISON_DATA = [
   {
@@ -43,16 +44,26 @@ export default function ComparisonSection() {
   const labelsOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
   const labelsY = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [30, 0, 0, -30]);
 
-  // Create scroll-based animations for each row with staggered timing
-  const createRowAnimations = (index: number) => {
-    const baseStart = 0.4 + (index * 0.08); // Stagger start times - delayed start
-    const baseEnd = 0.8 - (index * 0.05);   // Stagger end times
-    
-    const opacity = useTransform(scrollYProgress, [baseStart, baseStart + 0.3, baseEnd, baseEnd + 0.15], [0, 1, 1, 0]);
-    const y = useTransform(scrollYProgress, [baseStart, baseStart + 0.3, baseEnd, baseEnd + 0.15], [40, 0, 0, -40]);
-    
-    return { opacity, y };
-  };
+  // Individual row animations (must be separate useTransform calls to follow React Hooks rules)
+  const row0Opacity = useTransform(scrollYProgress, [0.4, 0.7, 0.8, 0.95], [0, 1, 1, 0]);
+  const row0Y = useTransform(scrollYProgress, [0.4, 0.7, 0.8, 0.95], [40, 0, 0, -40]);
+  
+  const row1Opacity = useTransform(scrollYProgress, [0.48, 0.78, 0.75, 0.9], [0, 1, 1, 0]);
+  const row1Y = useTransform(scrollYProgress, [0.48, 0.78, 0.75, 0.9], [40, 0, 0, -40]);
+  
+  const row2Opacity = useTransform(scrollYProgress, [0.56, 0.86, 0.7, 0.85], [0, 1, 1, 0]);
+  const row2Y = useTransform(scrollYProgress, [0.56, 0.86, 0.7, 0.85], [40, 0, 0, -40]);
+  
+  const row3Opacity = useTransform(scrollYProgress, [0.64, 0.94, 0.65, 0.8], [0, 1, 1, 0]);
+  const row3Y = useTransform(scrollYProgress, [0.64, 0.94, 0.65, 0.8], [40, 0, 0, -40]);
+
+  // Array to access animations by index
+  const rowAnimations = [
+    { opacity: row0Opacity, y: row0Y },
+    { opacity: row1Opacity, y: row1Y },
+    { opacity: row2Opacity, y: row2Y },
+    { opacity: row3Opacity, y: row3Y }
+  ];
 
   return (
     <section
@@ -165,11 +176,13 @@ export default function ComparisonSection() {
                     style={{
                       background: 'radial-gradient(circle, #101010 20%, #101010 40%, transparent 70%)'
                     }}></div>
-               <img
-                 src="/image/logo.png"
-                 alt="Clock Icon"
-                 className="relative z-10 w-24 h-24 mr-10"
-               />
+               <Image
+                src="/image/logo.png"
+                alt="Clock Icon"
+                width={96}
+                height={96}
+                className="relative z-10 w-24 h-24 mr-10"
+              />
              </div>
              
              {/* Right Side - Arrow with text below */}
@@ -197,7 +210,7 @@ export default function ComparisonSection() {
            <table className="w-full">
              <tbody>
                {COMPARISON_DATA.map((item, index) => {
-                 const { opacity, y } = createRowAnimations(index);
+                 const { opacity, y } = rowAnimations[index];
                  
                  return (
                    <tr key={index}>

@@ -23,8 +23,8 @@ export default function HeroSection() {
       {/* ---- Description ---- */}
       <div className="text-center w-full max-w-5xlxl mx-auto relative z-10">
         <p className="font-inter text-[24px] sm:text-2xl md:text-[32px] leading-[1.4] sm:leading-[1.5] font-light text-white max-w-5xl mx-auto">
-        Got questions? We've got answers. If you're still wondering about something <br />
-         after this, just give us a shout—we're humans behind the bot, promise.
+        Got questions? We&apos;ve got answers. If you&apos;re still wondering about something <br />
+         after this, just give us a shout—we&apos;re humans behind the bot, promise.
         </p>
       </div>
     </section>

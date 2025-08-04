@@ -40,7 +40,7 @@ export default function CTASection() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <h2 className="text-[60px] font-inter font-medium leading-tight">
-              <span className="bg-gradient-to-b from-[#252527] to-[#ADADAEB0] text-transparent bg-clip-text">Let's make</span>
+              <span className="bg-gradient-to-b from-[#252527] to-[#ADADAEB0] text-transparent bg-clip-text">Let&apos;s make</span>
               <br />
               <span className="bg-gradient-to-b from-[#252527] to-[#ADADAEB0] text-transparent bg-clip-text">it happen -</span>
               <br />

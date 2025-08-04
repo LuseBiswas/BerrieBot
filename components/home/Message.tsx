@@ -16,7 +16,7 @@ export default function Message() {
           <span className="text-white">No more theatrics.</span><br />
           <span className="relative inline-block">
             <span className="bg-gradient-to-r from-white to-[#252527] bg-clip-text text-transparent">
-              Let's show you the magic.
+              Let&apos;s show you the magic.
             </span>
             {/* Star Image */}
             <Image
@@ -32,7 +32,7 @@ export default function Message() {
         {/* Subtext */}
         <div className="text-lg sm:text-[36px] text-white/80 font-inter font-[400]">
           <p className="mb-2">Pssst....</p>
-          <p>We'll keep it short. We know you've got</p>
+          <p>We&apos;ll keep it short. We know you&apos;ve got</p>
           <p>interviews to run.</p>
         </div>
       </div>
