@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Dogica Pixel';
+  src: url('/fonts/dogicapixel.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer utilities {
+  .bg-pinstripes {
+    background-color: #000;
+    background-image: repeating-linear-gradient(
+      90deg,
+      #111 0px,
+      #111 1px,
+      transparent 1px,
+      transparent 60px
+    );
+  }
+  
+  .bg-pinstripes-white {
+    background-color: #fff;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(0, 199, 190, 0.08) 0px,
+      rgba(0, 199, 190, 0.08) 1px,
+      transparent 1px,
+      transparent 60px
+    );
+  }
+}
