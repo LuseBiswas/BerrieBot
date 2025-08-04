@@ -6,12 +6,64 @@ const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState<number | null>(7);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission logic here
     console.log({ name, email, message });
   };
+
+  // Calendar navigation functions
+  const navigateMonth = (direction: 'prev' | 'next') => {
+    const newDate = new Date(currentDate);
+    if (direction === 'prev') {
+      newDate.setMonth(newDate.getMonth() - 1);
+    } else {
+      newDate.setMonth(newDate.getMonth() + 1);
+    }
+    setCurrentDate(newDate);
+    setSelectedDate(null); // Clear selection when navigating
+  };
+
+  // Get calendar data
+  const getCalendarData = () => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    // First day of current month
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    
+    // Start date (might be from previous month)
+    const startDate = new Date(firstDay);
+    startDate.setDate(startDate.getDate() - firstDay.getDay());
+    
+    // Generate all dates for the calendar grid
+    const dates = [];
+    const current = new Date(startDate);
+    
+    // Generate 42 dates (6 weeks)
+    for (let i = 0; i < 42; i++) {
+      dates.push({
+        date: current.getDate(),
+        month: current.getMonth(),
+        year: current.getFullYear(),
+        isCurrentMonth: current.getMonth() === month,
+        isToday: current.toDateString() === new Date().toDateString()
+      });
+      current.setDate(current.getDate() + 1);
+    }
+    
+    return {
+      monthName: firstDay.toLocaleDateString('en-US', { month: 'long' }),
+      year: year,
+      dates: dates
+    };
+  };
+
+  const calendarData = getCalendarData();
 
   return (
     <div className="flex flex-col lg:flex-row gap-12 p-8 max-w-7xl mx-auto font-inter">
@@ -121,13 +173,21 @@ const Contact = () => {
 
           {/* Calendar navigation */}
           <div className="ml-12 flex items-center gap-3 mb-1">
-            <button className="p-2 hover:bg-gray-100 rounded-lg">
+            <button 
+              onClick={() => navigateMonth('prev')}
+              className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+            >
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
-            <h4 className="text-[14px] font-medium text-teal-500">August 2025</h4>
-            <button className="p-2 hover:bg-gray-100 rounded-lg">
+            <h4 className="text-[14px] font-medium text-teal-500">
+              {calendarData.monthName} {calendarData.year}
+            </h4>
+            <button 
+              onClick={() => navigateMonth('next')}
+              className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+            >
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -149,45 +209,39 @@ const Contact = () => {
 
               {/* Calendar dates */}
               <div className="grid grid-cols-7 gap-1">
-                {/* Previous month dates */}
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>30</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>31</div>
-                
-                {/* Current month dates */}
-                {Array.from({ length: 31 }, (_, i) => i + 1).map((date) => {
-                  const isSelected = date === 7;
-                  const isHighlighted = [8, 9, 10, 14, 15, 16, 17, 22, 24].includes(date);
+                {calendarData.dates.map((dateObj, index) => {
+                  const isSelected = selectedDate === dateObj.date && dateObj.isCurrentMonth;
+                  const isHighlighted = dateObj.isCurrentMonth && [8, 9, 10, 14, 15, 16, 17, 22, 24].includes(dateObj.date);
                   
-                  return (
-                    <button
-                      key={date}
-                      className={`w-8 h-8 flex items-center justify-center rounded-full font-medium transition-colors
-                        ${isSelected 
-                          ? 'bg-teal-500 text-white' 
-                          : isHighlighted 
-                            ? 'bg-gray-200 text-gray-700 hover:bg-gray-300' 
-                            : 'text-gray-700 hover:bg-gray-100'
-                        }`}
-                      style={{ fontSize: '12px' }}
-                    >
-                      {date}
-                    </button>
-                  );
+                  if (dateObj.isCurrentMonth) {
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedDate(dateObj.date)}
+                        className={`w-8 h-8 flex items-center justify-center rounded-full font-medium transition-colors cursor-pointer
+                          ${isSelected 
+                            ? 'bg-teal-500 text-white' 
+                            : isHighlighted 
+                              ? 'bg-gray-200 text-gray-700 hover:bg-gray-300' 
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
+                        style={{ fontSize: '12px' }}
+                      >
+                        {dateObj.date}
+                      </button>
+                    );
+                  } else {
+                    return (
+                      <div 
+                        key={index}
+                        className="w-8 h-8 flex items-center justify-center text-gray-300" 
+                        style={{ fontSize: '12px' }}
+                      >
+                        {dateObj.date}
+                      </div>
+                    );
+                  }
                 })}
-                
-                {/* Next month dates */}
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>1</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>2</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>3</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>4</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>5</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>6</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>7</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>8</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>9</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>10</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>11</div>
-                <div className="w-8 h-8 flex items-center justify-center text-gray-300" style={{ fontSize: '12px' }}>12</div>
               </div>
             </div>
           </div>
@@ -196,7 +250,7 @@ const Contact = () => {
           <div className="text-center mt-6 text-[11px]">
             <span className="text-teal-500 font-medium">Time Zone: </span>
             <span className="text-gray-600">UK, Ireland, Lisbon Time 11:00 AM</span>
-            <button className="ml-2 text-gray-400 hover:text-gray-600">
+            <button className="ml-2 text-gray-400 hover:text-gray-600 cursor-pointer">
               <svg className="w-2 h-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
