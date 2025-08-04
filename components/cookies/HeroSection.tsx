@@ -56,7 +56,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              Let's read some?
+              Let&apos;s read some?
             </motion.button>
           </motion.div>
         )}

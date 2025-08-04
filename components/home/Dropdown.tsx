@@ -20,7 +20,6 @@ interface DropdownProps {
 
 export default function Dropdown({ trigger, sections, className = '' }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOffset, setDropdownOffset] = useState(0);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
 

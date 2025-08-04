@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MapPin, Mail, Linkedin, Facebook, Github, Twitter } from 'lucide-react';
 
 export default function Footer() {
@@ -12,9 +13,11 @@ export default function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <img 
+              <Image 
                 src="/image/logo.png" 
                 alt="BerriBot Logo" 
+                width={32}
+                height={32}
                 className="w-8 h-8"
               />
               <span className="text-xl font-semibold">BerriBot</span>

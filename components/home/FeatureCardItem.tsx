@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import React from 'react';
+import Image from 'next/image';
 
 interface FeatureCardItemProps {
   icon?: string;
@@ -28,9 +29,11 @@ export default function FeatureCardItem({
       <div className="flex items-start gap-6">
         {icon && (
           <div className="flex-shrink-0">
-            <img 
+            <Image 
               src={icon} 
               alt={title}
+              width={178}
+              height={178}
               className="w-[178px] h-[178px] opacity-80"
             />
           </div>

@@ -1,5 +1,5 @@
 'use client';
-import { motion, useInView, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useRef, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 
@@ -55,7 +55,7 @@ function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: {
     };
 
     requestAnimationFrame(animate);
-  }, [showActual ? targetValue : randomValue, showActual]);
+  }, [showActual, targetValue, randomValue, displayValue]);
 
   // Safe format function that doesn't use random during SSR
   const getSafeDisplayValue = () => {
@@ -98,7 +98,6 @@ export default function StatsSection() {
   
   // State to control showing actual values (like APPLY/OFFER in HeroSection)
   const [showActualValues, setShowActualValues] = React.useState(false);
-  const [currentScrollProgress, setCurrentScrollProgress] = React.useState(0);
 
   // Scroll progress for animations
   const { scrollYProgress } = useScroll({
@@ -109,7 +108,6 @@ export default function StatsSection() {
   // Switch to actual values at specific scroll percentage (like HeroSection)
   useEffect(() => {
     const unsubscribe = scrollYProgress.onChange(v => {
-      setCurrentScrollProgress(v); // Update progress display
       if (v >= 0.5) setShowActualValues(true);      // Show actual values at 50% scroll
       else if (v <= 0.4) setShowActualValues(false); // Show random numbers below 40% scroll
     });

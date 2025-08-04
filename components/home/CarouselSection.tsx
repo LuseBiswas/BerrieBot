@@ -1,7 +1,8 @@
 'use client';
-import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useState, useEffect, useRef } from 'react';
-import { Clock, Plus } from 'lucide-react';
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion';
+import { Plus } from 'lucide-react';
+import Image from 'next/image';
 
 const SLIDES = [
   {
@@ -28,8 +29,6 @@ const SLIDES = [
     image: "/image/prodcut/ProductImagery_1.png"
   }
 ];
-
-const SLIDE_DURATION = 5000; // 5 seconds
 
 export default function CarouselSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -181,7 +180,7 @@ export default function CarouselSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
                 >
-                  <img src="/image/icons/clock.png" alt="Clock" className="w-6 h-6" />
+                  <Image src="/image/icons/clock.png" alt="Clock" width={24} height={24} className="w-6 h-6" />
                 </motion.div>
               )}
             </div>
@@ -197,12 +196,14 @@ export default function CarouselSection() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 100 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="relative"
+              className="relative w-full h-full"
             >
-              <img
+              <Image
                 src={SLIDES[currentSlide].image}
                 alt={SLIDES[currentSlide].title}
-                className="w-full h-auto object-cover"
+                fill
+                className="object-cover"
+                priority
               />
               
               {/* Overlay with slide info */}

@@ -3,44 +3,6 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 import FeatureCardItem from "./FeatureCardItem";
 
-/* ---------- feature list ---------- */
-const FEATURES = [
-  {
-    id: 1,
-    title: "The Interviewer that Never Sleeps",
-    description:
-      "Candidates interview anytime. Recruiters wake up to scored reports.",
-    icon: "/image/icons/clock.png",
-  },
-  {
-    id: 2,
-    title: "An Agent that feels Human",
-    description:
-      "Natural voice and chat interactions, localised, empathetic, and fluid.",
-    icon: "/image/icons/contact.png",
-  },
-  {
-    id: 3,
-    title: "Fits Your Workflow",
-    description:
-      "Integrates with ATS systems like Workday, SAP, SuccessFactors, and MS Teams.",
-    icon: null, // No icon for this one
-  },
-  {
-    id: 4,
-    title: "Built-In Fraud Detection",
-    description:
-      "Catch impersonators before they waste your time. 3D liveness, lip-sync, and more.",
-    icon: "/image/icons/computer.png",
-  },
-  {
-    id: 5,
-    title: "Flexible Pricing",
-    description: "Use what you need. P credits or pay-as-you-go.",
-    icon: "/image/icons/bill.png",
-  },
-];
-
 export default function FeatureCard() {
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-100px" });

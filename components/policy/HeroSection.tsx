@@ -34,7 +34,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
             "Did you definitely read it?"
           ) : (
             <>
-              We read the fine print so you don't have to and we <br /> definitely Guard your Data like it's Cake.
+              We read the fine print so you don&apos;t have to and we <br /> definitely Guard your Data like it&apos;s Cake.
             </>
           )}
         </p>
@@ -86,7 +86,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            No, now I'm worried that you'll <br />quiz me, let me read that again!
+            NO, AGAINNNNN!!!
           </motion.button>
         </div>
       )}

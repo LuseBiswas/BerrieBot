@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 
-import PrivacyPolicyComponent from "@/components/policy/privacy";
 import HeroSection from "@/components/cookies/HeroSection";
 import CookiesComponent from "@/components/cookies/cookies";
 

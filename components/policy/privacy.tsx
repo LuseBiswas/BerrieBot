@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 
 interface PrivacyPolicyComponentProps {
@@ -9,7 +8,7 @@ interface PrivacyPolicyComponentProps {
 }
 
 const PrivacyPolicyComponent = ({ state, onStateChange }: PrivacyPolicyComponentProps) => {
-  const handleDragEnd = (event: any, info: PanInfo) => {
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     // Close if dragged down more than 100px
     if (info.offset.y > 100) {
       onStateChange?.('confirmation');

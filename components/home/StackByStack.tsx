@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export interface StackCard {
   id: string;

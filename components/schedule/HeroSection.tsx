@@ -16,7 +16,7 @@ export default function HeroSection() {
         <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium bg-gradient-to-b from-[#252527] to-[#ADADAEB0] text-transparent bg-clip-text">
           Help is one form or one call
           <br />
-          away . What's your pick? 
+          away . What&apos;s your pick? 
         </h1>
       </div>
 
@@ -24,7 +24,7 @@ export default function HeroSection() {
       <div className="text-center w-full max-w-4xl mx-auto relative z-10">
         <p className="font-inter text-[36px] sm:text-2xl md:text-[36px] leading-[1.4] sm:leading-[1.5] font-light text-white max-w-5xl mx-auto">
           Got questions?  <br />Curious what Berribot{" "}
-          <span className="text-[#969696]">can actually do for your team? <br />You're in the right place. </span> 
+          <span className="text-[#969696]">can actually do for your team? <br />You&apos;re in the right place. </span> 
         </p>
       </div>
     </section>

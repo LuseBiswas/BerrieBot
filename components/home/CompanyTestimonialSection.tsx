@@ -1,4 +1,5 @@
 "use client";
+import React, { useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -6,7 +7,7 @@ import {
   useInView,
   AnimatePresence,
 } from "framer-motion";
-import React, { useRef, useState } from "react";
+import Image from 'next/image';
 
 const TESTIMONIALS = [
   {
@@ -65,11 +66,6 @@ export default function CompanyTestimonialSection() {
   });
 
   // Transform scroll progress for different animations
-  const horizontalLinesProgress = useTransform(
-    scrollYProgress,
-    [0, 0.3],
-    [0, 1]
-  );
   const verticalLinesProgress = useTransform(
     scrollYProgress,
     [0.2, 0.5],
@@ -146,9 +142,11 @@ export default function CompanyTestimonialSection() {
                   },
                 }}
               >
-                <img
+                <Image
                   src="/image/components/inverted_comma.png"
                   alt="Quote"
+                  width={64}
+                  height={64}
                   className="w-16 h-16 object-contain"
                 />
               </motion.div>
@@ -178,7 +176,7 @@ export default function CompanyTestimonialSection() {
                       transition={{ duration: 0.4, ease: "easeInOut" }}
                       layout
                     >
-                      "{TESTIMONIALS[activeTestimonial].quote}"
+                      &ldquo;{TESTIMONIALS[activeTestimonial].quote}&rdquo;
                     </motion.h2>
                   </motion.div>
                 </AnimatePresence>
@@ -226,9 +224,11 @@ export default function CompanyTestimonialSection() {
                     {index === activeTestimonial ? (
                       // Active state - show company logo with teal background
                       <div className="w-full h-full bg-[#04BBA6] flex items-center justify-center">
-                        <img
+                        <Image
                           src={testimonial.logo}
                           alt={testimonial.company}
+                          width={100}
+                          height={50}
                           className="w-full h-full object-contain p-2"
                           onError={(e) => {
                             // Fallback if image doesn't load
