@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 interface ResourceCardProps {
@@ -8,19 +9,21 @@ interface ResourceCardProps {
   title: string;
   description: string;
   hoverButtonName: string;
+  link: string;
 }
 
 const ResourceCard: React.FC<ResourceCardProps> = ({
   image,
   title,
   description,
-  hoverButtonName
+  hoverButtonName,
+  link
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div 
-      className="relative cursor-pointer" 
+      className="relative " 
       style={{ width: '421px' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -62,16 +65,18 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
         }}
         transition={{ duration: 0.3, ease: "easeOut" }}
       >
-        <button 
-          className="bg-teal-500 hover:bg-teal-600 text-black font-medium flex items-center justify-center transition-colors duration-200 "
-          style={{ 
-            width: '272px', 
-            height: '50px',
-            borderRadius: '15px'
-          }}
-        >
-          {hoverButtonName}
-        </button>
+        <Link href={link}>
+          <button 
+            className="bg-teal-500 hover:bg-teal-600 text-black font-medium flex items-center justify-center transition-colors duration-200 hover:cursor-pointer"
+            style={{ 
+              width: '272px', 
+              height: '50px',
+              borderRadius: '15px'
+            }}
+          >
+            {hoverButtonName}
+          </button>
+        </Link>
       </motion.div>
     </div>
   );

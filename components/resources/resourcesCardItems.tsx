@@ -21,6 +21,7 @@ const ResourcesCardItems: React.FC = () => {
             title="Learn"
             description="You ask, We (and Berribot) Answers. Got questions? Browse through our Frequently Asked Questions."
             hoverButtonName="Learn More"
+            link="/resources/faq"
           />
 
           {/* Explore Card */}
@@ -29,6 +30,7 @@ const ResourcesCardItems: React.FC = () => {
             title="Explore"
             description="Big ideas. Light read. Zero robot jargon. Welcome to the corner of the internet where brains meet bots—and both get smarter."
             hoverButtonName="Learn More"
+            link="/explore"
           />
 
           {/* Case Studies Card */}
@@ -37,6 +39,7 @@ const ResourcesCardItems: React.FC = () => {
             title="Case Studies"
             description="Real businesses. Real results. No fluff. See how teams are using Berribot to hire faster, cut admin work, and save a whole lot of sanity."
             hoverButtonName="Learn More"
+            link="/explore/case-studies"
           />
         </div>
       </div>
