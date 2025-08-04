@@ -88,7 +88,7 @@ export default function FeatureCard() {
           {/* Background to block the line but preserve grid with fading effect */}
           <div className="absolute inset-0 -mx-12 -my-6 rounded-lg" 
                style={{
-                 background: 'radial-gradient(ellipse 70% 60% at center, #000000 40%, #000000 70%, transparent 80%)'
+                 background: 'radial-gradient(ellipse 50% 60% at center, #000000 40%, #000000 70%, transparent 80%)'
                }}></div>
           <div className="relative z-10 flex items-center gap-3 justify-center">
             
@@ -169,7 +169,7 @@ export default function FeatureCard() {
 
         {/* Middle Left */}
         <motion.div 
-          className="absolute top-20 right-340 transform -translate-y-1/2 w-80"
+          className="absolute top-20 right-318 transform -translate-y-1/2 w-80"
           style={{ 
             x: leftCardX,
             opacity: cardOpacity

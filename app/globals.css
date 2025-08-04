@@ -19,4 +19,15 @@
       transparent 60px
     );
   }
+  
+  .bg-pinstripes-white {
+    background-color: #fff;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(0, 199, 190, 0.08) 0px,
+      rgba(0, 199, 190, 0.08) 1px,
+      transparent 1px,
+      transparent 60px
+    );
+  }
 }

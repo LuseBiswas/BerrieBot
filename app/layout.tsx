@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/home/NavBar";
 import Footer from "@/components/Footer";
+import DynamicBackground from "@/components/DynamicBackground";
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,13 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans`}>
-        <div className="min-h-screen w-full flex flex-col bg-pinstripes bg-fixed text-white overflow-x-hidden">
+        <DynamicBackground>
           <NavBar />
           <main className="flex-1 w-full">
             {children}
           </main>
           <Footer />
-        </div>
+        </DynamicBackground>
       </body>
     </html>
   );

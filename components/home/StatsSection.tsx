@@ -8,14 +8,20 @@ function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: {
   targetValue: number, 
   format: (num: number) => string, 
   showActual: boolean,
-  dynamicFormat?: (num: number, showActual: boolean) => string 
+  dynamicFormat?: (num: number, showActual: boolean, isMounted?: boolean) => string 
 }) {
   const [randomValue, setRandomValue] = React.useState(0);
   const [displayValue, setDisplayValue] = React.useState(0);
+  const [isMounted, setIsMounted] = React.useState(false);
 
-  // Generate random numbers when not showing actual
+  // Set mounted flag after hydration
   useEffect(() => {
-    if (!showActual) {
+    setIsMounted(true);
+  }, []);
+
+  // Generate random numbers when not showing actual (only after mount)
+  useEffect(() => {
+    if (!showActual && isMounted) {
       const interval = setInterval(() => {
         const random = Math.floor(Math.random() * targetValue * 1.5);
         setRandomValue(random);
@@ -23,7 +29,7 @@ function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: {
       
       return () => clearInterval(interval);
     }
-  }, [showActual, targetValue]);
+  }, [showActual, targetValue, isMounted]);
 
   // Smooth animation to current target value
   useEffect(() => {
@@ -51,6 +57,21 @@ function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: {
     requestAnimationFrame(animate);
   }, [showActual ? targetValue : randomValue, showActual]);
 
+  // Safe format function that doesn't use random during SSR
+  const getSafeDisplayValue = () => {
+    if (!isMounted) {
+      // Show consistent value during SSR/hydration
+      return format(0);
+    }
+    
+    if (dynamicFormat) {
+      // Pass isMounted flag to dynamicFormat to control random behavior
+      return dynamicFormat(displayValue, showActual, isMounted);
+    }
+    
+    return format(displayValue);
+  };
+
   return (
     <motion.span
       key={showActual ? 'actual' : 'random'}
@@ -66,7 +87,7 @@ function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: {
         textShadow: showActual ? '0 0 20px rgba(4, 187, 166, 0.3)' : 'none'
       }}
     >
-      {dynamicFormat ? dynamicFormat(displayValue, showActual) : format(displayValue)}
+      {getSafeDisplayValue()}
     </motion.span>
   );
 }
@@ -229,14 +250,17 @@ export default function StatsSection() {
                       targetValue={2}
                       format={(num) => `${Math.round(num)}x↑`}
                       showActual={showActualValues}
-                      dynamicFormat={(num, showActual) => {
+                      dynamicFormat={(num, showActual, isMounted) => {
                         if (showActual) {
                           return `${Math.round(num)}x↑`;
-                        } else {
-                          // Random letters but keep ↑ static
+                        } else if (isMounted) {
+                          // Random letters but keep ↑ static (only after mount)
                           const letters = ['x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
                           const randomLetter = letters[Math.floor(Math.random() * letters.length)];
                           return `${Math.round(num)}${randomLetter}↑`;
+                        } else {
+                          // Consistent fallback for SSR
+                          return `${Math.round(num)}x↑`;
                         }
                       }}
                     />
@@ -253,14 +277,17 @@ export default function StatsSection() {
                       targetValue={3}
                       format={(num) => `$${Math.round(num)}M+`}
                       showActual={showActualValues}
-                      dynamicFormat={(num, showActual) => {
+                      dynamicFormat={(num, showActual, isMounted) => {
                         if (showActual) {
                           return `$${Math.round(num)}M+`;
-                        } else {
-                          // Random units but keep $ and + static
+                        } else if (isMounted) {
+                          // Random units but keep $ and + static (only after mount)
                           const units = ['M', 'K', 'B', 'T', 'G', 'P', 'Z', 'E', 'Y', 'X', 'W'];
                           const randomUnit = units[Math.floor(Math.random() * units.length)];
                           return `$${Math.round(num)}${randomUnit}+`;
+                        } else {
+                          // Consistent fallback for SSR
+                          return `$${Math.round(num)}M+`;
                         }
                       }}
                     />
