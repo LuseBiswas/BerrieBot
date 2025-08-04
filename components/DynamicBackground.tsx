@@ -10,7 +10,7 @@ export default function DynamicBackground({ children }: DynamicBackgroundProps) 
   const pathname = usePathname();
   
   // Define routes that should use white background with teal stripes
-  const whiteBackgroundRoutes = ["/resources/explore/details", "/resources/faq"];
+  const whiteBackgroundRoutes = ["/resources","/explore/details", "/resources/faq"];
   
   // Check if current path starts with any of the white background routes
   const shouldUseWhiteBackground = whiteBackgroundRoutes.some(route => 

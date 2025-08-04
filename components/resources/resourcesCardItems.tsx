@@ -6,7 +6,7 @@ const ResourcesCardItems: React.FC = () => {
     <div className="w-full bg-transparent py-16 px-8">
       {/* Description Section */}
       <div className="max-w-5xlxl mx-auto text-center mb-16">
-        <p className="font-inter text-[20px] sm:text-2xl md:text-[32px] leading-[1.4] sm:leading-[1.5] font-light text-white max-w-5xl mx-auto">
+        <p className="font-inter text-[20px] sm:text-2xl md:text-[32px] leading-[1.4] sm:leading-[1.5] font-light text-[#969696] max-w-5xl mx-auto">
           We've put together guides, case studies, templates, and tips to help you make 
           the most of your time, team, and tech.
         </p>
