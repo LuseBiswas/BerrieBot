@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -133,13 +134,15 @@ const Contact = () => {
         </div>
 
         {/* Submit Button - outside the divider area */}
-        <button
+        <motion.button
           type="submit"
           onClick={handleSubmit}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           className="bg-teal-500 hover:bg-teal-600 text-white font-normal py-4 px-8 rounded-2xl transition-all duration-200 text-[14px]"
         >
           Contact support
-        </button>
+        </motion.button>
       </div>
 
       {/* Right Side - Calendar and Time Selection */}
@@ -161,17 +164,23 @@ const Contact = () => {
             {/* Meeting details */}
             <div className="space-y-2 mb-2" style={{ paddingLeft: '66px' }}>
               <div className="flex items-center gap-3">
-                <div className="w-2 h-2 border-2 border-teal-400 rounded-full flex items-center justify-center" style={{ marginLeft: '-2px' }}>
-                  <div className="w-2 h-2 bg-teal-400 rounded-full"></div>
-                </div>
+                <img 
+                  src="/image/icons/stopwatch.png" 
+                  alt="Duration" 
+                  className="w-4 h-4" 
+                  style={{ marginLeft: '0px' }}
+                />
                 <span className="text-teal-500 font-medium text-[14px]">30 mins</span>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 border-2 border-teal-400 rounded-md flex items-center justify-center" style={{ marginLeft: '-2px' }}>
-                  <div className="w-2 h-2 bg-teal-400 rounded-sm"></div>
-                </div>
+              <div className="flex items-center gap-1">
+                <img 
+                  src="/image/icons/web.png" 
+                  alt="Web conferencing" 
+                  className="w-4 h-4" 
+                  style={{ marginLeft: '0px' }}
+                />
                 <div>
-                  <div className="text-teal-500 font-medium text-[14px] ">Web conferencing details</div>
+                  <div className="text-teal-500 font-medium text-[14px]">Web conferencing details</div>
                   <div className="text-teal-500 font-medium text-[14px]">provided upon confirmation</div>
                 </div>
               </div>
@@ -179,25 +188,35 @@ const Contact = () => {
 
             {/* Calendar navigation */}
             <div className="ml-12 flex items-center gap-3 mb-1">
-              <button 
+              <motion.button 
                 onClick={() => navigateMonth('prev')}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
               >
                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
-              </button>
-              <h4 className="text-[14px] font-medium text-teal-500">
+              </motion.button>
+              <motion.h4 
+                key={`${calendarData.monthName}-${calendarData.year}`}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="text-[14px] font-medium text-teal-500"
+              >
                 {calendarData.monthName} {calendarData.year}
-              </h4>
-              <button 
+              </motion.h4>
+              <motion.button 
                 onClick={() => navigateMonth('next')}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 className="p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
               >
                 <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-              </button>
+              </motion.button>
             </div>
 
             {/* Inner Calendar Container */}
@@ -221,12 +240,14 @@ const Contact = () => {
                     
                     if (dateObj.isCurrentMonth) {
                       return (
-                        <button
+                        <motion.button
                           key={index}
                           onClick={() => {
                             setSelectedDate(dateObj.date);
                             setSelectedTime(null); // Reset selected time when date changes
                           }}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
                           className={`w-8 h-8 flex items-center justify-center rounded-full font-medium transition-colors cursor-pointer
                             ${isSelected 
                               ? 'bg-teal-500 text-white' 
@@ -237,7 +258,7 @@ const Contact = () => {
                           style={{ fontSize: '12px' }}
                         >
                           {dateObj.date}
-                        </button>
+                        </motion.button>
                       );
                     } else {
                       return (
@@ -268,39 +289,72 @@ const Contact = () => {
           </div>
 
           {/* Time Selection Component - Appears when date is selected */}
-          {selectedDate && (
-            <div className="bg-[#EAEFEF] rounded-3xl p-4 shadow-lg relative" style={{ width: '206px', height: '592px' }}>
-              {/* Selected Date Display */}
-              <div className="text-center mb-6">
-                <h3 className="text-[18px] font-medium text-teal-500">
-                  {selectedDate} {calendarData.monthName} {calendarData.year}
-                </h3>
-              </div>
+          <AnimatePresence>
+            {selectedDate && (
+              <motion.div 
+                initial={{ opacity: 0, x: 50, scale: 0.9 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 50, scale: 0.9 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="bg-[#EAEFEF] rounded-3xl p-4 shadow-lg relative" 
+                style={{ width: '206px', height: '592px' }}
+              >
+                {/* Selected Date Display */}
+                <motion.div 
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.3 }}
+                  className="text-center mb-6"
+                >
+                  <h3 className="text-[18px] font-medium text-teal-500">
+                    {selectedDate} {calendarData.monthName} {calendarData.year}
+                  </h3>
+                </motion.div>
 
-              {/* Time Slots */}
-              <div className="space-y-3">
-                {timeSlots.map((time) => (
-                  <div className="relative">
-                    <button
+                {/* Time Slots */}
+                <div className="space-y-3">
+                  {timeSlots.map((time, index) => (
+                    <motion.div 
                       key={time}
-                      onClick={() => setSelectedTime(time)}
-                      className="w-full py-3 px-4 rounded-2xl font-medium text-sm transition-all cursor-pointer bg-white text-gray-800 hover:bg-gray-100"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 + index * 0.1, duration: 0.3 }}
+                      className="relative"
                     >
-                      {time}
-                    </button>
-                    {/* Schedule Button extends outside to the right */}
-                    {selectedTime === time && (
-                      <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 z-10">
-                        <button className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-full transition-all cursor-pointer text-sm whitespace-nowrap">
-                          Schedule
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+                      <motion.button
+                        onClick={() => setSelectedTime(time)}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full py-3 px-4 rounded-2xl font-medium text-sm transition-all cursor-pointer bg-white text-gray-800 hover:bg-gray-100"
+                      >
+                        {time}
+                      </motion.button>
+                      {/* Schedule Button extends outside to the right */}
+                      <AnimatePresence>
+                        {selectedTime === time && (
+                          <motion.div 
+                            initial={{ opacity: 0, x: -20, scale: 0.8 }}
+                            animate={{ opacity: 1, x: 0, scale: 1 }}
+                            exit={{ opacity: 0, x: -20, scale: 0.8 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 z-10"
+                          >
+                            <motion.button 
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-full transition-all cursor-pointer text-sm whitespace-nowrap"
+                            >
+                              Schedule
+                            </motion.button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>
