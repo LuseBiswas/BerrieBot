@@ -190,16 +190,16 @@ export default function NavBar() {
               
               <Link href="/resources" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
                 Resource
-                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                </svg> */}
               </Link>
               
               <Link href="/about" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
                 About
-                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                </svg> */}
               </Link>
             </div>
 
