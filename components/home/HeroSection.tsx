@@ -1,5 +1,6 @@
 "use client";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import {
   motion,
   useReducedMotion,
@@ -167,15 +168,17 @@ export default function HeroSection() {
 
       {/* ---- CTA ---- */}
       <div className="mt-4 sm:mt-12 w-full sm:w-auto px-4 sm:px-0 relative z-10">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-full sm:w-auto bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full
-                     font-semibold text-base sm:text-lg hover:bg-gray-200 transition-colors"
-        >
-          Book a Demo
-          <ChevronRight className="inline-block ml-2 w-4 sm:w-5 h-4 sm:h-5" />
-        </motion.button>
+        <Link href="/schedule">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full sm:w-auto bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full
+                       font-semibold text-base sm:text-lg hover:bg-gray-200 transition-colors hover:cursor-pointer"
+          >
+            Book a Demo
+            <ChevronRight className="inline-block ml-2 w-4 sm:w-5 h-4 sm:h-5" />
+          </motion.button>
+        </Link>
       </div>
 
       {/* ---- Text scramble ---- */}

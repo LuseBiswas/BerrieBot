@@ -2,6 +2,7 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 export default function CTASection() {
   const ref = useRef(null);
@@ -61,9 +62,9 @@ export default function CTASection() {
               & fraud-free.
             </p>
           </motion.div>
-          
+          <Link href="/schedule">
           <motion.button
-            className="bg-[#04BBA6] text-black px-8 py-4 rounded-2xl font-inter font-light text-[16px] flex items-center gap-3 hover:bg-[#039a87] transition-colors"
+            className="bg-[#04BBA6] text-black px-8 py-4 rounded-2xl font-inter font-light text-[16px] flex items-center gap-3 hover:bg-[#039a87] transition-colors hover:cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, x: 50 }}
@@ -75,6 +76,7 @@ export default function CTASection() {
               <ArrowRight className="w-[25px] h-[25px] text-black" />
             </div>
           </motion.button>
+          </Link>
         </div>
       </motion.div>
     </section>

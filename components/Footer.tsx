@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 import { MapPin, Mail, Linkedin, Facebook, Github, Twitter } from 'lucide-react';
 
 export default function Footer() {
@@ -52,10 +53,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Products</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">BerriConnect</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">BerriProctor</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">BerriMasterMind</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Berri360</a></li>
+              <li><Link href="#" className="hover:text-white transition-colors">BerriConnect</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">BerriProctor</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">BerriMasterMind</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Berri360</Link></li>
             </ul>
           </div>
           
@@ -63,9 +64,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Solutions</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Recruitment Assistant</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Real-time Proctoring</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Live Texting</a></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Recruitment Assistant</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Real-time Proctoring</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Live Texting</Link></li>
             </ul>
           </div>
           
@@ -73,9 +74,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Resources</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Learn</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Explore</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Support</a></li>
+              <li><Link href="/resources/faq" className="hover:text-white transition-colors">Learn</Link></li>
+              <li><Link href="/explore" className="hover:text-white transition-colors">Explore</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Support</Link></li>
             </ul>
           </div>
           
@@ -83,11 +84,11 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">About</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">About us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Our Journey</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Our Values</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Our Teams</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Join us</a></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">About us</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Our Journey</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Our Values</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Our Teams</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Join us</Link></li>
             </ul>
           </div>
           
@@ -95,10 +96,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Legal</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><a href="#" className="hover:text-white transition-colors">Compliance</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Security</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms</a></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Compliance</Link></li>
+              <li><Link href="/policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link></li>
+              <li><Link href="#" className="hover:text-white transition-colors">Terms</Link></li>
             </ul>
           </div>
         </div>
@@ -109,18 +110,18 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             <span className="text-gray-400">Connect</span>
             <div className="flex gap-3">
-              <a href="#" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+              <Link href="https://www.linkedin.com/company/berribot/?originalSubdomain=sg" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
                 <Linkedin className="w-4 h-4 text-[#181818]" />
-              </a>
-              <a href="#" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+              </Link>
+              <Link href="https://www.facebook.com/Berribot/?_rdr" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
                 <Facebook className="w-4 h-4 text-[#181818]" />
-              </a>
-              <a href="#" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+              </Link>
+              <Link href="#" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
                 <Github className="w-4 h-4 text-[#181818]" />
-              </a>
-              <a href="#" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+              </Link>
+              <Link href="https://x.com/Berribot1" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
                 <Twitter className="w-4 h-4 text-[#181818]" />
-              </a>
+              </Link>
             </div>
           </div>
           

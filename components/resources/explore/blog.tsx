@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // Blog post data interface
 interface BlogPost {
@@ -9,6 +10,7 @@ interface BlogPost {
   title: string;
   description: string;
   backgroundImage: string;
+  link: string;
 }
 
 // Sample blog posts data
@@ -18,35 +20,40 @@ const blogPosts: BlogPost[] = [
     date: "12 Dec 2025",
     title: "So... What Can AI Actually Do for Hiring?",
     description: "Here's what smart teams are automating with tools like Berribot!",
-    backgroundImage: "/image/background/bg_image_2.png"
+    backgroundImage: "/image/background/bg_image_2.png",
+    link: "/explore/details"
   },
   {
     id: 2,
     date: "14 Aug 2025",
     title: "But Doesn't That Make Hiring... Less Human?",
     description: "Great question. And nope. Quite the opposite, actually.",
-    backgroundImage: "/image/background/bg_image_3.png"
+    backgroundImage: "/image/background/bg_image_3.png",
+    link: "/explore/details"
   },
   {
     id: 3,
     date: "18 Aug 2025",
     title: "TL;DR?",
     description: "Hiring doesn't have to feel like herding cats while answering emails in a burning building.",
-    backgroundImage: "/image/background/bg_image_4.png"
+    backgroundImage: "/image/background/bg_image_4.png",
+    link: "/explore/details"
   },
   {
     id: 4,
     date: "18 Aug 2025",
     title: "Real Talk: What Kind of Results Are We Talking?",
     description: "Increased peace of mind, slightly smug smiles, and more lunch breaks.",
-    backgroundImage: "/image/background/bg_image_5.png"
+    backgroundImage: "/image/background/bg_image_5.png",
+    link: "/explore/details"
   },
   {
     id: 5,
     date: "18 Aug 2025",
     title: "How Smart Teams Are Using AI to Simplify Hiring?",
     description: "Welcome to modern recruitment—powered by panic, fuelled by caffeine.",
-    backgroundImage: "/image/background/bg_image_6.png"
+    backgroundImage: "/image/background/bg_image_6.png",
+    link: "/explore/details"
   }
 ];
 
@@ -83,20 +90,24 @@ export default function BlogSection() {
           
           {/* Left Column - Tall Card */}
           <div className="flex-shrink-0">
-            <BlogCard 
-              post={blogPosts[0]} 
-              isLarge={true}
-            />
+            <Link href={blogPosts[0].link}>
+              <BlogCard 
+                post={blogPosts[0]} 
+                isLarge={true}
+              />
+            </Link>
           </div>
 
           {/* Right Column - 2x2 Grid */}
           <div className="grid grid-cols-2 gap-6">
             {blogPosts.slice(1).map((post) => (
-              <BlogCard 
-                key={post.id} 
-                post={post} 
-                isLarge={false}
-              />
+              <Link key={post.id} href={post.link}>
+                <BlogCard 
+                  key={post.id} 
+                  post={post} 
+                  isLarge={false}
+                />
+              </Link>
             ))}
           </div>
         </div>
