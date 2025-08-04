@@ -25,73 +25,77 @@ const Contact = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 p-8 max-w-6xl mx-auto">
+    <div className="flex flex-col lg:flex-row gap-12 p-8 max-w-7xl mx-auto font-inter">
       {/* Left Side - Form */}
-      <div className="flex-1 space-y-6">
-        <div>
-          <h2 className="text-2xl font-bold text-white mb-2">Not in a rush?</h2>
-          <p className="text-xl text-white">Fill out the form</p>
+      <div className="flex-1 space-y-8">
+        <div className="space-y-2 mb-36">
+          <h2 className="text-[24px] font-normal text-teal-400">Not in a rush?</h2>
+          <p className="text-[24px] font-normal text-teal-400">Fill out the form</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Name Input */}
-          <div>
-            <label htmlFor="name" className="block text-white text-sm font-medium mb-2">
-              Name:
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent"
-              placeholder="Enter your name"
-            />
-          </div>
+        <div className="flex lg:flex-row flex-col gap-12">
+          {/* Form Fields */}
+          <form onSubmit={handleSubmit} className="space-y-8 flex-1">
+            {/* Name Input */}
+            <div className="space-y-3">
+              <label htmlFor="name" className="block text-white text-[20px] font-light">
+                Name:
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-6 py-4 rounded-full bg-white/90 border-0 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400 text-lg"
+                placeholder="Deva"
+              />
+            </div>
 
-          {/* Work Email Input */}
-          <div>
-            <label htmlFor="email" className="block text-white text-sm font-medium mb-2">
-              Work Email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent"
-              placeholder="Enter your work email"
-            />
-          </div>
+            {/* Work Email Input */}
+            <div className="space-y-3">
+              <label htmlFor="email" className="block text-white text-[20px] font-light">
+                Work Email:
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-6 py-4 rounded-full bg-white/90 border-0 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400 text-lg"
+                placeholder="Deva@rkant.com"
+              />
+            </div>
 
-          {/* Message Textarea */}
-          <div>
-            <label htmlFor="message" className="block text-white text-sm font-medium mb-2">
-              What can we do for you today?
-            </label>
-            <textarea
-              id="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              rows={4}
-              className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent resize-none"
-              placeholder="Tell us how we can help you..."
-            />
-          </div>
+            {/* Message Textarea */}
+            <div className="space-y-3">
+              <label htmlFor="message" className="block text-white text-[20px] font-light">
+                What can we do for you today?
+              </label>
+              <textarea
+                id="message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                rows={6}
+                className="w-full px-6 py-4 rounded-3xl bg-white/90 border-0 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-400 resize-none text-lg leading-relaxed"
+                placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+              />
+            </div>
+          </form>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="bg-teal-500 hover:bg-teal-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200"
-          >
-            Contact support
-          </button>
-        </form>
+          {/* Grey Divider - positioned to align with form fields */}
+          <div className="w-px bg-gray-500 hidden lg:block"></div>
+          <div className="h-px bg-gray-500 lg:hidden"></div>
+        </div>
+
+        {/* Submit Button - outside the divider area */}
+        <button
+          type="submit"
+          onClick={handleSubmit}
+          className="bg-teal-500 hover:bg-teal-600 text-white font-normal py-4 px-8 rounded-2xl transition-all duration-200 text-[14px]"
+        >
+          Contact support
+        </button>
       </div>
-
-      {/* Grey Divider */}
-      <div className="w-px bg-gray-400 hidden lg:block"></div>
-      <div className="h-px bg-gray-400 lg:hidden"></div>
 
       {/* Right Side - Calendar */}
       <div className="flex-1">
