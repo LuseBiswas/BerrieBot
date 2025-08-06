@@ -10,7 +10,7 @@ export default function DynamicBackground({ children }: DynamicBackgroundProps) 
   const pathname = usePathname();
   
   // Define routes that should use white background with teal stripes
-  const whiteBackgroundRoutes = ["/resources","/explore/details", "/resources/faq"];
+  const whiteBackgroundRoutes = ["/resources","/explore/details", "/resources/faq","/product"];
   
   // Check if current path starts with any of the white background routes
   const shouldUseWhiteBackground = whiteBackgroundRoutes.some(route => 
@@ -27,6 +27,7 @@ export default function DynamicBackground({ children }: DynamicBackgroundProps) 
 
   return (
     <div className={`min-h-screen w-full flex flex-col ${backgroundClass} bg-fixed ${textColor} overflow-x-hidden`}>
+      <div className="matrix-line-3"></div>
       {children}
     </div>
   );

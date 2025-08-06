@@ -59,7 +59,7 @@ export default function TestimonialCard({
         </motion.h3>
       </motion.div>
 
-      <motion.p layout="position" className={`${textColor} font-inter ${variant === 'blue' ? 'opacity-90' : 'opacity-80'} mb-8 leading-relaxed`}>
+      <motion.p layout="position" className={`${textColor} font-inter ${variant === 'blue' ? 'opacity-90' : 'opacity-80'} mb-8 leading-relaxed text-[16px] sm:text-[22px]`}>
         {description}
       </motion.p>
 

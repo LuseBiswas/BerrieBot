@@ -71,10 +71,9 @@ export default function TestimonialSection() {
                 willChange: 'transform'
               }}
             >
-              <span className="text-[#04BBA6]">One Platform.</span>{" "}
-              <span className="text-white">Every</span><br />
+              <span className="text-white">One Platform. Every</span> <br />
               
-              <span className="bg-gradient-to-b from-white to-gray-500 bg-clip-text text-transparent">
+              <span className="text-white bg-clip-text ">
                Recruiting Task.
               </span>
             </motion.h2>

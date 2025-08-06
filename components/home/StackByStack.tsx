@@ -49,135 +49,167 @@ export default function StackByStack({
 
   return (
     <div className={`relative mx-auto ${width} ${height} select-none`}>
-        {visible.map(({ card, offset }) => {
-          const isFront = offset === 0;
-          const depth = Math.min(Math.max(offset, 0), visibleCount - 1);
-          const yMove = -20 * depth;
-          const scale = 1 - depth * 0.05;
-          const z = 100 - depth;
-          const opacity = 1 - depth * 0.2;
+      {visible.map(({ card, offset }) => {
+        const isFront = offset === 0;
+        const depth = Math.min(Math.max(offset, 0), visibleCount - 1);
+        const yMove = -35 * depth; // Increased gap between cards
+        const scale = 1 - depth * 0.08; // More pronounced scaling
+        const z = 100 - depth;
+        const opacity = 1 - depth * 0.15; // Slightly less opacity reduction
+        const blur = depth > 0 ? Math.min(depth * 2, 4) : 0; // Progressive blur
 
-          // Optimized animations - only transform properties
-          const baseTransform = {
-            y: yMove,
-            scale,
-            opacity,
-            x: 0,
-            rotate: 0,
-          };
+        // Optimized animations - only transform properties
+        const baseTransform = {
+          y: yMove,
+          scale,
+          opacity,
+          x: 0,
+          rotate: 0,
+          filter: blur > 0 ? `blur(${blur}px)` : 'none',
+        };
 
-          const dismissTransform = isFront && isDismissing
-            ? {
-                x: -180,
-                opacity: 0,
-                rotate: -6,
-                scale: scale * 0.95,
-                y: yMove + 10,
+        const dismissTransform = isFront && isDismissing
+          ? {
+              x: -180,
+              opacity: 0,
+              rotate: -6,
+              scale: scale * 0.95,
+              y: yMove + 10,
+              filter: 'none', // No blur during dismiss
+            }
+          : baseTransform;
+
+        return (
+          <motion.div
+            key={card.id}
+            initial={{
+              opacity: 0,
+              y: yMove + 60,
+              scale: scale * 0.9,
+              x: 40,
+            }}
+            animate={dismissTransform}
+            exit={{
+              opacity: 0,
+              y: yMove + 60,
+              scale: scale * 0.9,
+            }}
+            transition={
+              isFront && isDismissing
+                ? { 
+                    duration: 0.35, 
+                    ease: [0.4, 0, 0.2, 1] 
+                  }
+                : { 
+                    type: 'spring', 
+                    stiffness: 300, 
+                    damping: 30,
+                    opacity: { duration: 0.2 },
+                  }
+            }
+            style={{ 
+              zIndex: z,
+              willChange: 'transform, opacity, filter', // Add filter to will-change for optimization
+            }}
+            className={`absolute inset-0 ${isFront ? 'cursor-pointer' : 'pointer-events-none'}`}
+            onClick={isFront ? onFrontClick : undefined}
+            onAnimationComplete={() => {
+              if (isFront && isDismissing) {
+                setIsDismissing(false);
+                advance();
               }
-            : baseTransform;
-
-          return (
-            <motion.div
-              key={card.id}
-              initial={{
-                opacity: 0,
-                y: yMove + 60,
-                scale: scale * 0.9,
-                x: 40,
-              }}
-              animate={dismissTransform}
-              exit={{
-                opacity: 0,
-                y: yMove + 60,
-                scale: scale * 0.9,
-              }}
-              transition={
-                isFront && isDismissing
-                  ? { 
-                      duration: 0.35, 
-                      ease: [0.4, 0, 0.2, 1] 
-                    }
-                  : { 
-                      type: 'spring', 
-                      stiffness: 300, 
-                      damping: 30,
-                      opacity: { duration: 0.2 },
-                    }
-              }
-              style={{ 
-                zIndex: z,
-                willChange: 'transform, opacity', // Optimize for animations
-              }}
-              className={`absolute inset-0 ${isFront ? 'cursor-pointer' : 'pointer-events-none'}`}
-              onClick={isFront ? onFrontClick : undefined}
-              onAnimationComplete={() => {
-                if (isFront && isDismissing) {
-                  setIsDismissing(false);
-                  advance();
-                }
-              }}
-              whileHover={isFront ? { 
-                scale: scale * 1.02,
-                y: yMove - 3,
-                transition: { duration: 0.2 }
-              } : {}}
-              whileTap={isFront ? { 
-                scale: scale * 0.98,
-                transition: { duration: 0.1 }
-              } : {}}
-            >
-              {/* Pre-calculated shadow classes instead of dynamic filters */}
-              <div 
-                className={`
-                  relative flex flex-col justify-between h-full rounded-2xl 
-                  bg-gradient-to-b from-neutral-800 to-neutral-900 
-                  text-white overflow-hidden border border-neutral-700/30
-                  ${isFront ? 'shadow-2xl' : depth === 1 ? 'shadow-xl' : 'shadow-lg'}
-                `}
-                style={{
-                  transform: 'translateZ(0)', // Force hardware acceleration
-                }}
-              >
-                {/* Top highlight */}
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neutral-400/20 to-transparent" />
+            }}
+            whileHover={isFront ? { 
+              scale: scale * 1.02,
+              y: yMove - 3,
+              transition: { duration: 0.2 }
+            } : {}}
+            whileTap={isFront ? { 
+              scale: scale * 0.98,
+              transition: { duration: 0.1 }
+            } : {}}
+          >
+            {/* Main card container */}
+            <div 
+              className={`
+                relative flex flex-col justify-between h-full rounded-3xl 
+                bg-[#1E1E1E] text-white overflow-hidden 
                 
-                {/* Top content - no individual animations */}
-                <div className="px-8 pt-12 text-center">
-                  <div className="text-lg font-medium leading-relaxed text-neutral-100">
+                ${isFront ? 'shadow-2xl shadow-black/40' : depth === 1 ? 'shadow-xl shadow-black/30' : 'shadow-lg shadow-black/20'}
+              `}
+              style={{
+                transform: 'translateZ(0)', // Hardware acceleration
+                backfaceVisibility: 'hidden', // Optimize for blur
+              }}
+            >
+              {/* Top section */}
+              <div className="flex-1 flex items-center justify-center px-8 py-10">
+                <div className="text-center">
+                  <div className="text-3xl font-bold leading-tight text-white">
                     {card.top}
                   </div>
                 </div>
+              </div>
 
-                {/* Ribbon - simplified */}
-                <div className="relative w-full py-4 bg-gradient-to-r from-teal-600 to-teal-500 text-center font-semibold tracking-wider text-white">
-                  <div className="text-sm uppercase">
-                    {card.ribbon}
+              {/* Teal ribbon with scrolling marquee */}
+              <div className="relative w-full py-6 bg-gradient-to-r from-teal-600 to-teal-500 overflow-hidden">
+                <div className="relative">
+                  {/* Scrolling marquee */}
+                  <div className="flex animate-marquee whitespace-nowrap">
+                    <span className="text-white font-semibold text-lg uppercase tracking-widest mx-8">
+                      {card.ribbon}
+                    </span>
+                    <span className="text-white font-semibold text-lg uppercase tracking-widest mx-8">
+                      {card.ribbon}
+                    </span>
+                    <span className="text-white font-semibold text-lg uppercase tracking-widest mx-8">
+                      {card.ribbon}
+                    </span>
+                    <span className="text-white font-semibold text-lg uppercase tracking-widest mx-8">
+                      {card.ribbon}
+                    </span>
                   </div>
                 </div>
+              </div>
 
-                {/* Bottom content */}
-                <div className="px-8 pb-12 text-center">
-                  <div className="text-base leading-relaxed text-neutral-200">
+              {/* Bottom section */}
+              <div className="flex-1 flex items-center justify-center px-8 py-10">
+                <div className="text-center">
+                  <div className="text-3xl font-bold leading-tight text-white">
                     {card.bottom}
                   </div>
                 </div>
-
-                {/* Bottom highlight */}
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neutral-600/20 to-transparent" />
               </div>
+            </div>
 
-              {/* Simplified glow effect - only for front card */}
-              {isFront && (
-                <div className="absolute inset-0 rounded-2xl ring-1 ring-teal-500/20 pointer-events-none" />
-              )}
-            </motion.div>
-          );
-        })}
+            {/* Subtle glow effect for front card */}
+            {isFront && (
+              <div className="absolute inset-0 rounded-3xl ring-1 ring-teal-500/20 pointer-events-none" />
+            )}
+          </motion.div>
+        );
+      })}
 
-                 {/* Click blocker */}
-         {isDismissing && (
-           <div className="absolute inset-0 z-50 pointer-events-auto" />
-         )}
-       </div>
+      {/* Click blocker during dismiss animation */}
+      {isDismissing && (
+        <div className="absolute inset-0 z-50 pointer-events-auto" />
+      )}
+      
+      {/* Add custom CSS for marquee animation */}
+      <style jsx>{`
+        @keyframes marquee {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-marquee {
+          animation: marquee 15s linear infinite;
+        }
+      `}</style>
+    </div>
   );
 }

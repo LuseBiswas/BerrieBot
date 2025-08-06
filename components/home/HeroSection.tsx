@@ -1,6 +1,5 @@
 "use client";
 import { ChevronRight } from "lucide-react";
-import Link from "next/link";
 import {
   motion,
   useReducedMotion,
@@ -9,6 +8,7 @@ import {
   useSpring,
 } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import AnimatedButton from "./AnimatedButton";
 
 /* ---------- inner-box pulse ---------- */
 const CORE_VARIANTS = {
@@ -151,10 +151,9 @@ export default function HeroSection() {
         <h1 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8">
           <span className="text-white">The future of</span>
           <br />
-          <span className="bg-gradient-to-br from-white to-gray-500 text-transparent bg-clip-text">
-            Recruiting&nbsp;
+          <span className="text-white  bg-clip-text">
+            Recruiting&nbsp; is here.
           </span>
-          <span className="text-teal-400">is here.</span>
         </h1>
 
         <p className="text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto mb-8">
@@ -168,17 +167,13 @@ export default function HeroSection() {
 
       {/* ---- CTA ---- */}
       <div className="mt-4 sm:mt-12 w-full sm:w-auto px-4 sm:px-0 relative z-10">
-        <Link href="/schedule">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-full sm:w-auto bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full
-                       font-semibold text-base sm:text-lg hover:bg-gray-200 transition-colors hover:cursor-pointer"
-          >
-            Book a Demo
-            <ChevronRight className="inline-block ml-2 w-4 sm:w-5 h-4 sm:h-5" />
-          </motion.button>
-        </Link>
+        <AnimatedButton 
+          href="/schedule"
+          className="w-full sm:w-auto bg-white text-black px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg hover:bg-gray-200 transition-colors hover:cursor-pointer"
+          icon={<ChevronRight className="w-4 sm:w-5 h-4 sm:h-5" />}
+        >
+          Book a Demo
+        </AnimatedButton>
       </div>
 
       {/* ---- Text scramble ---- */}
