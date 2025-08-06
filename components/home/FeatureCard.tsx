@@ -55,11 +55,11 @@ export default function FeatureCard() {
           <div className="relative z-10 flex items-center gap-3 justify-center">
             
             <h2 className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]">
-              <span className="bg-gradient-to-r from-white to-gray-950 text-transparent bg-clip-text">Recruiting</span>
+              <span className="text-white bg-clip-text">Recruiting</span>
               <br />
-              <span className="bg-gradient-to-r from-white to-gray-950 text-transparent bg-clip-text">designed for the</span>
+              <span className="text-white bg-clip-text">designed for the</span>
               <br />
-              <span className="text-teal-400">AI Era</span>
+              <span className="text-white">AI Era</span>
             </h2>
             
           </div>

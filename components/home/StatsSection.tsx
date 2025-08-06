@@ -176,12 +176,11 @@ export default function StatsSection() {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <h2 className="text-[60px] font-inter font-light leading-tight mb-8">
-                <span className="bg-gradient-to-b from-white to-[#252527] text-transparent bg-clip-text">Recruiters Are</span>
+                <span className="text-white bg-clip-text">Recruiters Are</span>
                 <br />
-                <span className="text-[#04BBA6]">Turbocharged</span>
-                <span className="bg-gradient-to-b from-white to-[#252527] text-transparent bg-clip-text"> by</span>
-                <br />
-                <span className="bg-gradient-to-b from-white to-[#252527] text-transparent bg-clip-text">Berribot</span>
+                <span className="text-white">Turbocharged by</span>
+              <br />
+                <span className="text-white bg-clip-text">Berribot</span>
               </h2>
               
               <p className="text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90  sm:max-w-3xl  max-w-lg">

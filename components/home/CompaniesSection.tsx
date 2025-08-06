@@ -37,15 +37,15 @@ export default function CompaniesSection() {
         />
         
         {/* Content container with vertical lines */}
-        <div className="px-4 sm:px-6">
-          <div className="max-w-7xl mx-auto relative">
+        <div className="px-0">
+          <div className="max-w-full mx-auto relative">
             {/* Vertical lines */}
             <motion.div 
-              className="absolute inset-y-0 left-[16.59%] border-l border-black pointer-events-none hidden lg:block origin-bottom"
+              className="absolute inset-y-0 left-[16.64%] border-l border-black pointer-events-none hidden lg:block origin-bottom"
               style={{ scaleY: verticalLinesProgress }}
             />
             <motion.div 
-              className="absolute inset-y-0 right-0 border-l border-black pointer-events-none hidden lg:block origin-top"
+              className="absolute inset-y-0 right-[16.67%] border-l border-black pointer-events-none hidden lg:block origin-top"
               style={{ scaleY: verticalLinesProgress }}
             />
 
@@ -88,7 +88,7 @@ export default function CompaniesSection() {
                 className="col-span-2 sm:col-span-3 lg:col-span-6 relative py-16 px-8 text-center"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
+                transition={{ delay: 0.6 }}
                 viewport={{ once: true }}
               >
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#3D3D3D] leading-tight mx-auto max-w-2xl">
@@ -103,10 +103,10 @@ export default function CompaniesSection() {
               {/* --- Bottom logos row --- */}
               {/* Col 1 spacer to keep the first vertical line continuous */}
               <motion.div 
-                className="hidden lg:block border-r border-black"
+                className="hidden lg:block lg:border-r lg:border-black"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0.7 }}
                 viewport={{ once: true }}
               />
 
@@ -119,13 +119,13 @@ export default function CompaniesSection() {
                 { src: "/image/company/c_logo_5.png", alt: "Amazon" },
               ].map((c, i) => (
                 <motion.div
-                  key={c.alt}
+                  key={`bottom-${c.alt}`}
                   className={`p-8 flex items-center justify-center h-24 ${
                     i < 4 ? "lg:border-r" : ""
                   } lg:border-black`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + i * 0.1 }}
+                  transition={{ delay: 0.8 + i * 0.1 }}
                   viewport={{ once: true }}
                 >
                   <Image

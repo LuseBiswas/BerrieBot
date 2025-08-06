@@ -18,6 +18,53 @@
       transparent 1px,
       transparent 60px
     );
+    position: relative;
+  }
+  
+  /* Line 1 - using ::before */
+  .bg-pinstripes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 120px;
+    width: 1px;
+    height: 200px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.8) 30%, rgba(0, 199, 190, 0.4) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
+    transform: translateY(-200px);
+    animation: matrix-shine-move 6s linear infinite;
+    pointer-events: none;
+  }
+  
+  /* Line 2 - using ::after */
+  .bg-pinstripes::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 600px;
+    width: 1px;
+    height: 200px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.8) 30%, rgba(0, 199, 190, 0.4) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
+    transform: translateY(-200px);
+    animation: matrix-shine-move 6s linear infinite 2s;
+    pointer-events: none;
+  }
+  
+  /* Line 3 - using dedicated element */
+  .matrix-line-3 {
+    position: absolute;
+    top: 0;
+    left: 1320px;
+    width: 1px;
+    height: 200px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.8) 30%, rgba(0, 199, 190, 0.4) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
+    transform: translateY(-200px);
+    animation: matrix-shine-move 6s linear infinite 4s;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .bg-pinstripes-white .matrix-line-3 {
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.6) 30%, rgba(0, 199, 190, 0.3) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
   }
   
   .bg-pinstripes-white {
@@ -29,5 +76,47 @@
       transparent 1px,
       transparent 60px
     );
+    position: relative;
   }
+  
+  /* Line 1 - using ::before */
+  .bg-pinstripes-white::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 120px;
+    width: 1px;
+    height: 200px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.6) 30%, rgba(0, 199, 190, 0.3) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
+    transform: translateY(-200px);
+    animation: matrix-shine-move 6s linear infinite;
+    pointer-events: none;
+  }
+  
+  /* Line 2 - using ::after */
+  .bg-pinstripes-white::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 600px;
+    width: 1px;
+    height: 200px;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.6) 30%, rgba(0, 199, 190, 0.3) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
+    transform: translateY(-200px);
+    animation: matrix-shine-move 6s linear infinite 2s;
+    pointer-events: none;
+  }
+  
+
+  
+  @keyframes matrix-shine-move {
+    0% {
+      transform: translateY(-200px);
+    }
+    100% {
+      transform: translateY(calc(100vh + 200px));
+    }
+  }
+  
+
 }

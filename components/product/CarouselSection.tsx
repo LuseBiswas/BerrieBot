@@ -65,9 +65,9 @@ export default function CarouselSection() {
   }, []);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center ">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center mt-10 ">
       {/* Background grid pattern */}
-      <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-20" />
+      <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-0" />
       
       <motion.div 
         className="relative z-10 w-full text-center bg-[#101010] rounded-3xl p-12"
@@ -90,7 +90,7 @@ export default function CarouselSection() {
               Array.from({ length: 13 }, (_, col) => (
                 <div 
                   key={`${row}-${col}`}
-                  className="absolute text-white/20 opacity-[10%]"
+                  className="absolute text-white opacity-[10%]"
                   style={{
                     top: `${row * (100/12)}%`,
                     left: `${col * (100/12)}%`,
@@ -114,10 +114,10 @@ export default function CarouselSection() {
                 willChange: 'transform'
               }}
             >
-              <span className="text-white">The Agentic Hiring</span>
+              <span className="text-[#969696]">Hiring Is Broken</span> <br />
+              <span className="text-teal-400">We&apos;re Fixing It</span> <span className='text-[#969696]'>with</span>
               <br />
-              <span className="text-white">Stack that Does the</span> <br />
-              <span className="text-white bg-clip-text">Work for You</span>
+              <span className="text-[#969696]">AI Agents {""}</span>
             </motion.h2>
             <motion.p 
               className="text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto mb-8"
@@ -127,7 +127,7 @@ export default function CarouselSection() {
                 willChange: 'transform'
               }}
             >
-              From outreach to offer, the Berri Suite delivers speed, <br /> accuracy, and security—on autopilot.
+              Modern hiring is slow, expensive, and riddled with inefficiencies. Your best recruiters are stuck doing repetitive tasks. Your best candidates drop off. Fraudsters sneak in.
             </motion.p>
           </div>
 

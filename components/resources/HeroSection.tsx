@@ -26,7 +26,7 @@ export default function HeroSection() {
 
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-12">
-        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium bg-gradient-to-b from-[#252527] to-[#ADADAEB0] text-transparent bg-clip-text">
+        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text">
           Learn. Explore.
           <br />
           Get Smarter.
@@ -35,8 +35,8 @@ export default function HeroSection() {
 
       {/* ---- Description ---- */}
       <div className="text-center w-full max-w-4xl mx-auto relative z-10">
-        <p className="font-inter text-[20px] sm:text-2xl md:text-[32px] leading-[1.4] sm:leading-[1.5] font-light text-[#969696] max-w-5xl mx-auto">
-          <span className="text-[#00C7BEB2]">Welcome to your go-to hub for all </span> things Berribot and beyond. <br />
+        <p className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light text-[#969696] max-w-5xl mx-auto">
+          <span className="text-[#3d3d3d]">Welcome to your go-to hub for all </span> things Berribot and beyond. <br />
           Whether you&apos;re curious about AI, exploring automation strategies, <br />
           or just want to see how others are scaling smarter —not harder <br />
           —you&apos;re in the right place.

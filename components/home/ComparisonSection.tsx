@@ -139,11 +139,11 @@ export default function ComparisonSection() {
                 willChange: 'transform'
               }}
             >
-              <span className="bg-gradient-to-r from-white to-[#ADADAEB0] text-transparent bg-clip-text">
+              <span className="text-white bg-clip-text">
                 Proven to
-              </span>{" "}
+              </span>
               <br />
-              <span className="bg-gradient-to-r from-white to-[#ADADAEB0] text-transparent bg-clip-text">
+              <span className="text-white bg-clip-text">
                 deliver at scale.
               </span>
             </motion.h2>

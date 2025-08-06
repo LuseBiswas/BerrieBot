@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Dropdown, { DropdownSection } from "./Dropdown";
+import AnimatedButton from "./AnimatedButton";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,7 +15,7 @@ export default function NavBar() {
   const pathname = usePathname();
   
   // Define routes that should have black navbar background
-  const whiteBackgroundRoutes = [ "/resources","/explore/details", "/resources/faq"];
+  const whiteBackgroundRoutes = [ "/resources","/explore/details", "/resources/faq","/product"];
   
   // Check if current path starts with any of the white background routes
   const shouldUseBlackNavbar = whiteBackgroundRoutes.some(route => 
@@ -100,14 +101,14 @@ export default function NavBar() {
                   priority
                 />
               </div>
-              <span className="text-xl font-bold text-white">BerriBot</span>
+              <span className="text-2xl font-bold text-white">BerriBot</span>
             </Link>
 
             {/* Center - Navigation Links */}
             <div className="hidden lg:flex items-center space-x-8">
               <Dropdown
                 trigger={
-                  <div className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                  <div className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
                     Product
                     <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -117,21 +118,21 @@ export default function NavBar() {
                 sections={productSections}
               />
               
-              <Link href="/solution" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+              <Link href="/solution" className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
                 Solution
                 <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </Link>
               
-              <Link href="/resources" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+              <Link href="/resources" className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
                 Resource
                 {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg> */}
               </Link>
               
-              <Link href="/about" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+              <Link href="/about" className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
                 About
                 {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -150,12 +151,12 @@ export default function NavBar() {
 
             {/* Right side - Get Started Button */}
             <div className="hidden lg:flex items-center">
-              <Link 
-                href="/signup" 
-                className="px-6 py-2 bg-white rounded-full font-medium text-black hover:bg-gray-50 transition-colors"
+              <AnimatedButton 
+                href="/signup"
+                className="bg-white text-black hover:bg-gray-50 transition-colors"
               >
                 Get Started Free
-              </Link>
+              </AnimatedButton>
             </div>
 
             {/* Mobile - Empty div to maintain center alignment */}
@@ -217,13 +218,14 @@ export default function NavBar() {
                 >
                   Login
                 </Link>
-                <Link 
-                  href="/signup" 
-                  className="px-6 py-3 text-center bg-teal-400 text-white rounded-full font-medium hover:bg-teal-500 transition-colors"
-                  onClick={toggleMobileMenu}
-                >
-                  Get Started Free
-                </Link>
+                <div onClick={toggleMobileMenu}>
+                  <AnimatedButton 
+                    href="/signup"
+                    className="px-6 py-3 text-center bg-teal-400 text-white hover:bg-teal-500 transition-colors w-full"
+                  >
+                    Get Started Free
+                  </AnimatedButton>
+                </div>
               </div>
             </div>
           </div>
