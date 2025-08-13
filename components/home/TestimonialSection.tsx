@@ -71,7 +71,7 @@ export default function TestimonialSection() {
                 willChange: 'transform'
               }}
             >
-              <span className="text-white">One Platform. Every</span> <br />
+              <span className="text-white">One Berribot. Every</span> <br />
               
               <span className="text-white bg-clip-text ">
                Recruiting Task.
@@ -85,7 +85,9 @@ export default function TestimonialSection() {
                 willChange: 'transform'
               }}
             >
-              From outreach to offer, the Berri Suite delivers speed, <br /> accuracy, and security—on autopilot.
+              Berribot – Your Complete Recruitment Command Center. <br />
+              From outreach to offer, the Berri Suite delivers speed, <br />
+              accuracy, security and compliance shield.
             </motion.p>
           </div>
         </div>
@@ -113,12 +115,8 @@ export default function TestimonialSection() {
             <TestimonialCard
               variant="gray"
               title="Digital Recruiter"
-              description="Automatically search, connect and followup with candidates without getting overwhelmed."
+              description="Auto match, connect and followup with candidates without getting overwhelmed."
               buttonText="Learn More"
-              profileImage={{
-                src: "/image/profile/profile_3.jpg",
-                alt: "Recruiter Profile"
-              }}
             />
           </motion.div>
 
@@ -143,12 +141,8 @@ export default function TestimonialSection() {
             <TestimonialCard
               variant="gray"
               title="Digital Interviewer"
-              description="Schedule and assess candidate skills with a 24/7 Agentic interviewer."
+              description="Auto match, connect and followup with candidates without getting overwhelmed."
               buttonText="Learn More"
-              profileImage={{
-                src: "/image/profile/profile_2.jpg",
-                alt: "CHRO Profile"
-              }}
             />
           </motion.div>        
 
@@ -173,12 +167,8 @@ export default function TestimonialSection() {
             <TestimonialCard
               variant="gray"
               title="Digital Proctor"
-              description="Find verified candidates with advanced fraud detection, biometrics and authentication systems."
+              description="Verify candidates with advanced fraud detection, biometrics and authentication systems."
               buttonText="Learn More"
-              profileImage={{
-                src: "/image/profile/profile_1.jpg",
-                alt: "Compliance Profile"
-              }}
             />
           </motion.div>
         </div>

@@ -152,7 +152,7 @@ export default function CarouselSection() {
                 >
                   {/* Teal fill animation - fills from left to right */}
                   <motion.div
-                    className="absolute top-0 left-0 bottom-0 bg-[#04BBA6]"
+                    className="absolute top-0 left-0 bottom-0 bg-[#028374]"
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.1, ease: "linear" }}

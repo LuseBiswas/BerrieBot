@@ -21,6 +21,12 @@ const PRODUCT_FEATURES: StackCard[] = [
     ribbon: 'Zero-config tracing',
     bottom: 'Data-driven fixes',
   },
+  {
+    id: 'auto-scale',
+    top: <>Auto-Scaling<br/><span className="text-teal-400">Infrastructure</span></>,
+    ribbon: 'Elastic & Reliable',
+    bottom: <>Global<br/><span className="text-teal-400">Performance</span></>,
+  },
 ];
 
 export default function ProductFeature() {
@@ -38,10 +44,10 @@ export default function ProductFeature() {
         </div>
 
         {/* StackByStack Component */}
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-60">
           <StackByStack 
             cards={PRODUCT_FEATURES}
-            visibleCount={3}
+            visibleCount={4}
             width="w-[22rem]"
             height="h-[28rem]"
           />

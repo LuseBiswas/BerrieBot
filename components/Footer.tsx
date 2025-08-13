@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Mail, Linkedin, Facebook, Github, Twitter } from 'lucide-react';
+import { MapPin, Mail } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -56,10 +56,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Products</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="#" className="hover:text-white transition-colors">BerriConnect</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">BerriProctor</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">BerriMasterMind</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Berri360</Link></li>
+              <li><Link href="/product?product=berriconnect" className="hover:text-white transition-colors">BerriConnect</Link></li>
+              <li><Link href="/product?product=berriproctor" className="hover:text-white transition-colors">BerriProctor</Link></li>
+              <li><Link href="/product?product=berrimastermind" className="hover:text-white transition-colors">BerriMasterMind</Link></li>
+              <li><Link href="/product?product=berri360" className="hover:text-white transition-colors">Berri360</Link></li>
             </ul>
           </div>
           
@@ -113,17 +113,17 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             <span className="text-gray-400">Connect</span>
             <div className="flex gap-3">
-              <Link href="https://www.linkedin.com/company/berribot/?originalSubdomain=sg" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
-                <Linkedin className="w-4 h-4 text-[#181818]" />
+              <Link href="https://www.linkedin.com/company/berribot/?originalSubdomain=sg" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+                <Image src="/image/footer/linkedin.png" alt="LinkedIn" width={16} height={16} className="w-8 h-8" />
               </Link>
-              <Link href="https://www.facebook.com/Berribot/?_rdr" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
-                <Facebook className="w-4 h-4 text-[#181818]" />
+              <Link href="https://www.facebook.com/Berribot/?_rdr" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+                <Image src="/image/footer/facebook.png" alt="Facebook" width={16} height={16} className="w-8 h-8" />
               </Link>
-              <Link href="#" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
-                <Github className="w-4 h-4 text-[#181818]" />
+              <Link href="#" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+                <Image src="/image/footer/instagram.png" alt="Instagram" width={16} height={16} className="w-8 h-8" />
               </Link>
-              <Link href="https://x.com/Berribot1" className="w-8 h-8 bg-[#04BBA6] rounded flex items-center justify-center hover:opacity-80 transition-opacity">
-                <Twitter className="w-4 h-4 text-[#181818]" />
+              <Link href="https://x.com/Berribot1" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+                <Image src="/image/footer/twitter.png" alt="Twitter" width={16} height={16} className="w-8 h-8" />
               </Link>
             </div>
           </div>
