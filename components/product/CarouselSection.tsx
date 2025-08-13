@@ -1,38 +1,9 @@
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { Plus } from 'lucide-react';
-import Image from 'next/image';
 
-const SLIDES = [
-  {
-    id: 1,
-    title: "INTERVIEW & VERIFY",
-    image: "/image/prodcut/ProductImagery_1.png"
-  },
-  {
-    id: 2,
-    title: "INTERVIEW & VERIFY",
-    description: "Automated interviews with human-like interactions",
-    image: "/image/prodcut/ProductImagery_1.png"
-  },
-  {
-    id: 3,
-    title: "HIRE & ONBOARD",
-    description: "Streamlined hiring process with smart onboarding",
-    image: "/image/prodcut/ProductImagery_1.png"
-  },
-  {
-    id: 4,
-    title: "HIRE & ONBOARD",
-    description: "Streamlined hiring process with smart onboarding",
-    image: "/image/prodcut/ProductImagery_1.png"
-  }
-];
-
-export default function CarouselSection() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [progress, setProgress] = useState(0);
+export default function CarouselSection_2() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -50,22 +21,8 @@ export default function CarouselSection() {
   const descriptionOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
   const descriptionY = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [30, 0, 0, -30]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          setCurrentSlide(prevSlide => (prevSlide - 1 + SLIDES.length) % SLIDES.length);
-          return 0;
-        }
-        return prev + 2; // Increment by 2% every 100ms for smooth animation
-      });
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center mt-10 ">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center mt-[-40px] ">
       {/* Background grid pattern */}
       <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-0" />
       
@@ -131,92 +88,79 @@ export default function CarouselSection() {
             </motion.p>
           </div>
 
-        {/* Slide indicators - centered */}
-        <div className="flex justify-center items-center gap-4 mb-12">
-          {SLIDES.map((slide, index) => (
-            <div key={slide.id} className="relative">
-              {index === currentSlide ? (
-                // Active slide - wider box with teal background
-                <motion.div
-                  layout
-                  className="w-[434px] h-[87px] border-2 border-[#04BBA6] rounded-lg cursor-pointer relative overflow-hidden bg-[#181818]"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    setCurrentSlide(index);
-                    setProgress(0);
-                  }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                >
-                  {/* Teal fill animation - fills from left to right */}
-                  <motion.div
-                    className="absolute top-0 left-0 bottom-0 bg-[#04BBA6]"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress}%` }}
-                    transition={{ duration: 0.1, ease: "linear" }}
-                  />
-                  
-                  <div className="flex items-center justify-center h-full relative z-10">
-                    <span className="font-medium font-inter text-base text-white">
-                      {slide.title}
-                    </span>
-                  </div>
-                </motion.div>
-              ) : (
-                // Inactive slide - square box with icon
-                <motion.div
-                  layout
-                  className="w-[93px] h-[87px] border-2 border-teal-400 rounded-lg cursor-pointer flex items-center justify-center bg-[#181818]"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    setCurrentSlide(index);
-                    setProgress(0);
-                  }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                >
-                  <Image src="/image/icons/clock.png" alt="Clock" width={24} height={24} className="w-6 h-6" />
-                </motion.div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Image carousel - below the boxes */}
-        <div className="relative w-[1027px] h-[471px] rounded-2xl overflow-hidden mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="relative w-full h-full"
-            >
-              <Image
-                src={SLIDES[currentSlide].image}
-                alt={SLIDES[currentSlide].title}
-                fill
-                className="object-cover"
-                priority
-              />
-              
-              {/* Overlay with slide info */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {SLIDES[currentSlide].title}
-                </h3>
-                <p className="text-gray-300">
-                  {SLIDES[currentSlide].description}
+          {/* Statistics Box */}
+          <motion.div 
+            className="relative bg-white rounded-3xl mx-auto mb-12"
+            style={{
+              width: '890px',
+              height: '279px',
+              boxShadow: '0 20px 40px rgba(45, 212, 191, 0.15)'
+            }}
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          >
+            {/* Bottom right glow */}
+            <div 
+              className="absolute bottom-0 right-0 w-32 h-32 bg-teal-400/20 rounded-full blur-3xl"
+              style={{ transform: 'translate(25%, 25%)' }}
+            />
+            
+            <div className="relative flex h-full">
+              {/* First Stat */}
+              <div className="flex-1 flex flex-col items-center justify-center text-center">
+                <div className="font-mono text-[#007E79CF] text-[64px] font-light mb-3">
+                  &gt;60%
+                </div>
+                <p className="text-[#060606] font-mono text-base font-light text-[13px]">
+                  of recruiter time is<br />
+                  lost to repetitive<br />
+                  tasks
                 </p>
               </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+              
+              {/* First Divider */}
+              <div className="w-px bg-teal-400/30 mx-4" style={{ marginTop: '60px', marginBottom: '60px' }} />
+              
+              {/* Second Stat */}
+              <div className="flex-1 flex flex-col items-center justify-center text-center">
+                <div className="font-mono text-[#007E79CF] text-[64px] font-light mb-3">
+                  &gt;40%
+                </div>
+                <p className="text-[#060606] font-mono text-base font-light text-[13px] ">
+                  interview no-<br />
+                  show rates
+                </p>
+              </div>
+              
+              {/* Second Divider */}
+              <div className="w-px bg-teal-400/30 mx-4" style={{ marginTop: '60px', marginBottom: '60px' }} />
+              
+              {/* Third Stat */}
+              <div className="flex-1 flex flex-col items-center justify-center text-center">
+                <div className="font-mono text-[#007E79CF] text-[64px] font-light mb-3">
+                  30%
+                </div>
+                <p className="text-[#060606] font-mono text-base font-light text-[13px]">
+                  of resumes are<br />
+                  misrepresented
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Subheading */}
+          <motion.p 
+            className="text-base sm:text-xl leading-[1.4] sm:leading-[1.6] text-[24px] font-inter font-light text-white/80 max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+          >
+            <span className='text-[#04BBA6]'>We built Berribot to flip the script. </span> With autonomous AI agents that handle <br />
+             communication, screening, interviews, and fraud checks, we help you hire <br /> faster, better - and with zero drama.
+          </motion.p>
+
+       
       </motion.div>
     </section>
   );

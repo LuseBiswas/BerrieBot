@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import Dropdown, { DropdownSection } from "./home/Dropdown";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -37,47 +36,13 @@ export default function NavBar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
-  // Define dropdown data
-  const productSections: DropdownSection[] = [
-    {
-      title: "PRODUCTS",
-      items: [
-        {
-          name: "Berri Search & Match",
-          href: "/products/search-match",
-          description: "Text here."
-        },
-        {
-          name: "Berri Connect",
-          href: "/products/connect",
-          description: "Our Conversational AI platform - BerriConnect, exemplifies the future of communication."
-        }
-      ]
-    },
-    {
-      title: "",
-      items: [
-        {
-          name: "Berri Mastermind",
-          href: "/products/mastermind",
-          description: "In realm of Generative AI, we proudly present Berri's Interview MasterMind."
-        },
-        {
-          name: "Berri Proctor",
-          href: "/products/proctor",
-          description: "BerriProctor stands as a crucial asset, introducing an essential layer of cybersecurity."
-        }
-      ]
-    }
-  ];
-
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
         <div className="mx-2 my-3 rounded-2xl bg-[#04BBA6]">
-          <div className="mx-auto flex max-w-8xl items-center justify-between px-16 py-3">
+          <div className="mx-auto flex max-w-8xl items-center justify-between px-16 py-12">
             {/* Left side - Logo */}
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 flex items-center justify-center">
@@ -95,7 +60,7 @@ export default function NavBar() {
 
             {/* Center - Navigation Links */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Dropdown
+              {/* <Dropdown
                 trigger={
                   <div className=" text-white font-medium hover:text-white/80 transition-colors flex items-center">
                     Product
@@ -105,13 +70,20 @@ export default function NavBar() {
                   </div>
                 }
                 sections={productSections}
-              />
-              
-              <Link href="/solution" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
-                Solution
-                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              /> */}
+
+              <Link href="/product" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                Product
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                </svg> */}
+              </Link>
+              
+              <Link href="/solutions" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                Solution
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg> */}
               </Link>
               
               <Link href="/resources" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">

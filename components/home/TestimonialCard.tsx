@@ -1,5 +1,4 @@
 "use client"
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
@@ -8,18 +7,13 @@ interface TestimonialCardProps {
   description: string;
   buttonText: string;
   variant: 'blue' | 'gray';
-  profileImage?: {
-    src: string;
-    alt: string;
-  };
 }
 
 export default function TestimonialCard({ 
   title, 
   description, 
   buttonText, 
-  variant,
-  profileImage 
+  variant
 }: TestimonialCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const baseClasses = "rounded-[32px] p-8 relative overflow-hidden backdrop-blur-md";
@@ -41,7 +35,7 @@ export default function TestimonialCard({
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       <motion.div layout="position" className="flex items-center gap-6 mb-6">
-        {profileImage && (
+        {/* {profileImage && (
           <div className={`w-20 h-20 flex-shrink-0 rounded-full overflow-hidden ${variant === 'blue' ? 'bg-white/20' : 'bg-white/10'} flex items-center justify-center`}>
             <Image
               src={profileImage.src}
@@ -51,7 +45,7 @@ export default function TestimonialCard({
               className="object-cover w-full h-full"
             />
           </div>
-        )}
+        )} */}
 
         <motion.h3 layout="position" className={`text-2xl sm:text-3xl font-inter font-[500] ${textColor} leading-tight`}>
           {firstWord}<br />

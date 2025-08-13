@@ -19,7 +19,7 @@ export default function CTASection() {
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={ref} className="relative flex items-center justify-center mt-44 z-0">
+    <section ref={ref} className="relative flex items-center justify-center mt-44 z-0 bg-black">
       <motion.div 
         className="bg-[#D9D9D9] rounded-t-3xl p-12 flex items-center justify-between shadow-lg"
         style={{ 
