@@ -1,3 +1,4 @@
+import CTASection from "@/components/product/CTASection";
 import HeroSection from "@/components/solutions/HeroSection";
 import DisplaySolution from "@/components/solutions/displaySolution";
 
@@ -7,7 +8,7 @@ export default function Product() {
     <>
       <HeroSection />
 
-      <div className="mt-10">
+      <div className="mt-10 mb-[-180px]">
       <DisplaySolution
         theme="dark"
         position="left"
@@ -47,8 +48,11 @@ export default function Product() {
         outro="It's not just reactive—it’s proactive. BerriConnect knows when to follow up and how to make it feel human."
         image="/image/screenshot_4.png"
       />
+      </div>
+
+      <div className="">
+        <CTASection/>
       </div> 
-      
     </>
   );
 } 
