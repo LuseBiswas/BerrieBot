@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/home/NavBar";
 import Footer from "@/components/Footer";
 import DynamicBackground from "@/components/DynamicBackground";
+import Script from "next/script";
 
 
 const inter = Inter({
@@ -23,6 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script src="https://cdn.lordicon.com/lordicon.js" strategy="beforeInteractive" />
+      </head>
       <body className={`${inter.variable} font-sans`}>
         <DynamicBackground>
           <NavBar />

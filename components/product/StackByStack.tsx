@@ -155,7 +155,7 @@ export default function StackByStack({
               {/* Top section */}
               <div className="flex-1 flex items-center justify-center px-6 py-8">
                 <div className="text-center space-y-2">
-                  <div className="font-mono text-3xl font-extralight leading-tight text-gray-900">
+                  <div className="text-[45px] font-light leading-tight text-black">
                     {card.top}
                   </div>
                 </div>
@@ -184,7 +184,7 @@ export default function StackByStack({
               {/* Bottom section */}
               <div className="flex-1 flex items-center justify-center px-6 py-8">
                 <div className="text-center space-y-2">
-                  <div className="font-mono text-3xl font-extralight leading-tight text-gray-900">
+                  <div className="text-[45px] font-light leading-tight text-black">
                     {card.bottom}
                   </div>
                 </div>

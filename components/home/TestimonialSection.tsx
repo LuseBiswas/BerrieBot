@@ -1,8 +1,81 @@
 "use client"
 import Image from "next/image";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, MotionValue } from "framer-motion";
 import { useRef } from "react";
 import TestimonialCard from "./TestimonialCard";
+
+/* ---------- Custom Hook for Word Animation ---------- */
+function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
+  const lineDelay = lineIndex * 0.15;
+  const wordDelay = wordIndex * 0.015;
+  const startPoint = 0.2 + lineDelay + wordDelay;
+  const endPoint = startPoint + 0.06;
+  
+  const wordProgress = useTransform(
+    scrollProgress,
+    [startPoint, endPoint],
+    [0, 1]
+  );
+  
+  const colorTransform = useTransform(
+    wordProgress,
+    [0, 1],
+    ["#6B7280", "#FFFFFF"]
+  );
+  
+  return { wordProgress, colorTransform };
+}
+
+/* ---------- Animated Word Component ---------- */
+function AnimatedWord({ 
+  word, 
+  wordIndex, 
+  scrollProgress, 
+  lineIndex 
+}: { 
+  word: string; 
+  wordIndex: number; 
+  scrollProgress: MotionValue<number>; 
+  lineIndex: number; 
+}) {
+  const { colorTransform } = useWordAnimation(scrollProgress, wordIndex, lineIndex);
+  
+  return (
+    <motion.span
+      style={{ color: colorTransform }}
+      className="inline-block mr-1"
+    >
+      {word}
+    </motion.span>
+  );
+}
+
+/* ---------- Animated Text Component ---------- */
+function AnimatedText({ 
+  text, 
+  scrollProgress,
+  lineIndex = 0
+}: { 
+  text: string; 
+  scrollProgress: MotionValue<number>;
+  lineIndex?: number;
+}) {
+  const words = text.split(' ');
+  
+  return (
+    <span>
+      {words.map((word, wordIndex) => (
+        <AnimatedWord
+          key={wordIndex}
+          word={word}
+          wordIndex={wordIndex}
+          scrollProgress={scrollProgress}
+          lineIndex={lineIndex}
+        />
+      ))}
+    </span>
+  );
+}
 
 export default function TestimonialSection() {
   const ref = useRef(null);
@@ -64,7 +137,7 @@ export default function TestimonialSection() {
             </motion.div>
             
             <motion.h2 
-              className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]"
+              className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]"
               style={{ 
                 opacity: headingOpacity, 
                 y: headingY,
@@ -77,18 +150,32 @@ export default function TestimonialSection() {
                Recruiting Task.
               </span>
             </motion.h2>
-            <motion.p 
-              className="mt-6 text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90 max-w-[280px] sm:max-w-3xl mx-auto "
+            <motion.div 
+              className="mt-8 font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[280px] sm:max-w-3xl mx-auto "
               style={{ 
                 opacity: descriptionOpacity, 
                 y: descriptionY,
                 willChange: 'transform'
               }}
             >
-              Berribot – Your Complete Recruitment Command Center. <br />
-              From outreach to offer, the Berri Suite delivers speed, <br />
-              accuracy, security and compliance shield.
-            </motion.p>
+              <AnimatedText 
+                text="Berribot – Your Complete Recruitment Command Center."
+                scrollProgress={scrollYProgress}
+                lineIndex={0}
+              />
+              <br />
+              <AnimatedText 
+                text="From outreach to offer, the Berri Suite delivers speed,"
+                scrollProgress={scrollYProgress}
+                lineIndex={1}
+              />
+              <br />
+              <AnimatedText 
+                text="accuracy, security and compliance shield."
+                scrollProgress={scrollYProgress}
+                lineIndex={2}
+              />
+            </motion.div>
           </div>
         </div>
 

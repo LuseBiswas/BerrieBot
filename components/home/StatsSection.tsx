@@ -1,7 +1,80 @@
 'use client';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform, MotionValue } from 'framer-motion';
 import React, { useRef, useEffect } from 'react';
 import { Plus } from 'lucide-react';
+
+/* ---------- Custom Hook for Word Animation ---------- */
+function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
+  const lineDelay = lineIndex * 0.25; // Increased delay between lines
+  const wordDelay = wordIndex * 0.015; // Increased delay between words
+  const startPoint = 0.3 + lineDelay + wordDelay; // Later start point
+  const endPoint = startPoint + 0.08; // Longer animation duration
+  
+  const wordProgress = useTransform(
+    scrollProgress,
+    [startPoint, endPoint],
+    [0, 1]
+  );
+  
+  const colorTransform = useTransform(
+    wordProgress,
+    [0, 1],
+    ["#6B7280", "#FFFFFF"]
+  );
+  
+  return { wordProgress, colorTransform };
+}
+
+/* ---------- Animated Word Component ---------- */
+function AnimatedWord({ 
+  word, 
+  wordIndex, 
+  scrollProgress, 
+  lineIndex 
+}: { 
+  word: string; 
+  wordIndex: number; 
+  scrollProgress: MotionValue<number>; 
+  lineIndex: number; 
+}) {
+  const { colorTransform } = useWordAnimation(scrollProgress, wordIndex, lineIndex);
+  
+  return (
+    <motion.span
+      style={{ color: colorTransform }}
+      className="inline-block mr-1"
+    >
+      {word}
+    </motion.span>
+  );
+}
+
+/* ---------- Animated Text Component ---------- */
+function AnimatedText({ 
+  text, 
+  scrollProgress,
+  lineIndex = 0
+}: { 
+  text: string; 
+  scrollProgress: MotionValue<number>;
+  lineIndex?: number;
+}) {
+  const words = text.split(' ');
+  
+  return (
+    <span>
+      {words.map((word, wordIndex) => (
+        <AnimatedWord
+          key={wordIndex}
+          word={word}
+          wordIndex={wordIndex}
+          scrollProgress={scrollProgress}
+          lineIndex={lineIndex}
+        />
+      ))}
+    </span>
+  );
+}
 
 // Custom component to display animated numbers
 function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: { 
@@ -175,7 +248,7 @@ export default function StatsSection() {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h2 className="text-[60px] font-inter font-light leading-tight mb-8">
+              <h2 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text">
                 <span className="text-white bg-clip-text">Recruiters Are</span>
                 <br />
                 <span className="text-white">Turbocharged by</span>
@@ -183,9 +256,13 @@ export default function StatsSection() {
                 <span className="text-white bg-clip-text">Berribot</span>
               </h2>
               
-              <p className="text-base sm:text-[28px] leading-[1.3] sm:leading-[1.5] font-light text-white/90  sm:max-w-3xl  max-w-lg">
-                From Wipro to Cognizant, Berribot helps companies save millions in recruiter hours and cut hiring time in half.
-              </p>
+              <div className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-5xl mx-auto">
+                <AnimatedText 
+                  text="From Wipro to Cognizant, Berribot helps companies save millions in recruiter hours and cut hiring time in half."
+                  scrollProgress={scrollYProgress}
+                  lineIndex={0}
+                />
+              </div>
             </motion.div>
           </motion.div>
 

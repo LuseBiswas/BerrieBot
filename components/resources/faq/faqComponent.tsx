@@ -50,7 +50,7 @@ export default function FAQComponent() {
   };
 
     return (
-    <div className="w-full">
+    <div className="w-full mb-12 ">
       <div className="w-full max-w-4xl mx-auto space-y-4 mt-10">
         {faqData.map((item) => (
           <div key={item.id} className="relative">
@@ -143,7 +143,7 @@ export default function FAQComponent() {
         <p className="text-[#9CA3AF] text-[24px] font-extralight font-inter mb-8">
           Drop a message to <span className="font-normal">support@berribot.com</span>
         </p>
-        <p className="text-[#9CA3AF] text-[24px] font-extralight font-inter mb-4">
+        {/* <p className="text-[#9CA3AF] text-[24px] font-extralight font-inter mb-4">
           Or
         </p>
         <p className="text-[#9CA3AF] text-[24px] font-extralight font-inter mb-8">
@@ -156,7 +156,7 @@ export default function FAQComponent() {
           transition={{ duration: 0.2 }}
         >
           Book a Demo
-        </motion.button>
+        </motion.button> */}
       </div>
     </div>
   );

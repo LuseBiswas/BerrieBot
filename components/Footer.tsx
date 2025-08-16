@@ -67,9 +67,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Solutions</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="#" className="hover:text-white transition-colors">Recruitment Assistant</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Real-time Proctoring</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Live Texting</Link></li>
+              <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors">Recruitment Assistant</Link></li>
+              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors">Real-time Proctoring</Link></li>
+              <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors">Live Texting</Link></li>
             </ul>
           </div>
           

@@ -6,40 +6,39 @@ const PRODUCT_FEATURES: StackCard[] = [
   {
     id: 'sec-speed',
     top: <>Enterprise-Grade<br/><span className="text-teal-400">Security</span></>,
-    ribbon: <>SOC 2&nbsp;•&nbsp;ISO&nbsp;27001</>,
+    ribbon: <>SOC 2&nbsp;•&nbsp;ISO&nbsp;27001&nbsp;•&nbsp;GDPR&nbsp;•&nbsp;DPDP-complimant&nbsp;•</>,
     bottom: <>Startup-Grade<br/><span className="text-teal-400">Speed</span></>,
   },
   {
     id: 'ai-ready',
-    top: 'AI-Ready APIs',
-    ribbon: '99.99 % uptime',
-    bottom: 'Scale without ops',
+    topImage:'/image/Stack/shield-star 1.png',
+    bottom: <><span className="text-teal-400">End-to-end</span> <br />encryption</>
   },
   {
     id: 'obs-five',
-    top: 'Observability',
-    ribbon: 'Zero-config tracing',
-    bottom: 'Data-driven fixes',
+    topImage:'/image/Stack/scales 1.png',
+    ribbon: <>Demographic parity&nbsp;•&nbsp;Bias mitigation&nbsp;Explainaibilty</>,
+    bottom: <><span className="text-teal-400">AI Fairness</span><br/>Framework</>,
   },
   {
     id: 'auto-scale',
-    top: <>Auto-Scaling<br/><span className="text-teal-400">Infrastructure</span></>,
-    ribbon: 'Elastic & Reliable',
-    bottom: <>Global<br/><span className="text-teal-400">Performance</span></>,
+    top: <>Explainable<br/><span className="text-teal-400">AI logs</span></>,
+    ribbonImage: "/image/Stack/&.png",
+    bottom: <><span className="text-teal-400">Human-in-loop</span><br/>fallback</>,
   },
 ];
 
 export default function ProductFeature() {
   return (
-    <section className="py-20 bg-[#D9D9D9] ">
+    <section className="py-20 bg-white ">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Tagline */}
-        <div className="text-center mb-16 text-[64px] sm:text-6xl md:text-7xl lg:text-8xl font-inter font-medium leading-24 ">
-          <h2 className=" text-neutral-700 mb-4">
-            Built on <span className="text-[#04BBA6]">Trust.</span>
+        <div className="text-center font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text ">
+          <h2 className=" text-black mb-4">
+            Built on Trust.
           </h2>
-          <p className=" text-neutral-700">
-            <span className="text-[#04BBA6]">Secured</span> by Design.
+          <p className=" text-black">
+            Secured by Design.
           </p>
         </div>
 
@@ -48,8 +47,8 @@ export default function ProductFeature() {
           <StackByStack 
             cards={PRODUCT_FEATURES}
             visibleCount={4}
-            width="w-[22rem]"
-            height="h-[28rem]"
+            width="w-[396px]"
+            height="h-[396px]"
           />
         </div>
       </div>

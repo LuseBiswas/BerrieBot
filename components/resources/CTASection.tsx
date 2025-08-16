@@ -18,7 +18,7 @@ export default function CTASection() {
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={ref} className="relative flex items-center justify-center  z-0">
+    <section ref={ref} className="relative flex items-center justify-center  z-0 bg-black">
               <motion.div 
           className="bg-[url('/image/background/bg_image.png')] bg-cover bg-center rounded-t-3xl p-12 flex items-center justify-between shadow-lg"
         style={{ 
@@ -66,17 +66,35 @@ export default function CTASection() {
         {/* Right content */}
         <div className="flex-1 flex justify-end">
           <motion.button
-            className="bg-white text-black px-8 py-4 rounded-2xl font-inter font-light text-[16px] flex items-center gap-3 hover:bg-[#039a87] transition-colors"
+            className="bg-white text-black px-8 py-4 rounded-2xl font-inter font-light text-[16px] hover:cursor-pointer transition-colors relative overflow-hidden w-[180px] h-[56px]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            Berri-Happily
-            <div className="bg-[#181818] rounded-md p-2">
-              <ArrowRight className="w-[25px] h-[25px] text-white" />
-            </div>
+            <motion.div 
+              className="flex absolute top-1/2 -translate-y-1/2 left-[180px] -translate-x-1/2"
+              initial={{ x: 0 }}
+              whileHover={{ x: -180 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              {/* Default state - Arrow on left */}
+              <div className="flex items-center gap-3 w-[180px] justify-center">
+                <div className="bg-[#181818] rounded-md p-2">
+                  <ArrowRight className="w-[25px] h-[25px] text-white" />
+                </div>
+                Berri-Happily
+              </div>
+              
+              {/* Hover state - Arrow on right */}
+              <div className="flex items-center gap-3 w-[180px] justify-center">
+                Berri-Happily
+                <div className="bg-[#181818] rounded-md p-2">
+                  <ArrowRight className="w-[25px] h-[25px] text-white" />
+                </div>
+              </div>
+            </motion.div>
           </motion.button>
         </div>
       </motion.div>
