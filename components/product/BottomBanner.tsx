@@ -1,7 +1,80 @@
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
+
+/* ---------- Custom Hook for Word Animation ---------- */
+function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
+  const lineDelay = lineIndex * 0.15; // Delay between lines
+  const wordDelay = wordIndex * 0.02; // Delay between words
+  const startPoint = 0.1 + lineDelay + wordDelay; // Early start point
+  const endPoint = startPoint + 0.1; // Animation duration
+  
+  const wordProgress = useTransform(
+    scrollProgress,
+    [startPoint, endPoint],
+    [0, 1]
+  );
+  
+  const colorTransform = useTransform(
+    wordProgress,
+    [0, 1],
+    ["#6B7280", "#FFFFFF"] // grey to white (since background is black)
+  );
+  
+  return { wordProgress, colorTransform };
+}
+
+/* ---------- Animated Word Component ---------- */
+function AnimatedWord({ 
+  word, 
+  wordIndex, 
+  scrollProgress, 
+  lineIndex 
+}: { 
+  word: string; 
+  wordIndex: number; 
+  scrollProgress: MotionValue<number>; 
+  lineIndex: number; 
+}) {
+  const { colorTransform } = useWordAnimation(scrollProgress, wordIndex, lineIndex);
+  
+  return (
+    <motion.span
+      style={{ color: colorTransform }}
+      className="inline-block mr-1"
+    >
+      {word}
+    </motion.span>
+  );
+}
+
+/* ---------- Animated Text Component ---------- */
+function AnimatedText({ 
+  text, 
+  scrollProgress,
+  lineIndex = 0
+}: { 
+  text: string; 
+  scrollProgress: MotionValue<number>;
+  lineIndex?: number;
+}) {
+  const words = text.split(' ');
+  
+  return (
+    <span>
+      {words.map((word, wordIndex) => (
+        <AnimatedWord
+          key={wordIndex}
+          word={word}
+          wordIndex={wordIndex}
+          scrollProgress={scrollProgress}
+          lineIndex={lineIndex}
+        />
+      ))}
+    </span>
+  );
+}
 
 // Company logos data - easily extendable
 const COMPANY_LOGOS = [
@@ -38,8 +111,16 @@ const COMPANY_LOGOS = [
 ];
 
 export default function BottomBanner() {
+  const ref = useRef(null);
+  
+  // Scroll progress for animations
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
   return (
-    <section className="relative py-16 sm:py-20 bg-black text-white overflow-hidden">
+    <section ref={ref} className="relative py-16 sm:py-20 bg-black text-white overflow-hidden">
       {/* Background pattern from CompanyTestimonialSection */}
       <div className="absolute inset-0">
         {/* You can add any background pattern here similar to CompanyTestimonialSection */}
@@ -50,7 +131,7 @@ export default function BottomBanner() {
         <div className="max-w-7xl mx-auto text-center">
           {/* Heading */}
           <motion.h2
-            className="text-4xl sm:text-5xl lg:text-6xl font-inter font-light leading-tight mb-8"
+            className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -70,15 +151,31 @@ export default function BottomBanner() {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <p className="text-lg sm:text-xl font-inter font-light text-gray-300 leading-relaxed">
-              Our agents work across phone, chat, video,
+            <div className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light">
+              <AnimatedText 
+                text="Our agents work across phone, chat, video,"
+                scrollProgress={scrollYProgress}
+                lineIndex={0}
+              />
               <br />
-              and documents - and support 36+ languages.
+              <AnimatedText 
+                text="and documents - and support 36+ languages."
+                scrollProgress={scrollYProgress}
+                lineIndex={1}
+              />
               <br />
-              No matter your infra, timezone, or region
+              <AnimatedText 
+                text="No matter your infra, timezone, or region"
+                scrollProgress={scrollYProgress}
+                lineIndex={2}
+              />
               <br />
-              - we&apos;ve got you covered.
-            </p>
+              <AnimatedText 
+                text="- we've got you covered."
+                scrollProgress={scrollYProgress}
+                lineIndex={3}
+              />
+            </div>
           </motion.div>
 
         </div>

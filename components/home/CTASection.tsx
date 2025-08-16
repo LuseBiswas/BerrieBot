@@ -70,17 +70,35 @@ export default function CTASection() {
         <div className="flex-1 flex items-center justify-center">
           <Link href="/schedule">
           <motion.button
-            className="bg-[#04BBA6] text-black px-8 py-4 rounded-2xl font-inter font-light text-[16px] flex items-center gap-3 hover:bg-[#039a87] transition-colors hover:cursor-pointer"
+            className="bg-[#04BBA6] text-black px-8 py-4 rounded-2xl font-inter font-light text-[16px] hover:bg-[#039a87] transition-colors hover:cursor-pointer relative overflow-hidden w-[180px] h-[56px]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            Book a Demo
-            <div className="bg-white rounded-md p-2">
-              <ArrowRight className="w-[25px] h-[25px] text-black" />
-            </div>
+            <motion.div 
+              className="flex absolute top-1/2 -translate-y-1/2 left-[180px] -translate-x-1/2"
+              initial={{ x: 0 }}
+              whileHover={{ x: -180 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              {/* Default state - Arrow on left */}
+              <div className="flex items-center gap-3 w-[180px] justify-center">
+                <div className="bg-white rounded-md p-2">
+                  <ArrowRight className="w-[25px] h-[25px] text-black" />
+                </div>
+                Book a Demo
+              </div>
+              
+              {/* Hover state - Arrow on right */}
+              <div className="flex items-center gap-3 w-[180px] justify-center">
+                Book a Demo
+                <div className="bg-white rounded-md p-2">
+                  <ArrowRight className="w-[25px] h-[25px] text-black" />
+                </div>
+              </div>
+            </motion.div>
           </motion.button>
           </Link>
         </div>

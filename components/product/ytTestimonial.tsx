@@ -71,7 +71,7 @@ export default function YtTestimonial() {
             <div className="lg:w-1/2 text-left">
               {/* Main Heading */}
               <motion.h2
-                className="text-5xl sm:text-6xl lg:text-7xl font-inter font-light leading-tight mb-8"
+                className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] font-medium text-[#252527] bg-clip-text mb-8"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
@@ -86,19 +86,19 @@ export default function YtTestimonial() {
 
               {/* Description */}
               <motion.div
-                className="mb-12"
+                className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light text-[#969696] max-w-5xl mx-auto mb-12"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <p className="text-lg sm:text-xl font-inter font-light text-gray-300 leading-relaxed ">
+                <p className="text-gray-300">
                   Let Berri-Agents automate your outreach,
                 </p>
-                <p className="text-lg sm:text-xl font-inter font-light text-gray-300 leading-relaxed">
+                <p className="text-gray-300">
                   screening, interviewing, and verification.
                 </p>
-                <p className="text-lg sm:text-xl font-inter font-light text-gray-300 leading-relaxed">
+                <p className=" text-gray-300 ">
                   Your recruiters can focus on hiring, not chasing.
                 </p>
               </motion.div>

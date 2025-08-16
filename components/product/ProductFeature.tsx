@@ -67,12 +67,12 @@ export default function ProductFeature() {
       
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         {/* Tagline */}
-        <div className="text-center mb-32 text-[64px] sm:text-6xl md:text-7xl lg:text-8xl font-inter font-medium leading-24 ">
-          <h2 className=" text-neutral-700 mb-4">
-            We&apos;re <span className="text-[#04BBA6]">Not</span> Just
+        <div className="text-center mb-32 font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]  font-medium text-white bg-clip-text ">
+          <h2 className=" mb-4">
+            We&apos;re Not Just
           </h2>
-          <p className=" text-neutral-700">
-            <span className="text-[#04BBA6]">Another Hiring Tool</span>
+          <p className="">
+            Another Hiring Tool
           </p>
         </div>
 

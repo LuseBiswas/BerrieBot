@@ -14,8 +14,15 @@ export default function Home() {
   return (
     <>
       {/* <HeroSection /> */}
-        <YtTestimonial/>
-      <CarouselSection_2/> 
+      <YtTestimonial />
+      {/* <StarCardBG className="min-h-screen p-8">
+        <Card
+          heading="Your Heading Here"
+          description="Your description text here..."
+          className="max-w-md mx-auto"
+        />
+      </StarCardBG> */}
+      <CarouselSection_2 />
       <CompaniesSection />
       <TestimonialSection />
       <CarouselSection />
@@ -27,4 +34,4 @@ export default function Home() {
       <CTASection />
     </>
   );
-} 
+}

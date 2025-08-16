@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 interface FeatureCardItemProps {
   icon?: string;
+  lordicon?: string; // URL for lordicon animation
   title: string;
   description: string;
   index: number;
@@ -13,6 +14,7 @@ interface FeatureCardItemProps {
 
 export default function FeatureCardItem({ 
   icon, 
+  lordicon,
   title, 
   description, 
   index, 
@@ -27,15 +29,29 @@ export default function FeatureCardItem({
       transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
     >
       <div className="flex items-start gap-6">
-        {icon && (
+        {(icon || lordicon) && (
           <div className="flex-shrink-0">
-            <Image 
-              src={icon} 
-              alt={title}
-              width={178}
-              height={178}
-              className="w-[178px] h-[178px] opacity-80"
-            />
+            {lordicon ? (
+              <div 
+                dangerouslySetInnerHTML={{
+                  __html: `<lord-icon
+                    src="${lordicon}"
+                    trigger="loop"
+                    stroke="bold"
+                    colors="primary:#ffffff,secondary:#08a88a"
+                    style="width:178px;height:178px">
+                  </lord-icon>`
+                }}
+              />
+            ) : icon ? (
+              <Image 
+                src={icon} 
+                alt={title}
+                width={178}
+                height={178}
+                className="w-[178px] h-[178px] opacity-80"
+              />
+            ) : null}
           </div>
         )}
         <div className="flex-1">

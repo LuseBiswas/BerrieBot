@@ -27,7 +27,7 @@ export default function HeroSection() {
 
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-7xl mx-auto relative z-10 mb-12">
-        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-normal  text-[#969696] bg-clip-text">
+        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text">
         Smart bots. Less
           <br />
           busywork.
@@ -36,7 +36,7 @@ export default function HeroSection() {
 
       {/* ---- Description ---- */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-8">
-        <p className="font-inter text-[20px] sm:text-2xl md:text-[32px] leading-[1.4] sm:leading-[1.5] font-light text-[#969696] max-w-5xl mx-auto">
+        <p className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light text-[#969696] max-w-5xl mx-auto">
         At Berribot, we believe in tag-teaming with AI to take the grind out of  <br /> everyday workflows. Whether you&apos;re hiring at scale, vetting online  <br />participants, or texting leads like a boss—we&apos;ve got a bot for that.
         </p>
       </div>

@@ -1,8 +1,81 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform, MotionValue } from "framer-motion";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+
+/* ---------- Custom Hook for Word Animation ---------- */
+function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
+  const lineDelay = lineIndex * 0.15; // Delay between lines
+  const wordDelay = wordIndex * 0.02; // Delay between words
+  const startPoint = 0.1 + lineDelay + wordDelay; // Much earlier start point
+  const endPoint = startPoint + 0.1; // Animation duration
+  
+  const wordProgress = useTransform(
+    scrollProgress,
+    [startPoint, endPoint],
+    [0, 1]
+  );
+  
+  const colorTransform = useTransform(
+    wordProgress,
+    [0, 1],
+    ["#6B7280", "#000000"] // grey to black instead of white
+  );
+  
+  return { wordProgress, colorTransform };
+}
+
+/* ---------- Animated Word Component ---------- */
+function AnimatedWord({ 
+  word, 
+  wordIndex, 
+  scrollProgress, 
+  lineIndex 
+}: { 
+  word: string; 
+  wordIndex: number; 
+  scrollProgress: MotionValue<number>; 
+  lineIndex: number; 
+}) {
+  const { colorTransform } = useWordAnimation(scrollProgress, wordIndex, lineIndex);
+  
+  return (
+    <motion.span
+      style={{ color: colorTransform }}
+      className="inline-block mr-1"
+    >
+      {word}
+    </motion.span>
+  );
+}
+
+/* ---------- Animated Text Component ---------- */
+function AnimatedText({ 
+  text, 
+  scrollProgress,
+  lineIndex = 0
+}: { 
+  text: string; 
+  scrollProgress: MotionValue<number>;
+  lineIndex?: number;
+}) {
+  const words = text.split(' ');
+  
+  return (
+    <span>
+      {words.map((word, wordIndex) => (
+        <AnimatedWord
+          key={wordIndex}
+          word={word}
+          wordIndex={wordIndex}
+          scrollProgress={scrollProgress}
+          lineIndex={lineIndex}
+        />
+      ))}
+    </span>
+  );
+}
 
 // Carousel data - easily extendable
 const CAROUSEL_SLIDES = [
@@ -85,6 +158,13 @@ const PRODUCT_SLIDE_MAP: { [key: string]: number } = {
 export default function CommentCarousel() {
   const [activeSlide, setActiveSlide] = useState(0);
   const searchParams = useSearchParams();
+  const ref = useRef(null);
+  
+  // Scroll progress for animations
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
 
   // Handle URL parameter navigation
   useEffect(() => {
@@ -107,34 +187,42 @@ export default function CommentCarousel() {
   }, []);
 
   return (
-    <section className="py-16 sm:py-20 bg-white text-black">
+    <section ref={ref} className="py-16 sm:py-20 bg-white text-black">
       <div className="px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
           {/* Heading */}
           <motion.h2
-            className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl font-inter font-light leading-tight mb-4"
+            className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <span className="text-gray-600 ">One Platform.</span>
+            <span className="">One Platform.</span>
             <br />
-            <span className="text-[#04BBA6]">Four Powerful Products.</span>
+            <span className="">Four Powerful Products.</span>
           </motion.h2>
 
           {/* Subheading */}
-          <motion.p
-            className="font-inter text-[20px] sm:text-2xl md:text-[32px] leading-[1.4] sm:leading-[1.5] font-light text-[#969696] max-w-5xl mx-auto mb-10"
+          <motion.div
+            className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-5xl mx-auto mb-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            The Berri Suite automates the entire hiring lifecycle - so your
+            <AnimatedText 
+              text="The Berri Suite automates the entire hiring lifecycle - so your"
+              scrollProgress={scrollYProgress}
+              lineIndex={0}
+            />
             <br />
-            teams focus on decisions, not logistics.
-          </motion.p>
+            <AnimatedText 
+              text="teams focus on decisions, not logistics."
+              scrollProgress={scrollYProgress}
+              lineIndex={1}
+            />
+          </motion.div>
 
           {/* Carousel Indicators - Pill shaped */}
           <motion.div

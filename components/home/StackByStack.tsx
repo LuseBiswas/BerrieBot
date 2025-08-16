@@ -4,9 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export interface StackCard {
   id: string;
-  top: React.ReactNode;
-  ribbon: React.ReactNode;
-  bottom: React.ReactNode;
+  top?: React.ReactNode; // Made optional
+  ribbon?: React.ReactNode; // Made optional
+  bottom?: React.ReactNode; // Made optional
+  topImage?: string; // Optional image for top section
+  bottomImage?: string; // Optional image for bottom section
+  ribbonImage?: string; // Optional image for ribbon section
 }
 
 interface StackByStackProps {
@@ -179,40 +182,78 @@ export default function StackByStack({
                 }}
               >
                 {/* Top section */}
-                <div className="flex-1 flex items-center justify-center px-3 py-10">
-                  <div className="text-center">
-                    <div className="text-[45px] font-light leading-tight text-white">
-                      {card.top}
-                    </div>
+                <div className="flex-1 flex items-center justify-center px-6 py-8">
+                  <div className="text-center space-y-4">
+                    {card.topImage && (
+                      <div>
+                        <img 
+                          src={card.topImage} 
+                          alt="Top section" 
+                          className="mx-auto max-w-full h-auto max-h-32 object-contain"
+                        />
+                      </div>
+                    )}
+                    {card.top && (
+                      <div className="text-[45px] font-light leading-tight text-white">
+                        {card.top}
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                {/* Teal ribbon with scrolling marquee */}
-                <div className="relative w-full py-6 bg-gradient-to-r from-teal-600 to-teal-500 overflow-hidden">
-                  <div className="relative">
-                    <div className="flex animate-marquee whitespace-nowrap">
-                      <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
-                        {card.ribbon}
-                      </span>
-                      <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
-                        {card.ribbon}
-                      </span>
-                      <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
-                        {card.ribbon}
-                      </span>
-                      <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
-                        {card.ribbon}
-                      </span>
+                {/* Ribbon section - teal background only for text, transparent for image */}
+                {(card.ribbon || card.ribbonImage) && (
+                  <div className={`relative w-full overflow-hidden flex items-center ${
+                    card.ribbonImage ? 'py-8' : 'py-6 bg-gradient-to-r from-teal-600 to-teal-500'
+                  }`}>
+                    <div className="relative w-full flex items-center">
+                      {card.ribbonImage ? (
+                        // Static image in ribbon without background
+                        <div className="w-full flex justify-center">
+                          <img 
+                            src={card.ribbonImage} 
+                            alt="Ribbon" 
+                            className="h-16 object-contain"
+                          />
+                        </div>
+                      ) : (
+                        // Scrolling text marquee
+                        <div className="flex animate-marquee whitespace-nowrap items-center">
+                          <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
+                            {card.ribbon}
+                          </span>
+                          <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
+                            {card.ribbon}
+                          </span>
+                          <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
+                            {card.ribbon}
+                          </span>
+                          <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
+                            {card.ribbon}
+                          </span>
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
+                )}
 
                 {/* Bottom section */}
-                <div className="flex-1 flex items-center justify-center px-8 py-10">
-                  <div className="text-center">
-                    <div className="text-[45px] font-light leading-tight text-white">
-                      {card.bottom}
-                    </div>
+                <div className="flex-1 flex items-center justify-center px-6 py-8">
+                  <div className="text-center space-y-4">
+                    {card.bottomImage && (
+                      <div>
+                        <img 
+                          src={card.bottomImage} 
+                          alt="Bottom section" 
+                          className="mx-auto max-w-full h-auto max-h-32 object-contain"
+                        />
+                      </div>
+                    )}
+                    {card.bottom && (
+                      <div className="text-[45px] font-light leading-tight text-white">
+                        {card.bottom}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
