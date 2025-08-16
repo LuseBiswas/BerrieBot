@@ -1,347 +1,180 @@
 "use client";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect, useCallback, useMemo } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import { motion } from "framer-motion";
+import Image from "next/image";
+
+type StatItem = {
+  id: number;
+  title: string;
+  value: string;
+  gradient: string; // e.g. "from-purple-200 to-blue-200"
+  icon?: string;
+  iconWidth?: number;
+  iconHeight?: number;
+  image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  layoutMd: string; // md col placement
+  layoutLg: string; // lg precise col placement
+};
+
+const statsData: StatItem[] = [
+  {
+    id: 1,
+    title: "Customers served",
+    value: "10M+",
+    gradient: "from-purple-200 to-blue-200",
+    layoutMd: "md:col-span-6",
+    layoutLg: "lg:col-[1/9]", // 40% of 20 cols
+  },
+  {
+    id: 2,
+    title: "Deflection rate",
+    value: "80%",
+    gradient: "from-purple-300 to-pink-200",
+    icon: "/image/icons/computer.png",
+    iconWidth: 32,
+    iconHeight: 32,
+    layoutMd: "md:col-span-3",
+    layoutLg: "lg:col-[9/15]", // 30% of 20 cols
+  },
+  {
+    id: 3,
+    title: "Resolution rate",
+    value: "70%",
+    gradient: "from-blue-200 to-teal-200",
+    icon: "/image/icons/web.png",
+    iconWidth: 32,
+    iconHeight: 32,
+    layoutMd: "md:col-span-3",
+    layoutLg: "lg:col-[15/21]", // 30% of 20 cols
+  },
+  {
+    id: 4,
+    title: "Decrease in support operations costs",
+    value: "65%",
+    gradient: "from-green-200 to-yellow-200",
+    image: "/image/screenshot_2.png",
+    imageWidth: 180,
+    imageHeight: 220,
+    layoutMd: "md:col-span-3",
+    // Ends 40% into Tile 2 above (Tile 2 spans 6 cols → 40% ≈ 2.4 → snap to 2 cols):
+    // Tile 2 starts at 9 → 9 + 2 = 11 ⇒ end at line 11
+    layoutLg: "lg:col-[1/11]",
+  },
+  {
+    id: 5,
+    title: "Agent quality score",
+    value: "93%",
+    gradient: "from-pink-200 to-purple-200",
+    image: "/image/screenshot_2.png",
+    imageWidth: 180,
+    imageHeight: 220,
+    layoutMd: "md:col-span-3",
+    // Starts where Tile 4 ended (line 11) and fills to the end:
+    layoutLg: "lg:col-[11/21]",
+  },
+];
 
 export default function ValuesSection() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  // Transform scroll progress for different animations
-  const horizontalLinesProgress = useTransform(scrollYProgress, [0.1, 0.4], [0, 1]);
-  const verticalLinesProgress = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
-  const contentProgress = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
-
-  // Carousel state
-  const [currentSection, setCurrentSection] = useState(0); // 0: Mission, 1: Vision, 2: Values
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [slideDirection, setSlideDirection] = useState(0); // -1: left, 1: right
-
-  // Dummy slide data
-  const sections = useMemo(() => [
-    {
-      title: "Mission",
-      slides: [
-        {
-          title: "Automate. Innovate. Transform.<br/>(And maybe make your Mondays better)",
-          
-          content: "We're here to rescue teams from soul-sucking tasks. Berribot automates the repetitive stuff—calls, scheduling, sorting, screening - so real humans (aka you) can shine where it matters most. Basically, we help people do less busywork and more \"heck yes\" work."
-        }
-      ]
-    },
-    {
-      title: "Vision",
-      slides: [
-        {
-          title: "Let the Bots Handle the Blah, <br/> You Handle the Brilliance.",
-         
-          content: "We imagine a future where machines do what they’re built for—and people do what only people can do: dream, solve, create, and connect.  At Berribot, we’re all about that sweet spot where AI and humans tag-team like champions."
-        }
-      ]
-    },
-    {
-      title: "Values",
-      slides: [
-        {
-          subtitle: "We believe",
-          title: "Integrity",
-          content: "We keep it real. We do the right thing even when no one's watching (but let’s be honest, someone’s always watching)."
-        },
-        {
-          subtitle: "We believe",
-          title: "Togetherness",
-          content: "Teamwork makes the Berri work. We like working with nice people who listen, share snacks, and cheer each other on."
-        },
-        {
-          subtitle: "We believe",
-          title: "Ambition",
-          content: "We're not here to be average. We’re here to be awesome. We ask questions, break things (on purpose), and always aim higher."
-        }
-      ]
-    }
-  ], []);
-
-  // Navigation functions
-  const goToSection = (sectionIndex: number) => {
-    setSlideDirection(sectionIndex > currentSection ? 1 : -1);
-    setCurrentSection(sectionIndex);
-    setCurrentSlide(0);
-  };
-
-  const goToPrevSlide = useCallback(() => {
-    if (currentSlide > 0) {
-      setSlideDirection(-1);
-      setCurrentSlide(currentSlide - 1);
-    } else {
-      setSlideDirection(-1);
-      setCurrentSlide(sections[currentSection].slides.length - 1);
-    }
-  }, [currentSlide, currentSection, sections]);
-
-  const goToNextSlide = useCallback(() => {
-    if (currentSlide < sections[currentSection].slides.length - 1) {
-      setSlideDirection(1);
-      setCurrentSlide(currentSlide + 1);
-    } else {
-      setSlideDirection(1);
-      setCurrentSlide(0);
-    }
-  }, [currentSlide, currentSection, sections]);
-
-  const currentSlideData = sections[currentSection].slides[currentSlide];
-
-  // Slide animation variants
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0
-    }),
-    center: {
-      x: 0,
-      opacity: 1
-    },
-    exit: (direction: number) => ({
-      x: direction > 0 ? -300 : 300,
-      opacity: 0
-    })
-  };
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') {
-        goToPrevSlide();
-      } else if (event.key === 'ArrowRight') {
-        goToNextSlide();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentSection, currentSlide, goToPrevSlide, goToNextSlide]);
-
   return (
-    <section ref={ref} className="py-16 sm:py-3.5 bg-[#E0E0E0]">
-      <div className="relative">
-        {/* Horizontal lines that extend full width */}
-        <motion.div 
-          className="absolute left-0 right-0 top-0 h-[1px] bg-black origin-right"
-          style={{ scaleX: horizontalLinesProgress }}
-        />
-        <motion.div 
-          className="absolute left-0 right-0 top-[96px] h-[1px] bg-black origin-left"
-          style={{ scaleX: horizontalLinesProgress }}
-        />
-        <motion.div 
-          className="absolute left-0 right-0 bottom-[96px] h-[1px] bg-black origin-right"
-          style={{ scaleX: horizontalLinesProgress }}
-        />
-        <motion.div 
-          className="absolute left-0 right-0 bottom-0 h-[1px] bg-black origin-left"
-          style={{ scaleX: horizontalLinesProgress }}
-        />
-        
-        {/* Content container with vertical lines */}
-        <div className="px-4 sm:px-6">
-          <div className="max-w-7xl mx-auto relative">
-            {/* Vertical lines */}
-            <motion.div 
-              className="absolute inset-y-0 left-[12.42%] border-l border-black pointer-events-none hidden lg:block origin-bottom"
-              style={{ scaleY: verticalLinesProgress }}
-            />
-            <motion.div 
-              className="absolute inset-y-0 right-[12.5%] border-l border-black pointer-events-none hidden lg:block origin-top"
-              style={{ scaleY: verticalLinesProgress }}
-            />
+    <section className="py-16 sm:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Header */}
+        <motion.div
+          className="mb-8 sm:mb-12 lg:mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium text-white">
+            Driving results that truly matter
+          </h2>
+        </motion.div>
 
-            {/* Single grid controlling all three rows */}
-            <motion.div 
-              className="grid grid-cols-1 sm:[grid-template-columns:0.5fr_1fr_1fr_1fr_0.5fr]"
-              style={{ opacity: contentProgress }}
-            >
-              {/* --- Top row: 5 columns with middle 3 having text --- */}
-              {/* Column 1: Empty */}
-              <motion.div
-                className="p-8 flex items-center justify-center h-24 lg:border-r lg:border-black"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0 }}
-                viewport={{ once: true }}
-              >
-                {/* Empty */}
-              </motion.div>
-              
-              {/* Columns 2-4: Mission, Vision, Values */}
-              {sections.map((section, i) => (
-                <motion.div
-                  key={section.title}
-                  className="p-8 flex items-center justify-center h-24 lg:border-r lg:border-black cursor-pointer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: (i + 1) * 0.1 }}
-                  viewport={{ once: true }}
-                  onClick={() => goToSection(i)}
-                >
-                  <h3 className={`text-2xl font-inter font-light transition-colors ${
-                    currentSection === i ? 'text-black' : 'text-[#3D3D3D94]'
-                  }`}>
-                    {section.title}
-                  </h3>
-                </motion.div>
-              ))}
-              
-              {/* Column 5: Empty */}
-              <motion.div
-                className="p-8 flex items-center justify-center h-24"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                viewport={{ once: true }}
-              >
-                {/* Empty */}
-              </motion.div>
+        {/* Soft background wash (optional, like your screenshot) */}
+        <div className="relative rounded-3xl p-2 sm:p-3 lg:p-4 overflow-visible">
+          <div className="pointer-events-none absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50" />
 
-              {/* --- Left Navigation Arrow (Column 1) --- */}
-              {sections[currentSection].slides.length > 1 && (
-                <motion.div 
-                  className="flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                >
-                  <motion.button
-                    onClick={goToPrevSlide}
-                    disabled={currentSlide === 0}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="p-2 rounded-full transition-all duration-200"
+          {/* Grid */}
+          <div
+            className={`
+              grid gap-6
+              grid-cols-1
+              md:grid-cols-6
+              lg:[grid-template-columns:repeat(20,minmax(0,1fr))]
+            `}
+          >
+            {statsData.map((stat, idx) => (
+              <motion.div
+                key={stat.id}
+                className={`
+                  col-span-1 ${stat.layoutMd} ${stat.layoutLg}
+                  relative min-h-[16rem]
+                  rounded-3xl p-8
+                  bg-gradient-to-br ${stat.gradient}
+                  overflow-hidden flex flex-col justify-between
+                `}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.08 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.01 }}
+              >
+                {/* Top-right icon (decorative) */}
+                {stat.icon && stat.iconWidth && stat.iconHeight && (
+                  <div
+                    className="absolute right-4 top-4 rounded-2xl bg-black/10 flex items-center justify-center"
+                    style={{ width: 64, height: 64 }}
+                    aria-hidden="true"
                   >
-                    <ChevronLeft 
-                      className={`w-8 h-8 transition-colors ${
-                        currentSlide === 0
-                          ? 'text-gray-300 cursor-not-allowed' 
-                          : 'text-[#04BBA6] hover:text-[#03A094] hover:cursor-pointer'
-                      }`}
+                    <Image
+                      src={stat.icon}
+                      alt=""
+                      width={stat.iconWidth}
+                      height={stat.iconHeight}
+                      className="object-contain"
                     />
-                  </motion.button>
-                </motion.div>
-              )}
+                  </div>
+                )}
 
-              {/* Show empty div when no arrows needed to maintain grid layout */}
-              {sections[currentSection].slides.length <= 1 && (
-                <motion.div 
-                  className="flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                >
-                  {/* Empty */}
-                </motion.div>
-              )}
-
-              {/* --- Middle section with content (spans middle 3 columns) --- */}
-              <div className="col-span-1 sm:col-span-3 relative bg-black overflow-hidden">
-                <AnimatePresence mode="wait" custom={slideDirection}>
-                  <motion.div
-                    key={`${currentSection}-${currentSlide}`}
-                    custom={slideDirection}
-                    variants={slideVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    transition={{
-                      type: "tween",
-                      ease: "easeInOut",
-                      duration: 0.3
+                {/* Bottom-right image (decorative) */}
+                {stat.image && stat.imageWidth && stat.imageHeight && (
+                  <div
+                    className="absolute right-4 bottom-4 rounded-2xl overflow-hidden"
+                    style={{
+                      width: stat.imageWidth,
+                      height: stat.imageHeight,
                     }}
-                    className="py-16 px-4 text-center"
+                    aria-hidden="true"
                   >
-                    {'subtitle' in currentSlideData && currentSlideData.subtitle && (
-                      <h3 className="text-[24px] sm:text-[24px] font-extralight text-white font-inter">
-                        {currentSlideData.subtitle}
-                      </h3>
-                    )}
-                    <h2 
-                      className="text-[48px] sm:text-[48px] lg:text-[48px] font-inter font-medium text-teal-400 leading-tight mx-auto max-w-2xl mb-10"
-                      dangerouslySetInnerHTML={{ __html: currentSlideData.title }}
+                    <Image
+                      src={stat.image}
+                      alt=""
+                      width={stat.imageWidth}
+                      height={stat.imageHeight}
+                      className="object-cover w-full h-full"
+                      priority={idx < 3}
                     />
-                    <p className="text-base sm:text-xl font-inter font-thin text-white leading-relaxed mx-auto max-w-2xl">
-                      {currentSlideData.content}
-                    </p>
-                    
-                    {/* Slide indicators */}
-                    {/* <div className="flex justify-center mt-8 space-x-2">
-                      {sections[currentSection].slides.map((_, slideIndex) => (
-                        <button
-                          key={slideIndex}
-                          className={`w-2 h-2 rounded-full transition-colors ${
-                            slideIndex === currentSlide ? 'bg-teal-400' : 'bg-gray-600'
-                          }`}
-                          onClick={() => goToSlide(slideIndex)}
-                        />
-                      ))}
-                    </div> */}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+                  </div>
+                )}
 
-              {/* --- Right Navigation Arrow (Column 5) --- */}
-              {sections[currentSection].slides.length > 1 && (
-                <motion.div 
-                  className="flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                >
-                  <motion.button
-                    onClick={goToNextSlide}
-                    disabled={currentSlide === sections[currentSection].slides.length - 1}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="p-2 rounded-full transition-all duration-200"
-                  >
-                    <ChevronRight 
-                      className={`w-8 h-8 transition-colors ${
-                        currentSlide === sections[currentSection].slides.length - 1
-                          ? 'text-gray-300 cursor-not-allowed' 
-                          : 'text-[#04BBA6] hover:text-[#03A094] hover:cursor-pointer'
-                      }`}
-                    />
-                  </motion.button>
-                </motion.div>
-              )}
+                {/* Title */}
+                <div className="relative z-10">
+                  <h3 className="text-base sm:text-lg text-black/80 leading-tight">
+                    {stat.title}
+                  </h3>
+                </div>
 
-              {/* Show empty div when no arrows needed to maintain grid layout */}
-              {sections[currentSection].slides.length <= 1 && (
-                <motion.div 
-                  className="flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                >
-                  {/* Empty */}
-                </motion.div>
-              )}
-
-              {/* --- Bottom row: 5 empty sections --- */}
-              {[1, 2, 3, 4, 5].map((item, i) => (
-                <motion.div
-                  key={item}
-                  className={`p-8 flex items-center justify-center h-24 ${
-                    i < 4 ? "lg:border-r" : ""
-                  } lg:border-black`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + i * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  {/* Empty for now */}
-                </motion.div>
-              ))}
-            </motion.div>
+                {/* Value */}
+                <div className="relative z-10">
+                  <div className="text-5xl sm:text-6xl font-bold tracking-tight text-black">
+                    {stat.value}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
