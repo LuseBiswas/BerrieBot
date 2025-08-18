@@ -56,7 +56,7 @@ export default function MobileTestimonialCarousel() {
     <section className="relative bg-black py-16 px-4 overflow-hidden">
       {/* Background Images */}
       {/* Top Left - 7.png */}
-      <div className="absolute z-1 pointer-events-none" style={{ top: '-150px', left: '-150px' }}>
+      {/* <div className="absolute z-1 pointer-events-none" style={{ top: '-150px', left: '-150px' }}>
         <Image 
           src="/image/mobile/7.png"
           alt="Background Image Top Left"
@@ -64,21 +64,21 @@ export default function MobileTestimonialCarousel() {
           height={336}
           className="w-[377.31px] h-[336px] opacity-[70%]"
         />
-      </div>
+      </div> */}
       
       {/* Top Right - 8.png */}
-      <div className="absolute z-1 pointer-events-none" style={{ top: '0px', right: '-200px' }}>
+      <div className="absolute z-1 pointer-events-none" style={{ top: '150px', right: '-150px' }}>
         <Image 
           src="/image/mobile/8.png"
           alt="Background Image Top Right"
           width={544}
           height={462}
-          className="w-[543.6px] h-[462px]"
+          className="w-[543.6px] h-[462px] rotate-90 opacity-[50%]"
         />
       </div>
 
       {/* Top Left Image */}
-      <div className="absolute top-8 left-8">
+      <div className="absolute top-0 left-0">
         <Image 
           src="/image/mobile/line_1.png"
           alt="Top Left Lines"
@@ -162,7 +162,7 @@ export default function MobileTestimonialCarousel() {
       </div>
 
       {/* Bottom Right Image */}
-      <div className="absolute bottom-8 right-8">
+      <div className="absolute bottom-0 right-0">
         <Image 
           src="/image/mobile/line_2.png"
           alt="Bottom Right Lines"
