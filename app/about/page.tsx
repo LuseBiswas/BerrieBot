@@ -1,11 +1,11 @@
-import HeroSection from "@/components/about/HeroSection";
-import ValuesSection from "@/components/about/ValuesSection";
-import BottomBanner from "@/components/about/BottomBanner";
-import AboutSection from "@/components/about/AboutSection";
-import FoundersSection from "@/components/about/FoundersSection";
-import InvestorsSection from "@/components/about/Investor";
-import AccoladesCarousel from "@/components/home/AccoladesCarousel";
-import CTASection from "@/components/product/CTASection";
+import HeroSection from "@/components/desktop/about/HeroSection";
+import ValuesSection from "@/components/desktop/about/ValuesSection";
+import BottomBanner from "@/components/desktop/about/BottomBanner";
+import AboutSection from "@/components/desktop/about/AboutSection";
+import FoundersSection from "@/components/desktop/about/FoundersSection";
+import InvestorsSection from "@/components/desktop/about/Investor";
+import AccoladesCarousel from "@/components/desktop/home/AccoladesCarousel";
+import CTASection from "@/components/desktop/product/CTASection";
 
 export default function AboutPage() {
   return (

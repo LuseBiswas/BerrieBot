@@ -1,5 +1,5 @@
-import Contact from "@/components/schedule/contact";
-import HeroSection from "@/components/schedule/HeroSection";
+import Contact from "@/components/desktop/schedule/contact";
+import HeroSection from "@/components/desktop/schedule/HeroSection";
 
 
 

@@ -1,6 +1,6 @@
-import CTASection from "@/components/product/CTASection";
-import HeroSection from "@/components/solutions/HeroSection";
-import DisplaySolution from "@/components/solutions/displaySolution";
+import CTASection from "@/components/desktop/product/CTASection";
+import HeroSection from "@/components/desktop/solutions/HeroSection";
+import DisplaySolution from "@/components/desktop/solutions/displaySolution";
 
 export default function Product() {
   return (

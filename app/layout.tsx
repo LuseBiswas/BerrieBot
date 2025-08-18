@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/components/home/NavBar";
-import Footer from "@/components/Footer";
-import DynamicBackground from "@/components/DynamicBackground";
+import DeviceWrapper from "@/components/DeviceWrapper";
 import Script from "next/script";
 
 
@@ -25,16 +23,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
         <Script src="https://cdn.lordicon.com/lordicon.js" strategy="beforeInteractive" />
       </head>
-      <body className={`${inter.variable} font-sans`}>
-        <DynamicBackground>
-          <NavBar />
-          <main className="flex-1 w-full">
-            {children}
-          </main>
-          <Footer />
-        </DynamicBackground>
+      <body className={`${inter.variable} font-manrope`}>
+        <DeviceWrapper>
+          {children}
+        </DeviceWrapper>
       </body>
     </html>
   );
