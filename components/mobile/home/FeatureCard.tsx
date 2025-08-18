@@ -153,7 +153,7 @@ export default function MobileFeatureCard() {
           alt="Top Left Background"
           width={377}
           height={336}
-          className="w-[377.31px] h-[336px] opacity-60"
+          className="w-[377.31px] h-[336px] opacity-[35%]"
         />
       </div>
 

@@ -109,7 +109,7 @@ export default function MobileComparisonSection() {
           alt="Background Image"
           width={377}
           height={336}
-          className="w-[377.31px] h-[336px] opacity-60"
+          className="w-[377.31px] h-[336px] opacity-[35%]"
         />
       </div>
 

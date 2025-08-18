@@ -12,6 +12,18 @@ export default function MobileNavBar() {
   const pathname = usePathname();
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
+  // Define routes that should use white background (same as DynamicBackground)
+  const whiteBackgroundRoutes = ["/resources", "/explore/details", "/resources/faq", "/product", "/solutions"];
+  
+  // Check if current path starts with any of the white background routes
+  const shouldUseWhiteBackground = whiteBackgroundRoutes.some(route => 
+    pathname?.startsWith(route)
+  );
+  
+  const logoTextColor = shouldUseWhiteBackground ? "text-black" : "text-white";
+  const hamburgerColor = shouldUseWhiteBackground ? "text-black" : "text-white";
+  const logoSrc = shouldUseWhiteBackground ? "/image/logo_black.png" : "/image/logo.png";
+
   const navItems = [
     { name: "Home", href: "/" },
     { name: "Products", href: "/product" },
@@ -53,14 +65,14 @@ export default function MobileNavBar() {
           <Link href="/" className="flex items-center gap-2" onClick={close}>
             <div className="w-8 h-8 relative">
               <Image
-                src="/image/logo.png"
+                src={logoSrc}
                 alt="BerriBot Logo"
                 fill
                 className="object-contain"
                 priority
               />
             </div>
-            <span className="text-xl font-bold text-white">BerriBot</span>
+            <span className={`text-xl font-bold ${logoTextColor}`}>BerriBot</span>
           </Link>
 
           {/* Hamburger right */}
@@ -74,7 +86,7 @@ export default function MobileNavBar() {
             {open ? (
               <X className="w-6 h-6 text-[#00AD96]" />
             ) : (
-              <Menu className="w-6 h-6 text-white" />
+              <Menu className={`w-6 h-6 ${hamburgerColor}`} />
             )}
           </button>
         </div>
@@ -103,7 +115,7 @@ export default function MobileNavBar() {
                animate={{ x: 0 }}
                exit={{ x: "100%" }}
                transition={{ type: "spring", stiffness: 280, damping: 30, mass: 0.8 }}
-               className="absolute top-0 right-0 left-20 bottom-44 overflow-hidden"
+               className="absolute top-0 right-0 bottom-44 overflow-hidden"
                style={{
                  backgroundImage: 'url(/image/mobile/Menu.png)',
                  backgroundSize: '359px 632px',
@@ -123,7 +135,10 @@ export default function MobileNavBar() {
                </button>
 
                {/* Links block */}
-               <div className="pt-15 px-8 ml-10" style={{ fontFamily: 'Manrope, sans-serif' }}>
+               <div className="absolute top-16" style={{ 
+                 fontFamily: 'Manrope, sans-serif', 
+                 right: 'clamp(1rem, calc(100vw - 340px), 3rem)' 
+               }}>
                 <ul className="space-y-2">
                   {navItems.map((item) => (
                     <li key={item.href}>
@@ -154,9 +169,13 @@ export default function MobileNavBar() {
               </div>
             </motion.aside>
 
-                         {/* Two white circles with animation coming from behind the menu */}
+                         {/* Two white circles positioned at rounded corner for "eye" effect */}
              <motion.div 
-               className="pointer-events-none absolute bottom-70 left-18 w-19 h-19 bg-white rounded-full"
+               className="pointer-events-none absolute w-19 h-19 bg-white rounded-full hidden min-[380px]:block"
+               style={{ 
+                 bottom: '332px', // Position relative to menu bottom-left curve (632px - 200px)
+                 left: '60px'     // Position at the curve center from left edge
+               }}
                initial={{ scale: 0, x: 50, y: -50 }}
                animate={{ scale: 1, x: 0, y: 0 }}
                exit={{ scale: 0, x: 50, y: -50 }}
@@ -169,7 +188,11 @@ export default function MobileNavBar() {
                }}
              />
              <motion.div 
-               className="pointer-events-none absolute bottom-50 left-46 w-19 h-19 bg-white rounded-full"
+               className="pointer-events-none absolute w-19 h-19 bg-white rounded-full hidden min-[380px]:block"
+               style={{ 
+                 bottom: '252px', // Slightly offset from first circle (632px - 240px)
+                 left: '140px'     // Positioned to create eye effect
+               }}
                initial={{ scale: 0, x: 30, y: -30 }}
                animate={{ scale: 1, x: 0, y: 0 }}
                exit={{ scale: 0, x: 30, y: -30 }}

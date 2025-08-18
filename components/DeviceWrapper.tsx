@@ -19,6 +19,15 @@ import MobileProductFeature from "./mobile/home/ProductFeature";
 import MobileStatsSection from "./mobile/home/StatsSection";
 import MobileTestimonialCarousel from "./mobile/home/TestimonialCarousel";
 import MobileCTASection from "./mobile/home/CTASection";
+import MobileResourcesHeroSection from "./mobile/resources/HeroSection";
+import MobileFAQComponent from "./mobile/resources/faq/faqComponent";
+import MobileBlogResource from "./mobile/resources/blogResource";
+import MobileSolutionsHeroSection from "./mobile/solutions/HeroSection";
+import MobileSolutionsCarousel from "./mobile/solutions/SolutionsCarousel";
+import MobileSolutionsCarousel_2 from "./mobile/solutions/SolutionsCarousel_2";
+import MobileSolutionsCarousel_3 from "./mobile/solutions/SolutionsCarousel_3";
+import MobileDemoHeroSection from "./mobile/demo/HeroSection";
+import MobileContactForm from "./mobile/demo/ContactForm";
 
 interface DeviceWrapperProps {
   children: React.ReactNode;
@@ -40,7 +49,7 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
   // Mobile experience - with mobile navbar
   if (isMobile) {
     // Check if we have mobile components for this page
-    const hasMobileVersion = pathname === "/";
+    const hasMobileVersion = pathname === "/" || pathname === "/resources" || pathname === "/solutions" || pathname === "/schedule";
     
     return (
       <MobileDynamicBackground>
@@ -61,6 +70,27 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
                 <MobileStatsSection/>
                 <MobileTestimonialCarousel/>
                 <MobileCTASection/>
+              </>
+            ) : pathname === "/resources" ? (
+              <>
+                <MobileResourcesHeroSection />
+                <MobileFAQComponent/>
+                <MobileBlogResource/>
+                <MobileCTASection/>
+              </>
+            ) : pathname === "/solutions" ? (
+              <>
+                <MobileSolutionsHeroSection />
+                <MobileSolutionsCarousel />
+                <MobileSolutionsCarousel_2/>
+                <MobileSolutionsCarousel_3/>
+                <MobileCTASection/>
+              </>
+            ) : pathname === "/schedule" ? (
+              <>
+                
+                <MobileDemoHeroSection/>
+                <MobileContactForm/>
               </>
             ) : children
           ) : (
