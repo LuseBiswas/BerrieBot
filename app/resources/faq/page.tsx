@@ -1,6 +1,6 @@
-import CTASection from "@/components/resources/CTASection";
-import FAQComponent from "@/components/resources/faq/faqComponent";
-import HeroSection from "@/components/resources/faq/HeroSection";
+import CTASection from "@/components/desktop/resources/CTASection";
+import FAQComponent from "@/components/desktop/resources/faq/faqComponent";
+import HeroSection from "@/components/desktop/resources/faq/HeroSection";
 
 
 

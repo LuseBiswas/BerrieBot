@@ -1,0 +1,285 @@
+'use client';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+export interface StackCard {
+  id: string;
+  top?: React.ReactNode; // Made optional
+  ribbon?: React.ReactNode; // Made optional
+  bottom?: React.ReactNode; // Made optional
+  topImage?: string; // Optional image for top section
+  bottomImage?: string; // Optional image for bottom section
+  ribbonImage?: string; // Optional image for ribbon section
+}
+
+interface StackByStackProps {
+  cards: StackCard[];
+  visibleCount?: number;
+  width?: string;
+  height?: string;
+}
+
+export default function MobileStackByStack({
+  cards,
+  visibleCount = 3,
+  width = 'w-[259.79px]',
+  height = 'h-[259.79px]',
+}: StackByStackProps) {
+  // NEW: maintain an internal card order so we can rotate the deck endlessly
+  const [order, setOrder] = useState<string[]>(() => cards.map(c => c.id));
+  const [isDismissing, setIsDismissing] = useState(false);
+
+  // Keep order in sync if parent changes the cards prop
+  useEffect(() => {
+    const nextIds = cards.map(c => c.id);
+    setOrder(prev => {
+      const prevSet = new Set(prev);
+      // keep existing order where possible; append new ids; drop removed ids
+      const merged = [
+        ...prev.filter(id => nextIds.includes(id)),
+        ...nextIds.filter(id => !prevSet.has(id)),
+      ];
+      return merged;
+    });
+  }, [cards]);
+
+  // Fast lookup
+  const idToCard = useMemo(() => {
+    const map: Record<string, StackCard> = {};
+    for (const c of cards) map[c.id] = c;
+    return map;
+  }, [cards]);
+
+  const orderedCards: StackCard[] = useMemo(
+    () => order.map(id => idToCard[id]).filter(Boolean),
+    [order, idToCard]
+  );
+
+  // Render first N in the current order; depth = array index
+  const visible = orderedCards.slice(0, Math.min(visibleCount, orderedCards.length));
+
+  const onFrontClick = useCallback(() => {
+    if (!isDismissing) setIsDismissing(true);
+  }, [isDismissing]);
+
+  return (
+    <div className={`relative mx-auto ${width} ${height} select-none`}>
+      <AnimatePresence mode="popLayout">
+        {visible.map((card, depth) => {
+          const isFront = depth === 0;
+
+          // --- MOBILE OPTIMIZED VISUALS ---
+          const yMove = -40 * depth;             // reduced vertical gap for mobile
+          const scale = 1 - depth * 0.08;        // same scaling
+          const z = 100 - depth;                 // same z-index idea
+          const opacity = 1 - depth * 0.15;      // same opacity falloff
+          const blur = depth > 0 ? Math.min(depth * 2, 4) : 0; // same blur
+
+          const baseTransform = {
+            y: yMove,
+            scale,
+            opacity,
+            x: 0,
+            rotate: 0,
+            filter: blur > 0 ? `blur(${blur}px)` : 'none',
+          };
+
+          const dismissTransform =
+            isFront && isDismissing
+              ? {
+                  x: -200, // reduced for mobile
+                  opacity: 0,
+                  rotate: -15,
+                  scale: scale * 0.8,
+                  y: yMove + 20,
+                  filter: 'none',
+                }
+              : baseTransform;
+
+          return (
+            <motion.div
+              key={card.id}
+              layout
+              initial={{
+                opacity: 0,
+                y: yMove + 50, // reduced for mobile
+                scale: scale * 0.85,
+                x: 40, // reduced for mobile
+                rotate: 5,
+              }}
+              animate={dismissTransform}
+              exit={{
+                opacity: 0,
+                y: yMove + 50, // reduced for mobile
+                scale: scale * 0.85,
+                x: 40, // reduced for mobile
+                rotate: 5,
+              }}
+              transition={
+                isFront && isDismissing
+                  ? { 
+                      duration: 0.6, 
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                      x: { duration: 0.6, ease: [0.34, 1.56, 0.64, 1] },
+                      rotate: { duration: 0.6, ease: [0.34, 1.56, 0.64, 1] },
+                      scale: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
+                    }
+                  : { 
+                      type: 'spring', 
+                      stiffness: 260, 
+                      damping: 20, 
+                      mass: 0.8,
+                      opacity: { duration: 0.3 },
+                      layout: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }
+                    }
+              }
+              style={{
+                zIndex: z,
+                willChange: 'transform, opacity, filter',
+              }}
+              className={`absolute inset-0 ${isFront ? 'cursor-pointer' : 'pointer-events-none'}`}
+              onClick={isFront ? onFrontClick : undefined}
+              onAnimationComplete={() => {
+                // NEW: after front card finishes dismissing, move it to the back and reset
+                if (isFront && isDismissing) {
+                  setOrder(prev => {
+                    if (prev.length <= 1) return prev;
+                    const [first, ...rest] = prev;
+                    return [...rest, first];
+                  });
+                  setIsDismissing(false);
+                }
+              }}
+              whileHover={
+                isFront && !isDismissing
+                  ? {
+                      scale: scale * 1.03,
+                      y: yMove - 3, // reduced for mobile
+                      transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+                    }
+                  : {}
+              }
+              whileTap={
+                isFront && !isDismissing
+                  ? {
+                      scale: scale * 0.97,
+                      y: yMove + 2,
+                      transition: { duration: 0.15 },
+                    }
+                  : {}
+              }
+            >
+              {/* Main card container - mobile optimized */}
+              <div
+                className={`
+                  relative flex flex-col justify-between h-full rounded-4xl 
+                  bg-[#1E1E1E] text-white overflow-hidden 
+                  ${isFront ? 'shadow-2xl shadow-black/40' : depth === 1 ? 'shadow-xl shadow-black/30' : 'shadow-lg shadow-black/20'}
+                `}
+                style={{
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden',
+                }}
+              >
+                {/* Top section - mobile optimized */}
+                <div className="flex-1 flex items-center justify-center px-3 py-4">
+                  <div className="text-center space-y-2">
+                    {card.topImage && (
+                      <div>
+                        <img 
+                          src={card.topImage} 
+                          alt="Top section" 
+                          className="mx-auto max-w-full h-auto max-h-16 object-contain"
+                        />
+                      </div>
+                    )}
+                    {card.top && (
+                      <div className="text-lg font-light leading-tight text-white">
+                        {card.top}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Ribbon section - mobile optimized */}
+                {(card.ribbon || card.ribbonImage) && (
+                  <div className={`relative w-full overflow-hidden flex items-center ${
+                    card.ribbonImage ? 'py-3' : 'py-2 bg-gradient-to-r from-teal-600 to-teal-500'
+                  }`}>
+                    <div className="relative w-full flex items-center">
+                      {card.ribbonImage ? (
+                        // Static image in ribbon without background
+                        <div className="w-full flex justify-center">
+                          <img 
+                            src={card.ribbonImage} 
+                            alt="Ribbon" 
+                            className="h-8 object-contain"
+                          />
+                        </div>
+                      ) : (
+                        // Scrolling text marquee - mobile optimized
+                        <div className="flex animate-marquee whitespace-nowrap items-center">
+                          <span className="text-white font-semibold text-xs uppercase tracking-wide mx-4">
+                            {card.ribbon}
+                          </span>
+                          <span className="text-white font-semibold text-xs uppercase tracking-wide mx-4">
+                            {card.ribbon}
+                          </span>
+                          <span className="text-white font-semibold text-xs uppercase tracking-wide mx-4">
+                            {card.ribbon}
+                          </span>
+                          <span className="text-white font-semibold text-xs uppercase tracking-wide mx-4">
+                            {card.ribbon}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Bottom section - mobile optimized */}
+                <div className="flex-1 flex items-center justify-center px-3 py-4">
+                  <div className="text-center space-y-2">
+                    {card.bottomImage && (
+                      <div>
+                        <img 
+                          src={card.bottomImage} 
+                          alt="Bottom section" 
+                          className="mx-auto max-w-full h-auto max-h-16 object-contain"
+                        />
+                      </div>
+                    )}
+                    {card.bottom && (
+                      <div className="text-lg font-light leading-tight text-white">
+                        {card.bottom}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Subtle glow effect for front card */}
+              {/* {isFront && !isDismissing && (
+                <div className="absolute inset-0 rounded-2xl ring-1 ring-teal-500/20 pointer-events-none" />
+              )} */}
+            </motion.div>
+          );
+        })}
+      </AnimatePresence>
+
+      {/* Click blocker during dismiss animation */}
+      {isDismissing && <div className="absolute inset-0 z-50 pointer-events-auto" />}
+
+      {/* Marquee CSS */}
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 15s linear infinite;
+        }
+      `}</style>
+    </div>
+  );
+} 

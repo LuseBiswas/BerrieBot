@@ -1,5 +1,5 @@
-import CTASection from "@/components/resources/CTASection";
-import BlogDetail from "@/components/resources/explore/details/blogDetail";
+import CTASection from "@/components/desktop/resources/CTASection";
+import BlogDetail from "@/components/desktop/resources/explore/details/blogDetail";
 
 
 

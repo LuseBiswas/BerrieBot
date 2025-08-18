@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 
-import HeroSection from "@/components/cookies/HeroSection";
-import CookiesComponent from "@/components/cookies/cookies";
+import HeroSection from "@/components/desktop/cookies/HeroSection";
+import CookiesComponent from "@/components/desktop/cookies/cookies";
 
 export default function PolicyPage() {
   const [privacyState, setPrivacyState] = useState<'initial' | 'expanded' | 'confirmation'>('initial');

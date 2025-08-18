@@ -1,4 +1,4 @@
-import NavBar from "@/components/home/NavBar";
+import NavBar from "@/components/desktop/home/NavBar";
 
 export default function AdminDashboard() {
   return (
