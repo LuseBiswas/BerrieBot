@@ -8,8 +8,9 @@ export const useDeviceType = () => {
 
   useEffect(() => {
     const checkDevice = () => {
-      // Consider mobile if screen width is less than 768px (md breakpoint)
-      const mobile = window.innerWidth < 768;
+      // Consider mobile/tablet if screen width is less than 1024px (lg breakpoint)
+      // This includes phones (< 768px) and tablets (768px - 1023px)
+      const mobile = window.innerWidth < 1024;
       setIsMobile(mobile);
       setIsLoading(false);
     };
