@@ -36,6 +36,11 @@ import MobileAboutSubHeroSection from "./mobile/about/SubHeroSection";
 import MobileAboutProductDisplay from "./mobile/about/AboutProductDisplay";
 import MobileAboutStatsSection from "./mobile/about/AboutStatsSection";
 import MobileAboutFounderCarousel from "./mobile/about/FounderCarousel";
+import MobileResourceCTASection from "./mobile/resources/CTASection";
+import MobileProductHeroSection from "./mobile/product/HeroSection";
+import MobileProductCarousel from "./mobile/product/ProductCarousel";
+import MobileProductXFeature from "./mobile/product/Product2Feature";
+import MobileComparisonXSection from "./mobile/product/ComparisonXSection";
 
 interface DeviceWrapperProps {
   children: React.ReactNode;
@@ -153,7 +158,7 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
   // Mobile experience - with mobile navbar
   if (isMobile) {
     // Check if we have mobile components for this page
-    const hasMobileVersion = pathname === "/" || pathname === "/resources" || pathname === "/solutions" || pathname === "/schedule" || pathname === "/about";
+    const hasMobileVersion = pathname === "/" || pathname === "/resources" || pathname === "/solutions" || pathname === "/schedule" || pathname === "/about" || pathname === "/product";
     
     return (
       <MobileDynamicBackground>
@@ -180,7 +185,7 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
                 <MobileResourcesHeroSection />
                 <MobileFAQComponent/>
                 <MobileBlogResource/>
-                <MobileCTASection/>
+                <MobileResourceCTASection/>
               </>
             ) : pathname === "/solutions" ? (
               <>
@@ -204,6 +209,14 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
                 <MobileAboutProductDisplay/>
                 <MobileAboutStatsSection/>
                 <MobileAboutFounderCarousel/>
+                <MobileCTASection/>
+              </>
+            ) : pathname === "/product" ? (
+              <>
+                <MobileProductHeroSection/>
+                <MobileProductCarousel/>
+                <MobileProductXFeature/>
+                <MobileComparisonXSection/>
                 <MobileCTASection/>
               </>
             ) : children

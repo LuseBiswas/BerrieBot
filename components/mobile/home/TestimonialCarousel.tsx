@@ -8,21 +8,21 @@ import Image from 'next/image';
 const TESTIMONIALS = [
   {
     id: 1,
-    quote: "Berribot<br/>changed L1<br/>interviews<br/>forever.",
-    name: "Anisha",
-    company: "Global Head - Talent, Wipro"
+    quote: "AI is the future <br/> of Interviewing. GenZ's will look forward to <br/> using Berribot",
+    name: "CXO",
+    company: "CXO of a Fortune 500 IT Services firm"
   },
   {
     id: 2,
-    quote: "Our hiring<br/>process is now<br/>10x faster<br/>with Berribot.",
-    name: "Rajesh Kumar",
-    company: "VP - Recruitment, TCS"
+    quote: "Berribot <br/> changed the <br/> way L1 interviews <br/> are <br/> conducted for us",
+    name: "Director",
+    company: "Director of a Fortune 500 IT Services firm"
   },
   {
     id: 3,
-    quote: "Quality candidates<br/>are automatically<br/>filtered and<br/>ranked perfectly.",
-    name: "Sarah Chen",
-    company: "Chief People Officer, Microsoft"
+    quote: "Berribot delivers the exact need <br/> of the hour with their <br/> exceptional products",
+    name: "CXO",
+    company: "CXO of a billion dollar US based Mortgage Refinancing business"
   },
   {
     id: 4,

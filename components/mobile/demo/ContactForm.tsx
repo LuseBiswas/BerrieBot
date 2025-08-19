@@ -212,7 +212,15 @@ Best,"
           >
             Head over to our resources to find
             <br />
-            <span className="font-medium">FAQs</span> or write to our support team here.
+            <a 
+              href="/resources" 
+              className="font-bold underline text-black hover:text-[#00C7BEB2] transition-colors"
+            >
+              FAQs
+            </a> or write to our support team <a 
+              href="/resources" 
+              className="font-bold underline text-black hover:text-[#00C7BEB2] transition-colors"
+            >here</a>.
           </p>
         </div>
       </div>
