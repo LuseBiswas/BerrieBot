@@ -9,8 +9,6 @@ const nextConfig: NextConfig = {
     // Increase the limit for image optimization
     minimumCacheTTL: 60,
   },
-  // Enable static exports to ensure images are properly included
-  output: 'standalone',
 };
 
 export default nextConfig;

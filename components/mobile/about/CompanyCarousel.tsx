@@ -4,10 +4,10 @@ import Image from 'next/image';
 
 // Company logos data - can be extended with more logos
 const COMPANY_LOGOS = [
-  { id: 1, src: '/image/mobile/about/1.png', alt: 'Company 1' },
-  { id: 2, src: '/image/mobile/about/2.png', alt: 'Company 2' },
-  { id: 3, src: '/image/mobile/about/3.png', alt: 'Company 3' },
-  { id: 4, src: '/image/mobile/about/4.png', alt: 'Company 4' },
+  { id: 1, src: '/image/mobile/About/1.png', alt: 'Company 1' },
+  { id: 2, src: '/image/mobile/About/2.png', alt: 'Company 2' },
+  { id: 3, src: '/image/mobile/About/3.png', alt: 'Company 3' },
+  { id: 4, src: '/image/mobile/About/4.png', alt: 'Company 4' },
 ];
 
 export default function MobileCompanyCarousel() {
