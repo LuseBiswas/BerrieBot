@@ -1,6 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 export interface StackCard {
   id: string;
@@ -261,9 +262,11 @@ export default function MobileStackByStack({
                   <div className="text-center space-y-2">
                     {card.topImage && (
                       <div>
-                        <img 
+                        <Image 
                           src={card.topImage} 
                           alt="Top section" 
+                          width={96}
+                          height={96}
                           className={`mx-auto max-w-full h-auto ${textSizes.imageSize} object-contain`}
                         />
                       </div>
@@ -285,9 +288,11 @@ export default function MobileStackByStack({
                       {card.ribbonImage ? (
                         // Static image in ribbon without background
                         <div className="w-full flex justify-center">
-                          <img 
+                          <Image 
                             src={card.ribbonImage} 
                             alt="Ribbon" 
+                            width={48}
+                            height={48}
                             className={`${textSizes.ribbonImageSize} object-contain`}
                           />
                         </div>
@@ -317,9 +322,11 @@ export default function MobileStackByStack({
                   <div className="text-center space-y-2">
                     {card.bottomImage && (
                       <div>
-                        <img 
+                        <Image 
                           src={card.bottomImage} 
                           alt="Bottom section" 
+                          width={96}
+                          height={96}
                           className={`mx-auto max-w-full h-auto ${textSizes.imageSize} object-contain`}
                         />
                       </div>

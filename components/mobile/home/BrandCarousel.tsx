@@ -43,6 +43,7 @@ export default function MobileBrandCarousel() {
                     alt={brand.name}
                     width={80}
                     height={40}
+                    unoptimized
                     className="object-contain max-w-full max-h-full transition-all duration-300"
                   />
                 </div>
@@ -87,6 +88,7 @@ export default function MobileBrandCarousel() {
                     alt={brand.name}
                     width={80}
                     height={40}
+                    unoptimized
                     className="object-contain max-w-full max-h-full transition-all duration-300"
                   />
                 </div>
