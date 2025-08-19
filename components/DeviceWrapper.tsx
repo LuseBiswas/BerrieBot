@@ -2,6 +2,8 @@
 
 import { useDeviceType } from "@/hooks/useDeviceType";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
+import Image from "next/image";
 import NavBar from "@/components/desktop/home/NavBar";
 import Footer from "@/components/desktop/Footer";
 import DynamicBackground from "@/components/desktop/DynamicBackground";
@@ -28,6 +30,12 @@ import MobileSolutionsCarousel_2 from "./mobile/solutions/SolutionsCarousel_2";
 import MobileSolutionsCarousel_3 from "./mobile/solutions/SolutionsCarousel_3";
 import MobileDemoHeroSection from "./mobile/demo/HeroSection";
 import MobileContactForm from "./mobile/demo/ContactForm";
+import MobileAboutHeroSection from "./mobile/about/HeroSection";
+import MobileCompanyCarousel from "./mobile/about/CompanyCarousel";
+import MobileAboutSubHeroSection from "./mobile/about/SubHeroSection";
+import MobileAboutProductDisplay from "./mobile/about/AboutProductDisplay";
+import MobileAboutStatsSection from "./mobile/about/AboutStatsSection";
+import MobileAboutFounderCarousel from "./mobile/about/FounderCarousel";
 
 interface DeviceWrapperProps {
   children: React.ReactNode;
@@ -40,8 +48,104 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
   // Show loading state during device detection
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden">
+        {/* Background grid pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="grid grid-cols-8 grid-rows-12 h-full">
+            {Array.from({ length: 96 }).map((_, i) => (
+              <div key={i} className="border border-white/20" />
+            ))}
+          </div>
+        </div>
+
+        {/* Large Logo with Expansive Radial Animation */}
+        <div className="relative w-32 h-32 flex items-center justify-center z-10">
+          {/* Large Ripple circles - filling screen */}
+          <motion.div
+            className="absolute w-32 h-32 border-2 border-[#00AD96]/60 rounded-full pointer-events-none"
+            animate={{ 
+              scale: [1, 4, 8], 
+              opacity: [0.8, 0.4, 0] 
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity, 
+              ease: "easeOut",
+              repeatDelay: 0.5
+            }}
+          />
+          <motion.div
+            className="absolute w-32 h-32 border-2 border-[#00AD96]/50 rounded-full pointer-events-none"
+            animate={{ 
+              scale: [1, 4, 8], 
+              opacity: [0.7, 0.3, 0] 
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity, 
+              ease: "easeOut", 
+              delay: 1.2,
+              repeatDelay: 0.5
+            }}
+          />
+          <motion.div
+            className="absolute w-32 h-32 border-2 border-[#00AD96]/40 rounded-full pointer-events-none"
+            animate={{ 
+              scale: [1, 4, 8], 
+              opacity: [0.6, 0.2, 0] 
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity, 
+              ease: "easeOut", 
+              delay: 2.4,
+              repeatDelay: 0.5
+            }}
+          />
+
+          {/* Logo with pulse animation */}
+          <motion.div
+            className="relative w-24 h-24 rounded-full overflow-hidden z-20 bg-black/20 backdrop-blur-sm flex items-center justify-center"
+            animate={{ 
+              scale: [1, 1.1, 1],
+              boxShadow: [
+                "0 0 20px rgba(0, 173, 150, 0.3)",
+                "0 0 40px rgba(0, 173, 150, 0.6)", 
+                "0 0 20px rgba(0, 173, 150, 0.3)"
+              ]
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+          >
+            <Image 
+              src="/image/logo.png" 
+              alt="BerriBot Logo" 
+              width={80} 
+              height={80} 
+              className="object-contain" 
+            />
+          </motion.div>
+        </div>
+
+        {/* Loading text */}
+        <motion.div 
+          className="absolute bottom-20 left-1/2 transform -translate-x-1/2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <motion.p 
+            className="text-white text-lg font-light tracking-wide"
+            style={{ fontFamily: 'Manrope, sans-serif' }}
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            Loading BerriBot...
+          </motion.p>
+        </motion.div>
       </div>
     );
   }
@@ -49,7 +153,7 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
   // Mobile experience - with mobile navbar
   if (isMobile) {
     // Check if we have mobile components for this page
-    const hasMobileVersion = pathname === "/" || pathname === "/resources" || pathname === "/solutions" || pathname === "/schedule";
+    const hasMobileVersion = pathname === "/" || pathname === "/resources" || pathname === "/solutions" || pathname === "/schedule" || pathname === "/about";
     
     return (
       <MobileDynamicBackground>
@@ -91,6 +195,16 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
                 
                 <MobileDemoHeroSection/>
                 <MobileContactForm/>
+              </>
+            ) : pathname === "/about" ? (
+              <>
+                <MobileAboutHeroSection/>
+                <MobileCompanyCarousel/>
+                <MobileAboutSubHeroSection/>
+                <MobileAboutProductDisplay/>
+                <MobileAboutStatsSection/>
+                <MobileAboutFounderCarousel/>
+                <MobileCTASection/>
               </>
             ) : children
           ) : (

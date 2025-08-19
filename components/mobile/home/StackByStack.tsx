@@ -17,6 +17,7 @@ interface StackByStackProps {
   visibleCount?: number;
   width?: string;
   height?: string;
+  screenSize?: 'mobile' | 'tablet' | 'large';
 }
 
 export default function MobileStackByStack({
@@ -24,6 +25,7 @@ export default function MobileStackByStack({
   visibleCount = 3,
   width = 'w-[259.79px]',
   height = 'h-[259.79px]',
+  screenSize = 'mobile',
 }: StackByStackProps) {
   // NEW: maintain an internal card order so we can rotate the deck endlessly
   const [order, setOrder] = useState<string[]>(() => cards.map(c => c.id));
@@ -62,17 +64,90 @@ export default function MobileStackByStack({
     if (!isDismissing) setIsDismissing(true);
   }, [isDismissing]);
 
+  // Responsive animation values based on screen size
+  const getAnimationValues = () => {
+    switch (screenSize) {
+      case 'large':
+        return {
+          yMove: -53, // -40 * 1.33 ≈ -53
+          dismissX: -266, // -200 * 1.33 ≈ -266
+          initialY: 67, // 50 * 1.33 ≈ 67
+          initialX: 53, // 40 * 1.33 ≈ 53
+          exitY: 67, // 50 * 1.33 ≈ 67
+          exitX: 53, // 40 * 1.33 ≈ 53
+          hoverY: -4, // -3 * 1.33 ≈ -4
+          tapY: 3, // 2 * 1.33 ≈ 3
+        };
+      case 'tablet':
+        return {
+          yMove: -47, // -40 * 1.17 ≈ -47
+          dismissX: -234, // -200 * 1.17 ≈ -234
+          initialY: 58, // 50 * 1.17 ≈ 58
+          initialX: 47, // 40 * 1.17 ≈ 47
+          exitY: 58, // 50 * 1.17 ≈ 58
+          exitX: 47, // 40 * 1.17 ≈ 47
+          hoverY: -4, // -3 * 1.17 ≈ -4
+          tapY: 2, // 2 * 1.17 ≈ 2
+        };
+      default: // mobile
+        return {
+          yMove: -40,
+          dismissX: -200,
+          initialY: 50,
+          initialX: 40,
+          exitY: 50,
+          exitX: 40,
+          hoverY: -3,
+          tapY: 2,
+        };
+    }
+  };
+
+  const animValues = getAnimationValues();
+
+  // Responsive text and spacing values
+  const getTextSizes = () => {
+    switch (screenSize) {
+      case 'large':
+        return {
+          cardText: 'text-xl', // larger than mobile text-lg
+          ribbonText: 'text-sm', // larger than mobile text-xs
+          imageSize: 'max-h-20', // larger than mobile max-h-16
+          ribbonImageSize: 'h-10', // larger than mobile h-8
+          cardPadding: 'px-4 py-5', // larger than mobile px-3 py-4
+        };
+      case 'tablet':
+        return {
+          cardText: 'text-[34px]', // slightly larger than mobile
+          ribbonText: 'text-xs', // same as mobile but will look better with larger container
+          imageSize: 'max-h-18', // slightly larger than mobile max-h-16
+          ribbonImageSize: 'h-9', // slightly larger than mobile h-8
+          cardPadding: 'px-3 py-4', // same as mobile
+        };
+      default: // mobile
+        return {
+          cardText: 'text-[24px]',
+          ribbonText: 'text-xs',
+          imageSize: 'max-h-16',
+          ribbonImageSize: 'h-8',
+          cardPadding: 'px-3 py-4',
+        };
+    }
+  };
+
+  const textSizes = getTextSizes();
+
   return (
     <div className={`relative mx-auto ${width} ${height} select-none`}>
       <AnimatePresence mode="popLayout">
         {visible.map((card, depth) => {
           const isFront = depth === 0;
 
-          // --- MOBILE OPTIMIZED VISUALS ---
-          const yMove = -40 * depth;             // reduced vertical gap for mobile
-          const scale = 1 - depth * 0.08;        // same scaling
-          const z = 100 - depth;                 // same z-index idea
-          const opacity = 1 - depth * 0.15;      // same opacity falloff
+          // --- RESPONSIVE VISUALS ---
+          const yMove = animValues.yMove * depth;    // responsive vertical gap
+          const scale = 1 - depth * 0.08;            // same scaling ratio
+          const z = 100 - depth;                     // same z-index idea
+          const opacity = 1 - depth * 0.15;          // same opacity falloff
           const blur = depth > 0 ? Math.min(depth * 2, 4) : 0; // same blur
 
           const baseTransform = {
@@ -87,7 +162,7 @@ export default function MobileStackByStack({
           const dismissTransform =
             isFront && isDismissing
               ? {
-                  x: -200, // reduced for mobile
+                  x: animValues.dismissX, // responsive dismiss distance
                   opacity: 0,
                   rotate: -15,
                   scale: scale * 0.8,
@@ -102,17 +177,17 @@ export default function MobileStackByStack({
               layout
               initial={{
                 opacity: 0,
-                y: yMove + 50, // reduced for mobile
+                y: yMove + animValues.initialY, // responsive initial position
                 scale: scale * 0.85,
-                x: 40, // reduced for mobile
+                x: animValues.initialX, // responsive initial x
                 rotate: 5,
               }}
               animate={dismissTransform}
               exit={{
                 opacity: 0,
-                y: yMove + 50, // reduced for mobile
+                y: yMove + animValues.exitY, // responsive exit position
                 scale: scale * 0.85,
-                x: 40, // reduced for mobile
+                x: animValues.exitX, // responsive exit x
                 rotate: 5,
               }}
               transition={
@@ -154,7 +229,7 @@ export default function MobileStackByStack({
                 isFront && !isDismissing
                   ? {
                       scale: scale * 1.03,
-                      y: yMove - 3, // reduced for mobile
+                      y: yMove + animValues.hoverY, // responsive hover lift
                       transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
                     }
                   : {}
@@ -163,7 +238,7 @@ export default function MobileStackByStack({
                 isFront && !isDismissing
                   ? {
                       scale: scale * 0.97,
-                      y: yMove + 2,
+                      y: yMove + animValues.tapY, // responsive tap press
                       transition: { duration: 0.15 },
                     }
                   : {}
@@ -181,20 +256,20 @@ export default function MobileStackByStack({
                   backfaceVisibility: 'hidden',
                 }}
               >
-                {/* Top section - mobile optimized */}
-                <div className="flex-1 flex items-center justify-center px-3 py-4">
+                {/* Top section - responsive */}
+                <div className={`flex-1 flex items-center justify-center ${textSizes.cardPadding}`}>
                   <div className="text-center space-y-2">
                     {card.topImage && (
                       <div>
                         <img 
                           src={card.topImage} 
                           alt="Top section" 
-                          className="mx-auto max-w-full h-auto max-h-16 object-contain"
+                          className={`mx-auto max-w-full h-auto ${textSizes.imageSize} object-contain`}
                         />
                       </div>
                     )}
                     {card.top && (
-                      <div className="text-lg font-light leading-tight text-white">
+                      <div className={`${textSizes.cardText} font-light leading-tight text-white`}>
                         {card.top}
                       </div>
                     )}
@@ -213,22 +288,22 @@ export default function MobileStackByStack({
                           <img 
                             src={card.ribbonImage} 
                             alt="Ribbon" 
-                            className="h-8 object-contain"
+                            className={`${textSizes.ribbonImageSize} object-contain`}
                           />
                         </div>
                       ) : (
-                        // Scrolling text marquee - mobile optimized
+                        // Scrolling text marquee - responsive
                         <div className="flex animate-marquee whitespace-nowrap items-center">
-                          <span className="text-white font-semibold text-xs uppercase tracking-wide mx-4">
+                          <span className={`text-white font-semibold ${textSizes.ribbonText} uppercase tracking-wide mx-4`}>
                             {card.ribbon}
                           </span>
-                          <span className="text-white font-semibold text-xs uppercase tracking-wide mx-4">
+                          <span className={`text-white font-semibold ${textSizes.ribbonText} uppercase tracking-wide mx-4`}>
                             {card.ribbon}
                           </span>
-                          <span className="text-white font-semibold text-xs uppercase tracking-wide mx-4">
+                          <span className={`text-white font-semibold ${textSizes.ribbonText} uppercase tracking-wide mx-4`}>
                             {card.ribbon}
                           </span>
-                          <span className="text-white font-semibold text-xs uppercase tracking-wide mx-4">
+                          <span className={`text-white font-semibold ${textSizes.ribbonText} uppercase tracking-wide mx-4`}>
                             {card.ribbon}
                           </span>
                         </div>
@@ -237,20 +312,20 @@ export default function MobileStackByStack({
                   </div>
                 )}
 
-                {/* Bottom section - mobile optimized */}
-                <div className="flex-1 flex items-center justify-center px-3 py-4">
+                {/* Bottom section - responsive */}
+                <div className={`flex-1 flex items-center justify-center ${textSizes.cardPadding}`}>
                   <div className="text-center space-y-2">
                     {card.bottomImage && (
                       <div>
                         <img 
                           src={card.bottomImage} 
                           alt="Bottom section" 
-                          className="mx-auto max-w-full h-auto max-h-16 object-contain"
+                          className={`mx-auto max-w-full h-auto ${textSizes.imageSize} object-contain`}
                         />
                       </div>
                     )}
                     {card.bottom && (
-                      <div className="text-lg font-light leading-tight text-white">
+                      <div className={`${textSizes.cardText} font-light leading-tight text-white`}>
                         {card.bottom}
                       </div>
                     )}

@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function MobileNavBar() {
   const [open, setOpen] = useState(false);
+  const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'large'>('mobile');
   const pathname = usePathname();
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
@@ -23,6 +24,43 @@ export default function MobileNavBar() {
   const logoTextColor = shouldUseWhiteBackground ? "text-black" : "text-white";
   const hamburgerColor = shouldUseWhiteBackground ? "text-black" : "text-white";
   const logoSrc = shouldUseWhiteBackground ? "/image/logo_black.png" : "/image/logo.png";
+  const menuImageSrc = shouldUseWhiteBackground ? "/image/mobile/Menu_2.png" : "/image/mobile/Menu.png";
+  const circleColor = shouldUseWhiteBackground ? "#02645F" : "white";
+
+  // Responsive values based on screen size
+  const getResponsiveValues = () => {
+    switch (screenSize) {
+      case 'large':
+        return {
+          backgroundSize: '480px 750px',
+          rightPosition: 'clamp(2rem, calc(100vw - 400px), 4rem)',
+          circle1Bottom: '380px',
+          circle1Left: '80px',
+          circle2Bottom: '290px',
+          circle2Left: '170px'
+        };
+      case 'tablet':
+        return {
+          backgroundSize: '420px 700px',
+          rightPosition: 'clamp(1.5rem, calc(100vw - 360px), 3.5rem)',
+          circle1Bottom: '360px',
+          circle1Left: '70px',
+          circle2Bottom: '280px',
+          circle2Left: '155px'
+        };
+      default:
+        return {
+          backgroundSize: '359px 632px',
+          rightPosition: 'clamp(1rem, calc(100vw - 340px), 3rem)',
+          circle1Bottom: '332px',
+          circle1Left: '60px',
+          circle2Bottom: '252px',
+          circle2Left: '140px'
+        };
+    }
+  };
+
+  const responsiveValues = getResponsiveValues();
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -47,6 +85,23 @@ export default function MobileNavBar() {
       document.body.style.overflow = prev;
     };
   }, [open]);
+
+  // Screen size detection
+  useEffect(() => {
+    const updateScreenSize = () => {
+      if (window.innerWidth >= 1024) {
+        setScreenSize('large');
+      } else if (window.innerWidth >= 768) {
+        setScreenSize('tablet');
+      } else {
+        setScreenSize('mobile');
+      }
+    };
+
+    updateScreenSize();
+    window.addEventListener('resize', updateScreenSize);
+    return () => window.removeEventListener('resize', updateScreenSize);
+  }, []);
 
   // focus & ESC
   useEffect(() => {
@@ -115,14 +170,12 @@ export default function MobileNavBar() {
                animate={{ x: 0 }}
                exit={{ x: "100%" }}
                transition={{ type: "spring", stiffness: 280, damping: 30, mass: 0.8 }}
-               className="absolute top-0 right-0 bottom-44 overflow-hidden"
+               className="absolute top-0 right-0 bottom-44 overflow-hidden w-[359px] md:w-[420px] lg:w-[480px] h-[632px] md:h-[700px] lg:h-[750px]"
                style={{
-                 backgroundImage: 'url(/image/mobile/Menu.png)',
-                 backgroundSize: '359px 632px',
+                 backgroundImage: `url(${menuImageSrc})`,
+                 backgroundSize: responsiveValues.backgroundSize,
                  backgroundPosition: 'center',
-                 backgroundRepeat: 'no-repeat',
-                 width: '359px',
-                 height: '632px'
+                 backgroundRepeat: 'no-repeat'
                }}
                onClick={(e) => e.stopPropagation()}
              >
@@ -135,9 +188,9 @@ export default function MobileNavBar() {
                </button>
 
                {/* Links block */}
-               <div className="absolute top-16" style={{ 
+               <div className="absolute top-16 md:top-20 lg:top-24" style={{ 
                  fontFamily: 'Manrope, sans-serif', 
-                 right: 'clamp(1rem, calc(100vw - 340px), 3rem)' 
+                 right: responsiveValues.rightPosition
                }}>
                 <ul className="space-y-2">
                   {navItems.map((item) => (
@@ -145,9 +198,11 @@ export default function MobileNavBar() {
                       <Link
                         href={item.href}
                         onClick={close}
-                            className={`block font-normal leading-tight tracking-tight
-                           ${isActive(item.href) ? "text-[#00AD96]" : "text-black"}
-                           text-[30px]`}
+                            className={`block font-normal leading-tight tracking-tight text-[30px] md:text-[34px] lg:text-[36px] ${
+                          isActive(item.href) 
+                            ? (shouldUseWhiteBackground ? "text-[#00F5D8]" : "text-[#00AD96]")
+                            : (shouldUseWhiteBackground ? "text-white" : "text-black")
+                        }`}
                       >
                         {item.name}
                       </Link>
@@ -160,7 +215,9 @@ export default function MobileNavBar() {
                   <Link
                     href="/schedule"
                     onClick={close}
-                    className="block text-[30px] font-normal leading-tight tracking-tight text-black" 
+                    className={`block text-[30px] md:text-[34px] lg:text-[36px] font-normal leading-tight tracking-tight ${
+                      shouldUseWhiteBackground ? "text-white" : "text-black"
+                    }`}
                     style={{ fontFamily: 'Manrope, sans-serif' }}
                   >
                     Get Started Free
@@ -169,12 +226,13 @@ export default function MobileNavBar() {
               </div>
             </motion.aside>
 
-                         {/* Two white circles positioned at rounded corner for "eye" effect */}
+                         {/* Two circles positioned at rounded corner for "eye" effect - Mobile only */}
              <motion.div 
-               className="pointer-events-none absolute w-19 h-19 bg-white rounded-full hidden min-[380px]:block"
+               className="pointer-events-none absolute w-19 h-19 rounded-full hidden min-[380px]:block md:hidden"
                style={{ 
-                 bottom: '332px', // Position relative to menu bottom-left curve (632px - 200px)
-                 left: '60px'     // Position at the curve center from left edge
+                 bottom: responsiveValues.circle1Bottom,
+                 left: responsiveValues.circle1Left,
+                 backgroundColor: circleColor
                }}
                initial={{ scale: 0, x: 50, y: -50 }}
                animate={{ scale: 1, x: 0, y: 0 }}
@@ -188,10 +246,11 @@ export default function MobileNavBar() {
                }}
              />
              <motion.div 
-               className="pointer-events-none absolute w-19 h-19 bg-white rounded-full hidden min-[380px]:block"
+               className="pointer-events-none absolute w-19 h-19 rounded-full hidden min-[380px]:block md:hidden"
                style={{ 
-                 bottom: '252px', // Slightly offset from first circle (632px - 240px)
-                 left: '140px'     // Positioned to create eye effect
+                 bottom: responsiveValues.circle2Bottom,
+                 left: responsiveValues.circle2Left,
+                 backgroundColor: circleColor
                }}
                initial={{ scale: 0, x: 30, y: -30 }}
                animate={{ scale: 1, x: 0, y: 0 }}

@@ -53,10 +53,16 @@ export default function MobileLineSection() {
 
   /* ---------- headline word swap ---------- */
   const [displayText, setDisplayText] = useState("FROM");
+  const [applyText, setApplyText] = useState("APPLY");
   useEffect(() => {
     const unsub = scrollYProgress.on("change", (v) => {
-      if (v >= 0.6) setDisplayText("TO");
-      else if (v <= 0.4) setDisplayText("FROM");
+      if (v >= 0.6) {
+        setDisplayText("TO");
+        setApplyText("APPLY");
+      } else if (v <= 0.4) {
+        setDisplayText("FROM");
+        setApplyText("APPLY");
+      }
     });
     return () => unsub();
   }, [scrollYProgress]);
@@ -118,6 +124,7 @@ export default function MobileLineSection() {
   const [circleYs, setCircleYs] = useState<number[]>([]);
   const [railTopAbs, setRailTopAbs] = useState(0);
   const [railHeight, setRailHeight] = useState(0);
+  const [activeStep, setActiveStep] = useState(-1);
 
   // Height of the green progress (animated)
   const progressPx = useMotionValue(0);
@@ -154,25 +161,53 @@ export default function MobileLineSection() {
     const onResize = () => measure();
     window.addEventListener("resize", onResize);
     window.addEventListener("orientationchange", onResize);
-    const id = setTimeout(measure, 100); // settle layout
+    const id1 = setTimeout(measure, 100); // settle layout
+    const id2 = setTimeout(measure, 500); // extra settle time for increased spacing
+    const id3 = setTimeout(measure, 1000); // ensure full layout completion
     return () => {
-      clearTimeout(id);
+      clearTimeout(id1);
+      clearTimeout(id2);
+      clearTimeout(id3);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("orientationchange", onResize);
     };
   }, []);
 
+  // Re-measure when content animations complete
+  useEffect(() => {
+    const id = setTimeout(measure, 2000); // after all step animations
+    return () => clearTimeout(id);
+  }, []);
+
   // Drive progress so it crosses a dot when that step is centered in the viewport
   useEffect(() => {
+    let lastMeasureTime = 0;
     const unsub = scrollY.on("change", (y) => {
       if (!railHeight) return;
+      
+      // Re-measure occasionally while scrolling to ensure accuracy
+      const now = Date.now();
+      if (now - lastMeasureTime > 1000) { // every 1 second
+        measure();
+        lastMeasureTime = now;
+      }
+      
       const viewportCenterAbs = y + window.innerHeight / 2;
       const rel = viewportCenterAbs - railTopAbs;
       const clamped = Math.max(0, Math.min(railHeight, rel));
       progressPx.set(clamped);
+      
+      // Determine which step should be active based on line progress
+      let currentActiveStep = -1;
+      for (let i = 0; i < circleYs.length; i++) {
+        if (clamped >= circleYs[i] - 20) { // 20px threshold before circle
+          currentActiveStep = i;
+        }
+      }
+      setActiveStep(currentActiveStep);
     });
     return () => unsub();
-  }, [scrollY, railTopAbs, railHeight, progressPx]);
+  }, [scrollY, railTopAbs, railHeight, progressPx, circleYs]);
 
   return (
     <section ref={sectionRef} className="relative bg-black py-8 px-4">
@@ -186,8 +221,8 @@ export default function MobileLineSection() {
           className="object-cover"
         />
       </div>
-      <div className="w-full max-w-md mx-auto relative z-10">
-        <div className="flex h-auto min-h-[500px]">
+      <div className="w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto relative z-10">
+        <div className="flex h-auto min-h-[800px]">
           {/* Left side - 20% with logo and vertical line */}
           <div className="w-1/5 relative flex flex-col items-center">
             {/* Company Logo at top */}
@@ -210,18 +245,44 @@ export default function MobileLineSection() {
               
               {/* Ripple circles */}
               <motion.div
-                className="absolute w-16 h-16 border border-[#00AD96]/30 rounded-full"
-                animate={{ scale: [1, 1.5, 2], opacity: [0.6, 0.3, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+                className="absolute w-16 h-16 border border-[#00AD96]/40 rounded-full"
+                animate={{ 
+                  scale: [1, 2, 3.5], 
+                  opacity: [0.8, 0.4, 0] 
+                }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity, 
+                  ease: "easeOut",
+                  repeatDelay: 0.5
+                }}
+              />
+              <motion.div
+                className="absolute w-16 h-16 border border-[#00AD96]/40 rounded-full"
+                animate={{ 
+                  scale: [1, 2, 3.5], 
+                  opacity: [0.8, 0.4, 0] 
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeOut",
+                  delay: 1,
+                  repeatDelay: 0.5
+                }}
               />
               <motion.div
                 className="absolute w-16 h-16 border border-[#00AD96]/30 rounded-full"
-                animate={{ scale: [1, 1.5, 2], opacity: [0.6, 0.3, 0] }}
+                animate={{ 
+                  scale: [1, 2, 3.5], 
+                  opacity: [0.6, 0.3, 0] 
+                }}
                 transition={{
-                  duration: 2,
+                  duration: 3,
                   repeat: Infinity,
                   ease: "easeOut",
-                  delay: 0.7,
+                  delay: 2,
+                  repeatDelay: 0.5
                 }}
               />
               <div className="w-[76px] h-[75px] relative rounded-full overflow-hidden z-10">
@@ -268,22 +329,26 @@ export default function MobileLineSection() {
               style={{ opacity: cardOpacity, y: cardY }}
             >
               {/* FROM/TO APPLY text */}
-              <div className="mb-4">
+              <div className="mb-12">
                 <TextScramble currentText={displayText} />
-                <div className="font-['Dogica_Pixel'] text-[12px] tracking-[1px] text-white mt-1">
-                  APPLY
-                </div>
+                <TextScramble currentText={applyText} />
               </div>
 
               {/* Steps */}
-              <div className="space-y-8">
-                {allSteps.map((step, stepIndex) => (
+              <div className="space-y-16">
+                {allSteps.map((step, stepIndex) => {
+                  const isActive = activeStep >= stepIndex;
+                  return (
                   <motion.div
                     key={step.stepNumber}
-                                         ref={(el) => { stepRefs.current[stepIndex] = el; }}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 + stepIndex * 0.2 }}
+                    ref={(el) => { stepRefs.current[stepIndex] = el; }}
+                    initial={{ opacity: 0, x: 50, y: 20 }}
+                    animate={isActive ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: 50, y: 20 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      ease: "easeOut",
+                      delay: isActive ? 0.1 : 0 
+                    }}
                   >
                     {/* Step Header */}
                     <div className="mb-4">
@@ -307,10 +372,11 @@ export default function MobileLineSection() {
                             key={featureIndex}
                             className="flex items-start gap-2"
                             initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
+                            animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                             transition={{
-                              delay:
-                                0.8 + stepIndex * 0.3 + featureIndex * 0.1,
+                              duration: 0.4,
+                              ease: "easeOut",
+                              delay: isActive ? 0.2 + featureIndex * 0.1 : 0,
                             }}
                           >
                             <div className="w-4 h-4 bg-[#00AD96] rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
@@ -326,9 +392,13 @@ export default function MobileLineSection() {
                       {/* Arrow button */}
                       <motion.div
                         className="flex justify-end mt-4"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.2 + stepIndex * 0.3 }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                        transition={{ 
+                          duration: 0.3, 
+                          ease: "easeOut",
+                          delay: isActive ? 0.4 : 0 
+                        }}
                       >
                         <div className="w-8 h-8 bg-[#00AD96] rounded-full flex items-center justify-center">
                           <ChevronRight className="w-4 h-4 text-white" />
@@ -336,22 +406,19 @@ export default function MobileLineSection() {
                       </motion.div>
                     </div>
                   </motion.div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* TO APPLY text below Step 4 */}
               <motion.div
-                className="mt-8"
+                className="mt-16"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 2.5 }}
               >
-                <div className="font-['Dogica_Pixel'] text-[12px] tracking-[1px] text-white">
-                  TO
-                </div>
-                <div className="font-['Dogica_Pixel'] text-[12px] tracking-[1px] text-white mt-1">
-                  APPLY
-                </div>
+                <TextScramble currentText="TO" />
+                <TextScramble currentText="APPLY" />
               </motion.div>
             </motion.div>
           </div>

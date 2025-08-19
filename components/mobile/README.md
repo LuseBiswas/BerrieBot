@@ -22,14 +22,14 @@ Each subfolder corresponds to a page or section of the application:
 
 1. **Mobile-First Design**: Components should be optimized for touch interactions and small screens
 2. **Component Naming**: Use the same naming convention as desktop components for consistency
-3. **Responsive**: Components should work across mobile screen sizes (320px - 768px)
+3. **Responsive**: Components should work across mobile and tablet screen sizes (320px - 1023px)
 4. **Performance**: Optimize for mobile networks and lower-powered devices
 
 ## Current Status
 
 🚧 **Under Development** - Mobile components are not yet implemented. 
 
-When viewing the site on mobile devices (< 768px width), users will see a "Coming Soon" message.
+When viewing the site on mobile and tablet devices (< 1024px width), users will see the mobile-optimized experience.
 
 ## Getting Started
 
@@ -42,6 +42,6 @@ To add a mobile component:
 
 ## Device Detection
 
-Mobile components are automatically loaded when the screen width is less than 768px, handled by:
+Mobile components are automatically loaded when the screen width is less than 1024px, handled by:
 - `hooks/useDeviceType.ts` - Device detection hook
 - `components/DeviceWrapper.tsx` - Conditional rendering wrapper 

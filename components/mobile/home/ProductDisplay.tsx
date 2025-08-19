@@ -1,12 +1,13 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Code, Mic, Users, ChevronRight } from "lucide-react";
 
 export default function MobileProductDisplay() {
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'large'>('mobile');
 
   const productCards = [
     {
@@ -51,13 +52,76 @@ export default function MobileProductDisplay() {
     window.location.href = url;
   };
 
-  // Collapsed vs expanded heights
-  const collapsedH = "h-[117px]"; // Initial height: 117px
+  // Screen size detection
+  useEffect(() => {
+    const updateScreenSize = () => {
+      if (window.innerWidth >= 1024) {
+        setScreenSize('large');
+      } else if (window.innerWidth >= 768) {
+        setScreenSize('tablet');
+      } else {
+        setScreenSize('mobile');
+      }
+    };
+
+    updateScreenSize();
+    window.addEventListener('resize', updateScreenSize);
+    return () => window.removeEventListener('resize', updateScreenSize);
+  }, []);
+
+  // Responsive sizing based on mobile dimensions
+  const getResponsiveSizes = () => {
+    switch (screenSize) {
+      case 'large':
+        return {
+          // Card sizes: mobile 165.5x117 -> large 232x164 (1.4x)
+          cardWidthCollapsed: 'w-[232px]',
+          cardWidthExpanded: 'w-[326px]', // 233 * 1.4 = 326
+          cardHeightCollapsed: 'h-[164px]', // 117 * 1.4 = 164
+          cardHeightExpanded: 'h-[358px]', // 256 * 1.4 = 358
+          // Logo container: mobile 128x128 -> large 179x179 (1.4x)
+          logoSize: 'w-44 h-44', // w-44 = 176px, close to 179px
+          logoImageSize: { width: 106, height: 105 }, // 76*1.4=106, 75*1.4=105
+          // Font sizes
+          titleSize: 'text-[81px]', // 58 * 1.4 = 81
+          iconSize: 'w-[34px] h-[34px]' // 24 * 1.4 = 34
+        };
+      case 'tablet':
+        return {
+          // Card sizes: mobile 165.5x117 -> tablet 199x140 (1.2x)
+          cardWidthCollapsed: 'w-[199px]',
+          cardWidthExpanded: 'w-[280px]', // 233 * 1.2 = 280
+          cardHeightCollapsed: 'h-[140px]', // 117 * 1.2 = 140
+          cardHeightExpanded: 'h-[307px]', // 256 * 1.2 = 307
+          // Logo container: mobile 128x128 -> tablet 154x154 (1.2x)
+          logoSize: 'w-38 h-38', // w-38 = 152px, close to 154px
+          logoImageSize: { width: 91, height: 90 }, // 76*1.2=91, 75*1.2=90
+          // Font sizes
+          titleSize: 'text-[70px]', // 58 * 1.2 = 70
+          iconSize: 'w-[29px] h-[29px]' // 24 * 1.2 = 29
+        };
+      default: // mobile
+        return {
+          cardWidthCollapsed: 'w-[165.5px]',
+          cardWidthExpanded: 'w-[233px]',
+          cardHeightCollapsed: 'h-[117px]',
+          cardHeightExpanded: 'h-[256px]',
+          logoSize: 'w-32 h-32',
+          logoImageSize: { width: 76, height: 75 },
+          titleSize: 'text-[58px]',
+          iconSize: 'w-[24px] h-[24px]'
+        };
+    }
+  };
+
+  const sizes = getResponsiveSizes();
+
+  // Responsive card dimensions
   const getCardHeight = (cardId: number) =>
-    expandedCard === cardId ? "h-[256px]" : collapsedH; // Expanded: 256px
+    expandedCard === cardId ? sizes.cardHeightExpanded : sizes.cardHeightCollapsed;
   
   const getCardWidth = (cardId: number) =>
-    expandedCard === cardId ? "w-[233px]" : "w-[165.5px]"; // Initial: 165.5px, Expanded: 233px
+    expandedCard === cardId ? sizes.cardWidthExpanded : sizes.cardWidthCollapsed;
 
   return (
     <section className="relative min-h-screen bg-transparent px-4 py-16 overflow-visible">
@@ -80,7 +144,7 @@ export default function MobileProductDisplay() {
         </div>
       </div>
 
-      <div className="relative z-10 max-w-sm mx-auto text-center">
+      <div className="relative z-10 max-w-sm md:max-w-md lg:max-w-lg mx-auto text-center">
         {/* One Berribot Text */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -88,7 +152,7 @@ export default function MobileProductDisplay() {
           transition={{ duration: 0.8 }}
           className="mb-12"
         >
-          <h1 className="text-[58px] font-medium text-white leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
+          <h1 className={`${sizes.titleSize} font-medium text-white leading-tight`} style={{ fontFamily: 'Manrope, sans-serif' }}>
             One
             <br />
             Berribot.
@@ -97,31 +161,57 @@ export default function MobileProductDisplay() {
 
         {/* Logo with Ripple Animation */}
         <motion.div
-          className="relative w-32 h-32 mx-auto mb-12 flex items-center justify-center"
+          className={`relative ${sizes.logoSize} mx-auto mb-12 flex items-center justify-center`}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           {/* Ripple circles */}
           <motion.div
-            className="absolute w-32 h-32 border-2 border-white/30 rounded-full pointer-events-none"
-            animate={{ scale: [1, 1.5, 2], opacity: [0.6, 0.3, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut" }}
+            className={`absolute ${sizes.logoSize} border-2 border-white/40 rounded-full pointer-events-none`}
+            animate={{ 
+              scale: [1, 2, 3.5], 
+              opacity: [0.8, 0.4, 0] 
+            }}
+            transition={{ 
+              duration: 3, 
+              repeat: Infinity, 
+              ease: "easeOut",
+              repeatDelay: 0.5
+            }}
           />
           <motion.div
-            className="absolute w-32 h-32 border-2 border-white/30 rounded-full pointer-events-none"
-            animate={{ scale: [1, 1.5, 2], opacity: [0.6, 0.3, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 0.8 }}
+            className={`absolute ${sizes.logoSize} border-2 border-white/40 rounded-full pointer-events-none`}
+            animate={{ 
+              scale: [1, 2, 3.5], 
+              opacity: [0.8, 0.4, 0] 
+            }}
+            transition={{ 
+              duration: 3, 
+              repeat: Infinity, 
+              ease: "easeOut", 
+              delay: 1,
+              repeatDelay: 0.5
+            }}
           />
           <motion.div
-            className="absolute w-32 h-32 border-2 border-white/30 rounded-full pointer-events-none"
-            animate={{ scale: [1, 1.5, 2], opacity: [0.6, 0.3, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: 1.6 }}
+            className={`absolute ${sizes.logoSize} border-2 border-white/30 rounded-full pointer-events-none`}
+            animate={{ 
+              scale: [1, 2, 3.5], 
+              opacity: [0.6, 0.3, 0] 
+            }}
+            transition={{ 
+              duration: 3, 
+              repeat: Infinity, 
+              ease: "easeOut", 
+              delay: 2,
+              repeatDelay: 0.5
+            }}
           />
 
           {/* Logo */}
-          <div className="w-[76px] h-[75px] relative rounded-full overflow-hidden z-10  backdrop-blur-sm flex items-center justify-center">
-            <Image src="/image/logo_2.png" alt="BerriBot Logo" width={76} height={75} className="object-cover" />
+          <div className={`relative rounded-full overflow-hidden z-10 backdrop-blur-sm flex items-center justify-center`} style={{ width: `${sizes.logoImageSize.width}px`, height: `${sizes.logoImageSize.height}px` }}>
+            <Image src="/image/logo_2.png" alt="BerriBot Logo" width={sizes.logoImageSize.width} height={sizes.logoImageSize.height} className="object-cover" />
           </div>
         </motion.div>
 
@@ -132,7 +222,7 @@ export default function MobileProductDisplay() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mb-16"
         >
-          <h2 className="text-[58px] font-medium text-white leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
+          <h2 className={`${sizes.titleSize} font-medium text-white leading-tight`} style={{ fontFamily: 'Manrope, sans-serif' }}>
             Every
             <br />
             Recruiting
@@ -170,8 +260,8 @@ export default function MobileProductDisplay() {
                 >
                   {/* Initial Card View - Icon and Title */}
                   <div className="flex flex-col items-start text-left">
-                    <div className="w-[40px] h-[40px] bg-white/20 rounded-full flex items-center justify-center mb-3">
-                      <Icon className="w-[24px] h-[24px] text-white" />
+                    <div className={`bg-white/20 rounded-full flex items-center justify-center mb-3`} style={{ width: `${parseInt(sizes.iconSize.match(/\d+/)?.[0] || '24') * 1.67}px`, height: `${parseInt(sizes.iconSize.match(/\d+/)?.[0] || '24') * 1.67}px` }}>
+                      <Icon className={`${sizes.iconSize} text-white`} />
                     </div>
                     <h3 className={`font-semibold text-white leading-tight ${isExpanded ? 'text-lg' : 'text-base'}`}>{card.title}</h3>
                   </div>
