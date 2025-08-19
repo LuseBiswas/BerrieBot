@@ -1,6 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 export interface StackCard {
   id: string;
@@ -186,9 +187,11 @@ export default function StackByStack({
                   <div className="text-center space-y-4">
                     {card.topImage && (
                       <div>
-                        <img 
+                        <Image 
                           src={card.topImage} 
                           alt="Top section" 
+                          width={128}
+                          height={128}
                           className="mx-auto max-w-full h-auto max-h-32 object-contain"
                         />
                       </div>
@@ -210,9 +213,11 @@ export default function StackByStack({
                       {card.ribbonImage ? (
                         // Static image in ribbon without background
                         <div className="w-full flex justify-center">
-                          <img 
+                          <Image 
                             src={card.ribbonImage} 
                             alt="Ribbon" 
+                            width={64}
+                            height={64}
                             className="h-16 object-contain"
                           />
                         </div>
@@ -242,9 +247,11 @@ export default function StackByStack({
                   <div className="text-center space-y-4">
                     {card.bottomImage && (
                       <div>
-                        <img 
+                        <Image 
                           src={card.bottomImage} 
                           alt="Bottom section" 
+                          width={128}
+                          height={128}
                           className="mx-auto max-w-full h-auto max-h-32 object-contain"
                         />
                       </div>

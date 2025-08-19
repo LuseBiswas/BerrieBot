@@ -50,33 +50,6 @@ function AnimatedWord({
   );
 }
 
-/* ---------- Animated Text Component ---------- */
-function AnimatedText({ 
-  text, 
-  scrollProgress,
-  lineIndex = 0
-}: { 
-  text: string; 
-  scrollProgress: MotionValue<number>;
-  lineIndex?: number;
-}) {
-  const words = text.split(' ');
-  
-  return (
-    <span>
-      {words.map((word, wordIndex) => (
-        <AnimatedWord
-          key={wordIndex}
-          word={word}
-          wordIndex={wordIndex}
-          scrollProgress={scrollProgress}
-          lineIndex={lineIndex}
-        />
-      ))}
-    </span>
-  );
-}
-
 export default function MobileFeatureCard() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { margin: "-100px" });

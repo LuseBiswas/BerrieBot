@@ -1,8 +1,6 @@
 'use client';
 import { motion, useInView, useScroll, useTransform, MotionValue } from 'framer-motion';
 import React, { useRef, useEffect } from 'react';
-import { Plus } from 'lucide-react';
-import Image from 'next/image';
 
 /* ---------- Custom Hook for Word Animation ---------- */
 function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
@@ -47,33 +45,6 @@ function AnimatedWord({
     >
       {word}
     </motion.span>
-  );
-}
-
-/* ---------- Animated Text Component ---------- */
-function AnimatedText({ 
-  text, 
-  scrollProgress,
-  lineIndex = 0
-}: { 
-  text: string; 
-  scrollProgress: MotionValue<number>;
-  lineIndex?: number;
-}) {
-  const words = text.split(' ');
-  
-  return (
-    <span>
-      {words.map((word, wordIndex) => (
-        <AnimatedWord
-          key={wordIndex}
-          word={word}
-          wordIndex={wordIndex}
-          scrollProgress={scrollProgress}
-          lineIndex={lineIndex}
-        />
-      ))}
-    </span>
   );
 }
 

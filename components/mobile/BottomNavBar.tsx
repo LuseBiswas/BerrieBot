@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Home, Package, Lightbulb, BookOpen, Info } from "lucide-react";
+import { Home, Package, Lightbulb, BookOpen } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function BottomNavBar() {
