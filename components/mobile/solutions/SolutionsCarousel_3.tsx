@@ -1,30 +1,30 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
 
 interface SolutionSlide {
   id: number;
-  image: string;
+  lordicon: string;
   content: string;
 }
 
 const solutionsData: SolutionSlide[] = [
   {
     id: 1,
-    image: "/image/mobile/solution/6.png",
+    lordicon: "https://cdn.lordicon.com/cfoaotmk.json",
     content: "Personalized conversations via SMS, Calls, Email, and more."
   },
   {
     id: 2,
-    image: "/image/mobile/solution/7.png",
+    lordicon: "https://cdn.lordicon.com/sylzqxek.json",
     content: "Handles bookings, confirms calls, sends quotes, and even demos products."
   },
   {
     id: 3,
-    image: "/image/mobile/solution/8.png",
+    lordicon: "https://cdn.lordicon.com/kqsbkjmb.json",
     content: "Available 24/7, so you never miss a lead (or a customer craving attention)."
   }
 ];
@@ -33,7 +33,21 @@ export default function MobileSolutionsCarousel_3() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
+  // Load lordicon script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.lordicon.com/lordicon.js';
+    script.async = true;
+    document.head.appendChild(script);
 
+    return () => {
+      // Cleanup script on unmount
+      const existingScript = document.querySelector('script[src="https://cdn.lordicon.com/lordicon.js"]');
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+    };
+  }, []);
 
   const paginate = (newDirection: number) => {
     const newIndex = currentIndex + newDirection;
@@ -44,7 +58,7 @@ export default function MobileSolutionsCarousel_3() {
   };
 
   return (
-    <div className="bg-black py-16 px-4 relative mt-[-10px]">
+    <div className="bg-black pt-8 pb-16 px-4 relative mt-[-10px]">
       {/* Background Images */}
       <div className="absolute pointer-events-none" style={{ top: '0px', left: '-200px', zIndex: 1 }}>
         <Image
@@ -134,13 +148,19 @@ export default function MobileSolutionsCarousel_3() {
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="absolute inset-0 flex items-center justify-center"
                 >
-                  <Image
-                    src={solutionsData[currentIndex].image}
-                    alt={`Solution ${currentIndex + 1}`}
-                    width={137}
-                    height={137}
-                    className="object-contain"
-                  />
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div 
+                      dangerouslySetInnerHTML={{
+                        __html: `<lord-icon
+                          src="${solutionsData[currentIndex].lordicon}"
+                          trigger="loop"
+                          stroke="bold"
+                          colors="primary:#00AD96,secondary:#ffffff"
+                          style="width:137px;height:137px">
+                        </lord-icon>`
+                      }}
+                    />
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>

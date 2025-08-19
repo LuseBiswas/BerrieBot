@@ -42,7 +42,7 @@ export default function BottomNavBar() {
           className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50"
         >
           {/* Pill-shaped container */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-full px-4 py-3 flex items-center space-x-1 relative w-[299px] h-[68px]">
+          <div className="bg-white/10 backdrop-blur-sm rounded-full px-4 py-3 flex items-center space-x-1 relative w-[315px] h-[68px]">
             {navItems.map((item) => {
               const Icon = item.icon;
               const active = isActive(item.href);
@@ -53,7 +53,7 @@ export default function BottomNavBar() {
                   href={item.href}
                   className={`flex items-center justify-center transition-all duration-300 relative ${
                     active
-                      ? "text-white w-[109px] h-[52px]"
+                      ? "text-white w-[125px] h-[52px] px-3"
                       : "bg-white/20 backdrop-blur-sm w-[52px] h-[52px] text-white/80 hover:text-white hover:bg-white/30 rounded-full"
                   }`}
                 >

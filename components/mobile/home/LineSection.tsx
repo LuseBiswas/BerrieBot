@@ -58,7 +58,7 @@ export default function MobileLineSection() {
     const unsub = scrollYProgress.on("change", (v) => {
       if (v >= 0.6) {
         setDisplayText("TO");
-        setApplyText("APPLY");
+        setApplyText("OFFER");
       } else if (v <= 0.4) {
         setDisplayText("FROM");
         setApplyText("APPLY");
@@ -418,7 +418,7 @@ export default function MobileLineSection() {
                 transition={{ delay: 2.5 }}
               >
                 <TextScramble currentText="TO" />
-                <TextScramble currentText="APPLY" />
+                <TextScramble currentText="OFFER" />
               </motion.div>
             </motion.div>
           </div>

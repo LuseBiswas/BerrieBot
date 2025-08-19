@@ -6,12 +6,12 @@ import Image from "next/image";
 export default function MobileBrandCarousel() {
   // Brand logos - you can add more as needed
   const brands = [
-    { name: "DSPrint", logo: "/image/mobile/Home/1.png" },
-    { name: "PayPal", logo: "/image/mobile/Home/2.png" },
-    { name: "VIT", logo: "/image/mobile/Home/3.png" },
-    { name: "Cognizant", logo: "/image/mobile/Home/7.png" },
-    { name: "Excellencia", logo: "/image/mobile/Home/5.png" },
-    { name: "LTIMindtree", logo: "/image/mobile/Home/6.png" },
+    { name: "DSPrint", logo: "/image/mobile/Home/Teleperformer_2.png" },
+    { name: "PayPal", logo: "/image/mobile/Home/Mindsprint_2.png" },
+    { name: "VIT", logo: "/image/mobile/Home/VIT_2.png" },
+    { name: "Cognizant", logo: "/image/mobile/Home/cognizant.png" },
+    { name: "Excellencia", logo: "/image/mobile/Home/excelencia.png" },
+    { name: "LTIMindtree", logo: "/image/mobile/Home/LTIMindtree.png" },
   ];
 
   // Duplicate brands for seamless infinite scroll
@@ -37,12 +37,12 @@ export default function MobileBrandCarousel() {
           >
             {duplicatedBrands.map((brand, index) => (
               <div key={`top-${index}`} className="flex items-center gap-8">
-                <div className="flex-shrink-0 w-24 h-12 flex items-center justify-center rounded-lg p-2">
+                <div className="flex-shrink-0 w-24 h-12 flex items-center justify-center rounded-lg">
                   <Image
                     src={brand.logo}
                     alt={brand.name}
-                    width={80}
-                    height={40}
+                    width={96}
+                    height={48}
                     unoptimized
                     className="object-contain max-w-full max-h-full transition-all duration-300"
                   />
@@ -82,12 +82,12 @@ export default function MobileBrandCarousel() {
           >
             {duplicatedBrands.map((brand, index) => (
               <div key={`bottom-${index}`} className="flex items-center gap-8">
-                <div className="flex-shrink-0 w-24 h-12 flex items-center justify-center rounded-lg p-2">
+                <div className="flex-shrink-0 w-24 h-12 flex items-center justify-center rounded-lg">
                   <Image
                     src={brand.logo}
                     alt={brand.name}
-                    width={80}
-                    height={40}
+                    width={96}
+                    height={48}
                     unoptimized
                     className="object-contain max-w-full max-h-full transition-all duration-300"
                   />

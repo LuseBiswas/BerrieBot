@@ -319,7 +319,7 @@ export default function MobileStatsSection() {
           alt="Background Image Bottom Right"
           width={544}
           height={462}
-          className={`w-[${sizes.bgImage2Width}] h-[${sizes.bgImage3Height}]`}
+          className={`w-[${sizes.bgImage2Width}] h-[${sizes.bgImage3Height}] opacity-[30%]`}
         />
       </div>
       
