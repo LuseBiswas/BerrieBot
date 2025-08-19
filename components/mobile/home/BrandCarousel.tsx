@@ -6,12 +6,12 @@ import Image from "next/image";
 export default function MobileBrandCarousel() {
   // Brand logos - you can add more as needed
   const brands = [
-    { name: "DSPrint", logo: "/image/mobile/home/1.png" },
-    { name: "PayPal", logo: "/image/mobile/home/2.png" },
-    { name: "VIT", logo: "/image/mobile/home/3.png" },
-    { name: "Cognizant", logo: "/image/mobile/home/7.png" },
-    { name: "Excellencia", logo: "/image/mobile/home/5.png" },
-    { name: "LTIMindtree", logo: "/image/mobile/home/6.png" },
+    { name: "DSPrint", logo: "/image/mobile/Home/1.png" },
+    { name: "PayPal", logo: "/image/mobile/Home/2.png" },
+    { name: "VIT", logo: "/image/mobile/Home/3.png" },
+    { name: "Cognizant", logo: "/image/mobile/Home/7.png" },
+    { name: "Excellencia", logo: "/image/mobile/Home/5.png" },
+    { name: "LTIMindtree", logo: "/image/mobile/Home/6.png" },
   ];
 
   // Duplicate brands for seamless infinite scroll

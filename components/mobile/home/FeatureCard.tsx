@@ -154,7 +154,7 @@ export default function MobileFeatureCard() {
             
             {/* Star Image */}
             <Image 
-              src="/image/mobile/star_blue.png"
+              src="/image/mobile/Star_blue.png"
               alt="Blue Star"
               width={54}
               height={60}
