@@ -1,6 +1,6 @@
 'use client';
-import React, { useCallback, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export interface StackCard {
   id: string;
@@ -22,36 +22,48 @@ export default function StackByStack({
   width = 'w-[22rem]',
   height = 'h-[28rem]',
 }: StackByStackProps) {
-  const [index, setIndex] = useState(0);
-  const [direction, setDir] = useState<1 | -1>(1);
+  // NEW: maintain an internal card order so we can rotate the deck endlessly
+  const [order, setOrder] = useState<string[]>(() => cards.map(c => c.id));
   const [isDismissing, setIsDismissing] = useState(false);
 
-  const advance = useCallback(() => {
-    const last = cards.length - 1;
-    if (direction === 1 && index === last) {
-      setDir(-1);
-      setIndex(index - 1);
-    } else if (direction === -1 && index === 0) {
-      setDir(1);
-      setIndex(1);
-    } else {
-      setIndex(i => i + direction);
-    }
-  }, [cards.length, direction, index]);
+  // Keep order in sync if parent changes the cards prop
+  useEffect(() => {
+    const nextIds = cards.map(c => c.id);
+    setOrder(prev => {
+      const prevSet = new Set(prev);
+      // keep existing order where possible; append new ids; drop removed ids
+      const merged = [
+        ...prev.filter(id => nextIds.includes(id)),
+        ...nextIds.filter(id => !prevSet.has(id)),
+      ];
+      return merged;
+    });
+  }, [cards]);
+
+  // Fast lookup
+  const idToCard = useMemo(() => {
+    const map: Record<string, StackCard> = {};
+    for (const c of cards) map[c.id] = c;
+    return map;
+  }, [cards]);
+
+  const orderedCards: StackCard[] = useMemo(
+    () => order.map(id => idToCard[id]).filter(Boolean),
+    [order, idToCard]
+  );
+
+  // Render first N in the current order; depth = array index
+  const visible = orderedCards.slice(0, Math.min(visibleCount, orderedCards.length));
 
   const onFrontClick = useCallback(() => {
     if (!isDismissing) setIsDismissing(true);
   }, [isDismissing]);
 
-  const visible = cards
-    .map((c, i) => ({ card: c, offset: i - index }))
-    .filter((_, i) => Math.abs(i - index) < visibleCount);
-
   return (
     <div className={`relative mx-auto ${width} ${height} select-none`}>
-      {visible.map(({ card, offset }) => {
-        const isFront = offset === 0;
-        const depth = Math.min(Math.max(offset, 0), visibleCount - 1);
+      <AnimatePresence mode="popLayout">
+        {visible.map((card, depth) => {
+          const isFront = depth === 0;
         
         // Enhanced positioning for top-right expansion like in the image
         const xMove = depth * 175; // Move cards to the right - increased gap
@@ -86,31 +98,38 @@ export default function StackByStack({
         return (
           <motion.div
             key={card.id}
+            layout
             initial={{
               opacity: 0,
-              x: xMove + 50,
-              y: yMove + 50,
-              scale: scale * 0.8,
-              rotate: rotation + 10,
+              y: yMove + 80,
+              scale: scale * 0.85,
+              x: xMove + 60,
+              rotate: rotation + 5,
             }}
             animate={dismissTransform}
             exit={{
               opacity: 0,
-              x: xMove + 50,
-              y: yMove + 50,
-              scale: scale * 0.8,
+              y: yMove + 80,
+              scale: scale * 0.85,
+              x: xMove + 60,
+              rotate: rotation + 5,
             }}
             transition={
               isFront && isDismissing
                 ? { 
-                    duration: 0.4, 
-                    ease: [0.4, 0, 0.2, 1] 
+                    duration: 0.6, 
+                    ease: [0.25, 0.46, 0.45, 0.94],
+                    x: { duration: 0.6, ease: [0.34, 1.56, 0.64, 1] },
+                    rotate: { duration: 0.6, ease: [0.34, 1.56, 0.64, 1] },
+                    scale: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }
                   }
                 : { 
                     type: 'spring', 
-                    stiffness: 200, 
-                    damping: 25,
+                    stiffness: 260, 
+                    damping: 20, 
+                    mass: 0.8,
                     opacity: { duration: 0.3 },
+                    layout: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }
                   }
             }
             style={{ 
@@ -120,20 +139,34 @@ export default function StackByStack({
             className={`absolute inset-0 ${isFront ? 'cursor-pointer' : 'pointer-events-none'}`}
             onClick={isFront ? onFrontClick : undefined}
             onAnimationComplete={() => {
+              // NEW: after front card finishes dismissing, move it to the back and reset
               if (isFront && isDismissing) {
+                setOrder(prev => {
+                  if (prev.length <= 1) return prev;
+                  const [first, ...rest] = prev;
+                  return [...rest, first];
+                });
                 setIsDismissing(false);
-                advance();
               }
             }}
-            whileHover={isFront ? { 
-              scale: scale * 1.03,
-              y: yMove - 5,
-              transition: { duration: 0.2 }
-            } : {}}
-            whileTap={isFront ? { 
-              scale: scale * 0.97,
-              transition: { duration: 0.1 }
-            } : {}}
+            whileHover={
+              isFront && !isDismissing
+                ? {
+                    scale: scale * 1.03,
+                    y: yMove - 5,
+                    transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
+                  }
+                : {}
+            }
+            whileTap={
+              isFront && !isDismissing
+                ? {
+                    scale: scale * 0.97,
+                    y: yMove + 2,
+                    transition: { duration: 0.15 },
+                  }
+                : {}
+            }
           >
             {/* Main card container with clean design */}
             <div 
@@ -195,9 +228,36 @@ export default function StackByStack({
             {isFront && (
               <div className="absolute inset-0 rounded-2xl ring-1 ring-teal-200/40 pointer-events-none" />
             )}
+
+            {/* Plus icon on the right side of each card */}
+            <div 
+              className="absolute pointer-events-none"
+              style={{
+                right: '-120px', // Position 80px to the right of the card
+                top: '90%',
+                transform: 'translateY(-50%)',
+                zIndex: z + 1,
+                opacity: opacity * 0.8, // Slightly more transparent than the card
+              }}
+            >
+              <svg 
+                width="64" 
+                height="64" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="text-[#FAFAFA]"
+              >
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </div>
           </motion.div>
         );
-      })}
+        })}
+      </AnimatePresence>
 
       {/* Click blocker during dismiss animation */}
       {isDismissing && (

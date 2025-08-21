@@ -137,7 +137,7 @@ export default function CarouselSection_2() {
                   {/* Headline */}
           <div className="space-y-4 mb-12">
             <motion.h2 
-              className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text"
+              className="font-inter text-[64px] sm:tracking-[-2.5px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px]  mb-8 font-medium text-[#252527] bg-clip-text"
               style={{ 
                 opacity: headingOpacity, 
                 y: headingY,

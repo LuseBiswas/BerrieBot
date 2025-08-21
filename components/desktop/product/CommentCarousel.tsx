@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, MotionValue } from "framer-motion";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
 /* ---------- Custom Hook for Word Animation ---------- */
@@ -85,6 +84,11 @@ const CAROUSEL_SLIDES = [
     subtitle: "Automated Candidate Communication & Scheduling.",
     
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
+    lordicons: [
+      "https://cdn.lordicon.com/vpbspaec.json", // Box 1
+      "https://cdn.lordicon.com/odpyouay.json", // Box 2
+      "https://cdn.lordicon.com/sylzqxek.json"  // Box 3
+    ],
     keyHighlights: [
       "Bulk calling, WhatsApp, SMS, email follow-ups",
       "Live reminders & interview confirmations",
@@ -98,6 +102,11 @@ const CAROUSEL_SLIDES = [
     subtitle: "AI-Powered Resume Screening & Matching.",
     
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
+    lordicons: [
+      "https://cdn.lordicon.com/ypagsvdy.json", // Box 1
+      "https://cdn.lordicon.com/hcsnfpqp.json", // Box 2
+      "https://cdn.lordicon.com/gnxqymui.json"  // Box 3
+    ],
     keyHighlights: [
       "Intelligent resume parsing and analysis",
       "Job description matching algorithms",
@@ -111,6 +120,11 @@ const CAROUSEL_SLIDES = [
     subtitle: "Intelligent Interview Automation Platform.",
     
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
+    lordicons: [
+      "https://cdn.lordicon.com/ailnzwyn.json", // Box 1
+      "https://cdn.lordicon.com/idpbgtvy.json", // Box 2
+      "https://cdn.lordicon.com/euflfcqp.json"  // Box 3
+    ],
     keyHighlights: [
       "24/7 automated interview scheduling",
       "Technical and behavioral assessment",
@@ -124,6 +138,11 @@ const CAROUSEL_SLIDES = [
     subtitle: "Fraud Detection & Verification System.",
     description: "Ensure interview integrity with advanced proctoring technology that detects and prevents fraudulent activities.",
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
+    lordicons: [
+      "https://cdn.lordicon.com/gjopwtdp.json", // Box 1
+      "https://cdn.lordicon.com/kdibbosx.json", // Box 2
+      "https://cdn.lordicon.com/nwwurnnq.json"  // Box 3
+    ],
     keyHighlights: [
       "Real-time fraud detection technology",
       "Identity verification and authentication",
@@ -137,6 +156,11 @@ const CAROUSEL_SLIDES = [
     subtitle: "Comprehensive Recruitment Management Suite.",
     description: "Complete end-to-end recruitment solution that integrates all Berri products for seamless hiring workflow.",
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
+    lordicons: [
+      "https://cdn.lordicon.com/adbkylwa.json", // Box 1
+      "https://cdn.lordicon.com/xxmxrhzj.json", // Box 2
+      "https://cdn.lordicon.com/jwpaspoo.json"  // Box 3
+    ],
     keyHighlights: [
       "Unified dashboard for all recruitment activities",
       "Advanced analytics and reporting",
@@ -177,17 +201,20 @@ export default function CommentCarousel() {
     }
   }, [searchParams]);
 
-  // Auto-slide functionality
+  // Auto-slide functionality (only if no hash is present)
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
+      // Only auto-advance if there's no hash in the URL
+      if (!window.location.hash) {
+        setActiveSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
+      }
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section ref={ref} className="py-16 sm:py-20 bg-white text-black">
+    <section ref={ref} id="products" className="py-16 sm:py-20 bg-white text-black">
       <div className="px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
           {/* Heading */}
@@ -277,17 +304,90 @@ export default function CommentCarousel() {
                   {CAROUSEL_SLIDES[activeSlide].description}
                 </p>
 
-                {/* Main Content Layout - Image Left, Content Right */}
+                {/* Main Content Layout - Animated Boxes Left, Content Right */}
                 <div className="flex flex-col lg:flex-row gap-12 items-start">
-                  {/* Left Side - Image */}
-                  <div className="lg:w-[526px] flex-shrink-0">
-                    <Image
-                      src={CAROUSEL_SLIDES[activeSlide].image}
-                      alt={CAROUSEL_SLIDES[activeSlide].title}
-                      width={526}
-                      height={669}
-                      className="w-full h-[669px] object-cover rounded-lg"
-                    />
+                  {/* Left Side - Three Animated Boxes */}
+                  <div className="lg:w-[526px] flex-shrink-0 relative h-[669px]">
+                    {/* Box 1 - Top Left */}
+                    <motion.div
+                      className="absolute bg-[#1E1E1E] rounded-[20px] flex items-center justify-center"
+                      style={{ 
+                        width: '252px', 
+                        height: '167.8px',
+                        top: '0px',
+                        left: '20px',
+                        boxShadow: '0 0 22.2px rgba(4, 187, 166, 0.3)'
+                      }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                    >
+                      <div 
+                        dangerouslySetInnerHTML={{
+                          __html: `<lord-icon
+                            src="${CAROUSEL_SLIDES[activeSlide].lordicons[0]}"
+                            trigger="loop"
+                            stroke="bold"
+                            colors="primary:#ffffff,secondary:#04BBA6"
+                            style="width:144px;height:144px">
+                          </lord-icon>`
+                        }}
+                      />
+                    </motion.div>
+
+                    {/* Box 2 - Top Right */}
+                    <motion.div
+                      className="absolute bg-[#1E1E1E] rounded-[20px] flex items-center justify-center"
+                      style={{ 
+                        width: '252px', 
+                        height: '167.8px',
+                        top: '210px',
+                        left: '280px',
+                        boxShadow: '0 0 22.2px rgba(4, 187, 166, 0.3)'
+                      }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 0.4 }}
+                    >
+                      <div 
+                        dangerouslySetInnerHTML={{
+                          __html: `<lord-icon
+                            src="${CAROUSEL_SLIDES[activeSlide].lordicons[1]}"
+                            trigger="loop"
+                            stroke="bold"
+                            colors="primary:#ffffff,secondary:#04BBA6"
+                            style="width:144px;height:144px">
+                          </lord-icon>`
+                        }}
+                      />
+                    </motion.div>
+
+                    {/* Box 3 - Bottom Center */}
+                    <motion.div
+                      className="absolute bg-[#1E1E1E] rounded-[20px] flex items-center justify-center"
+                      style={{ 
+                        width: '252px', 
+                        height: '167.8px',
+                        top: '450px',
+                        left: '137px',
+                        boxShadow: '0 0 22.2px rgba(4, 187, 166, 0.3)'
+                      }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: 0.6 }}
+                    >
+                      <div 
+                        dangerouslySetInnerHTML={{
+                          __html: `<lord-icon
+                            src="${CAROUSEL_SLIDES[activeSlide].lordicons[2]}"
+                            trigger="loop"
+                            stroke="bold"
+                            colors="primary:#ffffff,secondary:#04BBA6"
+                            style="width:144px;height:144px">
+                          </lord-icon>`
+                        }}
+                      />
+                    </motion.div>
                   </div>
 
                   {/* Right Side - Key Highlights and Use Case */}

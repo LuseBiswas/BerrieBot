@@ -33,7 +33,7 @@ export default function ProductFeature() {
     <section className="py-20 bg-white ">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Tagline */}
-        <div className="text-center font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text ">
+        <div className="text-center font-inter text-[64px]  md:text-7xl lg:text-8xl tracking-[-2.5px] sm:tracking-[-2.5px] sm:text-6xl mb-8 font-medium text-[#252527] bg-clip-text " style={{ fontFamily: 'Manrope, sans-serif' }}>
           <h2 className=" text-black mb-4">
             Built on Trust.
           </h2>

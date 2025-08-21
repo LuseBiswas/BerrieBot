@@ -1,19 +1,22 @@
 "use client"
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface TestimonialCardProps {
   title: string;
   description: string;
   buttonText: string;
   variant: 'blue' | 'gray';
+  link?: string;
 }
 
 export default function TestimonialCard({ 
   title, 
   description, 
   buttonText, 
-  variant
+  variant,
+  link
 }: TestimonialCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const baseClasses = "rounded-[32px] p-8 relative overflow-hidden backdrop-blur-md";
@@ -53,33 +56,45 @@ export default function TestimonialCard({
         </motion.h3>
       </motion.div>
 
-      <motion.p layout="position" className={`${textColor} font-inter ${variant === 'blue' ? 'opacity-90' : 'opacity-80'} mb-8 leading-relaxed text-[16px] sm:text-[22px]`}>
-        {description}
-      </motion.p>
+      <motion.p 
+        layout="position" 
+        className={`${textColor} font-inter ${variant === 'blue' ? 'opacity-90' : 'opacity-80'} mb-8 leading-relaxed text-[16px] sm:text-[22px]`}
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
 
       {/* Animated Button */}
       <AnimatePresence>
-        {isHovered && (
-          <motion.button
+        {isHovered && link && (
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
-            className="font-inter font-[500] px-6 py-3 rounded-full transition-colors inline-flex items-center gap-2
-                     bg-white/10 hover:bg-[#04BBA6] text-white hover:text-black cursor-pointer group"
-            whileHover={{ scale: 1.02 }}
           >
-            {buttonText}
-            <motion.svg 
-              width="16" 
-              height="16" 
-              viewBox="0 0 16 16" 
-              fill="none"
-              className="group-hover:translate-x-1 transition-transform duration-200"
+            <Link
+              href={link}
+              target={link.startsWith('http') ? '_blank' : '_self'}
+              rel={link.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="font-inter font-[500] px-6 py-3 rounded-full transition-colors inline-flex items-center gap-2
+                       bg-white/10 hover:bg-[#04BBA6] text-white hover:text-black cursor-pointer group"
             >
-              <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </motion.svg>
-          </motion.button>
+              <motion.span
+                className="inline-flex items-center gap-2"
+                whileHover={{ scale: 1.02 }}
+              >
+                {buttonText}
+                <motion.svg 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 16 16" 
+                  fill="none"
+                  className="group-hover:translate-x-1 transition-transform duration-200"
+                >
+                  <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </motion.svg>
+              </motion.span>
+            </Link>
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.div>

@@ -52,14 +52,15 @@ export default function Footer() {
             </div>
           </div>
           
-          {/* Products */}
+                    {/* Products */}
           <div>
             <h3 className="text-lg font-medium mb-6">Products</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="/product?product=berriconnect" className="hover:text-white transition-colors">BerriConnect</Link></li>
-              <li><Link href="/product?product=berriproctor" className="hover:text-white transition-colors">BerriProctor</Link></li>
-              <li><Link href="/product?product=berrimastermind" className="hover:text-white transition-colors">BerriMasterMind</Link></li>
-              <li><Link href="/product?product=berri360" className="hover:text-white transition-colors">Berri360</Link></li>
+              <li><Link href="/product?product=berriconnect#products" className="hover:text-white transition-colors">BerriConnect</Link></li>
+              <li><Link href="/product?product=berrisearch#products" className="hover:text-white transition-colors">BerriSearch</Link></li>
+              <li><Link href="/product?product=berrimastermind#products" className="hover:text-white transition-colors">BerriMasterMind</Link></li>
+              <li><Link href="/product?product=berriproctor#products" className="hover:text-white transition-colors">BerriProctor</Link></li>
+ 
             </ul>
           </div>
           
@@ -77,9 +78,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Resources</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="/resources/faq" className="hover:text-white transition-colors">Learn</Link></li>
-              <li><Link href="/explore" className="hover:text-white transition-colors">Explore</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Support</Link></li>
+              <li><Link href="/resources#faq" className="hover:text-white transition-colors">FAQ</Link></li>
+              <li><Link href="/resources#blogs" className="hover:text-white transition-colors">Blogs</Link></li>
+              
             </ul>
           </div>
           
@@ -99,10 +100,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Legal</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="#" className="hover:text-white transition-colors">Compliance</Link></li>
+              
               <li><Link href="/policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
               <li><Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Terms</Link></li>
+              
             </ul>
           </div>
         </div>
@@ -119,7 +120,7 @@ export default function Footer() {
               <Link href="https://www.facebook.com/Berribot/?_rdr" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
                 <Image src="/image/footer/facebook.png" alt="Facebook" width={16} height={16} className="w-8 h-8" />
               </Link>
-              <Link href="#" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+              <Link href="https://www.instagram.com/berribot.official/" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
                 <Image src="/image/footer/instagram.png" alt="Instagram" width={16} height={16} className="w-8 h-8" />
               </Link>
               <Link href="https://x.com/Berribot1" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">

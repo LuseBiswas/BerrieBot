@@ -126,7 +126,7 @@ export default function FeatureCard() {
                }}></div>
           <div className="relative z-10 flex items-center gap-3 justify-center">
             
-            <h2 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text">
+            <h2 className="font-inter text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl mb-8 font-medium text-[#252527] bg-clip-text" style={{ fontFamily: 'Manrope, sans-serif' }}>
               <span className="text-white bg-clip-text">Recruiting</span>
               <br />
               <span className="text-white bg-clip-text">designed for the</span>
@@ -176,8 +176,8 @@ export default function FeatureCard() {
           <FeatureCardItem
             icon="/image/icons/clock.png"
             lordicon="https://cdn.lordicon.com/vnlbhttp.json"
-            title="The Interviewer that Never Sleeps"
-            description="Candidates interview anytime. Recruiters wake up to scored reports."
+            title="The interviewer <br/> that never sleeps"
+            description="Candidates interview <br/> anytime. Recruiters wake up <br/> to scored reports."
             index={0}
             isInView={true}
           />
@@ -202,9 +202,10 @@ export default function FeatureCard() {
             }
           }}
         >
+          
           <FeatureCardItem
-            lordicon="https://cdn.lordicon.com/adbkylwa.json"
-            title="An Agent that feels Human"
+            lordicon="https://cdn.lordicon.com/bmkseyni.json"
+            title="An AI agent <br/> that feels human"
             description="Natural voice and chat interactions, localised, empathetic, and fluid."
             index={1}
             isInView={true}
@@ -231,8 +232,8 @@ export default function FeatureCard() {
           }}
         >
           <FeatureCardItem
-          lordicon="https://cdn.lordicon.com/bmkseyni.json"
-            title="Fits Your Workflow"
+          lordicon="https://cdn.lordicon.com/adbkylwa.json"
+            title="Fits your workflow"
             description="Integrates with ATS systems like Workday, SAP, SuccessFactors, and MS Teams."
             index={2}
             isInView={true}
@@ -260,8 +261,8 @@ export default function FeatureCard() {
         >
           <FeatureCardItem
             lordicon="https://cdn.lordicon.com/xxmxrhzj.json"
-            title="Built-In Fraud Detection"
-            description="Catch impersonators before they waste your time. 3D liveness, lip-sync, and more."
+            title="Built-in fraud detection"
+            description="Catch impersonators before <br/> they waste your time. 3D liveness, lip-sync, and more."
             index={3}
             isInView={true}
           />
@@ -288,8 +289,8 @@ export default function FeatureCard() {
         >
           <FeatureCardItem
             lordicon="https://cdn.lordicon.com/jwpaspoo.json"
-            title="Flexible Pricing"
-            description="Use what you need. P credits or pay-as-you-go."
+            title="Flexible pricing"
+            description="Use what you need.<br/> Pre-paid credits."
             index={4}
             isInView={true}
           />

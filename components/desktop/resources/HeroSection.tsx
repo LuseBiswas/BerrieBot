@@ -13,20 +13,21 @@ export default function HeroSection() {
 
   return (
     <section 
+      id="faq"
       className={sectionClassName}
       suppressHydrationWarning={true}
       style={isMounted ? {} : { marginTop: '9rem' }}
     >
       {/* ---- "We are Berribot" pill ---- */}
       <div className="mb-12 relative z-10">
-        <div className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
+        <div className="bg-[#04BBA6] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
           Resources
         </div>
       </div>
 
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-6">
-        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text">
+        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text" style={{ fontFamily: 'Manrope, sans-serif' }}>
           Learn. Explore.
           <br />
           Get Smarter.

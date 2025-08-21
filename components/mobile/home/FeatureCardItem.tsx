@@ -55,12 +55,16 @@ export default function MobileFeatureCardItem({
           </div>
         )}
         <div className="w-full text-left">
-          <h3 className="font-bold text-white mb-2 leading-tight" style={{ fontSize: '18px' }}>
-            {title}
-          </h3>
-          <p className="text-gray-400 leading-relaxed" style={{ fontSize: '14px' }}>
-            {description}
-          </p>
+          <h3 
+            className="font-bold text-white mb-2 leading-tight" 
+            style={{ fontSize: '18px' }}
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
+          <p 
+            className="text-gray-400 leading-relaxed" 
+            style={{ fontSize: '14px' }}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         </div>
       </div>
     </motion.div>

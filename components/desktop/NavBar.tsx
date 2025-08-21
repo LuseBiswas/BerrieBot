@@ -113,10 +113,10 @@ export default function NavBar() {
             {/* Right side - Get Started Button */}
             <div className="hidden lg:flex items-center">
               <Link 
-                href="/signup" 
+                href="/schedule" 
                 className="px-6 py-2 bg-white rounded-full font-medium text-black hover:bg-gray-50 transition-colors"
               >
-                Get Started Free
+                Book a Demo
               </Link>
             </div>
 
@@ -180,11 +180,11 @@ export default function NavBar() {
                   Login
                 </Link>
                 <Link 
-                  href="/signup" 
+                  href="/schedule" 
                   className="px-6 py-3 text-center bg-teal-400 text-white rounded-full font-medium hover:bg-teal-500 transition-colors"
                   onClick={toggleMobileMenu}
                 >
-                  Get Started Free
+                  Book a Demo
                 </Link>
               </div>
             </div>

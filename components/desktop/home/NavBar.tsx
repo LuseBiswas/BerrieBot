@@ -124,10 +124,10 @@ export default function NavBar() {
             {/* Right side - Get Started Button */}
             <div className="hidden lg:flex items-center">
               <AnimatedButton 
-                href="/signup"
+                href="/schedule"
                 className="bg-white text-black hover:bg-gray-50 transition-colors"
               >
-                Get Started Free
+                Book a Demo
               </AnimatedButton>
             </div>
 
@@ -192,10 +192,10 @@ export default function NavBar() {
                 </Link>
                 <div onClick={toggleMobileMenu}>
                   <AnimatedButton 
-                    href="/signup"
+                    href="/schedule"
                     className="px-6 py-3 text-center bg-teal-400 text-white hover:bg-teal-500 transition-colors w-full"
                   >
-                    Get Started Free
+                    Book a Demo
                   </AnimatedButton>
                 </div>
               </div>

@@ -9,6 +9,7 @@ import CompanyTestimonialSection from "@/components/desktop/home/CompanyTestimon
 import CTASection from "@/components/desktop/home/CTASection";
 import CarouselSection_2 from "@/components/desktop/product/CarouselSection";
 import YtTestimonial from "@/components/desktop/product/ytTestimonial";
+import AgeticSpcae from "@/components/desktop/home/AgeticSpcae";
 
 export default function Home() {
   return (
@@ -22,11 +23,14 @@ export default function Home() {
           className="max-w-md mx-auto"
         />
       </StarCardBG> */}
+      <AgeticSpcae />
       <CarouselSection_2 />
       <CompaniesSection />
       <TestimonialSection />
-      <CarouselSection />
+      
       <FeatureCard />
+     
+      
       <ComparisonSection />
       <ProductFeature />
       <StatsSection />
