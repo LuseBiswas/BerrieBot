@@ -225,56 +225,10 @@ export default function MobileComparisonXSection() {
         }
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        {/* Header with icon and arrows */}
+        {/* Header with logo and title */}
         <div className="relative mb-8" >
-          {/* Title */}
-          <div className="relative inline-block mb-6">
-            {/* Background to block the line but preserve grid with fading effect */}
-            <div className="absolute inset-0 -mx-6 -my-4 rounded-lg" 
-                 style={{
-                   background: 'radial-gradient(ellipse 70% 60% at center, #000000 30%, #000000 60%, transparent 80%)'
-                 }}></div>
-            <motion.h2 
-              className="relative z-10 font-inter text-[58px] md:text-[70px] lg:text-[81px] tracking-[-1px] mb-4 font-medium text-[#252527] bg-clip-text leading-none"
-              style={{ 
-                opacity: headingOpacity, 
-                y: headingY,
-                willChange: 'transform',
-                fontFamily: 'Manrope, sans-serif'
-              }}
-            >
-              <span className="text-white bg-clip-text">
-                Proven to
-              </span>
-              <br />
-              <span className="text-white bg-clip-text">
-                Results.  <br />Measurable <br/> ROI.
-              </span>
-            </motion.h2>
-          </div>
-
-          {/* Before/After indicator with arrows - Mobile Layout */}
-          <div className="flex items-center justify-center gap-8 px-4 pt-16">
-            {/* Left Side - Arrow with text below */}
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex items-center">
-                <ArrowLeft className={`${sizes.arrowSize} text-white -mr-1`} strokeWidth={2} />
-                <div className={`${sizes.arrowLineWidth} h-0.5 bg-white`}></div>
-              </div>
-              <motion.span 
-                className="text-white font-medium font-inter text-[24px] md:text-[29px] lg:text-[34px] mt-2"
-                style={{ 
-                  opacity: labelsOpacity, 
-                  y: labelsY,
-                  willChange: 'transform',
-                  fontFamily: 'Manrope, sans-serif'
-                }}
-              >
-                BEFORE
-              </motion.span>
-            </div>
-            
-            {/* Center Icon */}
+          {/* Center Logo */}
+          <div className="flex items-center justify-center px-4 mb-8">
             <div className="relative flex items-center justify-center" style={{ width: sizes.logoWidth, height: sizes.logoHeight }}>
               {/* Ripple circles */}
               <motion.div
@@ -333,25 +287,32 @@ export default function MobileComparisonXSection() {
                style={{ width: sizes.logoWidth, height: sizes.logoHeight }}
              />
             </div>
-            
-            {/* Right Side - Arrow with text below */}
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex items-center">
-                <div className={`${sizes.arrowLineWidth} h-0.5 bg-white`}></div>
-                <ArrowRight className={`${sizes.arrowSize} text-white -ml-1`} strokeWidth={2} />
-              </div>
-              <motion.span 
-                className="text-white font-medium font-inter text-[24px] md:text-[29px] lg:text-[34px] mt-2"
-                style={{ 
-                  opacity: labelsOpacity, 
-                  y: labelsY,
-                  willChange: 'transform',
-                  fontFamily: 'Manrope, sans-serif'
-                }}
-              >
-                AFTER
-              </motion.span>
-            </div>
+          </div>
+
+          {/* Title */}
+          <div className="relative inline-block mb-6">
+            {/* Background to block the line but preserve grid with fading effect */}
+            <div className="absolute inset-0 -mx-6 -my-4 rounded-lg" 
+                 style={{
+                   background: 'radial-gradient(ellipse 70% 60% at center, #000000 30%, #000000 60%, transparent 80%)'
+                 }}></div>
+            <motion.h2 
+              className="relative z-10 font-inter text-[58px] md:text-[70px] lg:text-[81px] tracking-[-1px] mb-4 font-medium text-[#252527] bg-clip-text leading-none"
+              style={{ 
+                opacity: headingOpacity, 
+                y: headingY,
+                willChange: 'transform',
+                fontFamily: 'Manrope, sans-serif'
+              }}
+            >
+              <span className="text-white bg-clip-text">
+                Proven to
+              </span>
+              <br />
+              <span className="text-white bg-clip-text">
+                Results.  <br />Measurable <br/> ROI.
+              </span>
+            </motion.h2>
           </div>
         </div>
 

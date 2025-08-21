@@ -248,17 +248,17 @@ export default function StatsSection() {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h2 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text">
-                <span className="text-white bg-clip-text">Recruiters Are</span>
+              <h2 className="font-inter text-[64px] md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl mb-8 font-medium text-[#252527] bg-clip-text leading-28" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <span className="text-white bg-clip-text">Recruiters are</span>
                 <br />
-                <span className="text-white">Turbocharged by</span>
+                <span className="text-white">turbocharged</span>
               <br />
-                <span className="text-white bg-clip-text">Berribot</span>
+                <span className="text-white bg-clip-text"> by Berribot</span>
               </h2>
               
               <div className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-5xl mx-auto">
                 <AnimatedText 
-                  text="From Wipro to Cognizant, Berribot helps companies save millions in recruiter hours and cut hiring time in half."
+                  text="Berribot helps companies save millions in recruiter hours and cut hiring time in half."
                   scrollProgress={scrollYProgress}
                   lineIndex={0}
                 />
@@ -367,7 +367,7 @@ export default function StatsSection() {
                     />
                   </div>
                   <div className="text-[22px] font-manrope font-extralight text-[#060606] leading-tight">
-                    In ROI reported<br />by Cognizant
+                    In ROI reported<br />by Fortune 200 client
                   </div>
                 </div>
               </div>

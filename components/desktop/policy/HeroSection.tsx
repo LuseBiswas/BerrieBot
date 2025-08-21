@@ -20,7 +20,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
 
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-12">
-        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium bg-gradient-to-b from-[#252527] to-[#ADADAEB0] text-transparent bg-clip-text">
+        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium bg-white text-transparent bg-clip-text"style={{ fontFamily: 'Manrope, sans-serif' }}>
           No Secrets, Just 
           <br />
           Privacy

@@ -45,17 +45,20 @@ export default function BlogResource() {
   return (
     <div className="bg-black ">
       {/* Hero Section */}
-      <section className="relative  flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent">
-        {/* ---- "Blog" pill ---- */}
-        <div className="mt-12 mb-12 relative z-10">
+      <section id="blogs" className="relative  flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent">
+        {/* ---- Pills ---- */}
+        <div className="mt-12 mb-12 relative z-10 flex gap-4">
           <div className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
-            Blog
+          Sub-stack
+          </div>
+          <div className="bg-white text-black px-6 py-1 rounded-full font-inter font-medium text-lg">
+            White Papers
           </div>
         </div>
 
         {/* ---- Main Heading ---- */}
         <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-12">
-          <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium bg-gradient-to-b from-[#252527] to-[#ADADAEB0] text-transparent bg-clip-text">
+          <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-white "style={{ fontFamily: 'Manrope, sans-serif' }}>
             Smart Ideas, No
             <br />
             Robot Jargon

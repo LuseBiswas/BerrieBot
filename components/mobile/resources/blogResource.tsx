@@ -66,7 +66,7 @@ export default function MobileBlogResource() {
         {/* ---- Main Heading ---- */}
         <div className="text-center w-full max-w-sm mx-auto relative z-10 mb-8">
           <h1 
-            className="tracking-tight mb-6 font-medium bg-gradient-to-b from-[#252527] to-[#ADADAEB0] text-transparent bg-clip-text"
+            className="tracking-tight mb-6 font-medium bg-white text-transparent bg-clip-text"
             style={{
               fontSize: '48px',
               fontFamily: 'Manrope, sans-serif',

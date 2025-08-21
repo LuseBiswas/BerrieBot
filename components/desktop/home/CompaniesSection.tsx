@@ -16,7 +16,7 @@ export default function CompaniesSection() {
   const contentProgress = useTransform(scrollYProgress, [0.4, 0.7], [0, 1]);
 
   return (
-    <section ref={ref} className="py-16 sm:py-3.5 bg-[#E0E0E0]">
+    <section ref={ref} className="py-16 sm:py-3.5 bg-[#FAFAFA]">
       <div className="relative">
         {/* Horizontal lines that extend full width */}
         <motion.div 
@@ -50,23 +50,23 @@ export default function CompaniesSection() {
             />
 
             {/* Single grid controlling all three rows */}
-            <motion.div 
+            <div 
               className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6"
-              style={{ opacity: contentProgress }}
             >
-              {/* --- Top logos row (6 cols) --- */}
+              {/* --- Top logos row (4 cols centered) --- */}
+              {/* Empty spacer for left */}
+              <div className="hidden lg:block"></div>
+              
               {[
-                { src: "/image/company/c_logo_1.png", alt: "Airbnb" },
-                { src: "/image/company/c_logo_2.png", alt: "Canva" },
-                { src: "/image/company/c_logo_3.png", alt: "Stripe" },
-                { src: "/image/company/c_logo_4.png", alt: "Booking.com" },
-                { src: "/image/company/c_logo_5.png", alt: "Amazon" },
-                { src: "/image/company/c_logo_6.png", alt: "Google" },
+                { src: "/image/mobile/Home/Teleperformer_3.png", alt: "Canva" },
+                { src: "/image/mobile/Home/VIT_2.png", alt: "Stripe" },
+                { src: "/image/mobile/Home/encora.png", alt: "Booking.com" },
+                { src: "/image/mobile/Home/indium.png", alt: "Amazon" },
               ].map((c, i) => (
                 <motion.div
                   key={c.alt}
                   className={`p-8 flex items-center justify-center h-24 ${
-                    i < 5 ? "lg:border-r" : ""
+                    i < 3 ? "lg:border-r" : ""
                   } lg:border-black`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -76,12 +76,15 @@ export default function CompaniesSection() {
                   <Image
                     src={c.src}
                     alt={c.alt}
-                    width={100}
+                    width={300}
                     height={30}
-                    className="opacity-60 hover:opacity-100 transition-opacity"
+                    className=""
                   />
                 </motion.div>
               ))}
+              
+              {/* Empty spacer for right */}
+              <div className="hidden lg:block"></div>
 
               {/* --- Testimonial row (spans full width) --- */}
               <motion.div 
@@ -91,7 +94,7 @@ export default function CompaniesSection() {
                 transition={{ delay: 0.6 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-[#3D3D3D] leading-tight mx-auto max-w-2xl">
+                <h2 className="text-2xl sm:tracking-[-2.5px] sm:text-6xl lg:text-4xl font-medium text-[#3D3D3D] leading-tight mx-auto max-w-2xl">
                   Used by teams at Cognizant,
                   <br />
                   Wipro, LTIMindtree,
@@ -100,28 +103,21 @@ export default function CompaniesSection() {
                 </h2>
               </motion.div>
 
-              {/* --- Bottom logos row --- */}
-              {/* Col 1 spacer to keep the first vertical line continuous */}
-              <motion.div 
-                className="hidden lg:block lg:border-r lg:border-black"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
-                viewport={{ once: true }}
-              />
+              {/* --- Bottom logos row (4 cols centered) --- */}
+              {/* Left spacer */}
+              <div className="hidden lg:block lg:border-r lg:border-black"></div>
 
-              {/* Cols 2–6: 5 logos */}
+              {/* 4 centered logos */}
               {[
-                { src: "/image/company/c_logo_1.png", alt: "Airbnb" },
-                { src: "/image/company/c_logo_2.png", alt: "Canva" },
-                { src: "/image/company/c_logo_3.png", alt: "Stripe" },
-                { src: "/image/company/c_logo_4.png", alt: "Booking.com" },
-                { src: "/image/company/c_logo_5.png", alt: "Amazon" },
+                { src: "/image/mobile/Home/excelencia.png", alt: "Excelencia" },
+                { src: "/image/mobile/Home/cognizant.png", alt: "Cognizant" },
+                { src: "/image/mobile/Home/LTIMindtree_3.png", alt: "LTIMindtree" },
+                { src: "/image/mobile/Home/Mindsprint_2.png", alt: "Mindsprint" },
               ].map((c, i) => (
                 <motion.div
                   key={`bottom-${c.alt}`}
-                  className={`p-8 flex items-center justify-center h-24 ${
-                    i < 4 ? "lg:border-r" : ""
+                  className={`p-7 flex items-center justify-center h-24 ${
+                    i < 3 ? "lg:border-r" : ""
                   } lg:border-black`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -131,13 +127,16 @@ export default function CompaniesSection() {
                   <Image
                     src={c.src}
                     alt={c.alt}
-                    width={100}
+                    width={450}
                     height={30}
-                    className="opacity-60 hover:opacity-100 transition-opacity"
+                    className=""
                   />
                 </motion.div>
               ))}
-            </motion.div>
+              
+              {/* Right spacer */}
+              <div className="hidden lg:block"></div>
+            </div>
           </div>
         </div>
       </div>

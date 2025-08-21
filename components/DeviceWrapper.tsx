@@ -41,6 +41,7 @@ import MobileProductHeroSection from "./mobile/product/HeroSection";
 import MobileProductCarousel from "./mobile/product/ProductCarousel";
 import MobileProductXFeature from "./mobile/product/Product2Feature";
 import MobileComparisonXSection from "./mobile/product/ComparisonXSection";
+import MobileProductTestimonialCarousel from "./mobile/product/TestimonialCarousel";
 
 interface DeviceWrapperProps {
   children: React.ReactNode;
@@ -217,6 +218,7 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
                 <MobileProductCarousel/>
                 <MobileProductXFeature/>
                 <MobileComparisonXSection/>
+                <MobileProductTestimonialCarousel/>
                 <MobileCTASection/>
               </>
             ) : children

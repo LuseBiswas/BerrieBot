@@ -137,17 +137,18 @@ export default function TestimonialSection() {
             </motion.div>
             
             <motion.h2 
-              className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]"
+              className="font-inter text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl"
               style={{ 
                 opacity: headingOpacity, 
                 y: headingY,
-                willChange: 'transform'
+                willChange: 'transform',
+                fontFamily: 'Manrope, sans-serif' 
               }}
             >
               <span className="text-white">One Berribot. Every</span> <br />
               
               <span className="text-white bg-clip-text ">
-               Recruiting Task.
+               recruiting task.
               </span>
             </motion.h2>
             <motion.div 
@@ -159,7 +160,7 @@ export default function TestimonialSection() {
               }}
             >
               <AnimatedText 
-                text="Berribot – Your Complete Recruitment Command Center."
+                text="Your Complete Recruitment Command Center."
                 scrollProgress={scrollYProgress}
                 lineIndex={0}
               />
@@ -202,14 +203,15 @@ export default function TestimonialSection() {
             <TestimonialCard
               variant="gray"
               title="Digital Recruiter"
-              description="Auto match, connect and followup with candidates without getting overwhelmed."
+              description="Automatically search, connect <br/> and followup with candidates without <br/> getting overwhelmed."
               buttonText="Learn More"
+              link="/solutions#live-texting"
             />
           </motion.div>
 
           {/* CHROs & Leaders Card (bottom-left) */}
           <motion.div 
-            className="my-8 lg:my-0 lg:absolute lg:bottom-[310] lg:left-[250] lg:w-[48%] z-10"
+            className="my-8 lg:my-0 lg:absolute lg:bottom-[310] lg:left-[250] lg:w-[48%] z-50"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { 
               opacity: 1, 
@@ -228,8 +230,9 @@ export default function TestimonialSection() {
             <TestimonialCard
               variant="gray"
               title="Digital Interviewer"
-              description="Auto match, connect and followup with candidates without getting overwhelmed."
+              description="Schedule and assess candidate skills <br/> with a 24/7 Agentic interviewer."
               buttonText="Learn More"
+              link="/solutions#recruitment-assistant"
             />
           </motion.div>        
 
@@ -254,8 +257,9 @@ export default function TestimonialSection() {
             <TestimonialCard
               variant="gray"
               title="Digital Proctor"
-              description="Verify candidates with advanced fraud detection, biometrics and authentication systems."
+              description="Find verified candidates with <br/> advanced fraud detection, biometrics <br/> and authentication systems."
               buttonText="Learn More"
+              link="/solutions#real-time-proctoring"
             />
           </motion.div>
         </div>

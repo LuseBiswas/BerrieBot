@@ -22,13 +22,13 @@ export default function FeatureCardItem({
 }: FeatureCardItemProps) {
   return (
     <motion.div
-      className="bg-[#101010] border border-teal-400/30 rounded-xl p-8 text-left"
+      className="bg-[#101010] border border-teal-400/30 rounded-xl p-8 text-center flex items-center justify-center"
       style={{ width: '582px', height: '343px' }}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
     >
-      <div className="flex items-start gap-6">
+      <div className="flex items-center justify-center gap-6">
         {(icon || lordicon) && (
           <div className="flex-shrink-0">
             {lordicon ? (
@@ -55,12 +55,14 @@ export default function FeatureCardItem({
           </div>
         )}
         <div className="flex-1">
-          <h3 className="text-[30px] font-bold text-white mb-4">
-            {title}
-          </h3>
-          <p className="text-gray-400 text-base leading-relaxed text-[22px]">
-            {description}
-          </p>
+          <h3 
+            className="text-[30px] font-bold text-white mb-4"
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
+          <p 
+            className="text-gray-400 text-base leading-relaxed text-[22px]"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         </div>
       </div>
     </motion.div>

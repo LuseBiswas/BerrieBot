@@ -1,5 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 interface DisplaySolutionProps {
   theme: 'dark' | 'light';
@@ -8,7 +8,7 @@ interface DisplaySolutionProps {
   subheading: string;
   bulletPoints: string[];
   outro: string;
-  image: string;
+  lordicons: string[]; // Replace image with lordicons array
 }
 
 const DisplaySolution: React.FC<DisplaySolutionProps> = ({
@@ -18,20 +18,95 @@ const DisplaySolution: React.FC<DisplaySolutionProps> = ({
   subheading,
   bulletPoints,
   outro,
-  image
+  lordicons
 }) => {
   const backgroundClass = theme === 'dark' ? 'bg-black' : 'bg-transparent';
   const textColorClass = theme === 'dark' ? 'text-white' : 'text-black';
   
-  const ImageComponent = () => (
+  const AnimatedBoxesComponent = () => (
     <div className="flex justify-center items-center relative z-10">
-      <Image 
-        src={image} 
-        alt="Solution illustration"
-        width={526}
-        height={669}
-        className="object-cover relative z-10"
-      />
+      <div className="w-[526px] h-[669px] relative">
+        {/* Box 1 - Top Left */}
+        <motion.div
+          className="absolute bg-[#1E1E1E] rounded-[20px] flex items-center justify-center"
+          style={{ 
+            width: '252px', 
+            height: '167.8px',
+            top: '0px',
+            left: '20px',
+            boxShadow: '0 0 22.2px rgba(4, 187, 166, 0.3)'
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div 
+            dangerouslySetInnerHTML={{
+              __html: `<lord-icon
+                src="${lordicons[0]}"
+                trigger="loop"
+                stroke="bold"
+                colors="primary:#ffffff,secondary:#04BBA6"
+                style="width:144px;height:144px">
+              </lord-icon>`
+            }}
+          />
+        </motion.div>
+
+        {/* Box 2 - Top Right */}
+        <motion.div
+          className="absolute bg-[#1E1E1E] rounded-[20px] flex items-center justify-center"
+          style={{ 
+            width: '252px', 
+            height: '167.8px',
+            top: '210px',
+            left: '280px',
+            boxShadow: '0 0 22.2px rgba(4, 187, 166, 0.3)'
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div 
+            dangerouslySetInnerHTML={{
+              __html: `<lord-icon
+                src="${lordicons[1]}"
+                trigger="loop"
+                stroke="bold"
+                colors="primary:#ffffff,secondary:#04BBA6"
+                style="width:144px;height:144px">
+              </lord-icon>`
+            }}
+          />
+        </motion.div>
+
+        {/* Box 3 - Bottom Center */}
+        <motion.div
+          className="absolute bg-[#1E1E1E] rounded-[20px] flex items-center justify-center"
+          style={{ 
+            width: '252px', 
+            height: '167.8px',
+            top: '450px',
+            left: '137px',
+            boxShadow: '0 0 22.2px rgba(4, 187, 166, 0.3)'
+          }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <div 
+            dangerouslySetInnerHTML={{
+              __html: `<lord-icon
+                src="${lordicons[2]}"
+                trigger="loop"
+                stroke="bold"
+                colors="primary:#ffffff,secondary:#04BBA6"
+                style="width:144px;height:144px">
+              </lord-icon>`
+            }}
+          />
+        </motion.div>
+      </div>
     </div>
   );
 
@@ -53,7 +128,7 @@ const DisplaySolution: React.FC<DisplaySolutionProps> = ({
                 <div className={`flex-shrink-0 w-[20px] h-[20px] rounded-full flex items-center justify-center ${theme === 'dark' ? 'text-white' : 'text-black'} text-[20px] font-inter font-light`}>
                   {index + 1}
                 </div>
-                <p className="text-[19px] font-inter font-light leading-relaxed flex-1 text-left">
+                <p className="text-[19px] font-inter font-light leading-relaxed flex-1 text-left text-white">
                   {point}
                 </p>
               </div>
@@ -79,13 +154,13 @@ const DisplaySolution: React.FC<DisplaySolutionProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[669px]">
           {position === 'left' ? (
             <>
-              <ImageComponent />
+              <AnimatedBoxesComponent />
               <ContentComponent />
             </>
           ) : (
             <>
               <ContentComponent />
-              <ImageComponent />
+              <AnimatedBoxesComponent />
             </>
           )}
         </div>

@@ -67,7 +67,7 @@ export default function ProductFeature() {
       
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
         {/* Tagline */}
-        <div className="text-center mb-32 font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]  font-medium text-white bg-clip-text ">
+        <div className="text-center mb-32 font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px]  font-medium text-white bg-clip-text "style={{ fontFamily: 'Manrope, sans-serif' }}>
           <h2 className=" mb-4">
             We&apos;re Not Just
           </h2>
@@ -77,13 +77,15 @@ export default function ProductFeature() {
         </div>
 
         {/* StackByStack Component */}
-        <div className="flex justify-center">
-          <StackByStack 
-            cards={PRODUCT_FEATURES}
-            visibleCount={4}
-            width="w-[396px]"
-            height="h-[396px]"
-          />
+        <div className="relative flex justify-center h-[396px]">
+          <div className="relative left-[-300px]">
+            <StackByStack 
+              cards={PRODUCT_FEATURES}
+              visibleCount={4}
+              width="w-[396px]"
+              height="h-[396px]"
+            />
+          </div>
         </div>
       </div>
     </section>

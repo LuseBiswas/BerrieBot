@@ -125,14 +125,14 @@ export default function ComparisonSection() {
         {/* Header with icon and arrows */}
         <div className="relative mb-16">
           {/* Title */}
-          <div className="relative inline-block mb-8">
+          <div className="relative inline-block mb-8" style={{ fontFamily: 'Manrope, sans-serif' }}>
             {/* Background to block the line but preserve grid with fading effect */}
             <div className="absolute inset-0 -mx-12 -my-6 rounded-lg" 
                  style={{
                    background: 'radial-gradient(ellipse 70% 60% at center, #101010 30%, #101010 60%, transparent 80%)'
                  }}></div>
             <motion.h2 
-              className="relative z-10 font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text"
+              className="relative z-10 font-inter text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl mb-8 font-medium text-[#252527] bg-clip-text"
               style={{ 
                 opacity: headingOpacity, 
                 y: headingY,
