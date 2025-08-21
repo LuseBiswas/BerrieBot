@@ -1,7 +1,7 @@
 "use client";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import React, { useRef, useState, useEffect } from "react";
-import { ArrowLeft, ArrowRight, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import Image from "next/image";
 
 const COMPARISON_DATA = [
@@ -42,8 +42,6 @@ export default function MobileComparisonXSection() {
   const headingY = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [50, 0, 0, -50]);
 
   // Scroll-based animations for BEFORE/AFTER labels (entrance and outro)
-  const labelsOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [0, 1, 1, 0]);
-  const labelsY = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [30, 0, 0, -30]);
 
   // Individual row animations (must be separate useTransform calls to follow React Hooks rules)
   const row0Opacity = useTransform(scrollYProgress, [0.4, 0.7, 0.8, 0.95], [0, 1, 1, 0]);

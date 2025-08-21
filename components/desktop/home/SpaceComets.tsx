@@ -1,5 +1,5 @@
 // add useReducedMotion to your framer-motion import
-import { motion, useMotionValue, useTransform, useSpring, useMotionTemplate, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 // ========================= SpaceComets.tsx =========================
 type SpaceCometsProps = {
@@ -142,7 +142,7 @@ type SpaceCometsProps = {
                 width: c.size,
                 height: c.size,
                 background: color,
-                mixBlendMode: "screen" as any,
+                mixBlendMode: "screen" as React.CSSProperties["mixBlendMode"],
                 boxShadow: `
                   0 0 ${c.size * 3}px ${color},
                   0 0 ${c.size * 7}px ${hexToRgba(color, 0.6)}

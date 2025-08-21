@@ -7,7 +7,7 @@ import {
   useInView,
   AnimatePresence,
 } from "framer-motion";
-import Image from 'next/image';
+
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const TESTIMONIALS = [
