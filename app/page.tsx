@@ -1,5 +1,5 @@
 import CompaniesSection from "@/components/desktop/home/CompaniesSection";
-import CarouselSection from "@/components/desktop/home/CarouselSection";
+
 import FeatureCard from "@/components/desktop/home/FeatureCard";
 import ComparisonSection from "@/components/desktop/home/ComparisonSection";
 import TestimonialSection from "@/components/desktop/home/TestimonialSection";

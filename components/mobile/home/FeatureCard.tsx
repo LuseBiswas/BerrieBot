@@ -26,29 +26,7 @@ function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number
   return { wordProgress, colorTransform };
 }
 
-/* ---------- Animated Word Component ---------- */
-function AnimatedWord({ 
-  word, 
-  wordIndex, 
-  scrollProgress, 
-  lineIndex 
-}: { 
-  word: string; 
-  wordIndex: number; 
-  scrollProgress: MotionValue<number>; 
-  lineIndex: number; 
-}) {
-  const { colorTransform } = useWordAnimation(scrollProgress, wordIndex, lineIndex);
-  
-  return (
-    <motion.span
-      style={{ color: colorTransform }}
-      className="inline-block mr-1"
-    >
-      {word}
-    </motion.span>
-  );
-}
+
 
 export default function MobileFeatureCard() {
   const ref = useRef<HTMLDivElement>(null);

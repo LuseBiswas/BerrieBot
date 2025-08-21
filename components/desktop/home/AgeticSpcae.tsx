@@ -187,9 +187,11 @@ const AnimatedIcon = ({ lordicon, className, style }: {
       
       iconRef.current.appendChild(lordIconElement);
       
+      // Store the current ref value for cleanup
+      const currentIconRef = iconRef.current;
       return () => {
-        if (iconRef.current) {
-          iconRef.current.innerHTML = '';
+        if (currentIconRef) {
+          currentIconRef.innerHTML = '';
         }
       };
     }
@@ -412,9 +414,6 @@ export default function EllipseOrbit({
   color = "#04BBA6",
   glow = 4,
   direction = -1, // -1 matches your original (dashoffset decreasing)
-  // Defaults
-  fadePx = 18,
-  fadeGamma = 1.7,
 }: OrbitProps) {
   const viewW = 1309; // Increased by 10% from 1190
   const viewH = 706;

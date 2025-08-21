@@ -13,7 +13,6 @@ export default function CompaniesSection() {
   // Transform scroll progress for different animations
   const horizontalLinesProgress = useTransform(scrollYProgress, [0.1, 0.4], [0, 1]);
   const verticalLinesProgress = useTransform(scrollYProgress, [0.2, 0.5], [0, 1]);
-  const contentProgress = useTransform(scrollYProgress, [0.4, 0.7], [0, 1]);
 
   return (
     <section ref={ref} className="py-16 sm:py-3.5 bg-[#FAFAFA]">
