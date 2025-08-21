@@ -304,13 +304,13 @@ const FlippableCard = React.memo(({
       <AnimatePresence>
         {isBlurred && (
           <motion.div
-            className="fixed inset-0 z-40"
+            className="fixed inset-0 z-60"
             style={{
-              backdropFilter: shouldReduceMotion ? "none" : "blur(8px)",
-              backgroundColor: "rgba(0, 0, 0, 0.5)"
+              backdropFilter: shouldReduceMotion ? "none" : "blur(20px)",
+              backgroundColor: "rgba(0, 0, 0, 0.6)"
             }}
             initial={{ opacity: 0, backdropFilter: shouldReduceMotion ? "none" : "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: shouldReduceMotion ? "none" : "blur(8px)" }}
+            animate={{ opacity: 1, backdropFilter: shouldReduceMotion ? "none" : "blur(20px)" }}
             exit={{ opacity: 0, backdropFilter: shouldReduceMotion ? "none" : "blur(0px)" }}
             transition={{ 
               duration: shouldReduceMotion ? 0.1 : 0.4,
@@ -328,7 +328,7 @@ const FlippableCard = React.memo(({
         style={{
           ...style,
           perspective: 1000,
-          zIndex: isFlipped ? 50 : 30
+          zIndex: isFlipped ? 70 : 30
         }}
         onClick={handleCardClick}
         animate={floating && !isFlipped && !shouldReduceMotion ? { 
@@ -697,7 +697,7 @@ export default function EllipseOrbit({
   ), []);
 
   return (
-    <section className="w-full h-[1994px] bg-black flex items-center justify-center relative z-50">
+    <section className="w-full h-[1994px] bg-black flex flex-col items-center justify-center relative z-50">
       {/* Background glow images - behind stars but above black bg */}
       {backgroundImages}
       
@@ -718,35 +718,58 @@ export default function EllipseOrbit({
         } : {}}
       />
       
-      {staticElements}
-      
-      {/* Optimized glow effect behind logo */}
-      <motion.div
-        className="absolute z-10"
+      {/* Main Heading */}
+      <div 
+        className="absolute z-50 text-center -mt-20 mb-10"
         style={{
-          top: "43%",
-          left: "12%",
-          transform: "translate(-50%, -50%)"
+          top: "15%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          fontSize: "64px",
+          color: "white",
+          lineHeight: "1.2",
+          
+          fontFamily: 'Manrope, sans-serif'
         }}
-        animate={!shouldReduceMotion ? {
-          scale: [1, 1.1, 1],
-          opacity: [0.8, 1, 0.8],
-          y: [0, -5, 0]
-        } : {}}
-        transition={!shouldReduceMotion ? {
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        } : {}}
       >
-        <Image
-          src="/image/space/Logo/glow.png"
-          alt="Glow effect"
-          width={290}
-          height={290}
-          priority={true}
-        />
-      </motion.div>
+        Berri is your complete
+        <br />
+        360° Agentic Stack
+        <br />
+        for hiring
+      </div>
+      
+      {/* Main Content Container - Everything below the heading */}
+      <div className="relative w-full h-full">
+        {staticElements}
+        
+        {/* Optimized glow effect behind logo */}
+        <motion.div
+          className="absolute z-10"
+          style={{
+            top: "43%",
+            left: "12%",
+            transform: "translate(-50%, -50%)"
+          }}
+          animate={!shouldReduceMotion ? {
+            scale: [1, 1.1, 1],
+            opacity: [0.8, 1, 0.8],
+            y: [0, -5, 0]
+          } : {}}
+          transition={!shouldReduceMotion ? {
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          } : {}}
+        >
+          <Image
+            src="/image/space/Logo/glow.png"
+            alt="Glow effect"
+            width={290}
+            height={290}
+            priority={true}
+          />
+        </motion.div>
       
       {/* Connect1 card */}
       <FlippableCard
@@ -924,15 +947,25 @@ export default function EllipseOrbit({
         ]}
       />
       
-      <OptimizedOrbit
-        lapSeconds={lapSeconds}
-        segment={segment}
-        strokeWidth={strokeWidth}
-        color={color}
-        glow={glow}
-        direction={direction}
-      />
+      <div 
+        className="absolute"
+        style={{
+          top: "33%", // Move down to be below the heading
+          left: "50%",
+          transform: "translate(-50%, 0)"
+        }}
+      >
+        <OptimizedOrbit
+          lapSeconds={lapSeconds}
+          segment={segment}
+          strokeWidth={strokeWidth}
+          color={color}
+          glow={glow}
+          direction={direction}
+        />
+      </div>
       {/* <SpaceComets color="#04BBA6" maxConcurrent={3} spawnRatePerMin={18} /> */}
+      </div>
     </section>
   );
 }
