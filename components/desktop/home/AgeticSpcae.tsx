@@ -859,7 +859,7 @@ export default function EllipseOrbit({
           />
         </g>
       </svg>
-      <SpaceComets color="#04BBA6" maxConcurrent={3} spawnRatePerMin={18} />
+      {/* <SpaceComets color="#04BBA6" maxConcurrent={3} spawnRatePerMin={18} /> */}
     </section>
   );
 }
