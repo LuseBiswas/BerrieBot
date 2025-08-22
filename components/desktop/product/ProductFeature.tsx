@@ -12,21 +12,18 @@ const PRODUCT_FEATURES: StackCard[] = [
   },
   {
     id: 'ai-ready',
-    top: 'AI-Ready APIs',
-    ribbon: '99.99 % uptime',
-    bottom: 'Scale without ops',
+    top: 'Built by AI Natives',
+    ribbonStatic: 'Patents, exits, and 10M+ minutes of AI assessments power this platform.',
   },
   {
     id: 'obs-five',
-    top: 'Observability',
-    ribbon: 'Zero-config tracing',
-    bottom: 'Data-driven fixes',
+    top: 'Modular. Scalable. Predictable Pricing.',
+    ribbonStatic:'Use what you need, when you need. Flexible prepaid commerical plans.',
   },
   {
     id: 'global-deploy',
-    top: <>Global<br/><span className="text-teal-400">Deployment</span></>,
-    ribbon: 'Multi-region support',
-    bottom: <>Instant<br/><span className="text-teal-400">Scaling</span></>,
+    top: 'Zero Vendor Bloat',
+    ribbonStatic: 'Why juggle 6 tools when one platform does it all?'
   },
 ];
 
@@ -77,7 +74,7 @@ export default function ProductFeature() {
         </div>
 
         {/* StackByStack Component */}
-        <div className="relative flex justify-center h-[396px]">
+        <div className="relative flex justify-center h-[396px] mt-65">
           <div className="relative left-[-300px]">
             <StackByStack 
               cards={PRODUCT_FEATURES}

@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, MotionValue, useTransform, useScroll } from "framer-motion";
 
-export default function HeroSection() {
+export default function MobileAboutSubHeroSection() {
   const ref = useRef<HTMLElement>(null);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -18,7 +19,7 @@ export default function HeroSection() {
 
   /* ---------- Custom Hook for Word Animation ---------- */
   function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
-    const lineDelay = lineIndex * 0.15;
+    const lineDelay = lineIndex * 0.42; // Much larger delay between lines
     const wordDelay = wordIndex * 0.015;
     const startPoint = 0.2 + lineDelay + wordDelay;
     const endPoint = startPoint + 0.06;
@@ -32,7 +33,7 @@ export default function HeroSection() {
     const colorTransform = useTransform(
       wordProgress,
       [0, 1],
-      ["#969696", "#3d3d3d"]
+      ["#6B7280", "#FFFFFF"]
     );
     
     return { wordProgress, colorTransform };
@@ -66,17 +67,19 @@ export default function HeroSection() {
   function AnimatedTextWithBreaks({ 
     text, 
     scrollProgress,
-    className = ""
+    className = "",
+    style = {}
   }: { 
     text: string; 
     scrollProgress: MotionValue<number>;
     className?: string;
+    style?: React.CSSProperties;
   }) {
     // Split by <br/> to handle line breaks
     const lines = text.split('<br/>');
     
     return (
-      <div className={className}>
+      <div className={className} style={style}>
         {lines.map((line, lineIndex) => {
           const words = line.trim().split(' ').filter(word => word.length > 0);
           
@@ -100,49 +103,65 @@ export default function HeroSection() {
   }
 
   // Force consistent className after hydration
-  const sectionClassName =
-    "relative mt-36 flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent";
+  const sectionClassName = "relative mt-20 flex flex-col items-center justify-center px-4 bg-transparent mb-20 overflow-visible";
 
   return (
-    <section
+    <section 
       ref={ref}
       className={sectionClassName}
       suppressHydrationWarning={true}
-      style={isMounted ? {} : { marginTop: "9rem" }}
+      style={isMounted ? {} : { marginTop: '5rem' }}
     >
-      {/* ---- "We are Berribot" pill ---- */}
-      <div className="mb-12 relative z-10">
-        <div className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
-          Solutions
-        </div>
+      {/* Background Image */}
+      <div className="absolute pointer-events-none" style={{ top: '-80px', left: '-230px', zIndex: 1 }}>
+        <Image
+          src="/image/mobile/7.png"
+          alt="Background"
+          width={577}
+          height={536}
+          className="w-[877.31px] h-[836px] opacity-[60%]"
+        />
       </div>
-
-      {/* ---- Main Heading ---- */}
-      <div className="text-center w-full max-w-7xl mx-auto relative z-10 mb-12"style={{ fontFamily: 'Manrope, sans-serif' }}>
-        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text">
-        Smart bots. Less
-          <br />
-          busywork.
+      
+      {/* Second Background Image */}
+      <div className="absolute pointer-events-none" style={{ top: '-250px', right: '-230px', zIndex: -1 }}>
+        <Image
+          src="/image/mobile/9.png"
+          alt="Background 2"
+          width={377}
+          height={336}
+          className="w-[543px] h-[462px] "
+        />
+      </div>
+      
+      {/* Main Heading */}
+      <div className="text-center w-full max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto relative z-10 mb-6">
+        <h1 
+          className="tracking-tight mb-6 font-medium text-white"
+          style={{
+            fontSize: '76px',
+            fontFamily: 'Manrope, sans-serif',
+            lineHeight: '1.2'
+          }}
+        >
+          Why we exist?
         </h1>
       </div>
 
-      {/* ---- Description ---- */}
-      <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-8"style={{ fontFamily: 'Manrope, sans-serif' }}>
+      {/* Description */}
+      <div className="text-center w-full max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto relative z-10">
         {isMounted && (
           <AnimatedTextWithBreaks 
-            text="At Berribot, we believe in tag-teaming with AI to take the grind out of <br/>everyday workflows. Whether you're hiring at scale, vetting online <br/>participants, or texting leads like a boss—we've got a bot for that."
+            text="At Berribot, we believe the future belongs to businesses where people focus on creativity, problem-solving, and strategy while AI handles the repetitive, time-consuming work.<br/>Our mission is simple: unleash human ingenuity by giving organizations intelligent digital agents that work at scale, without compromise."
             scrollProgress={scrollYProgress}
-            className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-5xl mx-auto"
+            className="leading-[1.4] font-light mx-auto"
+            style={{
+              fontSize: '36px',
+              fontFamily: 'Manrope, sans-serif'
+            }}
           />
         )}
       </div>
-
-      {/* ---- Book a Demo Button ---- */}
-      {/* <div className="relative z-10">
-        <button className="bg-[#04BBA6] text-white font-inter font-medium text-lg px-8 py-3 rounded-full hover:bg-[#00AFA7] transition-colors duration-300">
-          Book a Demo
-        </button>
-      </div> */}
     </section>
   );
-}
+} 

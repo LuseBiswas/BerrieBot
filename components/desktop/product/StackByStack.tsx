@@ -5,8 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 export interface StackCard {
   id: string;
   top: React.ReactNode;
-  ribbon: React.ReactNode;
-  bottom: React.ReactNode;
+  ribbon?: React.ReactNode;
+  ribbonStatic?: React.ReactNode;
+  bottom?: React.ReactNode;
 }
 
 interface StackByStackProps {
@@ -197,31 +198,43 @@ export default function StackByStack({
               {/* Teal ribbon section */}
               <div className="relative w-full py-4 bg-gradient-to-r from-teal-500 to-teal-400 overflow-hidden">
                 <div className="relative">
-                  <div className="flex animate-marquee whitespace-nowrap">
-                    <span className="text-white font-semibold text-sm uppercase tracking-wider mx-6">
-                      {card.ribbon}
-                    </span>
-                    <span className="text-white font-semibold text-sm uppercase tracking-wider mx-6">
-                      {card.ribbon}
-                    </span>
-                    <span className="text-white font-semibold text-sm uppercase tracking-wider mx-6">
-                      {card.ribbon}
-                    </span>
-                    <span className="text-white font-semibold text-sm uppercase tracking-wider mx-6">
-                      {card.ribbon}
-                    </span>
-                  </div>
+                  {card.ribbonStatic ? (
+                    // Static ribbon without marquee effect
+                    <div className="text-center">
+                      <span className="text-white font-semibold text-sm uppercase tracking-wider">
+                        {card.ribbonStatic}
+                      </span>
+                    </div>
+                  ) : (
+                    // Original marquee ribbon
+                    <div className="flex animate-marquee whitespace-nowrap">
+                      <span className="text-white font-semibold text-sm uppercase tracking-wider mx-6">
+                        {card.ribbon}
+                      </span>
+                      <span className="text-white font-semibold text-sm uppercase tracking-wider mx-6">
+                        {card.ribbon}
+                      </span>
+                      <span className="text-white font-semibold text-sm uppercase tracking-wider mx-6">
+                        {card.ribbon}
+                      </span>
+                      <span className="text-white font-semibold text-sm uppercase tracking-wider mx-6">
+                        {card.ribbon}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
 
               {/* Bottom section */}
-              <div className="flex-1 flex items-center justify-center px-6 py-8">
-                <div className="text-center space-y-2">
-                  <div className="text-[45px] font-light leading-tight text-black">
-                    {card.bottom}
+              {card.bottom && (
+                <div className="flex-1 flex items-center justify-center px-6 py-8">
+                  <div className="text-center space-y-2">
+                    <div className="text-[45px] font-light leading-tight text-black">
+                      {card.bottom}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Enhanced glow effect for front card */}

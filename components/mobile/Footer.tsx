@@ -126,10 +126,10 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Products</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-            <li><Link href="/product?product=berriconnect" className="hover:text-white transition-colors">BerriConnect</Link></li>
-            <li><Link href="/product?product=berriproctor" className="hover:text-white transition-colors">BerriProctor</Link></li>
-            <li><Link href="/product?product=berrimastermind" className="hover:text-white transition-colors">BerriMasterMind</Link></li>
-            <li><Link href="/product?product=berri360" className="hover:text-white transition-colors">Berri360</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors">BerriConnect</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors">BerriSearch</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors">BerriMasterMind</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors">BerriProctor</Link></li>
           </ul>
         </div>
         
@@ -137,9 +137,9 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Solutions</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-            <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors">Recruitment Assistant</Link></li>
-            <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors">Real-time Proctoring</Link></li>
-            <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors">Live Texting</Link></li>
+          <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors">Recruitment Assistant</Link></li>
+              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors">Real-time Proctoring</Link></li>
+              <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors">Live Texting</Link></li>
           </ul>
         </div>
         
@@ -147,9 +147,8 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Resources</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-            <li><Link href="/resources/faq" className="hover:text-white transition-colors">Learn</Link></li>
-            <li><Link href="/explore" className="hover:text-white transition-colors">Explore</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors">Support</Link></li>
+          <li><Link href="/resources#faq" className="hover:text-white transition-colors">FAQ</Link></li>
+          <li><Link href="/resources#blogs" className="hover:text-white transition-colors">Blogs</Link></li>
           </ul>
         </div>
         
@@ -169,10 +168,9 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Legal</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-            <li><Link href="#" className="hover:text-white transition-colors">Compliance</Link></li>
-            <li><Link href="/policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-            <li><Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors">Terms</Link></li>
+          <li><Link href="/policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link></li>
+
           </ul>
         </div>
         

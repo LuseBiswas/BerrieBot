@@ -182,7 +182,7 @@ export default function MobileAboutStatsSection() {
       
 
       <motion.div 
-        className="relative z-10 w-full max-w-sm mx-auto"
+        className="relative z-10 w-full max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -216,11 +216,11 @@ export default function MobileAboutStatsSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="text-center max-w-xs mx-auto">
+            <div className="text-center max-w-2xl mx-auto">
               <p 
                 className="leading-[1.4] font-light text-black mb-4"
                 style={{
-                  fontSize: '20px',
+                  fontSize: '36px',
                   fontFamily: 'Manrope, sans-serif'
                 }}
               >
@@ -244,18 +244,17 @@ export default function MobileAboutStatsSection() {
             <h1 
               className="tracking-tight font-medium text-black text-center"
               style={{
-                fontSize: '48px',
+                fontSize: '76px',
                 fontFamily: 'Manrope, sans-serif',
                 lineHeight: '1.2'
               }}
             >
-              We’ve already
+              We’ve already 
               <br />
-              delivered
-              <br />
-              measurable
+              delivered measurable 
               <br />
               results with;
+              
             </h1>
           </motion.div>
 
@@ -265,11 +264,11 @@ export default function MobileAboutStatsSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="text-center max-w-xs mx-auto">
+            <div className="text-center max-w-2xl mx-auto">
               <p 
                 className="leading-[1.4] font-light text-black mb-4"
                 style={{
-                  fontSize: '20px',
+                  fontSize: '36px',
                   fontFamily: 'Manrope, sans-serif'
                 }}
               >
@@ -285,8 +284,8 @@ export default function MobileAboutStatsSection() {
             className="bg-white rounded-2xl flex items-center justify-center"
             style={{ 
               boxShadow: '10px 20px 60px 2px rgba(4, 187, 166, 0.3)',
-              width: '324px',
-              height: '310px'
+              width: '666px',
+              height: '533px'
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -296,35 +295,35 @@ export default function MobileAboutStatsSection() {
             <div className="grid grid-cols-2 gap-12 p-2">
               {/* Stat 1 */}
               <div className="text-center">
-                <div className="text-[36px] font-light text-[#007E79CF] mb-2 leading-none" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <div className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none" style={{ fontFamily: 'Manrope, sans-serif' }}>
                   <AnimatedNumber 
                     targetValue={50}
                     format={(num) => Math.round(num).toLocaleString('en-US')}
                     showActual={showActualValues}
                   />%
                 </div>
-                <div className="text-[14px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <div className="text-[22px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
                 Reduction in<br />time-to-hire
                 </div>
               </div>
 
               {/* Stat 2 */}
               <div className="text-center">
-                <div className="text-[36px] font-light text-[#007E79CF] mb-2 leading-none" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <div className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none" style={{ fontFamily: 'Manrope, sans-serif' }}>
                   <AnimatedNumber 
                     targetValue={78}
                     format={(num) => `${Math.round(num)}%`}
                     showActual={showActualValues}
-                  />%
+                  />
                 </div>
-                <div className="text-[14px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <div className="text-[22px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
                 savings in<br />recruiter & panel <br /> hours
                 </div>
               </div>
 
               {/* Stat 3 */}
               <div className="text-center">
-                <div className="text-[36px] font-light text-[#007E79CF] mb-2 leading-none flex items-center justify-center" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <div className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none flex items-center justify-center" style={{ fontFamily: 'Manrope, sans-serif' }}>
                   <AnimatedNumber 
                     targetValue={2}
                     format={(num) => `${Math.round(num)}x↑`}
@@ -344,21 +343,21 @@ export default function MobileAboutStatsSection() {
                     }}
                   />
                 </div>
-                <div className="text-[14px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <div className="text-[22px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
                   show-up rates
                 </div>
               </div>
 
               {/* Stat 4 */}
               <div className="text-center">
-                <div className="text-[36px] font-light text-[#007E79CF] mb-2 leading-none" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <div className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none" style={{ fontFamily: 'Manrope, sans-serif' }}>
                   <AnimatedNumber 
                     targetValue={47}
                     format={(num) => (num / 10).toFixed(1)}
                     showActual={showActualValues}
                   />/5
                 </div>
-                <div className="text-[14px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <div className="text-[22px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
                 candidate<br />satisfaction  <br /> scores
                 </div>
               </div>

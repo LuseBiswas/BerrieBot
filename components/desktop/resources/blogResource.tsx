@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Blog post data interface
 interface BlogPost {
@@ -42,18 +43,40 @@ const blogPosts: BlogPost[] = [
 ];
 
 export default function BlogResource() {
+  const [activeTab, setActiveTab] = useState<'sub-task' | 'whitepaper'>('sub-task');
+
   return (
     <div className="bg-black ">
       {/* Hero Section */}
       <section id="blogs" className="relative  flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent">
         {/* ---- Pills ---- */}
         <div className="mt-12 mb-12 relative z-10 flex gap-4">
-          <div className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
-          Sub-stack
-          </div>
-          <div className="bg-white text-black px-6 py-1 rounded-full font-inter font-medium text-lg">
+          <motion.button
+            onClick={() => setActiveTab('sub-task')}
+            className={`px-6 py-1 rounded-full font-inter font-medium text-lg cursor-pointer ${
+              activeTab === 'sub-task'
+                ? 'bg-[#00C7BEB2] text-white'
+                : 'bg-white text-black'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            Sub-stack
+          </motion.button>
+          <motion.button
+            onClick={() => setActiveTab('whitepaper')}
+            className={`px-6 py-1 rounded-full font-inter font-medium text-lg cursor-pointer ${
+              activeTab === 'whitepaper'
+                ? 'bg-[#00C7BEB2] text-white'
+                : 'bg-white text-black'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
             White Papers
-          </div>
+          </motion.button>
         </div>
 
         {/* ---- Main Heading ---- */}
@@ -66,19 +89,76 @@ export default function BlogResource() {
         </div>
       </section>
 
-      {/* Blog Cards Section */}
+      {/* Content Section */}
       <div className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          {/* Blog Cards in horizontal layout */}
-          <div className="flex gap-6 justify-center">
-            {blogPosts.map((post) => (
-              <Link key={post.id} href={post.link}>
-                <BlogCard 
-                  post={post} 
-                />
-              </Link>
-            ))}
-          </div>
+          <AnimatePresence mode="wait">
+            {activeTab === 'sub-task' ? (
+              /* Blog Cards in horizontal layout */
+              <motion.div 
+                key="sub-task"
+                className="flex gap-6 justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                {blogPosts.map((post, index) => (
+                  <motion.div
+                    key={post.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: index * 0.1,
+                      ease: "easeOut" 
+                    }}
+                  >
+                    <Link href={post.link}>
+                      <BlogCard 
+                        post={post} 
+                      />
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.div>
+            ) : (
+              /* Coming Soon Message for Whitepaper */
+              <motion.div 
+                key="whitepaper"
+                className="flex flex-col items-center justify-center py-20"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <motion.div 
+                  className="text-center text-white font-medium"
+                  style={{
+                    fontSize: '48px',
+                    fontFamily: 'Manrope, sans-serif'
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                >
+                  Content is coming soon
+                </motion.div>
+                <motion.div 
+                  className="text-center text-white/70 mt-4 font-light"
+                  style={{
+                    fontSize: '24px',
+                    fontFamily: 'Manrope, sans-serif'
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                >
+                  We&apos;re working on bringing you amazing whitepaper content
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

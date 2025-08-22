@@ -45,7 +45,7 @@ export default function HeroSection() {
       {/* ---- Book a Demo Button ---- */}
       <div className="relative z-10">
         <Link href="/schedule">
-          <button className="bg-[#04BBA6] text-white font-inter font-medium text-lg px-8 py-3 rounded-full hover:bg-[#00AFA7] transition-colors duration-300">
+          <button className="bg-[#04BBA6] text-white font-inter font-medium text-lg px-8 py-3 rounded-full hover:bg-[#00AFA7] hover:cursor-pointer transition-colors duration-300">
             Book a Demo
           </button>
         </Link>

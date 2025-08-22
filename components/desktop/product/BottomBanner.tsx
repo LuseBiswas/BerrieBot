@@ -120,7 +120,7 @@ export default function BottomBanner() {
   });
 
   return (
-    <section ref={ref} className="relative py-16 sm:py-20 bg-black text-white overflow-hidden">
+    <section ref={ref} className="relative py-16 sm:py-20 bg-black text-white overflow-hidden" style={{ fontFamily: 'Manrope, sans-serif' }}>
       {/* Background pattern from CompanyTestimonialSection */}
       <div className="absolute inset-0">
         {/* You can add any background pattern here similar to CompanyTestimonialSection */}
@@ -137,7 +137,7 @@ export default function BottomBanner() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <span className="text-[#04BBA6]">Plug into</span>{" "}
+            <span className="text-white">Plug into</span>{" "}
             <span className="text-white">Your ATS.</span>
             <br />
             <span className="text-white">Scale Across Geos.</span>

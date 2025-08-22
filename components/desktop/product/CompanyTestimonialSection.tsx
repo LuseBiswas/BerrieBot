@@ -7,51 +7,55 @@ import {
   useInView,
   AnimatePresence,
 } from "framer-motion";
-import Image from 'next/image';
+
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const TESTIMONIALS = [
   {
     id: 1,
-    quote: "Berribot changed L1 interviews forever at Wipro.",
-    author: "Anisha",
-    title: "Global Head - Talent, Wipro",
+    quote: "AI is the future of Interviewing.<br/> GenZ's will look forward to using Berribot",
+    author: "CXO",
+    title: "of a Fortune 500 IT Services firm",
     company: "wipro",
-    logo: "/image/company/wipro.png",
   },
   {
     id: 2,
-    quote: "AI-powered screening reduced our hiring time by 60% at Cognizant.",
-    author: "Rajesh Kumar",
-    title: "VP - Human Resources, Cognizant",
+    quote: "Berribot changed the way <br/> L1 interviews are conducted for us",
+    author: "Director",
+    title: "of a Fortune 500 IT Services firm",
     company: "cognizant",
-    logo: "/image/company/wipro.png",
   },
   {
     id: 3,
     quote:
-      "Berribot's automation helped us scale our recruitment process seamlessly.",
-    author: "Sarah Chen",
-    title: "Director - Talent Acquisition, TCS",
+      "We should learn to adapt ourselves <br/> with the use of AI tools in Hiring and Berribot <br/> has just stepped up their game",
+    author: "Global Recruitment Head",
+    title: "of a billion dollar IT firm",
     company: "tcs",
-    logo: "/image/company/wipro.png",
   },
   {
     id: 4,
     quote:
-      "The fraud detection feature saved us countless hours of manual verification.",
-    author: "Michael Rodriguez",
-    title: "Head of Recruitment, Infosys",
+      "Berribot delivers the exact need <br/> of the hour with their exceptional products",
+    author: "CXO",
+    title: "of a billion dollar US based Mortgage Refinancing business",
     company: "infosys",
-    logo: "/image/company/wipro.png",
   },
   {
     id: 5,
     quote:
-      "Our candidate experience improved dramatically with Berribot's human-like AI.",
-    author: "Priya Sharma",
-    title: "Chief People Officer, HCL",
+      "Berribot has significantly <br/> Revolutionalized the way we hire and also <br/> lead the way to the future of Gen AI hiring",
+    author: "Head of Talent Acquisition",
+    title: "of a Fortune 200 Digital and Technology Enterprise",
     company: "hcl",
-    logo: "/image/company/wipro.png",
+  },
+  {
+    id: 6,
+    quote:
+      "Berribot has helped enhance our candidate <br/> experience and improved our hiring turn around <br/> times especially in the LATAM markets",
+    author: "Global Head of TA",
+    title: "Digital Engineering Firm",
+    company: "hcl",
   },
 ];
 
@@ -59,6 +63,14 @@ export default function CompanyTestimonialSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 }); // Triggers when 50% of component is in view (centered)
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  const nextTestimonial = () => {
+    setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
+  };
+
+  const prevTestimonial = () => {
+    setActiveTestimonial((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  };
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -112,146 +124,88 @@ export default function CompanyTestimonialSection() {
             />
 
             {/* Main content */}
-            <motion.div className="py-20" style={{ opacity: contentProgress }}>
-              {/* Floating quote icon */}
-              <motion.div
-                className="absolute top-0 left-[12%] mt-10"
-                initial={{ opacity: 0, y: -20 }}
-                animate={
-                  isInView
-                    ? {
-                        opacity: 1,
-                        y: [0, -8, 0], // Floating up and down
-                        rotate: [0, 2, -2, 0], // Slight rotation
-                      }
-                    : { opacity: 0, y: -20 }
-                }
-                transition={{
-                  opacity: { duration: 0.8, delay: 0.2 },
-                  y: {
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1,
-                  },
-                  rotate: {
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1.5,
-                  },
-                }}
-              >
-                <Image
-                  src="/image/components/inverted_comma.png"
-                  alt="Quote"
-                  width={64}
-                  height={64}
-                  className="w-16 h-16 object-contain"
-                />
-              </motion.div>
+            <motion.div className="py-32" style={{ opacity: contentProgress }}>
+            
 
-              {/* Testimonial content */}
-              <motion.div
-                className="text-center max-w-4xl mx-auto mb-16"
-                initial={{ opacity: 0, y: 30 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-                }
-                transition={{ duration: 0.8, delay: 0.4 }}
-                layout
-              >
+              {/* Testimonial content with arrows */}
+              <div className="relative max-w-6xl mx-auto flex items-center min-h-[400px]">
+                {/* Left Arrow */}
+                <motion.button
+                  onClick={prevTestimonial}
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 w-12 h-12 border border-white rounded-full flex items-center justify-center bg-black hover:bg-[#04BBA6] hover:border-[#04BBA6] transition-all duration-300 cursor-pointer z-10"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  <ChevronLeft className="w-6 h-6 text-white" />
+                </motion.button>
+
+                {/* Right Arrow */}
+                <motion.button
+                  onClick={nextTestimonial}
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 w-12 h-12 border border-white rounded-full flex items-center justify-center bg-black hover:bg-[#04BBA6] hover:border-[#04BBA6] transition-all duration-300 cursor-pointer z-10"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  <ChevronRight className="w-6 h-6 text-white" />
+                </motion.button>
+
+                {/* Testimonial content */}
+                <motion.div
+                  className="text-center max-w-4xl mx-auto flex-1 flex flex-col justify-center"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={
+                    isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+                  }
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  layout
+                >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeTestimonial}
-                    className="min-h-[200px] flex flex-col justify-center"
+                    className="flex flex-col justify-center"
                     layout
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <motion.h2
-                      className="text-4xl sm:text-5xl lg:text-6xl font-inter font-light leading-tight mb-12"
+                      className="text-4xl sm:text-[44px] lg:text-[44px] font-inter font-light leading-tight mb-12"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                      layout
+                      dangerouslySetInnerHTML={{ 
+                        __html: `&ldquo;${TESTIMONIALS[activeTestimonial].quote}&rdquo;` 
+                      }}
+                    />
+
+                    <motion.div
+                      className="flex flex-col justify-center"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.4, ease: "easeInOut" }}
                       layout
                     >
-                      &ldquo;{TESTIMONIALS[activeTestimonial].quote}&rdquo;
-                    </motion.h2>
+                      <h3 className="text-2xl font-inter font-medium text-[#04BBA6] mb-2">
+                        {TESTIMONIALS[activeTestimonial].author}
+                      </h3>
+                      <p 
+                        className="text-[24px] text-[#FAFAFA]"
+                        dangerouslySetInnerHTML={{ 
+                          __html: TESTIMONIALS[activeTestimonial].title 
+                        }}
+                      />
+                    </motion.div>
                   </motion.div>
                 </AnimatePresence>
-
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={`author-${activeTestimonial}`}
-                    className="min-h-[80px] flex flex-col justify-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                    layout
-                  >
-                    <h3 className="text-2xl font-inter font-medium text-[#04BBA6] mb-2">
-                      {TESTIMONIALS[activeTestimonial].author}
-                    </h3>
-                    <p className="text-lg text-gray-400">
-                      {TESTIMONIALS[activeTestimonial].title}
-                    </p>
-                  </motion.div>
-                </AnimatePresence>
-              </motion.div>
-
-              {/* Company logos */}
-              <motion.div
-                className="flex justify-center items-center"
-                initial={{ opacity: 0, y: 30 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-                }
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
-                {TESTIMONIALS.map((testimonial, index) => (
-                  <motion.button
-                    key={testimonial.id}
-                    onClick={() => setActiveTestimonial(index)}
-                    className="w-[142.33px] h-[141.83px] border border-white transition-all duration-300 cursor-pointer flex items-center justify-center bg-black"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 + index * 0.1 }}
-                  >
-                    {index === activeTestimonial ? (
-                      // Active state - show company logo with teal background
-                      <div className="w-full h-full bg-[#04BBA6] flex items-center justify-center">
-                        <Image
-                          src={testimonial.logo}
-                          alt={testimonial.company}
-                          width={100}
-                          height={50}
-                          className="w-full h-full object-contain p-2"
-                          onError={(e) => {
-                            // Fallback if image doesn't load
-                            e.currentTarget.style.display = "none";
-                            const nextElement = e.currentTarget
-                              .nextElementSibling as HTMLElement;
-                            if (nextElement) {
-                              nextElement.style.display = "flex";
-                            }
-                          }}
-                        />
-                        {/* Fallback for broken images */}
-                        <div className="w-full h-full bg-[#04BBA6] items-center justify-center text-black font-bold text-xs hidden">
-                          {testimonial.company.toUpperCase()}
-                        </div>
-                      </div>
-                    ) : (
-                      // Inactive state - gray rectangle for ALL inactive boxes
-                      <div className="w-[50px] h-[45px] bg-[#B0B0B0]"></div>
-                    )}
-                  </motion.button>
-                ))}
-              </motion.div>
+                </motion.div>
+              </div>
             </motion.div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 "use client";
-import { motion, useInView, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import FeatureCardItem from "./FeatureCardItem";

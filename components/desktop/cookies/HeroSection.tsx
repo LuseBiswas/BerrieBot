@@ -10,7 +10,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ showConfirmationText = false, onConfirmationChoice, onReadPrivacy }: HeroSectionProps) {
   return (
-    <section className="relative mt-60 flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent">
+    <section className="relative mt-60 flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent" style={{ fontFamily: 'Manrope, sans-serif' }}>
       {/* ---- "We are Berribot" pill ---- */}
       <div className="mb-12 relative z-10">
         <div className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
