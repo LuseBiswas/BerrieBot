@@ -213,7 +213,7 @@ export default function FAQComponent() {
                   className="overflow-hidden relative z-0 mt-[-25px]"
                 >
                   <div className="flex justify-center pt-4">
-                    <div className="w-4/5 bg-[#F4F4F4] rounded-2xl p-6 pt-8">
+                    <div className="w-4/5 bg-transparent rounded-2xl p-6 pt-8">
                       <motion.div
                         initial={{ y: -10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}

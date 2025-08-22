@@ -222,7 +222,7 @@ export default function MobileFAQComponent() {
                   }}
                   className="overflow-hidden w-full flex justify-center mt-2"
                 >
-                  <div className="w-[260px] bg-[#F4F4F4] rounded-2xl p-4">
+                  <div className="w-[260px] bg-transparent rounded-2xl p-4">
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
