@@ -20,21 +20,21 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
 
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-12">
-        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium bg-gradient-to-b from-[#252527] to-[#ADADAEB0] text-transparent bg-clip-text">
-          Not the Choclate 
+        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium bg-white text-transparent bg-clip-text">
+          Not the 
           <br />
-          Chip Kind
+          chocolate  chip kind
         </h1>
       </div>
 
       {/* ---- Description ---- */}
       <div className="text-center w-full max-w-4xl mx-auto relative z-10 mb-28">
-        <p className=" font-inter text-[34px] sm:text-2xl md:text-[28px] leading-[1.4] sm:leading-[1.5] font-light text-white max-w-5xl mx-auto">
+        <p className=" font-inter text-[34px] sm:text-2xl md:text-[28px] leading-[1.4] sm:leading-[1.5] font-light text-white max-w-7xl mx-auto">
           {showConfirmationText ? (
             "You definetly read some?"
           ) : (
             <>
-              Let’s be real: we use cookies - but not the chewy, gooey kind <br /> (unfortunately). <br /> These are the digital kind that help Berribot understand how people use our <br /> website so we can make things better, faster, and smoother for you.
+              Let’s be real: we use cookies - but not the chewy, gooey kind (unfortunately). These are the digital kind that help Berribot <br /> understand  how people use our website so we can <br /> make things better, faster, and smoother for you.
             </>
           )}
         </p>
@@ -51,7 +51,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
           >
             <motion.button
               onClick={onReadPrivacy}
-              className="bg-white border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 flex items-center justify-center text-gray-700 font-medium hover:cursor-pointer"
+              className="bg-white border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 flex items-center justify-center text-gray-700 font-medium hover:cursor-pointer text-xl"
               style={{ width: '268px', height: '73px' }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -70,7 +70,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             onClick={() => onConfirmationChoice?.('back')}
-            className="bg-white text-[#181818] px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 font-inter font-light hover:cursor-pointer w-auto"
+            className="bg-white text-[#181818] px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 font-inter font-light hover:cursor-pointer w-auto text-xl"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -82,7 +82,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             onClick={() => onConfirmationChoice?.('readAgain')}
-            className="bg-[#CFCFCF] text-[#181818] px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all duration-200 font-inter font-light hover:cursor-pointer w-auto"
+            className="bg-[#CFCFCF] text-[#181818] px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all duration-200 font-inter font-light hover:cursor-pointer w-auto text-xl"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >

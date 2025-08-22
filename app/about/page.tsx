@@ -10,13 +10,21 @@ import CTASection from "@/components/desktop/product/CTASection";
 export default function AboutPage() {
   return (
     <>
-    <MobileAboutHeroSection/>
-    <MobileCompanyCarousel/>
-    <MobileAboutSubHeroSection/>
-    <MobileAboutProductDisplay/>
-    <MobileAboutStatsSection/>
-    <MobileAboutFounderCarousel/>
-    <CTASection/>
+      <div id="we-are-berribot">
+        <MobileAboutHeroSection/>
+      </div>
+      <MobileCompanyCarousel/>
+      <div id="our-mission">
+        <MobileAboutSubHeroSection/>
+      </div>
+      <div id="what-we-do">
+        <MobileAboutProductDisplay/>
+      </div>
+      <MobileAboutStatsSection/>
+      <div id="our-leaders">
+        <MobileAboutFounderCarousel/>
+      </div>
+      <CTASection/>
     </>
     
   );

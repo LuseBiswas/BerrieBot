@@ -69,7 +69,7 @@ export default function Footer() {
             <h3 className="text-lg font-medium mb-6">Solutions</h3>
             <ul className="space-y-4 text-gray-400">
               <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors">Recruitment Assistant</Link></li>
-              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors">Real-time Proctoring</Link></li>
+              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors">Real-time  Proctoring</Link></li>
               <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors">Live Texting</Link></li>
             </ul>
           </div>
@@ -79,7 +79,7 @@ export default function Footer() {
             <h3 className="text-lg font-medium mb-6">Resources</h3>
             <ul className="space-y-4 text-gray-400">
               <li><Link href="/resources#faq" className="hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link href="/resources#blogs" className="hover:text-white transition-colors">Blogs</Link></li>
+              <li><Link href="/resources#blogs" className="hover:text-white transition-colors">Blog</Link></li>
               
             </ul>
           </div>
@@ -88,11 +88,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">About</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="/about" className="hover:text-white transition-colors">About us</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Our Journey</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Our Values</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Our Teams</Link></li>
-              <li><Link href="#" className="hover:text-white transition-colors">Join us</Link></li>
+              <li><Link href="/about#we-are-berribot" className="hover:text-white transition-colors">We are Berribot</Link></li>
+              <li><Link href="/about#our-mission" className="hover:text-white transition-colors">Our Mission</Link></li>
+              <li><Link href="/about#what-we-do" className="hover:text-white transition-colors">What we do</Link></li>
+              <li><Link href="/about#our-leaders" className="hover:text-white transition-colors">Our Leaders</Link></li>
             </ul>
           </div>
           

@@ -51,7 +51,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
           >
             <motion.button
               onClick={onReadPrivacy}
-              className="bg-white border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 flex items-center justify-center text-gray-700 font-medium hover:cursor-pointer"
+              className="bg-white border border-gray-300 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-200 flex items-center justify-center text-gray-700 font-medium hover:cursor-pointer text-xl"
               style={{ width: '268px', height: '73px' }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -70,7 +70,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             onClick={() => onConfirmationChoice?.('back')}
-            className="bg-white text-[#181818] px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 font-inter font-light hover:cursor-pointer w-auto"
+            className="bg-white text-[#181818] px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 font-inter font-light hover:cursor-pointer w-auto text-xl"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -82,7 +82,7 @@ export default function HeroSection({ showConfirmationText = false, onConfirmati
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             onClick={() => onConfirmationChoice?.('readAgain')}
-            className="bg-[#CFCFCF] text-[#181818] px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all duration-200 font-inter font-light hover:cursor-pointer w-auto"
+            className="bg-[#CFCFCF] text-[#181818] px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all duration-200 font-inter font-light hover:cursor-pointer w-auto text-xl"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
