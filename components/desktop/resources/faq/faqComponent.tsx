@@ -12,47 +12,144 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     id: 1,
-    question: "What exactly is Berribot?",
-    answer: "Think of Berribot as your tireless, AI-powered sidekick. It handles the admin stuff—like scheduling, screening, chasing leads, and sorting tasks—so your team can get back to doing what they do best: being awesome."
+    question: "What is Berribot?",
+    answer: "Berribot is an AI-powered recruitment and workforce automation platform. It uses digital agents to handle communication, screening, interviewing, and fraud detection—reducing manual workload, cutting costs, and improving candidate and employee experience."
   },
   {
     id: 2,
-    question: "Is Berribot just for recruitment?",
-    answer: "Not at all! While Berribot excels at recruitment tasks, it's designed to handle various administrative workflows across different business functions. From lead management to task automation, it's your versatile business companion."
+    question: "Can Berribot scale for large enterprises?",
+    answer: "Yes. Berribot handles up to 10,000 calls or chats per minute across 36+ languages and 130+ countries, making it suitable for both SMBs and global enterprises."
   },
   {
     id: 3,
-    question: "Do I need to be a tech genius to use it?",
-    answer: "Absolutely not! Berribot is built with simplicity in mind. Our intuitive interface makes it easy for anyone to get started, regardless of their technical background. If you can use email, you can use Berribot."
+    question: "How does Berribot ensure interview integrity?",
+    answer: "BerriProctor uses facial recognition, voice biometrics, liveness checks, and anomaly detection (e.g., second screens, lip-sync coaching) to prevent impersonation and fraud during interviews."
   },
   {
     id: 4,
-    question: "How much time can it actually save me?",
-    answer: "Our users typically save 15-20 hours per week on administrative tasks. That's time you can reinvest in growing your business, developing strategies, or simply maintaining a better work-life balance."
+    question: "Can Berribot conduct interviews without human intervention?",
+    answer: "Yes. BerriMastermind delivers fully automated interviews, including adaptive questioning, coding assessments, and AI-driven scoring—available 24/7 to eliminate scheduling delays."
   },
   {
     id: 5,
-    question: "Is my data safe with Berribot?",
-    answer: "Security is our top priority. We use enterprise-grade encryption, comply with GDPR and other data protection standards, and regularly undergo security audits. Your data is as safe with us as it would be in a bank vault."
+    question: "Is Berribot compliant with data privacy regulations?",
+    answer: "Yes. Berribot is GDPR, DPDP (India 2023), CCPA/CPRA, and EEOC compliant. It uses end-to-end encryption, audit trails, and human-in-the-loop review for edge cases. We are also Soc2Type2 and ISO27K compliant."
   },
   {
     id: 6,
-    question: "What if I need help getting started?",
-    answer: "We've got your back! Our dedicated support team provides onboarding assistance, comprehensive documentation, video tutorials, and ongoing support to ensure you get the most out of Berribot from day one."
+    question: "What ROI can companies expect?",
+    answer: "Clients like Cognizant and Wipro have reported:\n\n• 50% faster time-to-hire\n• 75% cost savings on interviews\n• $3M+ in annual productivity savings."
+  },
+  {
+    id: 7,
+    question: "What integrations does Berribot support?",
+    answer: "Berribot integrates with major ATS and HR platforms (Workday, SAP SuccessFactors, Oracle), as well as communication channels like WhatsApp, Teams, Messenger, and SMS."
+  },
+  {
+    id: 8,
+    question: "Who will I be talking to during my Berribot interview?",
+    answer: "You may be interacting with an AI recruiter or interviewer bot. These are digital agents that ask structured questions, record answers, and share them with human recruiters for final evaluation."
+  },
+  {
+    id: 9,
+    question: "How does Berribot save recruiter time?",
+    answer: "Over 60% of recruiter time is typically spent on repetitive tasks. Berribot automates scheduling, reminders, follow-ups, and screening, freeing recruiters for higher-value work."
+  },
+  {
+    id: 10,
+    question: "What metrics can recruiters track?",
+    answer: "Recruiters get dashboards showing candidate show rates, fraud alerts, scoring, and recruiter time saved. Clients have seen 75% cost savings and 50% faster time-to-hire."
+  },
+  {
+    id: 11,
+    question: "How does Berribot help businesses?",
+    answer: "Berribot offers a complete AI based recruitment solution from candidate search, to automated connect, to skill interviews with proctoring. Berribot reduces hiring costs by up to 85%, cuts time-to-hire by 50%, prevents fraud, and improves candidate engagement. It frees recruiters from repetitive tasks so they can focus on decision-making and building relationships."
+  },
+  {
+    id: 12,
+    question: "How does Berribot improve candidate communication?",
+    answer: "BerriConnect automates outreach, reminders, and status updates via voice, SMS, WhatsApp, and chat. This ensures candidates stay informed, increasing show-up rates and reducing ghosting. Berribot ensures that all communications are warm and friendly."
+  },
+  {
+    id: 13,
+    question: "Does Berribot use client data to train models?",
+    answer: "No. Berribot defaults to no cross-company data training. Each client's data remains private and auditable"
+  },
+  {
+    id: 14,
+    question: "How is Berribot priced?",
+    answer: "Berribot offers usage-based pricing. Plans are tiered for SMBs, mid-market, and enterprise, with add-ons for fraud detection, advanced analytics, and ATS integrations."
+  },
+  {
+    id: 15,
+    question: "Does Berribot support multiple languages?",
+    answer: "Yes. Berribot supports 36+ languages and operates in 130+ countries."
+  },
+  {
+    id: 16,
+    question: "Will the AI know if I am the right fit?",
+    answer: "Berribot uses skill-based assessments, coding challenges, and contextual matching against the job description. Human recruiters still review final recommendations."
+  },
+  {
+    id: 17,
+    question: "How do I know the interview is fair?",
+    answer: "All candidates receive the same standardized questions. Scoring is automated and bias-free, helping ensure fairness in evaluation. We constantly train our models to make sure they are bias-free and fair."
+  },
+  {
+    id: 18,
+    question: "Can I complete the interview at my own time?",
+    answer: "Yes. BerriMastermind supports 24/7 asynchronous interviews, so you can log in and complete them when convenient."
+  },
+  {
+    id: 19,
+    question: "What if I face technical issues?",
+    answer: "Berribot interviews are designed to auto-resume if a call drops or a session is interrupted. You will also receive reminders and links to continue."
+  },
+  {
+    id: 20,
+    question: "Will my data be safe?",
+    answer: "Yes. Your personal information and interview recordings are encrypted and stored securely, fully compliant with data privacy laws like GDPR and India's DPDP Act."
+  },
+  {
+    id: 21,
+    question: "Can I customize interview questions?",
+    answer: "Yes. Recruiters can upload job descriptions and skill requirements. BerriMastermind generates adaptive, benchmarked questions aligned with the role."
+  },
+  {
+    id: 22,
+    question: "Does Berribot integrate with our ATS?",
+    answer: "Berribot integrates with systems like Workday, Oracle, and SAP SuccessFactors, and syncs candidate data back into your ATS automatically."
+  },
+  {
+    id: 23,
+    question: "How does Berribot prevent fraud in interviews?",
+    answer: "BerriProctor uses voice and facial biometrics, liveness checks, and anomaly detection (like second screens or whispered coaching) to flag impersonation or suspicious behavior in real time."
+  },
+  {
+    id: 24,
+    question: "Is human oversight still needed?",
+    answer: "Yes. Berribot is designed as a recruiter co-pilot — handling repetitive workflows while keeping final hiring decisions with your team."
   }
 ];
 
 export default function FAQComponent() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState<boolean>(false);
 
   const toggleExpanded = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
   };
 
-    return (
+  const handleLoadMore = () => {
+    setShowAll(true);
+  };
+
+  const displayedFAQs = showAll ? faqData : faqData.slice(0, 10);
+
+  return (
     <div className="w-full mb-12 ">
       <div className="w-full max-w-4xl mx-auto space-y-4 mt-10">
-        {faqData.map((item) => (
+        {displayedFAQs.map((item) => (
           <div key={item.id} className="relative">
             {/* Question Container */}
             <motion.div
@@ -70,7 +167,7 @@ export default function FAQComponent() {
             >
               <div className="p-6 flex justify-between items-center">
                 <motion.h3
-                  className="text-[24px] font-extralight font-inter"
+                  className="text-[24px] font-extralight font-inter flex-1 pr-4"
                   animate={{
                     color: expandedId === item.id ? "#3D3D3D94" : "#6b7280"
                   }}
@@ -79,7 +176,7 @@ export default function FAQComponent() {
                   {item.question}
                 </motion.h3>
                 <motion.div
-                  className="w-6 h-6 flex items-center justify-center"
+                  className="w-6 h-6 flex items-center justify-center flex-shrink-0"
                   animate={{ 
                     rotate: expandedId === item.id ? 180 : 0,
                     color: expandedId === item.id ? "#3D3D3D94" : "#6b7280"
@@ -117,15 +214,32 @@ export default function FAQComponent() {
                 >
                   <div className="flex justify-center pt-4">
                     <div className="w-4/5 bg-[#F4F4F4] rounded-2xl p-6 pt-8">
-                      <motion.p
+                      <motion.div
                         initial={{ y: -10, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: -10, opacity: 0 }}
                         transition={{ delay: 0.1, duration: 0.3 }}
                         className="text-[#3D3D3D94] text-[24px] leading-relaxed font-inter font-extralight"
                       >
-                        {item.answer}
-                      </motion.p>
+                        {item.answer.split('\n').map((line, index) => {
+                          if (line.trim() === '') {
+                            return <br key={index} />;
+                          } else if (line.trim().startsWith('•')) {
+                            return (
+                              <div key={index} className="flex items-start mb-1">
+                                <span className="mr-2 mt-1">•</span>
+                                <span>{line.trim().substring(1).trim()}</span>
+                              </div>
+                            );
+                          } else {
+                            return (
+                              <p key={index} className={index > 0 ? "mt-2" : ""}>
+                                {line}
+                              </p>
+                            );
+                          }
+                        })}
+                      </motion.div>
                     </div>
                   </div>
                 </motion.div>
@@ -133,6 +247,40 @@ export default function FAQComponent() {
             </AnimatePresence>
           </div>
         ))}
+        
+        {/* Load More Button */}
+        {!showAll && faqData.length > 10 && (
+          <div className="flex justify-center mt-8">
+            <motion.button
+              onClick={handleLoadMore}
+              className="flex items-center justify-center w-16 h-16 bg-[#EAEFEF] rounded-full hover:bg-[#d1d5db] transition-colors duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <motion.div
+                animate={{ y: [0, 4, 0] }}
+                transition={{ 
+                  duration: 1.5, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#6b7280"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="6,9 12,15 18,9"></polyline>
+                </svg>
+              </motion.div>
+            </motion.button>
+          </div>
+        )}
       </div>
 
       {/* Call to Action Section */}
@@ -143,20 +291,6 @@ export default function FAQComponent() {
         <p className="text-[#9CA3AF] text-[24px] font-extralight font-inter mb-8">
           Drop a message to <span className="font-normal">support@berribot.com</span>
         </p>
-        {/* <p className="text-[#9CA3AF] text-[24px] font-extralight font-inter mb-4">
-          Or
-        </p>
-        <p className="text-[#9CA3AF] text-[24px] font-extralight font-inter mb-8">
-          Go straight to the good stuff
-        </p>
-        <motion.button
-          className="bg-[#04BBA6] text-white text-[18px] font-normal font-inter px-12 py-4 rounded-2xl"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ duration: 0.2 }}
-        >
-          Book a Demo
-        </motion.button> */}
       </div>
     </div>
   );

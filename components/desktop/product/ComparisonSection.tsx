@@ -64,6 +64,7 @@ export default function ComparisonSection() {
     <section
       ref={ref}
       className="relative min-h-screen flex items-center justify-center py-20 bg-[#FFFFFF] bg-transparent"
+      style={{ fontFamily: 'Manrope, sans-serif' }}
     >
 
       {/* Central green line - animated with scroll */}
@@ -101,6 +102,7 @@ export default function ComparisonSection() {
                 opacity: headingOpacity, 
                 y: headingY,
                 willChange: 'transform'
+
               }}
             >
               <span className="text-black bg-clip-text">

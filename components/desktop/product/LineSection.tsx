@@ -83,7 +83,7 @@ export default function LineSection() {
       className="relative bg-transparent"
       style={{ height: "1457px" }}
     >
-      <div className="flex h-full">
+      <div className="flex h-full" style={{ fontFamily: 'Manrope, sans-serif' }}>
         {/* Left side - 40% with vertical line */}
         <div className="w-2/5 relative flex flex-col items-center justify-center">
           {/* Background vertical line */}

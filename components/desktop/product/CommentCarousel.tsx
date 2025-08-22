@@ -224,6 +224,7 @@ export default function CommentCarousel() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            style={{ fontFamily: 'Manrope, sans-serif' }}
           >
             <span className="">One Platform.</span>
             <br />

@@ -99,7 +99,7 @@ export default function MobileBlogResource() {
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.2 }}
           >
-            Sub-task
+            Sub-stack
           </motion.button>
           <motion.button
             onClick={() => setActiveTab('whitepaper')}
