@@ -6,7 +6,6 @@ import {
   useTransform,
 } from "framer-motion";
 import React, { useEffect, useState, useRef } from "react";
-import Image from "next/image";
 
 /* ---------- text-scramble helper ---------- */
 const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

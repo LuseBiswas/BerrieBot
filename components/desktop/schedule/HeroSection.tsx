@@ -1,11 +1,10 @@
 "use client";
-import { motion,MotionValue, useTransform, useInView, useScroll } from "framer-motion";
+import { motion,MotionValue, useTransform, useScroll } from "framer-motion";
 import React, { useRef, useEffect, useState } from "react";
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const [mounted, setMounted] = useState(false);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
   
   useEffect(() => {
     setMounted(true);

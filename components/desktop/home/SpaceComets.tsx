@@ -171,24 +171,26 @@ type SpaceCometsProps = {
 
     // Optimized cleanup with batch operations
     useEffect(() => {
+      // Capture ref value at the beginning of the effect
+      const timers = timersRef.current;
+      
       // Clear old timers in batch
-      if (timersRef.current.length > 0) {
-        timersRef.current.forEach((t) => window.clearTimeout(t));
-        timersRef.current.length = 0; // More efficient than creating new array
+      if (timers.length > 0) {
+        timers.forEach((t) => window.clearTimeout(t));
+        timers.length = 0; // More efficient than creating new array
       }
 
       comets.forEach((c: CometKF) => {
         const t = window.setTimeout(() => {
           setComets((prev: CometKF[]) => prev.filter((x: CometKF) => x.id !== c.id));
         }, c.duration * 1000 + 150) as unknown as number; // Slightly longer cleanup delay
-        timersRef.current.push(t);
+        timers.push(t);
       });
 
       return () => {
-        // Copy current ref value to avoid stale reference in cleanup
-        const currentTimers = timersRef.current;
-        currentTimers.forEach((t) => window.clearTimeout(t));
-        currentTimers.length = 0;
+        // Use the captured timers array in cleanup
+        timers.forEach((t) => window.clearTimeout(t));
+        timers.length = 0;
       };
     }, [comets]);
 

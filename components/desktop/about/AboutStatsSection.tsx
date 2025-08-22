@@ -1,5 +1,5 @@
 'use client';
-import { motion, useInView, useScroll, useTransform, MotionValue } from 'framer-motion';
+import { motion, useInView, useScroll } from 'framer-motion';
 import React, { useRef, useEffect } from 'react';
 
 /* ---------- Custom Hook for Word Animation ---------- */

@@ -56,7 +56,7 @@ export default function MobileCookiesHeroSection({ showConfirmationText = false,
             "You definitely read some?"
           ) : (
             <>
-              Let's be real: we use cookies - but not the chewy, gooey kind (unfortunately).
+              Let&apos;s be real: we use cookies - but not the chewy, gooey kind (unfortunately).
               <br /><br />
               These are the digital kind that help Berribot understand how people use our website so we can make things better, faster, and smoother for you.
             </>

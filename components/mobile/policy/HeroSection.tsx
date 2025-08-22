@@ -56,7 +56,7 @@ export default function MobilePolicyHeroSection({ showConfirmationText = false, 
             "Did you definitely read it?"
           ) : (
             <>
-              We read the fine print so you don't have to and we definitely Guard your Data like it's Cake.
+              We read the fine print so you don&apos;t have to and we definitely Guard your Data like it&apos;s Cake.
             </>
           )}
         </p>
