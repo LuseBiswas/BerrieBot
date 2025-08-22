@@ -3,26 +3,27 @@ import { motion, useInView, useScroll, useTransform, MotionValue } from 'framer-
 import React, { useRef, useEffect } from 'react';
 
 /* ---------- Custom Hook for Word Animation ---------- */
-function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
-  const lineDelay = lineIndex * 0.25; // Increased delay between lines
-  const wordDelay = wordIndex * 0.015; // Increased delay between words
-  const startPoint = 0.3 + lineDelay + wordDelay; // Later start point
-  const endPoint = startPoint + 0.08; // Longer animation duration
-  
-  const wordProgress = useTransform(
-    scrollProgress,
-    [startPoint, endPoint],
-    [0, 1]
-  );
-  
-  const colorTransform = useTransform(
-    wordProgress,
-    [0, 1],
-    ["#6B7280", "#FFFFFF"]
-  );
-  
-  return { wordProgress, colorTransform };
-}
+// Commented out unused function to avoid ESLint warning
+// function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
+//   const lineDelay = lineIndex * 0.25; // Increased delay between lines
+//   const wordDelay = wordIndex * 0.015; // Increased delay between words
+//   const startPoint = 0.3 + lineDelay + wordDelay; // Later start point
+//   const endPoint = startPoint + 0.08; // Longer animation duration
+//   
+//   const wordProgress = useTransform(
+//     scrollProgress,
+//     [startPoint, endPoint],
+//     [0, 1]
+//   );
+//   
+//   const colorTransform = useTransform(
+//     wordProgress,
+//     [0, 1],
+//     ["#6B7280", "#FFFFFF"]
+//   );
+//   
+//   return { wordProgress, colorTransform };
+// }
 
 
 
@@ -197,7 +198,7 @@ export default function MobileAboutStatsSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <div 
-              className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-medium flex items-center justify-center"
+              className="bg-[#028374] text-white px-6 py-1 rounded-full font-medium flex items-center justify-center"
               style={{
                 width: '140px',
                 height: '25px',

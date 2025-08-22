@@ -1,67 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
-/* ---------- text-scramble helper ---------- */
-const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-function TextScramble({ currentText }: { currentText: string }) {
-  const [displayText, setDisplayText] = useState(currentText);
-
-  useEffect(() => {
-    if (displayText === currentText) return;
-    const id = setInterval(() => {
-      setDisplayText((prev) =>
-        prev === currentText
-          ? prev
-          : prev
-              .split("")
-              .map((ch, i) =>
-                ch === currentText[i]
-                  ? ch
-                  : chars[Math.floor(Math.random() * chars.length)]
-              )
-              .join("")
-      );
-    }, 50);
-    return () => clearInterval(id);
-  }, [currentText, displayText]);
-
-  return (
-    <div className="font-['Dogica_Pixel'] text-[24px] tracking-[1px] text-white">
-      {displayText}
-    </div>
-  );
-}
-
 export default function YtTestimonial() {
-  const ref = React.useRef(null);
-
-  /* ---------- scroll-linked progress bar ---------- */
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  /* ---------- headline word swap ---------- */
-  const [displayText, setDisplayText] = useState("APPLY");
-  useEffect(() => {
-    const unsub = scrollYProgress.onChange((v) => {
-      if (v >= 0.65) setDisplayText("OFFER");
-      else if (v <= 0.6) setDisplayText("APPLY");
-    });
-    return unsub;
-  }, [scrollYProgress]);
 
   return (
     <section
-      ref={ref}
       className="py-16 sm:py-20 bg-black text-white relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pb-48 mb-10 overflow-visible"
     >
       <div className="px-4 sm:px-6">
@@ -154,7 +100,7 @@ export default function YtTestimonial() {
                     <iframe
                       width="100%"
                       height="100%"
-                      src="https://www.youtube.com/embed/Vr330NM_-8U?si=mWfVII5ZO7Lylusz"
+                      src="https://www.youtube.com/embed/ww3flTt--Xw?autoplay=1&mute=1&loop=1&playlist=ww3flTt--Xw"
                       title="YouTube video player"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -180,15 +126,7 @@ export default function YtTestimonial() {
                   viewport={{ once: true }}
                 >
                   {/* Inverted Comma Image */}
-                  <div className="absolute top-[10px] right-[320px] w-[24px] h-[24px]">
-                    <Image
-                      src="/image/components/inverted_comma.png"
-                      alt="Quote"
-                      width={24}
-                      height={24}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
+                  
                     
                   <div className="flex items-center justify-center h-full">
                     {/* Testimonial Content */}
@@ -269,18 +207,7 @@ export default function YtTestimonial() {
         </div>
       </div>
 
-      {/* ---- Text scramble ---- */}
-      <div className="absolute bottom-4 right-4 text-white">
-        <TextScramble currentText={displayText} />
-      </div>
 
-      {/* ---- Progress bar ---- */}
-      <div className="absolute -bottom-0 left-0 right-0 h-2 bg-white">
-        <motion.div
-          className="h-full bg-[#04BBA6] origin-left "
-          style={{ scaleX }}
-        />
-      </div>
     </section>
   );
 }

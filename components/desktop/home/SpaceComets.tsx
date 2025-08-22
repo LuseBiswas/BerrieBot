@@ -1,6 +1,7 @@
 // add useReducedMotion to your framer-motion import
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
+
 // ========================= SpaceComets.tsx =========================
 type SpaceCometsProps = {
     color?: string;                 // comet color
@@ -12,183 +13,277 @@ type SpaceCometsProps = {
     depthLayers?: 1 | 2 | 3;        // parallax depth buckets
     zIndex?: number;                // layer above cards (z-30)
     safeZones?: Array<{ x: number; y: number; w: number; h: number }>; // optional no-fly rects
+    performanceMode?: 'high' | 'balanced' | 'low'; // performance optimization level
   };
   
   export const SpaceComets: React.FC<SpaceCometsProps> = ({
     color = "#04BBA6",
-    maxConcurrent = 3,
-    spawnRatePerMin = 20,
+    maxConcurrent = 2, // Reduced from 3 for better performance
+    spawnRatePerMin = 12, // Reduced from 18 for better performance
     speedRange = [380, 900],
-    tailRange = [120, 340],
-    sizeRange = [2, 5],
-    depthLayers = 3,
+    tailRange = [80, 240], // Reduced tail length for better performance
+    sizeRange = [2, 4], // Reduced max size
+    depthLayers = 2, // Reduced from 3 for better performance
     zIndex = 35,
     safeZones = [],
+    performanceMode = 'balanced',
   }) => {
-    const reduce = useReducedMotion() ?? false;
+    const reduce = useReducedMotion() || false;
     const wrapRef = useRef<HTMLDivElement>(null);
     const [bounds, setBounds] = useState({ w: 0, h: 0 });
     const [comets, setComets] = useState<CometKF[]>([]);
     const timersRef = useRef<number[]>([]);
     const spawnTORef = useRef<number | null>(null);
-  
-    // Measure container (px) and keep it fresh
+    const frameRef = useRef<number | undefined>(undefined);
+    const lastResizeRef = useRef<number>(0);
+
+    // Performance-aware settings based on mode
+    const perfSettings = useMemo(() => {
+      switch (performanceMode) {
+        case 'high':
+          return {
+            maxConcurrent: Math.min(maxConcurrent, 1),
+            spawnRate: Math.min(spawnRatePerMin, 8),
+            samples: 6,
+            blurLevel: 1,
+            updateFreq: 2, // Update every 2 frames
+          };
+        case 'low':
+          return {
+            maxConcurrent: Math.min(maxConcurrent, 4),
+            spawnRate: spawnRatePerMin,
+            samples: 16,
+            blurLevel: 2,
+            updateFreq: 1, // Update every frame
+          };
+        default: // balanced
+          return {
+            maxConcurrent: Math.min(maxConcurrent, 2),
+            spawnRate: Math.min(spawnRatePerMin, 12),
+            samples: 10,
+            blurLevel: 1.5,
+            updateFreq: 1,
+          };
+      }
+    }, [performanceMode, maxConcurrent, spawnRatePerMin]);
+
+    // Throttled resize observer with debouncing
+    const handleResize = useCallback(() => {
+      const now = Date.now();
+      if (now - lastResizeRef.current < 100) return; // Throttle to 10fps for resize
+      lastResizeRef.current = now;
+
+      const el = wrapRef.current;
+      if (!el) return;
+
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+
+      frameRef.current = requestAnimationFrame(() => {
+        const r = el.getBoundingClientRect();
+        setBounds(prev => {
+          const newW = Math.max(1, r.width);
+          const newH = Math.max(1, r.height);
+          // Only update if change is significant
+          if (Math.abs(prev.w - newW) > 10 || Math.abs(prev.h - newH) > 10) {
+            return { w: newW, h: newH };
+          }
+          return prev;
+        });
+      });
+    }, []);
+
+    // Measure container with optimized resize observer
     useEffect(() => {
       const el = wrapRef.current;
       if (!el) return;
-  
-      const applySize = () => {
-        const r = el.getBoundingClientRect();
-        setBounds({ w: Math.max(1, r.width), h: Math.max(1, r.height) });
-      };
-      applySize();
-  
-      const ro = new ResizeObserver(() => {
-        // batch into RAF to avoid layout thrash
-        requestAnimationFrame(applySize);
-      });
+
+      handleResize(); // Initial measurement
+
+      const ro = new ResizeObserver(handleResize);
       ro.observe(el);
-      return () => ro.disconnect();
-    }, []);
-  
-    // Spawn scheduler (Poisson-ish + micro-bursts)
+      
+      return () => {
+        ro.disconnect();
+        if (frameRef.current) {
+          cancelAnimationFrame(frameRef.current);
+        }
+      };
+    }, [handleResize]);
+
+    // Optimized spawn scheduler with performance awareness
     useEffect(() => {
-      if (!bounds.w || !bounds.h) return;
-  
+      if (!bounds.w || !bounds.h || reduce) return;
+
       let killed = false;
-  
-      const meanMs = (60_000 / Math.max(1, spawnRatePerMin)) | 0;
-      const nextDelay = () => expRand(meanMs); // exponential
-  
+      let frameCounter = 0;
+
+      const meanMs = (60_000 / Math.max(1, perfSettings.spawnRate)) | 0;
+      const nextDelay = () => expRand(meanMs * 1.5); // Increased delay multiplier
+
       const schedule = (delay: number) => {
         if (spawnTORef.current) window.clearTimeout(spawnTORef.current);
         spawnTORef.current = window.setTimeout(() => {
           if (killed) return;
+          
+          // Check frame rate and skip spawning if performance is poor
+          frameCounter++;
+          if (frameCounter % perfSettings.updateFreq !== 0) {
+            schedule(nextDelay());
+            return;
+          }
+
           if (document.visibilityState === "visible") {
             setComets((prev: CometKF[]) => {
-              if (prev.length >= maxConcurrent) return prev;
-  
-              // Occasionally spawn 2–3 quick comets (micro-shower)
-              const burst = Math.random() < 0.12 ? randInt(2, 3) : 1;
+              if (prev.length >= perfSettings.maxConcurrent) return prev;
+
+              // Reduced burst frequency for better performance
+              const burst = Math.random() < 0.05 ? 2 : 1;
               const next: CometKF[] = [];
               for (let i = 0; i < burst; i++) {
-                next.push(makeComet(bounds, { color, speedRange, tailRange, sizeRange, depthLayers, reduce, safeZones }));
+                next.push(makeComet(bounds, { 
+                  color, 
+                  speedRange, 
+                  tailRange, 
+                  sizeRange, 
+                  depthLayers, 
+                  reduce, 
+                  safeZones,
+                  samples: perfSettings.samples,
+                  blurLevel: perfSettings.blurLevel
+                }));
               }
-              return [...prev, ...next].slice(0, maxConcurrent);
+              return [...prev, ...next].slice(0, perfSettings.maxConcurrent);
             });
           }
           schedule(nextDelay());
         }, delay) as unknown as number;
       };
-  
-      schedule(600); // quick first spawn
-  
+
+      schedule(1000); // Slightly longer initial delay
+
       return () => {
         killed = true;
         if (spawnTORef.current) window.clearTimeout(spawnTORef.current);
       };
-    }, [bounds, color, maxConcurrent, spawnRatePerMin, speedRange, tailRange, sizeRange, depthLayers, reduce, safeZones]);
-  
-    // Cleanup timers per comet
+    }, [bounds, color, speedRange, tailRange, sizeRange, depthLayers, reduce, safeZones, perfSettings]);
+
+    // Optimized cleanup with batch operations
     useEffect(() => {
-      // clear old timers
-      timersRef.current.forEach((t) => window.clearTimeout(t));
-      timersRef.current = [];
-  
+      // Clear old timers in batch
+      if (timersRef.current.length > 0) {
+        timersRef.current.forEach((t) => window.clearTimeout(t));
+        timersRef.current.length = 0; // More efficient than creating new array
+      }
+
       comets.forEach((c: CometKF) => {
         const t = window.setTimeout(() => {
           setComets((prev: CometKF[]) => prev.filter((x: CometKF) => x.id !== c.id));
-        }, c.duration * 1000 + 120) as unknown as number;
+        }, c.duration * 1000 + 150) as unknown as number; // Slightly longer cleanup delay
         timersRef.current.push(t);
       });
-  
+
       return () => {
-        timersRef.current.forEach((t) => window.clearTimeout(t));
-        timersRef.current = [];
+        // Copy current ref value to avoid stale reference in cleanup
+        const currentTimers = timersRef.current;
+        currentTimers.forEach((t) => window.clearTimeout(t));
+        currentTimers.length = 0;
       };
     }, [comets]);
-  
-    if (!bounds.w || !bounds.h) {
-      return <div ref={wrapRef} className="absolute inset-0 pointer-events-none" style={{ zIndex }} />;
+
+    // Memoized styles for better performance
+    const containerStyle = useMemo(() => ({ zIndex }), [zIndex]);
+
+    if (!bounds.w || !bounds.h || reduce) {
+      return <div ref={wrapRef} className="absolute inset-0 pointer-events-none" style={containerStyle} />;
     }
-  
+
     return (
-      <div ref={wrapRef} className="absolute inset-0 pointer-events-none" style={{ zIndex }}>
+      <div ref={wrapRef} className="absolute inset-0 pointer-events-none" style={containerStyle}>
         {comets.map((c: CometKF) => (
-          <motion.div
-            key={c.id}
-            className="absolute"
-            style={{ willChange: "transform, opacity" }}
-            initial={{ opacity: 0 }}
-            animate={{
-              x: c.xKF,
-              y: c.yKF,
-              rotate: c.rKF,
-              opacity: c.opacityKF,
-            }}
-            transition={{
-              duration: c.duration,
-              ease: "linear",
-              x: { times: c.tKF },
-              y: { times: c.tKF },
-              rotate: { times: c.tKF },
-              opacity: { times: [0, 0.08, 0.85, 1] },
-            }}
-          >
-            {/* Head */}
-            <div
-              className="absolute rounded-full"
-              style={{
-                width: c.size,
-                height: c.size,
-                background: color,
-                mixBlendMode: "screen" as React.CSSProperties["mixBlendMode"],
-                boxShadow: `
-                  0 0 ${c.size * 3}px ${color},
-                  0 0 ${c.size * 7}px ${hexToRgba(color, 0.6)}
-                `,
-              }}
-            />
-            {/* Core Tail */}
-            <div
-              className="absolute"
-              style={{
-                left: -c.tail,
-                top: c.size / 2 - Math.max(1, c.size * 0.35),
-                width: c.tail,
-                height: Math.max(2, c.size - 1),
-                transformOrigin: "right center",
-                background: `linear-gradient(90deg,
-                  ${hexToRgba(color, 0)} 0%,
-                  ${hexToRgba(color, 0.15)} 25%,
-                  ${hexToRgba(color, 0.5)} 65%,
-                  ${color} 100%
-                )`,
-                filter: "blur(0.7px)",
-              }}
-            />
-            {/* Bloom Tail */}
-            <div
-              className="absolute"
-              style={{
-                left: -c.tail * 0.8,
-                top: c.size / 2 - 3,
-                width: c.tail * 0.8,
-                height: Math.max(6, c.size + 2),
-                transformOrigin: "right center",
-                background: `linear-gradient(90deg,
-                  ${hexToRgba(color, 0)} 0%,
-                  ${hexToRgba(color, 0.06)} 30%,
-                  ${hexToRgba(color, 0.25)} 100%
-                )`,
-                filter: "blur(2.2px)",
-              }}
-            />
-          </motion.div>
+          <CometElement key={c.id} comet={c} color={color} />
         ))}
       </div>
     );
   };
+
+  // Separate memoized comet component to prevent unnecessary re-renders
+  const CometElement = React.memo(({ comet, color }: { comet: CometKF; color: string }) => {
+    // Memoized styles
+    const headStyle = useMemo(() => ({
+      width: comet.size,
+      height: comet.size,
+      background: color,
+      mixBlendMode: "screen" as React.CSSProperties["mixBlendMode"],
+      boxShadow: `0 0 ${comet.size * 2}px ${color}, 0 0 ${comet.size * 4}px ${hexToRgba(color, 0.4)}`, // Reduced glow intensity
+    }), [comet.size, color]);
+
+    const coreStyle = useMemo(() => ({
+      left: -comet.tail,
+      top: comet.size / 2 - Math.max(1, comet.size * 0.35),
+      width: comet.tail,
+      height: Math.max(2, comet.size - 1),
+      transformOrigin: "right center",
+      background: `linear-gradient(90deg,
+        ${hexToRgba(color, 0)} 0%,
+        ${hexToRgba(color, 0.1)} 25%,
+        ${hexToRgba(color, 0.4)} 65%,
+        ${color} 100%
+      )`,
+      filter: `blur(${comet.blurLevel * 0.5}px)`, // Dynamic blur based on performance
+    }), [comet.tail, comet.size, comet.blurLevel, color]);
+
+    const bloomStyle = useMemo(() => ({
+      left: -comet.tail * 0.7,
+      top: comet.size / 2 - 2,
+      width: comet.tail * 0.7,
+      height: Math.max(4, comet.size + 1),
+      transformOrigin: "right center",
+      background: `linear-gradient(90deg,
+        ${hexToRgba(color, 0)} 0%,
+        ${hexToRgba(color, 0.04)} 30%,
+        ${hexToRgba(color, 0.15)} 100%
+      )`,
+      filter: `blur(${comet.blurLevel}px)`,
+    }), [comet.tail, comet.size, comet.blurLevel, color]);
+
+    return (
+      <motion.div
+        className="absolute"
+        style={{ 
+          willChange: "transform",
+          transform: "translate3d(0,0,0)", // Force hardware acceleration
+        }}
+        initial={{ opacity: 0 }}
+        animate={{
+          x: comet.xKF,
+          y: comet.yKF,
+          rotate: comet.rKF,
+          opacity: comet.opacityKF,
+        }}
+        transition={{
+          duration: comet.duration,
+          ease: "linear",
+          x: { times: comet.tKF },
+          y: { times: comet.tKF },
+          rotate: { times: comet.tKF },
+          opacity: { times: [0, 0.1, 0.8, 1] }, // Faster fade in/out
+        }}
+      >
+        {/* Head */}
+        <div className="absolute rounded-full" style={headStyle} />
+        {/* Core Tail */}
+        <div className="absolute" style={coreStyle} />
+        {/* Bloom Tail - Only render if performance allows */}
+        {comet.blurLevel > 1 && (
+          <div className="absolute" style={bloomStyle} />
+        )}
+      </motion.div>
+    );
+  });
+
+  CometElement.displayName = 'CometElement';
   
   // ========================= Types & helpers =========================
   type CometKF = {
@@ -201,6 +296,7 @@ type SpaceCometsProps = {
     size: number;
     tail: number;
     opacityKF: number[];
+    blurLevel: number;
   };
   
   function makeComet(
@@ -213,47 +309,48 @@ type SpaceCometsProps = {
       depthLayers: 1 | 2 | 3;
       reduce: boolean;
       safeZones: Array<{ x: number; y: number; w: number; h: number }>;
+      samples: number;
+      blurLevel: number;
     }
   ): CometKF {
     const { w: W, h: H } = bounds;
-    const { speedRange, tailRange, sizeRange, depthLayers, reduce } = opts;
+    const { speedRange, tailRange, sizeRange, depthLayers, reduce, samples, blurLevel } = opts;
   
     // Depth (0=far,1=mid,2=near)
     const depth = Math.min(depthLayers - 1, Math.floor(Math.random() * depthLayers));
-    const depthSpeedMul = [0.65, 0.85, 1.0][depth] ?? 1.0;
-    const depthOpacity = [0.55, 0.75, 0.95][depth] ?? 0.85;
+    const depthSpeedMul = [0.7, 0.9, 1.0][depth] ?? 1.0;
+    const depthOpacity = [0.6, 0.8, 1.0][depth] ?? 0.85;
   
-    const pad = 120;
+    const pad = 100; // Reduced padding for tighter bounds
     const entry = randInt(0, 3); // 0=L,1=T,2=R,3=B
     const start = edgePoint(entry, W, H, pad);
-    const exit = ((entry + 2 + (Math.random() < 0.25 ? (Math.random() < 0.5 ? 1 : 3) : 0)) % 4) as 0 | 1 | 2 | 3;
+    const exit = ((entry + 2 + (Math.random() < 0.2 ? (Math.random() < 0.5 ? 1 : 3) : 0)) % 4) as 0 | 1 | 2 | 3;
     const end = edgePoint(exit, W, H, pad);
   
-    // Control points for gentle curve (normal to path)
+    // Reduced curve amplitude for straighter paths (better performance)
     const dir = Math.atan2(end.y - start.y, end.x - start.x);
     const nx = -Math.sin(dir), ny = Math.cos(dir);
-    const amp = rand(20, 60);
+    const amp = rand(15, 40); // Reduced from 20-60
     const p0 = start;
     const p3 = end;
     const p1 = add(lerpPoint(p0, p3, 0.33), { x: nx * amp, y: ny * amp });
     const p2 = add(lerpPoint(p0, p3, 0.66), { x: -nx * amp, y: -ny * amp });
   
-    const samples = reduce ? 8 : 20;
     const { xs, ys, rs, ts } = sampleCubicBezier(p0, p1, p2, p3, samples);
   
     // Duration from distance / speed
     const dist = totalDistance(xs, ys);
     const speed = (reduce ? 200 : rand(speedRange[0], speedRange[1])) * depthSpeedMul;
-    const duration = Math.max(1.2, dist / speed);
+    const duration = Math.max(1.0, Math.min(4.0, dist / speed)); // Clamped duration
   
     const size = reduce ? 2 : rand(sizeRange[0], sizeRange[1]);
-    const tail = clamp(speed * 0.35, tailRange[0], tailRange[1]);
+    const tail = clamp(speed * 0.25, tailRange[0], tailRange[1]); // Reduced tail multiplier
   
     // Opacity KF with depth scaling
-    const opacityKF = [0, depthOpacity, depthOpacity, 0];
+    const opacityKF = [0, depthOpacity * 0.8, depthOpacity * 0.8, 0]; // Slightly reduced opacity
   
     return {
-      id: `comet-${Math.random().toString(36).slice(2)}`,
+      id: `comet-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`, // More efficient ID
       xKF: xs,
       yKF: ys,
       rKF: rs,
@@ -262,6 +359,7 @@ type SpaceCometsProps = {
       size,
       tail,
       opacityKF,
+      blurLevel,
     };
   }
   

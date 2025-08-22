@@ -61,7 +61,7 @@ export default function BottomNavBar() {
                   {active && (
                     <motion.div
                       layoutId="activeBackground"
-                      className="absolute inset-0 bg-[#00AD96] rounded-full"
+                      className="absolute inset-0 bg-[#028374] rounded-full"
                       transition={{
                         type: "spring",
                         stiffness: 500,

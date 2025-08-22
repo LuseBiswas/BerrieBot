@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import { motion, useMotionValue, useTransform, useSpring, useMotionTemplate, AnimatePresence } from "framer-motion";
+import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
+import { motion, useMotionValue, useTransform, useSpring, useMotionTemplate, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { SpaceComets } from "./SpaceComets";
 
@@ -21,7 +21,7 @@ type TiltProps = {
   floating?: boolean;
 };
 
-export const TiltImage = ({
+export const TiltImage = React.memo(({
   src,
   alt,
   width,
@@ -36,27 +36,43 @@ export const TiltImage = ({
   const rootRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [dims, setDims] = useState({ w: width, h: height });
+  const shouldReduceMotion = useReducedMotion();
 
-  // Track actual DOM size so mapping is always correct
+  // Throttled resize observer to reduce state updates
   useEffect(() => {
     if (!rootRef.current) return;
+    let timeoutId: NodeJS.Timeout;
+    
     const ro = new ResizeObserver(([entry]) => {
-      const { width: w, height: h } = entry.contentRect;
-      setDims({ w, h });
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const { width: w, height: h } = entry.contentRect;
+        setDims(prev => {
+          // Only update if dimensions actually changed significantly
+          if (Math.abs(prev.w - w) > 5 || Math.abs(prev.h - h) > 5) {
+            return { w, h };
+          }
+          return prev;
+        });
+      }, 100); // Throttle updates
     });
+    
     ro.observe(rootRef.current);
-    return () => ro.disconnect();
+    return () => {
+      ro.disconnect();
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   // Raw mouse deltas from center
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
 
-  // Smooth them
+  // Smooth them with optimized spring settings
   const x = useSpring(rawX, { stiffness: 140, damping: 18, mass: 0.5 });
   const y = useSpring(rawY, { stiffness: 140, damping: 18, mass: 0.5 });
 
-  // Map to rotations using *actual* size
+  // Map to rotations using actual size
   const rotateX = useTransform(y, [-dims.h / 2, dims.h / 2], [maxTilt, -maxTilt]);
   const rotateY = useTransform(x, [-dims.w / 2, dims.w / 2], [-maxTilt, maxTilt]);
 
@@ -64,17 +80,23 @@ export const TiltImage = ({
   const glare = useMotionTemplate`radial-gradient(220px 140px at calc(50% + ${x}px) calc(50% + ${y}px),
     rgba(255,255,255,0.18), rgba(255,255,255,0.08) 35%, transparent 60%)`;
 
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  // Memoized event handlers
+  const onMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (shouldReduceMotion) return;
     const r = e.currentTarget.getBoundingClientRect();
     rawX.set(e.clientX - (r.left + r.width / 2));
     rawY.set(e.clientY - (r.top + r.height / 2));
-  };
+  }, [rawX, rawY, shouldReduceMotion]);
 
-  const onLeave = () => {
+  const onLeave = useCallback(() => {
     setIsHovered(false);
     rawX.set(0);
     rawY.set(0);
-  };
+  }, [rawX, rawY]);
+
+  const onEnter = useCallback(() => {
+    setIsHovered(true);
+  }, []);
 
   // Calculate hover dimensions (315x447)
   const hoverWidth = 315;
@@ -87,25 +109,25 @@ export const TiltImage = ({
       className={className}
       style={{ ...style, perspective, transformStyle: "preserve-3d" }}
       onMouseMove={onMove}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={onEnter}
       onMouseLeave={onLeave}
     >
       <motion.div
         style={{
-          rotateX,
-          rotateY,
+          rotateX: shouldReduceMotion ? 0 : rotateX,
+          rotateY: shouldReduceMotion ? 0 : rotateY,
           transformStyle: "preserve-3d",
           willChange: "transform",
         }}
         animate={{ 
           scale: isHovered ? hoverScale : 1,
-          y: floating ? [0, -8, 0] : 0
+          y: floating && !shouldReduceMotion ? [0, -8, 0] : 0
         }}
         transition={{ 
           type: "spring", 
           stiffness: 260, 
           damping: 22,
-          y: floating ? {
+          y: floating && !shouldReduceMotion ? {
             duration: 3,
             repeat: Infinity,
             ease: "easeInOut"
@@ -134,6 +156,7 @@ export const TiltImage = ({
               width={hoverWidth}
               height={hoverHeight}
               draggable={false}
+              priority={true} // Add priority for performance
               style={{ 
                 display: "block", 
                 userSelect: "none",
@@ -161,15 +184,18 @@ export const TiltImage = ({
       </motion.div>
     </div>
   );
-};
+});
+
+TiltImage.displayName = 'TiltImage';
 
 // Animated Icon Component (inspired by FeatureCard.tsx)
-const AnimatedIcon = ({ lordicon, className, style }: {
+const AnimatedIcon = React.memo(({ lordicon, className, style }: {
   lordicon: string;
   className?: string;
   style?: React.CSSProperties;
 }) => {
   const iconRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (typeof window !== 'undefined' && iconRef.current) {
@@ -182,8 +208,8 @@ const AnimatedIcon = ({ lordicon, className, style }: {
       lordIconElement.setAttribute('trigger', 'loop');
       lordIconElement.setAttribute('delay', '2000');
       lordIconElement.setAttribute('colors', 'primary:#04BBA6,secondary:#ffffff');
-      lordIconElement.style.width = '130px';
-      lordIconElement.style.height = '130px';
+      lordIconElement.style.width = '104px';
+      lordIconElement.style.height = '104px';
       
       iconRef.current.appendChild(lordIconElement);
       
@@ -203,7 +229,7 @@ const AnimatedIcon = ({ lordicon, className, style }: {
       className={className}
       style={style}
       animate={{ 
-        y: [0, -8, 0] 
+        y: !shouldReduceMotion ? [0, -8, 0] : 0
       }}
       transition={{ 
         duration: 4, 
@@ -213,10 +239,12 @@ const AnimatedIcon = ({ lordicon, className, style }: {
       }}
     />
   );
-};
+});
+
+AnimatedIcon.displayName = 'AnimatedIcon';
 
 // Flippable Card Component
-const FlippableCard = ({ 
+const FlippableCard = React.memo(({ 
   frontSrc, 
   backSrc, 
   alt, 
@@ -252,8 +280,9 @@ const FlippableCard = ({
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
-  const handleCardClick = () => {
+  const handleCardClick = useCallback(() => {
     if (isFlipped) {
       // When closing, first trigger the blur exit, then flip
       setIsBlurred(false);
@@ -267,7 +296,7 @@ const FlippableCard = ({
         setIsBlurred(true);
       }, 200); // Delay blur to let card start flipping first
     }
-  };
+  }, [isFlipped]);
 
   return (
     <>
@@ -277,16 +306,16 @@ const FlippableCard = ({
           <motion.div
             className="fixed inset-0 z-40"
             style={{
-              backdropFilter: "blur(8px)",
+              backdropFilter: shouldReduceMotion ? "none" : "blur(8px)",
               backgroundColor: "rgba(0, 0, 0, 0.5)"
             }}
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(8px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            initial={{ opacity: 0, backdropFilter: shouldReduceMotion ? "none" : "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: shouldReduceMotion ? "none" : "blur(8px)" }}
+            exit={{ opacity: 0, backdropFilter: shouldReduceMotion ? "none" : "blur(0px)" }}
             transition={{ 
-              duration: 0.4,
+              duration: shouldReduceMotion ? 0.1 : 0.4,
               ease: [0.23, 1, 0.32, 1],
-              backdropFilter: { duration: 0.5 }
+              backdropFilter: { duration: shouldReduceMotion ? 0.1 : 0.5 }
             }}
             onClick={handleCardClick}
           />
@@ -302,10 +331,10 @@ const FlippableCard = ({
           zIndex: isFlipped ? 50 : 30
         }}
         onClick={handleCardClick}
-        animate={floating && !isFlipped ? { 
+        animate={floating && !isFlipped && !shouldReduceMotion ? { 
           y: [0, -8, 0] 
         } : {}}
-        transition={floating ? { 
+        transition={floating && !shouldReduceMotion ? { 
           duration: 3, 
           repeat: Infinity, 
           ease: "easeInOut" 
@@ -322,11 +351,11 @@ const FlippableCard = ({
             height: isFlipped ? backHeight : height,
           }}
           transition={{ 
-            duration: 0.8, 
+            duration: shouldReduceMotion ? 0.2 : 0.8, 
             ease: [0.23, 1, 0.32, 1], // Custom cubic-bezier for smoother animation
-            scale: { duration: 0.8, ease: [0.23, 1, 0.32, 1] },
-            width: { duration: 0.8, ease: [0.23, 1, 0.32, 1] },
-            height: { duration: 0.8, ease: [0.23, 1, 0.32, 1] }
+            scale: { duration: shouldReduceMotion ? 0.2 : 0.8, ease: [0.23, 1, 0.32, 1] },
+            width: { duration: shouldReduceMotion ? 0.2 : 0.8, ease: [0.23, 1, 0.32, 1] },
+            height: { duration: shouldReduceMotion ? 0.2 : 0.8, ease: [0.23, 1, 0.32, 1] }
           }}
         >
           {/* Front of card */}
@@ -364,6 +393,7 @@ const FlippableCard = ({
                 alt={`${alt} back`}
                 width={backWidth}
                 height={backHeight}
+                priority={true} // Add priority for performance
                 style={{
                   width: "100%",
                   height: "100%",
@@ -375,7 +405,7 @@ const FlippableCard = ({
               {/* Dynamic animated icons */}
               {icons.map((icon, index) => (
                 <AnimatedIcon
-                  key={index}
+                  key={`${icon.lordicon}-${index}`} // Better key
                   lordicon={icon.lordicon}
                   className="absolute"
                   style={icon.position}
@@ -387,7 +417,9 @@ const FlippableCard = ({
       </motion.div>
     </>
   );
-};
+});
+
+FlippableCard.displayName = 'FlippableCard';
 
 type OrbitProps = {
   /** Seconds per full lap (lower = faster) */
@@ -407,35 +439,159 @@ type OrbitProps = {
   fadeGamma?: number;  // 1.0 = linear, 1.6–2.2 = smoother fade
 };
 
-export default function EllipseOrbit({
+// Optimized SVG Orbit component
+const OptimizedOrbit = React.memo(({ 
   lapSeconds = 15,
   segment = 0.7,
-  strokeWidth = 2, // Reduced from 4 to 2
+  strokeWidth = 2,
   color = "#04BBA6",
   glow = 4,
-  direction = -1, // -1 matches your original (dashoffset decreasing)
-}: OrbitProps) {
-  const viewW = 1309; // Increased by 10% from 1190
+  direction = -1
+}: OrbitProps) => {
+  const shouldReduceMotion = useReducedMotion();
+  const viewW = 1309;
   const viewH = 706;
-  const cx = 654.5; // Adjusted center X for new width
+  const cx = 654.5;
   const cy = 353;
-  const rx = 652.3; // Increased by 10% from 593
+  const rx = 652.3;
   const ry = 351;
-  // Defaults
   
-
   // Keep segment within (0,1) for a valid dash
   const seg = Math.max(0.01, Math.min(0.99, segment));
 
+  // Optimize filter effects for performance
+  const optimizedGlowStyle = useMemo(() => ({
+    filter: shouldReduceMotion 
+      ? `drop-shadow(0 0 8px ${color})` 
+      : `drop-shadow(0 0 8px ${color}) drop-shadow(0 0 16px ${color}) drop-shadow(0 0 32px ${color})`,
+    opacity: 1
+  }), [color, shouldReduceMotion]);
+
   return (
-    <section className="w-full h-[1994px] bg-black flex items-center justify-center relative z-50">
-      {/* Background glow images - behind stars but above black bg */}
+    <svg
+      width={viewW}
+      height={viewH}
+      viewBox={`0 0 ${viewW} ${viewH}`}
+      className="relative"
+    >
+      <defs>
+        {/* Simplified glow for better performance */}
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation={shouldReduceMotion ? 2 : glow} result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        {/* Simplified blur */}
+        <filter id="soften" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation={shouldReduceMotion ? 1 : 3} />
+        </filter>
+
+        {/* Animated mask that reveals only a blurred dash segment */}
+        <mask id="movingSoftDash" maskUnits="userSpaceOnUse">
+          <motion.ellipse
+            cx={cx}
+            cy={cy}
+            rx={rx}
+            ry={ry}
+            fill="none"
+            stroke="white"
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            pathLength={1}
+            strokeDasharray={`${seg} ${1 - seg}`}
+            initial={{ strokeDashoffset: 0 }}
+            animate={{ 
+              strokeDashoffset: shouldReduceMotion ? 0 : (direction === 1 ? 1 : -1) 
+            }}
+            transition={{ 
+              duration: shouldReduceMotion ? 0 : lapSeconds, 
+              repeat: shouldReduceMotion ? 0 : Infinity, 
+              ease: "linear" 
+            }}
+            filter="url(#soften)"
+          />
+        </mask>
+      </defs>
+
+      {/* Base track */}
+      <ellipse
+        cx={cx}
+        cy={cy}
+        rx={rx}
+        ry={ry}
+        fill="none"
+        stroke="#101010"
+        strokeWidth={strokeWidth}
+      />
+
+      {/* Teal arc + glow, revealed by the soft dash mask */}
+      <g mask="url(#movingSoftDash)">
+        {/* Main bright ellipse with optimized glow */}
+        <ellipse
+          cx={cx}
+          cy={cy}
+          rx={rx}
+          ry={ry}
+          fill="none"
+          stroke={color}
+          strokeWidth={strokeWidth}
+          style={optimizedGlowStyle}
+        />
+        {/* Reduced secondary ellipses for performance */}
+        {!shouldReduceMotion && (
+          <>
+            <ellipse
+              cx={cx}
+              cy={cy}
+              rx={rx}
+              ry={ry}
+              fill="none"
+              stroke={color}
+              strokeWidth={strokeWidth * 1.5}
+              style={{ opacity: 0.9 }}
+            />
+            <ellipse
+              cx={cx}
+              cy={cy}
+              rx={rx}
+              ry={ry}
+              fill="none"
+              stroke={color}
+              strokeWidth={strokeWidth * 2}
+              style={{ filter: 'blur(1px)', opacity: 0.6 }}
+            />
+          </>
+        )}
+      </g>
+    </svg>
+  );
+});
+
+OptimizedOrbit.displayName = 'OptimizedOrbit';
+
+export default function EllipseOrbit({
+  lapSeconds = 15,
+  segment = 0.7,
+  strokeWidth = 2,
+  color = "#04BBA6",
+  glow = 4,
+  direction = -1,
+}: OrbitProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  // Memoize static content to prevent unnecessary re-renders
+  const backgroundImages = useMemo(() => (
+    <>
       <Image
         src="/image/space/BG/BG_Glow1.png"
         alt="Background Glow 1"
         width={1920}
         height={1080}
         className="absolute"
+        priority={true}
         style={{
           width: "100%",
           height: "auto",
@@ -452,6 +608,7 @@ export default function EllipseOrbit({
         width={1920}
         height={1080}
         className="absolute"
+        priority={true}
         style={{
           width: "100%",
           height: "auto",
@@ -461,30 +618,16 @@ export default function EllipseOrbit({
           zIndex: 2
         }}
       />
-      
-      {/* Background stars image */}
-      <motion.div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/image/space/BG_Stars.png')",
-          zIndex: 3
-        }}
-        animate={{
-          opacity: [0.2, 0.35, 0.2]
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      
+    </>
+  ), []);
+
+  const staticElements = useMemo(() => (
+    <>
       {/* Ellipse 30 */}
-      {/* White ellipse matching Ellipse 30 */}
       <div
         className="absolute"
         style={{
-          width: "1049.4px", // Increased by 10% from 954px
+          width: "1049.4px",
           height: "534px",
           top: "50%",
           left: "45%",
@@ -494,16 +637,15 @@ export default function EllipseOrbit({
         }}
       />
       
-      {/* From Apply To Offer Text */}
       <div 
         className="absolute z-40 text-center"
         style={{
-          top: "30%",
+          top: "35%",
           left: "20%",
           transform: "translate(-50%, -50%)"
         }}
       >
-        <div className="font-['Dogica_Pixel'] text-2xl tracking-[1px] text-white">
+        <div className="font-['Dogica_Pixel'] text-xl tracking-[1px] text-white">
           From
           <br />
           Apply
@@ -513,23 +655,22 @@ export default function EllipseOrbit({
       <div 
         className="absolute z-40 text-center"
         style={{
-          top: "75%",
+          top: "66%",
           left: "55%",
           transform: "translate(-50%, -50%)"
         }}
       >
-        <div className="font-['Dogica_Pixel'] text-2xl tracking-[1px] text-white">
+        <div className="font-['Dogica_Pixel'] text-xl tracking-[1px] text-white">
           To
           <br />
           Offer
         </div>
       </div>
       
-      {/* White ellipse matching Ellipse 30 */}
       <div
         className="absolute"
         style={{
-          width: "847px", // Increased by 10% from 770px
+          width: "847px",
           height: "354px",
           top: "50%",
           left: "40%",
@@ -539,59 +680,109 @@ export default function EllipseOrbit({
         }}
       />
       
-      {/* Glow effect behind logo */}
-      <motion.div
-        className="absolute z-10"
-        style={{
-          top: "43%",
-          left: "12%",
-          transform: "translate(-50%, -50%)"
-        }}
-        animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.8, 1, 0.8],
-          y: [0, -5, 0]
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        <Image
-          src="/image/space/Logo/glow.png"
-          alt="Glow effect"
-          width={290}
-          height={290}
-        />
-      </motion.div>
-      
-      {/* Logo on top of glow */}
       <Image
         src="/image/space/Logo/logo.png"
         alt="Logo"
         className="absolute z-20"
-        width={150}
-        height={150}
+        width={127.5}
+        height={127.5}
+        priority={true}
         style={{
-          top: "50%",
-          left: "22%",
+          top: "49.5%",
+          left: "20%",
           transform: "translate(-50%, -50%)"
         }}
       />
+    </>
+  ), []);
+
+  return (
+    <section className="w-full h-[1994px] bg-black flex flex-col items-center justify-center relative z-50">
+      {/* Background glow images - behind stars but above black bg */}
+      {backgroundImages}
+      
+      {/* Background stars image with optimized animation */}
+      <motion.div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/image/space/BG_Stars.png')",
+          zIndex: 3
+        }}
+        animate={!shouldReduceMotion ? {
+          opacity: [0.2, 0.35, 0.2]
+        } : {}}
+        transition={!shouldReduceMotion ? {
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut"
+        } : {}}
+      />
+      
+      {/* Main Heading */}
+      <div 
+        className="absolute z-50 text-center -mt-20 mb-10"
+        style={{
+          top: "15%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          fontSize: "64px",
+          color: "white",
+          lineHeight: "1.2",
+          
+          fontFamily: 'Manrope, sans-serif'
+        }}
+      >
+        Berri is your complete
+        <br />
+        360° Agentic Stack
+        <br />
+        for hiring
+      </div>
+      
+      {/* Main Content Container - Everything below the heading */}
+      <div className="relative w-full h-full">
+        {staticElements}
+        
+        {/* Optimized glow effect behind logo */}
+        <motion.div
+          className="absolute z-10"
+          style={{
+            top: "43%",
+            left: "12%",
+            transform: "translate(-50%, -50%)"
+          }}
+          animate={!shouldReduceMotion ? {
+            scale: [1, 1.1, 1],
+            opacity: [0.8, 1, 0.8],
+            y: [0, -5, 0]
+          } : {}}
+          transition={!shouldReduceMotion ? {
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          } : {}}
+        >
+          <Image
+            src="/image/space/Logo/glow.png"
+            alt="Glow effect"
+            width={246.5}
+            height={246.5}
+            priority={true}
+          />
+        </motion.div>
       
       {/* Connect1 card */}
       <FlippableCard
         frontSrc="/image/space/FrontCards/Connect1.png"
         backSrc="/image/space/BackCards/Connect2.png"
         alt="Connect1 card"
-        width={280}
-        height={396}
-        backWidth={389}
-        backHeight={552}
+        width={238}
+        height={336.6}
+        backWidth={237.32}
+        backHeight={348.16}
         className="absolute z-30"
         style={{
-          top: "25%",
+          top: "30%",
           left: "25%",
           transform: "translate(-50%, -50%)"
         }}
@@ -600,8 +791,8 @@ export default function EllipseOrbit({
           {
             lordicon: "https://cdn.lordicon.com/vpbspaec.json",
             position: {
-              top: "-25%",
-              left: "85%",
+              top: "-10%",
+              left: "105%",
               transform: "translate(-50%, -50%)"
             }
           },
@@ -609,15 +800,15 @@ export default function EllipseOrbit({
             lordicon: "https://cdn.lordicon.com/odpyouay.json",
             position: {
               top: "30%",
-              right: "-35%",
+              right: "-85%",
               transform: "translate(50%, -50%)"
             }
           },
           {
             lordicon: "https://cdn.lordicon.com/adbkylwa.json",
             position: {
-              bottom: "-15%",
-              left: "100%",
+              bottom: "-12%",
+              left: "110%",
               transform: "translate(-50%, 50%)"
             }
           }
@@ -629,14 +820,14 @@ export default function EllipseOrbit({
         frontSrc="/image/space/FrontCards/Search1.png"
         backSrc="/image/space/BackCards/Search2.png"
         alt="Search1 card"
-        width={280}
-        height={396}
-        backWidth={389}
-        backHeight={552}
+        width={238}
+        height={336.6}
+        backWidth={264.52}
+        backHeight={375.36}
         className="absolute z-30"
         style={{
-          top: "22%",
-          left: "50%",
+          top: "27%",
+          left: "47%",
           transform: "translate(-50%, -50%)"
         }}
         floating={true}
@@ -644,8 +835,8 @@ export default function EllipseOrbit({
           {
             lordicon: "https://cdn.lordicon.com/ypagsvdy.json",
             position: {
-              top: "-10%",
-              left: "-40%",
+              top: "-5%",
+              left: "-45%",
               transform: "translate(-50%, -50%)"
             }
           },
@@ -660,8 +851,8 @@ export default function EllipseOrbit({
           {
             lordicon: "https://cdn.lordicon.com/gnxqymui.json",
             position: {
-              bottom: "-20%",
-              left: "-35%",
+              bottom: "-10%",
+              left: "-50%",
               transform: "translate(-50%, 50%)"
             }
           }
@@ -673,14 +864,14 @@ export default function EllipseOrbit({
         frontSrc="/image/space/FrontCards/Mastermind1.png"
         backSrc="/image/space/BackCards/Mastermind2.png"
         alt="Mastermind1 card"
-        width={280}
-        height={396}
-        backWidth={389}
-        backHeight={552}
+        width={238}
+        height={336.6}
+        backWidth={264.52}
+        backHeight={375.36}
         className="absolute z-30"
         style={{
-          top: "35%",
-          left: "73%",
+          top: "34%",
+          left: "70%",
           transform: "translate(-50%, -50%)"
         }}
         floating={true}
@@ -688,24 +879,24 @@ export default function EllipseOrbit({
           {
             lordicon: "https://cdn.lordicon.com/ailnzwyn.json",
             position: {
-              top: "-25%",
-              left: "-35%",
+              top: "0%",
+              left: "-45%",
               transform: "translate(-50%, -50%)"
             }
           },
           {
             lordicon: "https://cdn.lordicon.com/idpbgtvy.json",
             position: {
-              top: "25%",
-              right: "130%",
+              top: "35%",
+              right: "140%",
               transform: "translate(50%, -50%)"
             }
           },
           {
             lordicon: "https://cdn.lordicon.com/euflfcqp.json",
             position: {
-              bottom: "-10%",
-              left: "-35%",
+              bottom: "-5%",
+              left: "-45%",
               transform: "translate(-50%, 50%)"
             }
           }
@@ -717,14 +908,14 @@ export default function EllipseOrbit({
         frontSrc="/image/space/FrontCards/Proctor1.png"
         backSrc="/image/space/BackCards/Proctor2.png"
         alt="Proctor1 card"
-        width={280}
-        height={396}
-        backWidth={389}
-        backHeight={552}
+        width={238}
+        height={336.6}
+        backWidth={264.52}
+        backHeight={375.36}
         className="absolute z-30"
         style={{
-          top: "58%",
-          left: "62%",
+          top: "53%",
+          left: "60%",
           transform: "translate(-50%, -50%)"
         }}
         floating={true}
@@ -733,133 +924,48 @@ export default function EllipseOrbit({
             lordicon: "https://cdn.lordicon.com/gjopwtdp.json",
             position: {
               top: "-30%",
-              left: "-35%",
+              left: "60%",
               transform: "translate(-50%, -50%)"
             }
           },
           {
             lordicon: "https://cdn.lordicon.com/kdibbosx.json",
             position: {
-              top: "40%",
-              right: "125%",
+              top: "-30%",
+              right: "105%",
               transform: "translate(50%, -50%)"
             }
           },
           {
             lordicon: "https://cdn.lordicon.com/nwwurnnq.json",
             position: {
-              bottom: "-25%",
-              left: "-30%",
+              bottom: "40%",
+              left: "-40%",
               transform: "translate(-50%, 50%)"
             }
           }
         ]}
       />
       
-      
-      
-      <svg
-        width={viewW}
-        height={viewH}
-        viewBox={`0 0 ${viewW} ${viewH}`}
-        className="relative"
+      <div 
+        className="absolute"
+        style={{
+          top: "33%", // Move down to be below the heading
+          left: "50%",
+          transform: "translate(-50%, 0)"
+        }}
       >
-        <defs>
-          {/* Soft glow for the teal stroke */}
-          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation={glow} result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-
-          {/* Blur to feather the mask edges so the arc fades at start/end */}
-          <filter id="soften" x="-50%" y="-50%" width="200%" height="200%">
-            {/* Reduced blur for better visibility */}
-            <feGaussianBlur in="SourceGraphic" stdDeviation={3} />
-          </filter>
-
-          {/* Animated mask that reveals only a blurred dash segment */}
-          <mask id="movingSoftDash" maskUnits="userSpaceOnUse">
-            <motion.ellipse
-              cx={cx}
-              cy={cy}
-              rx={rx}
-              ry={ry}
-              fill="none"
-              stroke="white"
-              strokeWidth={strokeWidth}
-              strokeLinecap="round"
-              // Normalize path length to 1 so dash values are easy
-              pathLength={1}
-              strokeDasharray={`${seg} ${1 - seg}`}
-              initial={{ strokeDashoffset: 0 }}
-              animate={{ strokeDashoffset: direction === 1 ? 1 : -1 }}
-              transition={{ duration: lapSeconds, repeat: Infinity, ease: "linear" }}
-              // Reduced blur on mask for brighter effect
-              filter="url(#soften)"
-            />
-          </mask>
-        </defs>
-
-        {/* Base track */}
-        <ellipse
-          cx={cx}
-          cy={cy}
-          rx={rx}
-          ry={ry}
-          fill="none"
-          stroke="#101010"
+        <OptimizedOrbit
+          lapSeconds={lapSeconds}
+          segment={segment}
           strokeWidth={strokeWidth}
+          color={color}
+          glow={glow}
+          direction={direction}
         />
-
-        {/* Teal arc + glow, revealed by the soft dash mask */}
-        <g mask="url(#movingSoftDash)">
-          {/* Main bright ellipse with enhanced glow */}
-          <ellipse
-            cx={cx}
-            cy={cy}
-            rx={rx}
-            ry={ry}
-            fill="none"
-            stroke={color}
-            strokeWidth={strokeWidth}
-            style={{
-              filter: 'drop-shadow(0 0 8px #04BBA6) drop-shadow(0 0 16px #04BBA6) drop-shadow(0 0 32px #04BBA6) drop-shadow(0 0 64px #04BBA6) drop-shadow(0 0 120px rgba(4, 187, 166, 0.8))',
-              opacity: 1
-            }}
-          />
-          {/* Secondary ellipse for extra brightness */}
-          <ellipse
-            cx={cx}
-            cy={cy}
-            rx={rx}
-            ry={ry}
-            fill="none"
-            stroke={color}
-            strokeWidth={strokeWidth * 1.5}
-            style={{
-              opacity: 0.9
-            }}
-          />
-          {/* Third ellipse for maximum glow */}
-          <ellipse
-            cx={cx}
-            cy={cy}
-            rx={rx}
-            ry={ry}
-            fill="none"
-            stroke={color}
-            strokeWidth={strokeWidth * 2}
-            style={{
-              filter: 'blur(1px)',
-              opacity: 0.6
-            }}
-          />
-        </g>
-      </svg>
-      {/* <SpaceComets color="#04BBA6" maxConcurrent={3} spawnRatePerMin={18} /> */}
+      </div>
+      <SpaceComets color="#04BBA6" maxConcurrent={2} spawnRatePerMin={12} performanceMode="balanced" />
+      </div>
     </section>
   );
 }

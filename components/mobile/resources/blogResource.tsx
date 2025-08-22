@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Blog post data interface
 interface BlogPost {
@@ -51,7 +52,7 @@ export default function MobileBlogResource() {
         {/* ---- "Blog" pill ---- */}
         <div className="mt-12 mb-8 relative z-10">
           <div 
-            className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-medium flex items-center justify-center"
+            className="bg-[#028374] text-white px-6 py-1 rounded-full font-medium flex items-center justify-center"
             style={{
               width: '98px',
               height: '25px',
@@ -81,11 +82,11 @@ export default function MobileBlogResource() {
 
         {/* Navigation Pills */}
         <div className="flex gap-4 mb-8">
-          <button
+          <motion.button
             onClick={() => setActiveTab('sub-task')}
-            className={`px-4 py-1 rounded-full font-medium transition-colors flex items-center justify-center ${
+            className={`px-4 py-1 rounded-full font-medium flex items-center justify-center ${
               activeTab === 'sub-task'
-                ? 'bg-[#00AD96] text-white'
+                ? 'bg-[#028374] text-white'
                 : 'bg-white text-black'
             }`}
             style={{ 
@@ -94,14 +95,17 @@ export default function MobileBlogResource() {
               fontSize: '14px',
               fontFamily: 'Manrope, sans-serif'
             }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
           >
             Sub-task
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => setActiveTab('whitepaper')}
-            className={`px-4 py-1 rounded-full font-medium transition-colors flex items-center justify-center ${
+            className={`px-4 py-1 rounded-full font-medium flex items-center justify-center ${
               activeTab === 'whitepaper'
-                ? 'bg-[#00AD96] text-white'
+                ? 'bg-[#028374] text-white'
                 : 'bg-white text-black'
             }`}
             style={{ 
@@ -110,23 +114,83 @@ export default function MobileBlogResource() {
               fontSize: '14px',
               fontFamily: 'Manrope, sans-serif'
             }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
           >
             Whitepaper
-          </button>
+          </motion.button>
         </div>
       </section>
 
-      {/* Blog Cards Section - Stacked Layout */}
+      {/* Content Section */}
       <div className="py-8 px-4">
         <div className="max-w-sm mx-auto">
-          {/* Blog Cards in vertical stack */}
-          <div className="flex flex-col gap-6">
-            {blogPosts.map((post) => (
-              <Link key={post.id} href={post.link}>
-                <MobileBlogCard post={post} />
-              </Link>
-            ))}
-          </div>
+          <AnimatePresence mode="wait">
+            {activeTab === 'sub-task' ? (
+              /* Blog Cards in vertical stack */
+              <motion.div 
+                key="sub-task"
+                className="flex flex-col gap-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                {blogPosts.map((post, index) => (
+                  <motion.div
+                    key={post.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: index * 0.1,
+                      ease: "easeOut" 
+                    }}
+                  >
+                    <Link href={post.link}>
+                      <MobileBlogCard post={post} />
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.div>
+            ) : (
+              /* Coming Soon Message for Whitepaper */
+              <motion.div 
+                key="whitepaper"
+                className="flex flex-col items-center justify-center py-20"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <motion.div 
+                  className="text-center text-white font-medium"
+                  style={{
+                    fontSize: '24px',
+                    fontFamily: 'Manrope, sans-serif'
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                >
+                  Content is coming soon
+                </motion.div>
+                <motion.div 
+                  className="text-center text-white/70 mt-4 font-light"
+                  style={{
+                    fontSize: '16px',
+                    fontFamily: 'Manrope, sans-serif'
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                >
+                  We&apos;re working on bringing you amazing whitepaper content
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

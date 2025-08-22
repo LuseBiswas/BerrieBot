@@ -67,7 +67,7 @@ export default function MobileSolutionsHeroSection() {
       {/* ---- "Solutions" pill ---- */}
       <div className="mb-8 relative z-10">
         <div 
-          className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-medium flex items-center justify-center"
+          className="bg-[#028374] text-white px-6 py-1 rounded-full font-medium flex items-center justify-center"
           style={{
             width: sizes.pillWidth,
             height: sizes.pillHeight,

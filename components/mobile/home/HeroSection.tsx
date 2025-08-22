@@ -144,13 +144,14 @@ export default function MobileHeroSection() {
           <iframe
             width="100%"
             height="100%"
-            src="https://www.youtube.com/embed/Vr330NM_-8U?si=mWfVII5ZO7Lylusz"
+            src="https://www.youtube.com/embed/ww3flTt--Xw?autoplay=1&mute=1&loop=1&playlist=ww3flTt--Xw"
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
-            className="w-full h-full object-cover"
+            className="w-full h-full"
+            style={{ border: 'none' }}
           />
           
           
@@ -239,7 +240,7 @@ export default function MobileHeroSection() {
             <div className="flex-1 flex flex-col items-center px-4 pt-8 relative">
               {/* Pill Shape */}
               <motion.div 
-                className="absolute bg-[#00AD96] text-white rounded-full flex items-center justify-center text-sm md:text-base lg:text-lg font-medium"
+                className="absolute bg-[#04BBA6] text-white rounded-full flex items-center justify-center text-sm md:text-base lg:text-lg font-medium z-30"
                 style={{
                   width: sizes.popupPillWidth,
                   height: sizes.popupPillHeight,
@@ -257,7 +258,7 @@ export default function MobileHeroSection() {
 
               {/* YouTube Video - Larger */}
               <motion.div 
-                className="rounded-2xl overflow-hidden mb-8"
+                className="rounded-2xl overflow-hidden mb-8 relative"
                 style={{
                   width: sizes.popupVideoWidth,
                   height: sizes.popupVideoHeight
@@ -267,15 +268,18 @@ export default function MobileHeroSection() {
                 transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
               >
                 <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/Vr330NM_-8U?si=mWfVII5ZO7Lylusz"
+                  src="https://www.youtube.com/embed/ww3flTt--Xw?autoplay=1&mute=1&loop=1&playlist=ww3flTt--Xw"
                   title="YouTube video player"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
-                  className="w-full h-full object-cover"
+                  className="absolute top-0 left-0 w-full h-full"
+                  style={{ 
+                    border: 'none',
+                    transform: 'scale(1.9)',
+                    transformOrigin: 'center center'
+                  }}
                 />
               </motion.div>
 

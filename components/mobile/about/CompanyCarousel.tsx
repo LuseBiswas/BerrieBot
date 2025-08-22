@@ -12,7 +12,7 @@ const COMPANY_LOGOS = [
 
 export default function MobileCompanyCarousel() {
   return (
-    <div className="w-full overflow-hidden" style={{ height: '60px', backgroundColor: '#00C7BE' }}>
+    <div className="w-full overflow-hidden" style={{ height: '60px', backgroundColor: '#028374' }}>
       <div className="flex items-center h-full animate-scroll">
         {/* First set of logos */}
         {COMPANY_LOGOS.map((logo, index) => (

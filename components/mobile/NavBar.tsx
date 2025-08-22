@@ -23,7 +23,7 @@ export default function MobileNavBar() {
   
   const logoTextColor = shouldUseWhiteBackground ? "text-black" : "text-white";
   const hamburgerColor = shouldUseWhiteBackground ? "text-black" : "text-white";
-  const logoSrc = shouldUseWhiteBackground ? "/image/logo_black.png" : "/image/logo.png";
+  const logoSrc = shouldUseWhiteBackground ? "/image/logo_black_2.png" : "/image/logo.png";
   const menuImageSrc = shouldUseWhiteBackground ? "/image/mobile/Menu_2.png" : "/image/mobile/Menu.png";
   const circleColor = shouldUseWhiteBackground ? "#02645F" : "white";
 
