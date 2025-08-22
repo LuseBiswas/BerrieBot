@@ -2,6 +2,7 @@
 
 import { useDeviceType } from "@/hooks/useDeviceType";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import NavBar from "@/components/desktop/home/NavBar";
@@ -42,6 +43,8 @@ import MobileProductCarousel from "./mobile/product/ProductCarousel";
 import MobileProductXFeature from "./mobile/product/Product2Feature";
 import MobileComparisonXSection from "./mobile/product/ComparisonXSection";
 import MobileProductTestimonialCarousel from "./mobile/product/TestimonialCarousel";
+import MobileCookiesHeroSection from "./mobile/cookies/HeroSection";
+import MobileCookiesComponent from "./mobile/cookies/cookies";
 
 interface DeviceWrapperProps {
   children: React.ReactNode;
@@ -50,6 +53,21 @@ interface DeviceWrapperProps {
 export default function DeviceWrapper({ children }: DeviceWrapperProps) {
   const { isMobile, isLoading } = useDeviceType();
   const pathname = usePathname();
+  
+  // State management for mobile cookies page
+  const [mobilePrivacyState, setMobilePrivacyState] = useState<'initial' | 'expanded' | 'confirmation'>('initial');
+
+  const handleMobileConfirmationChoice = (choice: 'back' | 'readAgain') => {
+    if (choice === 'back') {
+      setMobilePrivacyState('initial');
+    } else {
+      setMobilePrivacyState('expanded');
+    }
+  };
+
+  const handleMobileReadPrivacy = () => {
+    setMobilePrivacyState('expanded');
+  };
 
   // Show loading state during device detection
   if (isLoading) {
@@ -159,7 +177,7 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
   // Mobile experience - with mobile navbar
   if (isMobile) {
     // Check if we have mobile components for this page
-    const hasMobileVersion = pathname === "/" || pathname === "/resources" || pathname === "/solutions" || pathname === "/schedule" || pathname === "/about" || pathname === "/product";
+    const hasMobileVersion = pathname === "/" || pathname === "/resources" || pathname === "/solutions" || pathname === "/schedule" || pathname === "/about" || pathname === "/product" || pathname === "/cookies";
     
     return (
       <MobileDynamicBackground>
@@ -220,6 +238,19 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
                 <MobileComparisonXSection/>
                 <MobileProductTestimonialCarousel/>
                 <MobileCTASection/>
+              </>
+            ) : pathname === "/cookies" ? (
+              <>
+                <MobileCookiesHeroSection 
+                  showConfirmationText={mobilePrivacyState === 'confirmation'} 
+                  onConfirmationChoice={handleMobileConfirmationChoice}
+                  onReadPrivacy={handleMobileReadPrivacy}
+                />
+                <MobileCookiesComponent 
+                  state={mobilePrivacyState} 
+                  onStateChange={setMobilePrivacyState} 
+                />
+                
               </>
             ) : children
           ) : (
