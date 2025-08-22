@@ -197,7 +197,7 @@ export default function MobileAboutStatsSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <div 
-              className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-medium flex items-center justify-center"
+              className="bg-[#028374] text-white px-6 py-1 rounded-full font-medium flex items-center justify-center"
               style={{
                 width: '140px',
                 height: '25px',

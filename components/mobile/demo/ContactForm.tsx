@@ -29,7 +29,7 @@ export default function MobileContactForm() {
         {/* About you pill */}
         <div className="mb-8 flex justify-center">
           <div 
-            className="bg-[#00C7BEB2] text-white px-6 py-2 rounded-full font-medium flex items-center justify-center"
+            className="bg-[#028374] text-white px-6 py-2 rounded-full font-medium flex items-center justify-center"
             style={{
               fontSize: '16px',
               fontFamily: 'Manrope, sans-serif'
@@ -180,7 +180,7 @@ Best,"
           <div className="flex justify-center mt-8">
             <button
               type="submit"
-              className="bg-[#00C7BEB2] text-white px-8 py-3 rounded-2xl font-medium hover:bg-[#4a847c] transition-colors"
+              className="bg-[#028374] text-white px-8 py-3 rounded-2xl font-medium hover:bg-[#4a847c] transition-colors"
               style={{
                 fontSize: '16px',
                 fontFamily: 'Manrope, sans-serif'

@@ -20,7 +20,7 @@ export default function MobileResourcesHeroSection() {
       {/* ---- "Resources" pill ---- */}
       <div className="mb-8 relative z-10">
         <div 
-          className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-medium text-lg flex items-center justify-center"
+          className="bg-[#028374] text-white px-6 py-1 rounded-full font-medium text-lg flex items-center justify-center"
           style={{
             width: '140px',
             height: '25px',

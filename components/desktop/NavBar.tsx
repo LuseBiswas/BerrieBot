@@ -41,7 +41,7 @@ export default function NavBar() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
-        <div className="mx-2 my-3 rounded-2xl bg-[#04BBA6]">
+        <div className="mx-2 my-3 rounded-2xl bg-[#028374]">
           <div className="mx-auto flex max-w-8xl items-center justify-between px-16 py-12">
             {/* Left side - Logo */}
             <Link href="/" className="flex items-center space-x-2">
