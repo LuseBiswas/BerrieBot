@@ -93,7 +93,7 @@ export default function CompaniesSection() {
                 transition={{ delay: 0.6 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-2xl sm:tracking-[-2.5px] sm:text-6xl lg:text-4xl font-medium text-[#3D3D3D] leading-tight mx-auto max-w-2xl">
+                <h2 className="text-2xl tracking-[1px] sm:tracking-[-2.5px] sm:text-6xl lg:text-4xl lg:tracking-[-1px] font-medium text-[#3D3D3D] leading-tight mx-auto max-w-2xl">
                   Used by teams at Cognizant,
                   <br />
                   Wipro, LTIMindtree,

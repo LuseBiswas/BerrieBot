@@ -76,37 +76,42 @@ function AnimatedText({
   );
 }
 
-// Company logos data - easily extendable
+// Company logos data - easily extendable with individual sizes
 const COMPANY_LOGOS = [
   {
     id: 1,
     name: "Microsoft Teams",
-    logo: "/image/company/c_logo_1.png", // Replace with actual path
+    logo: "/image/product/Microsoft.png",
+    width: 240,
+    height: 120,
   },
   {
     id: 2,
-    name: "Workday",
-    logo: "/image/company/c_logo_2.png", // Replace with actual path
+    name: "SAP",
+    logo: "/image/product/SAP_1.png",
+    width: 150,
+    height: 75,
   },
   {
     id: 3,
-    name: "SAP",
-    logo: "/image/company/c_logo_3.png", // Replace with actual path
+    name: "SuccessFactors",
+    logo: "/image/product/successfactors.png",
+    width: 320,
+    height: 110,
   },
   {
     id: 4,
-    name: "SuccessFactors",
-    logo: "/image/company/c_logo_4.png", // Replace with actual path
+    name: "Workday",
+    logo: "/image/product/workdays1.png",
+    width: 165,
+    height: 60,
   },
   {
     id: 5,
-    name: "Additional Company",
-    logo: "/image/company/c_logo_5.png", // Replace with actual path
-  },
-  {
-    id: 6,
-    name: "Another Company",
-    logo: "/image/company/c_logo_6.png", // Replace with actual path
+    name: "And Many More",
+    logo: "/image/product/&manymore.png",
+    width: 200,
+    height: 75,
   },
 ];
 
@@ -181,7 +186,7 @@ export default function BottomBanner() {
         </div>
       </div>
 
-      {/* Blue ribbon with marquee - Full width */}
+      {/* Blue ribbon with static logos - Full width */}
       <motion.div
         className="w-full bg-[#028374] py-8 relative"
         initial={{ opacity: 0, y: 30 }}
@@ -189,91 +194,30 @@ export default function BottomBanner() {
         transition={{ duration: 0.8, delay: 0.4 }}
         viewport={{ once: true }}
       >
-            {/* Marquee container */}
-            <div className="flex items-center justify-center relative overflow-hidden">
-              {/* First set of logos */}
-              <motion.div
-                className="flex items-center space-x-16 shrink-0"
-                animate={{
-                  x: [0, -100 * COMPANY_LOGOS.length],
-                }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 20,
-                    ease: "linear",
-                  },
-                }}
+        {/* Static logos container */}
+        <div className="flex items-center justify-center">
+          <div className="flex items-center space-x-16">
+            {COMPANY_LOGOS.map((company) => (
+              <div
+                key={company.id}
+                className="flex items-center justify-center min-w-[200px] h-16"
               >
-                {COMPANY_LOGOS.map((company) => (
-                  <div
-                    key={`first-${company.id}`}
-                    className="flex items-center justify-center min-w-[200px] h-16"
-                  >
-                    <Image
-                      src={company.logo}
-                      alt={company.name}
-                      width={150}
-                      height={60}
-                      className="max-w-[150px] max-h-12 object-contain filter brightness-0 invert"
-                    />
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* Second set of logos (for seamless loop) */}
-              <motion.div
-                className="flex items-center space-x-16 shrink-0"
-                animate={{
-                  x: [0, -100 * COMPANY_LOGOS.length],
-                }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 20,
-                    ease: "linear",
-                  },
-                }}
-              >
-                {COMPANY_LOGOS.map((company) => (
-                  <div
-                    key={`second-${company.id}`}
-                    className="flex items-center justify-center min-w-[200px] h-16"
-                  >
-                    <Image
-                      src={company.logo}
-                      alt={company.name}
-                      width={150}
-                      height={60}
-                      className="max-w-[150px] max-h-12 object-contain filter brightness-0 invert"
-                    />
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* "& many more" text at the end */}
-              <motion.div
-                className="flex items-center justify-center min-w-[300px] h-16"
-                animate={{
-                  x: [0, -100 * COMPANY_LOGOS.length],
-                }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 20,
-                    ease: "linear",
-                  },
-                }}
-              >
-                <span className="text-black text-2xl font-inter font-light">
-                  & many more.
-                </span>
-              </motion.div>
-            </div>
-          </motion.div>
+                <Image
+                  src={company.logo}
+                  alt={company.name}
+                  width={company.width}
+                  height={company.height}
+                  className="object-contain filter brightness-0 invert"
+                  style={{
+                    maxWidth: `${company.width}px`,
+                    maxHeight: `${company.height}px`
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 } 

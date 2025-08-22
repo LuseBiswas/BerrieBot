@@ -21,7 +21,7 @@ export default function CTASection() {
   return (
     <section ref={ref} className="relative flex items-center justify-center mt-44 z-0 bg-black">
       <motion.div 
-        className="bg-[#D9D9D9] rounded-t-3xl p-12 flex items-center justify-between shadow-lg"
+        className="bg-[#FAFAFA] rounded-t-3xl p-12 flex items-center justify-between shadow-lg"
         style={{ 
           width: '1200px', 
           height: '307px',

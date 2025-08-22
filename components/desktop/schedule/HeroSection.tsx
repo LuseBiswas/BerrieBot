@@ -100,9 +100,7 @@ export default function HeroSection() {
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-12">
         <h1 className="text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl" style={{ fontFamily: 'Manrope, sans-serif' }}>
-          Help is one form or one call
-          <br />
-          away . What&apos;s your pick? 
+         Help is just <br /> one form away!
         </h1>
       </div>
 
@@ -111,19 +109,19 @@ export default function HeroSection() {
         {mounted && (
           <div className="text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[280px] sm:max-w-3xl mx-auto">
             <AnimatedText 
-              text="Got questions?"
+              text="From automating candidate outreach to running unbiased interviews;"
               scrollProgress={scrollYProgress}
               lineIndex={0}
             />
             <br />
             <AnimatedText 
-              text="Curious what Berribot can actually do for your team?"
+              text="From real-time fraud detection to intelligent matching;"
               scrollProgress={scrollYProgress}
               lineIndex={1}
             />
             <br />
             <AnimatedText 
-              text="You're in the right place."
+              text="Berribot integrates seamlessly into your hiring process. We make it faster, fairer, and more efficient."
               scrollProgress={scrollYProgress}
               lineIndex={2}
             />

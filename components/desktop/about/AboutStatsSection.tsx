@@ -1,6 +1,6 @@
-'use client';
-import { motion, useInView, useScroll } from 'framer-motion';
-import React, { useRef, useEffect } from 'react';
+"use client";
+import { motion, useInView, useScroll } from "framer-motion";
+import React, { useRef, useEffect } from "react";
 
 /* ---------- Custom Hook for Word Animation ---------- */
 // Commented out unused function to avoid ESLint warning
@@ -9,30 +9,37 @@ import React, { useRef, useEffect } from 'react';
 //   const wordDelay = wordIndex * 0.015; // Increased delay between words
 //   const startPoint = 0.3 + lineDelay + wordDelay; // Later start point
 //   const endPoint = startPoint + 0.08; // Longer animation duration
-//   
+//
 //   const wordProgress = useTransform(
 //     scrollProgress,
 //     [startPoint, endPoint],
 //     [0, 1]
 //   );
-//   
+//
 //   const colorTransform = useTransform(
 //     wordProgress,
 //     [0, 1],
 //     ["#6B7280", "#FFFFFF"]
 //   );
-//   
+//
 //   return { wordProgress, colorTransform };
 // }
 
-
-
 // Custom component to display animated numbers
-function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: { 
-  targetValue: number, 
-  format: (num: number) => string, 
-  showActual: boolean,
-  dynamicFormat?: (num: number, showActual: boolean, isMounted?: boolean) => string 
+function AnimatedNumber({
+  targetValue,
+  format,
+  showActual,
+  dynamicFormat,
+}: {
+  targetValue: number;
+  format: (num: number) => string;
+  showActual: boolean;
+  dynamicFormat?: (
+    num: number,
+    showActual: boolean,
+    isMounted?: boolean
+  ) => string;
 }) {
   const [randomValue, setRandomValue] = React.useState(0);
   const [displayValue, setDisplayValue] = React.useState(0);
@@ -50,7 +57,7 @@ function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: {
         const random = Math.floor(Math.random() * targetValue * 1.5);
         setRandomValue(random);
       }, 200); // Slower updates for smoother effect
-      
+
       return () => clearInterval(interval);
     }
   }, [showActual, targetValue, isMounted]);
@@ -66,11 +73,11 @@ function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: {
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
+
       // Easing function for smooth animation
       const easeOut = 1 - Math.pow(1 - progress, 3);
-      
-      const currentVal = startVal + (diff * easeOut);
+
+      const currentVal = startVal + diff * easeOut;
       setDisplayValue(Math.round(currentVal));
 
       if (progress < 1) {
@@ -87,28 +94,30 @@ function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: {
       // Show consistent value during SSR/hydration
       return format(0);
     }
-    
+
     if (dynamicFormat) {
       // Pass isMounted flag to dynamicFormat to control random behavior
       return dynamicFormat(displayValue, showActual, isMounted);
     }
-    
+
     return format(displayValue);
   };
 
   return (
     <motion.span
-      key={showActual ? 'actual' : 'random'}
+      key={showActual ? "actual" : "random"}
       initial={{ scale: 0.95, opacity: 0.8 }}
-      animate={{ 
-        scale: 1, 
+      animate={{
+        scale: 1,
         opacity: 1,
-        color: showActual ? "#007E79CF" : "#007E79AA" // Slightly different opacity for random vs actual
+        color: showActual ? "#007E79CF" : "#007E79AA", // Slightly different opacity for random vs actual
       }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`${showActual ? 'drop-shadow-lg' : ''} transition-all duration-300`}
+      className={`${
+        showActual ? "drop-shadow-lg" : ""
+      } transition-all duration-300`}
       style={{
-        textShadow: showActual ? '0 0 20px rgba(4, 187, 166, 0.3)' : 'none'
+        textShadow: showActual ? "0 0 20px rgba(4, 187, 166, 0.3)" : "none",
       }}
     >
       {getSafeDisplayValue()}
@@ -119,30 +128,34 @@ function AnimatedNumber({ targetValue, format, showActual, dynamicFormat }: {
 export default function MobileAboutStatsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
+
   // State to control showing actual values (like APPLY/OFFER in HeroSection)
   const [showActualValues, setShowActualValues] = React.useState(false);
 
   // Scroll progress for animations
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   // Switch to actual values at specific scroll percentage (like HeroSection)
   useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange(v => {
-      if (v >= 0.5) setShowActualValues(true);      // Show actual values at 50% scroll
+    const unsubscribe = scrollYProgress.onChange((v) => {
+      if (v >= 0.5)
+        setShowActualValues(true); // Show actual values at 50% scroll
       else if (v <= 0.4) setShowActualValues(false); // Show random numbers below 40% scroll
     });
     return unsubscribe;
   }, [scrollYProgress]);
 
   return (
-    <section ref={ref} className="relative flex items-center justify-center py-10 px-4 overflow-visible bg-white">
+    <section
+      ref={ref}
+      className="relative flex items-center justify-center pt-10 pb-20  px-4 overflow-visible bg-white "
+    >
       {/* Background grid pattern */}
       <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-20" />
-      
+
       {/* Background Images */}
       {/* Top Left - 7.png */}
       {/* <div className="absolute z-1 pointer-events-none overflow-hidden" style={{ top: '0px', left: '-200px', height: '250px' }}>
@@ -166,7 +179,7 @@ export default function MobileAboutStatsSection() {
           className="w-[543.6px] h-[462px] "
         /> 
       </div> */}
-      
+
       {/* Bottom Right - 8.png behind stats container */}
       {/* <div className="absolute z-5 pointer-events-none" style={{ bottom: '-211px', right: '-150px' }}>
         <Image 
@@ -179,61 +192,49 @@ export default function MobileAboutStatsSection() {
       </div>
        */}
       {/* Grid pattern with + signs at grid intersections - section level */}
-      
 
-      <motion.div 
+      <motion.div
         className="relative z-10 w-full max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-
         {/* Stacked Layout for Mobile */}
         <div className="flex flex-col items-center text-center space-y-8">
-          
           {/* "Get Started" pill */}
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div 
-              className="bg-[#028374] text-white px-6 py-1 rounded-full font-medium flex items-center justify-center"
-              style={{
-                width: '140px',
-                height: '25px',
-                fontSize: '14px',
-                fontFamily: 'Manrope, sans-serif'
-              }}
-            >
+            <div className="bg-[#028374] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
               Solutions
             </div>
           </motion.div>
 
-           {/* Description */}
-           <motion.div
+          {/* Description */}
+          <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="text-center max-w-2xl mx-auto">
-              <p 
+              <p
                 className="leading-[1.4] font-light text-black mb-4"
                 style={{
-                  fontSize: '36px',
-                  fontFamily: 'Manrope, sans-serif'
+                  fontSize: "36px",
+                  fontFamily: "Manrope, sans-serif",
                 }}
               >
                 We solve these challenges with a <br />
                 complete Agentic platform that <br />
-                automates the transactional, protects <br /> 
-                the integrity of the process, and gives <br /> 
+                automates the transactional, protects <br />
+                the integrity of the process, and gives <br />
                 recruiters more time to make high- <br />
                 value decisions.
               </p>
             </div>
           </motion.div>
-
 
           {/* Main Heading */}
           <motion.div
@@ -241,20 +242,19 @@ export default function MobileAboutStatsSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <h1 
+            <h1
               className="tracking-tight font-medium text-black text-center"
               style={{
-                fontSize: '76px',
-                fontFamily: 'Manrope, sans-serif',
-                lineHeight: '1.2'
+                fontSize: "76px",
+                fontFamily: "Manrope, sans-serif",
+                lineHeight: "1.2",
               }}
             >
-              We’ve already 
+              We’ve already
               <br />
-              delivered measurable 
+              delivered measurable
               <br />
               results with;
-              
             </h1>
           </motion.div>
 
@@ -265,11 +265,11 @@ export default function MobileAboutStatsSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="text-center max-w-2xl mx-auto">
-              <p 
+              <p
                 className="leading-[1.4] font-light text-black mb-4"
                 style={{
-                  fontSize: '36px',
-                  fontFamily: 'Manrope, sans-serif'
+                  fontSize: "36px",
+                  fontFamily: "Manrope, sans-serif",
                 }}
               >
                 customers including Cognizant, <br />
@@ -278,14 +278,13 @@ export default function MobileAboutStatsSection() {
             </div>
           </motion.div>
 
-         
           {/* Stats Container - Bottom */}
           <motion.div
             className="bg-white rounded-2xl flex items-center justify-center"
-            style={{ 
-              boxShadow: '10px 20px 60px 2px rgba(4, 187, 166, 0.3)',
-              width: '666px',
-              height: '533px'
+            style={{
+              boxShadow: "10px 20px 60px 2px rgba(4, 187, 166, 0.3)",
+              width: "666px",
+              height: "533px",
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -295,36 +294,56 @@ export default function MobileAboutStatsSection() {
             <div className="grid grid-cols-2 gap-12 p-2">
               {/* Stat 1 */}
               <div className="text-center">
-                <div className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                  <AnimatedNumber 
+                <div
+                  className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none"
+                  style={{ fontFamily: "Manrope, sans-serif" }}
+                >
+                  <AnimatedNumber
                     targetValue={50}
-                    format={(num) => Math.round(num).toLocaleString('en-US')}
+                    format={(num) => Math.round(num).toLocaleString("en-US")}
                     showActual={showActualValues}
-                  />%
+                  />
+                  %
                 </div>
-                <div className="text-[22px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                Reduction in<br />time-to-hire
+                <div
+                  className="text-[22px] font-extralight text-[#060606] leading-tight"
+                  style={{ fontFamily: "Manrope, sans-serif" }}
+                >
+                  Reduction in
+                  <br />
+                  time-to-hire
                 </div>
               </div>
 
               {/* Stat 2 */}
               <div className="text-center">
-                <div className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                  <AnimatedNumber 
+                <div
+                  className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none"
+                  style={{ fontFamily: "Manrope, sans-serif" }}
+                >
+                  <AnimatedNumber
                     targetValue={78}
                     format={(num) => `${Math.round(num)}%`}
                     showActual={showActualValues}
                   />
                 </div>
-                <div className="text-[22px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                savings in<br />recruiter & panel <br /> hours
+                <div
+                  className="text-[22px] font-extralight text-[#060606] leading-tight"
+                  style={{ fontFamily: "Manrope, sans-serif" }}
+                >
+                  savings in
+                  <br />
+                  recruiter & panel <br /> hours
                 </div>
               </div>
 
               {/* Stat 3 */}
               <div className="text-center">
-                <div className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none flex items-center justify-center" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                  <AnimatedNumber 
+                <div
+                  className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none flex items-center justify-center"
+                  style={{ fontFamily: "Manrope, sans-serif" }}
+                >
+                  <AnimatedNumber
                     targetValue={2}
                     format={(num) => `${Math.round(num)}x↑`}
                     showActual={showActualValues}
@@ -333,8 +352,21 @@ export default function MobileAboutStatsSection() {
                         return `${Math.round(num)}x↑`;
                       } else if (isMounted) {
                         // Random letters but keep ↑ static (only after mount)
-                        const letters = ['x', 'y', 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-                        const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+                        const letters = [
+                          "x",
+                          "y",
+                          "z",
+                          "a",
+                          "b",
+                          "c",
+                          "d",
+                          "e",
+                          "f",
+                          "g",
+                          "h",
+                        ];
+                        const randomLetter =
+                          letters[Math.floor(Math.random() * letters.length)];
                         return `${Math.round(num)}${randomLetter}↑`;
                       } else {
                         // Consistent fallback for SSR
@@ -343,22 +375,34 @@ export default function MobileAboutStatsSection() {
                     }}
                   />
                 </div>
-                <div className="text-[22px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                <div
+                  className="text-[22px] font-extralight text-[#060606] leading-tight"
+                  style={{ fontFamily: "Manrope, sans-serif" }}
+                >
                   show-up rates
                 </div>
               </div>
 
               {/* Stat 4 */}
               <div className="text-center">
-                <div className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                  <AnimatedNumber 
+                <div
+                  className="text-[64px] font-light text-[#007E79CF] mb-2 leading-none"
+                  style={{ fontFamily: "Manrope, sans-serif" }}
+                >
+                  <AnimatedNumber
                     targetValue={47}
                     format={(num) => (num / 10).toFixed(1)}
                     showActual={showActualValues}
-                  />/5
+                  />
+                  /5
                 </div>
-                <div className="text-[22px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                candidate<br />satisfaction  <br /> scores
+                <div
+                  className="text-[22px] font-extralight text-[#060606] leading-tight"
+                  style={{ fontFamily: "Manrope, sans-serif" }}
+                >
+                  candidate
+                  <br />
+                  satisfaction <br /> scores
                 </div>
               </div>
             </div>
@@ -367,4 +411,4 @@ export default function MobileAboutStatsSection() {
       </motion.div>
     </section>
   );
-} 
+}

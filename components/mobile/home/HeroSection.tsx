@@ -69,20 +69,7 @@ export default function MobileHeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
       >
-        {/* Pill Shape */}
-        <motion.div 
-          className="bg-[#028374] text-white rounded-full flex items-center justify-center text-sm md:text-base lg:text-lg font-medium z-30 mb-4"
-          style={{
-            width: sizes.pillWidth,
-            height: sizes.pillHeight,
-            fontFamily: 'Manrope, sans-serif'
-          }}
-          initial={{ opacity: 0, scale: 0.8, y: -10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-        >
-          Berri is a MasterMind
-        </motion.div>
+       
 
         {/* YouTube Video - Larger */}
         <motion.div 
@@ -124,7 +111,9 @@ export default function MobileHeroSection() {
               fontFamily: 'Manrope, sans-serif'
             }}
           >
-            Hi this is Berri, your complete agentic AI recruiter. Let&apos;s get started?!
+            Hi, This is Berri! <br /> Your AI recruiter
+who interviews hundreds of candidates
+while you focus on real work.
           </p>
         </motion.div>
       </motion.div>

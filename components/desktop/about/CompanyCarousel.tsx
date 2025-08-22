@@ -4,10 +4,14 @@ import Image from 'next/image';
 
 // Company logos data - can be extended with more logos
 const COMPANY_LOGOS = [
-  { id: 1, src: '/image/mobile/About/1.png', alt: 'Company 1' },
-  { id: 2, src: '/image/mobile/About/2.png', alt: 'Company 2' },
-  { id: 3, src: '/image/mobile/About/3.png', alt: 'Company 3' },
-  { id: 4, src: '/image/mobile/About/4.png', alt: 'Company 4' },
+  { id: 1, src: '/image/mobile/Home/Teleperformer_3.png', alt: 'Company 1' },
+  { id: 2, src: '/image/mobile/Home/VIT_2.png', alt: 'Company 2' },
+  { id: 3, src: '/image/mobile/Home/encora.png', alt: 'Company 3' },
+  { id: 4, src: '/image/mobile/Home/indium.png', alt: 'Company 4' },
+  { id: 5, src: '/image/mobile/Home/excelencia.png', alt: 'Company 4' },
+  { id: 6, src: '/image/mobile/Home/cognizant.png', alt: 'Company 4' },
+  { id: 7, src: '/image/mobile/Home/LTIMindtree_3.png', alt: 'Company 4' },
+  { id: 8, src: '/image/mobile/Home/Mindsprint_2.png', alt: 'Company 4' },
 ];
 
 export default function MobileCompanyCarousel() {
@@ -21,7 +25,7 @@ export default function MobileCompanyCarousel() {
             alt={logo.alt}
             width={100}
             height={32}
-            className="object-contain"
+            className="object-contain filter brightness-0 invert"
             style={{ height: '31.75px', width: 'auto' }}
           />
         </div>

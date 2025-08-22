@@ -11,26 +11,23 @@ export default function MobileAboutProductDisplay() {
       icon: Code,
       title: "Too much time <br/> on the wrong tasks",
       description: "Over 60% of recruiter time <br/> is lost to repetitive admin.",
-      position: "top-0 left-7",
     },
     {
       id: 2,
       icon: Mic,
       title: "High opportunity costs",
       description: "Scarcity of technical <br/> interviewers delays hiring <br/> by weeks.",
-      position: "top-45 left-[70%] -translate-x-1/2 z-20",
     },
     {
       id: 3,
       icon: Users,
       title: "Verification challenges",
       description: "30% of applicants <br/> misrepresent credentials.",
-      position: "top-120 right-[50%]",
     },
   ];
 
   return (
-    <section className="relative min-h-screen bg-transparent px-4 py-16 overflow-visible mb-90">
+    <section className="relative min-h-screen bg-transparent px-4 py-16 overflow-visible mb-[-100]">
       {/* Background Image */}
       <div className="absolute pointer-events-none" style={{ top: '500px', right: '-200px', zIndex: 0 }}>
         <Image
@@ -42,7 +39,7 @@ export default function MobileAboutProductDisplay() {
         />
       </div>
       
-      <div className="relative z-10 max-w-2xl mx-auto text-left">
+      <div className="relative z-10 max-w-5xl mx-auto text-left">
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -53,19 +50,19 @@ export default function MobileAboutProductDisplay() {
           <h2 className="text-[76px] font-normal text-white leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
             Recruitment
             <br />
-            has a problem
+            has a few problems
           </h2>
         </motion.div>
 
         {/* Product Cards */}
-        <div className="relative min-h-[26rem] w-full">
+        <div className="flex justify-center items-center gap-6 w-full">
           {productCards.map((card, index) => {
             const Icon = card.icon;
 
             return (
               <motion.div
                 key={card.id}
-                className={`absolute ${card.position} w-[233px] h-[256px] z-10`}
+                className="w-[220px] h-[256px] flex-shrink-0"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.9 + index * 0.2 }}

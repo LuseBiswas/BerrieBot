@@ -153,7 +153,7 @@ export default function MobileAboutSubHeroSection() {
       <div className="text-center text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[280px] sm:max-w-3xl mx-auto relative z-10" style={{ fontFamily: 'Manrope, sans-serif' }}>
         {isMounted && (
           <AnimatedTextWithBreaks 
-            text="At Berribot, we believe the future belongs to businesses where people focus on creativity, problem-solving, and strategy while AI handles the repetitive, time-consuming work.<br/>Our mission is simple: unleash human ingenuity by giving organizations intelligent digital agents that work at scale, without compromise."
+            text="At Berribot, we believe the future belongs to businesses where people focus on creativity, problem-solving, and strategy while AI handles the repetitive, time-consuming work. Our mission is simple: unleash human ingenuity by giving organizations intelligent digital agents that work at scale, without compromise."
             scrollProgress={scrollYProgress}
             className="leading-[1.4] font-light mx-auto"
             

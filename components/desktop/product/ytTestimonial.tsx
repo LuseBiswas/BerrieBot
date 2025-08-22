@@ -8,7 +8,7 @@ export default function YtTestimonial() {
 
   return (
     <section
-      className="py-16 sm:py-20 bg-black text-white relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 pb-48 mb-10 overflow-visible"
+      className="py-16 sm:py-20 bg-black text-white relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 overflow-visible"
     >
       <div className="px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
