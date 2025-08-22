@@ -5,26 +5,27 @@ import Image from "next/image";
 import FeatureCardItem from "./FeatureCardItem";
 
 /* ---------- Custom Hook for Word Animation ---------- */
-function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
-  const lineDelay = lineIndex * 0.25; // Increased delay between lines
-  const wordDelay = wordIndex * 0.015; // Increased delay between words
-  const startPoint = 0.3 + lineDelay + wordDelay; // Later start point
-  const endPoint = startPoint + 0.08; // Longer animation duration
-  
-  const wordProgress = useTransform(
-    scrollProgress,
-    [startPoint, endPoint],
-    [0, 1]
-  );
-  
-  const colorTransform = useTransform(
-    wordProgress,
-    [0, 1],
-    ["#6B7280", "#FFFFFF"]
-  );
-  
-  return { wordProgress, colorTransform };
-}
+// Commented out unused function to avoid ESLint warning
+// function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
+//   const lineDelay = lineIndex * 0.25; // Increased delay between lines
+//   const wordDelay = wordIndex * 0.015; // Increased delay between words
+//   const startPoint = 0.3 + lineDelay + wordDelay; // Later start point
+//   const endPoint = startPoint + 0.08; // Longer animation duration
+//   
+//   const wordProgress = useTransform(
+//     scrollProgress,
+//     [startPoint, endPoint],
+//     [0, 1]
+//   );
+//   
+//   const colorTransform = useTransform(
+//     wordProgress,
+//     [0, 1],
+//     ["#6B7280", "#FFFFFF"]
+//   );
+//   
+//   return { wordProgress, colorTransform };
+// }
 
 
 

@@ -208,8 +208,8 @@ const AnimatedIcon = React.memo(({ lordicon, className, style }: {
       lordIconElement.setAttribute('trigger', 'loop');
       lordIconElement.setAttribute('delay', '2000');
       lordIconElement.setAttribute('colors', 'primary:#04BBA6,secondary:#ffffff');
-      lordIconElement.style.width = '130px';
-      lordIconElement.style.height = '130px';
+      lordIconElement.style.width = '104px';
+      lordIconElement.style.height = '104px';
       
       iconRef.current.appendChild(lordIconElement);
       
@@ -304,13 +304,13 @@ const FlippableCard = React.memo(({
       <AnimatePresence>
         {isBlurred && (
           <motion.div
-            className="fixed inset-0 z-60"
+            className="fixed inset-0 z-40"
             style={{
-              backdropFilter: shouldReduceMotion ? "none" : "blur(20px)",
-              backgroundColor: "rgba(0, 0, 0, 0.6)"
+              backdropFilter: shouldReduceMotion ? "none" : "blur(8px)",
+              backgroundColor: "rgba(0, 0, 0, 0.5)"
             }}
             initial={{ opacity: 0, backdropFilter: shouldReduceMotion ? "none" : "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: shouldReduceMotion ? "none" : "blur(20px)" }}
+            animate={{ opacity: 1, backdropFilter: shouldReduceMotion ? "none" : "blur(8px)" }}
             exit={{ opacity: 0, backdropFilter: shouldReduceMotion ? "none" : "blur(0px)" }}
             transition={{ 
               duration: shouldReduceMotion ? 0.1 : 0.4,
@@ -328,7 +328,7 @@ const FlippableCard = React.memo(({
         style={{
           ...style,
           perspective: 1000,
-          zIndex: isFlipped ? 70 : 30
+          zIndex: isFlipped ? 50 : 30
         }}
         onClick={handleCardClick}
         animate={floating && !isFlipped && !shouldReduceMotion ? { 
@@ -640,12 +640,12 @@ export default function EllipseOrbit({
       <div 
         className="absolute z-40 text-center"
         style={{
-          top: "30%",
+          top: "35%",
           left: "20%",
           transform: "translate(-50%, -50%)"
         }}
       >
-        <div className="font-['Dogica_Pixel'] text-2xl tracking-[1px] text-white">
+        <div className="font-['Dogica_Pixel'] text-xl tracking-[1px] text-white">
           From
           <br />
           Apply
@@ -655,12 +655,12 @@ export default function EllipseOrbit({
       <div 
         className="absolute z-40 text-center"
         style={{
-          top: "75%",
+          top: "66%",
           left: "55%",
           transform: "translate(-50%, -50%)"
         }}
       >
-        <div className="font-['Dogica_Pixel'] text-2xl tracking-[1px] text-white">
+        <div className="font-['Dogica_Pixel'] text-xl tracking-[1px] text-white">
           To
           <br />
           Offer
@@ -684,12 +684,12 @@ export default function EllipseOrbit({
         src="/image/space/Logo/logo.png"
         alt="Logo"
         className="absolute z-20"
-        width={150}
-        height={150}
+        width={127.5}
+        height={127.5}
         priority={true}
         style={{
-          top: "50%",
-          left: "22%",
+          top: "49.5%",
+          left: "20%",
           transform: "translate(-50%, -50%)"
         }}
       />
@@ -765,8 +765,8 @@ export default function EllipseOrbit({
           <Image
             src="/image/space/Logo/glow.png"
             alt="Glow effect"
-            width={290}
-            height={290}
+            width={246.5}
+            height={246.5}
             priority={true}
           />
         </motion.div>
@@ -776,13 +776,13 @@ export default function EllipseOrbit({
         frontSrc="/image/space/FrontCards/Connect1.png"
         backSrc="/image/space/BackCards/Connect2.png"
         alt="Connect1 card"
-        width={280}
-        height={396}
-        backWidth={389}
-        backHeight={552}
+        width={238}
+        height={336.6}
+        backWidth={237.32}
+        backHeight={348.16}
         className="absolute z-30"
         style={{
-          top: "25%",
+          top: "30%",
           left: "25%",
           transform: "translate(-50%, -50%)"
         }}
@@ -791,8 +791,8 @@ export default function EllipseOrbit({
           {
             lordicon: "https://cdn.lordicon.com/vpbspaec.json",
             position: {
-              top: "-25%",
-              left: "85%",
+              top: "-10%",
+              left: "105%",
               transform: "translate(-50%, -50%)"
             }
           },
@@ -800,15 +800,15 @@ export default function EllipseOrbit({
             lordicon: "https://cdn.lordicon.com/odpyouay.json",
             position: {
               top: "30%",
-              right: "-35%",
+              right: "-85%",
               transform: "translate(50%, -50%)"
             }
           },
           {
             lordicon: "https://cdn.lordicon.com/adbkylwa.json",
             position: {
-              bottom: "-15%",
-              left: "100%",
+              bottom: "-12%",
+              left: "110%",
               transform: "translate(-50%, 50%)"
             }
           }
@@ -820,14 +820,14 @@ export default function EllipseOrbit({
         frontSrc="/image/space/FrontCards/Search1.png"
         backSrc="/image/space/BackCards/Search2.png"
         alt="Search1 card"
-        width={280}
-        height={396}
-        backWidth={389}
-        backHeight={552}
+        width={238}
+        height={336.6}
+        backWidth={264.52}
+        backHeight={375.36}
         className="absolute z-30"
         style={{
-          top: "22%",
-          left: "50%",
+          top: "27%",
+          left: "47%",
           transform: "translate(-50%, -50%)"
         }}
         floating={true}
@@ -835,8 +835,8 @@ export default function EllipseOrbit({
           {
             lordicon: "https://cdn.lordicon.com/ypagsvdy.json",
             position: {
-              top: "-10%",
-              left: "-40%",
+              top: "-5%",
+              left: "-45%",
               transform: "translate(-50%, -50%)"
             }
           },
@@ -851,8 +851,8 @@ export default function EllipseOrbit({
           {
             lordicon: "https://cdn.lordicon.com/gnxqymui.json",
             position: {
-              bottom: "-20%",
-              left: "-35%",
+              bottom: "-10%",
+              left: "-50%",
               transform: "translate(-50%, 50%)"
             }
           }
@@ -864,14 +864,14 @@ export default function EllipseOrbit({
         frontSrc="/image/space/FrontCards/Mastermind1.png"
         backSrc="/image/space/BackCards/Mastermind2.png"
         alt="Mastermind1 card"
-        width={280}
-        height={396}
-        backWidth={389}
-        backHeight={552}
+        width={238}
+        height={336.6}
+        backWidth={264.52}
+        backHeight={375.36}
         className="absolute z-30"
         style={{
-          top: "35%",
-          left: "73%",
+          top: "34%",
+          left: "70%",
           transform: "translate(-50%, -50%)"
         }}
         floating={true}
@@ -879,24 +879,24 @@ export default function EllipseOrbit({
           {
             lordicon: "https://cdn.lordicon.com/ailnzwyn.json",
             position: {
-              top: "-25%",
-              left: "-35%",
+              top: "0%",
+              left: "-45%",
               transform: "translate(-50%, -50%)"
             }
           },
           {
             lordicon: "https://cdn.lordicon.com/idpbgtvy.json",
             position: {
-              top: "25%",
-              right: "130%",
+              top: "35%",
+              right: "140%",
               transform: "translate(50%, -50%)"
             }
           },
           {
             lordicon: "https://cdn.lordicon.com/euflfcqp.json",
             position: {
-              bottom: "-10%",
-              left: "-35%",
+              bottom: "-5%",
+              left: "-45%",
               transform: "translate(-50%, 50%)"
             }
           }
@@ -908,14 +908,14 @@ export default function EllipseOrbit({
         frontSrc="/image/space/FrontCards/Proctor1.png"
         backSrc="/image/space/BackCards/Proctor2.png"
         alt="Proctor1 card"
-        width={280}
-        height={396}
-        backWidth={389}
-        backHeight={552}
+        width={238}
+        height={336.6}
+        backWidth={264.52}
+        backHeight={375.36}
         className="absolute z-30"
         style={{
-          top: "58%",
-          left: "62%",
+          top: "53%",
+          left: "60%",
           transform: "translate(-50%, -50%)"
         }}
         floating={true}
@@ -924,23 +924,23 @@ export default function EllipseOrbit({
             lordicon: "https://cdn.lordicon.com/gjopwtdp.json",
             position: {
               top: "-30%",
-              left: "-35%",
+              left: "60%",
               transform: "translate(-50%, -50%)"
             }
           },
           {
             lordicon: "https://cdn.lordicon.com/kdibbosx.json",
             position: {
-              top: "40%",
-              right: "125%",
+              top: "-30%",
+              right: "105%",
               transform: "translate(50%, -50%)"
             }
           },
           {
             lordicon: "https://cdn.lordicon.com/nwwurnnq.json",
             position: {
-              bottom: "-25%",
-              left: "-30%",
+              bottom: "40%",
+              left: "-40%",
               transform: "translate(-50%, 50%)"
             }
           }
@@ -964,7 +964,7 @@ export default function EllipseOrbit({
           direction={direction}
         />
       </div>
-      {/* <SpaceComets color="#04BBA6" maxConcurrent={3} spawnRatePerMin={18} /> */}
+      <SpaceComets color="#04BBA6" maxConcurrent={2} spawnRatePerMin={12} performanceMode="balanced" />
       </div>
     </section>
   );

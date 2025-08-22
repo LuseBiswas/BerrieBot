@@ -186,7 +186,7 @@ export default function MobileBlogResource() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.4 }}
                 >
-                  We're working on bringing you amazing whitepaper content
+                  We&apos;re working on bringing you amazing whitepaper content
                 </motion.div>
               </motion.div>
             )}
