@@ -119,10 +119,10 @@ export default function HeroSection() {
 
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-7xl mx-auto relative z-10 mb-12"style={{ fontFamily: 'Manrope, sans-serif' }}>
-        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text">
-        Smart bots. Less
+        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-normal text-[#252527] bg-clip-text">
+        Smart bots.
           <br />
-          busywork.
+          Less busy work.
         </h1>
       </div>
 

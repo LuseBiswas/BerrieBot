@@ -18,27 +18,27 @@ interface BlogPost {
 const blogPosts: BlogPost[] = [
   {
     id: 1,
-    date: "14 Aug 2025",
-    title: "But Doesn't That Make Hiring... Less Human?",
-    description: "Great question. And nope. Quite the opposite, actually.",
+    date: "Jul 18, 2025",
+    title: "Recruitment is stuck. We are bringing it to the future.",
+    description: "Welcome to Berri Bytes, our attempt at making a guide for the future of hiring.",
     backgroundImage: "/image/background/bg_image_3.png",
-    link: "/explore/details"
+    link: "https://berribot.substack.com/p/recruitment-is-stuck-we-are-bringing?r=5zrtcb&utm_campaign=post&utm_medium=web&triedRedirect=true"
   },
   {
     id: 2,
-    date: "18 Aug 2025",
-    title: "TL;DR?",
-    description: "Hiring doesn't have to feel like herding cats while answering emails in a burning building.",
+    date: "Jul 29, 2025",
+    title: "Will ‘Comet’ Replace Recruiters?",
+    description: "AI Will Not Replace Recruiters. But Recruiters Who Use AI Will Replace Those Who Don’t.",
     backgroundImage: "/image/background/bg_image_4.png",
-    link: "/explore/details"
+    link: "https://berribot.substack.com/p/will-comet-replace-recruiters?r=5zrtcb&utm_campaign=post&utm_medium=web&triedRedirect=true"
   },
   {
     id: 3,
-    date: "18 Aug 2025",
-    title: "Real Talk: What Kind of Results Are We Talking?",
-    description: "Increased peace of mind, slightly smug smiles, and more lunch breaks.",
+    date: "Aug 12, 2025",
+    title: "The Five Rules of Building Empathetic AI in Hiring",
+    description: "In a world of automation, the companies that win will be the ones that remember how it feels to apply for a job.",
     backgroundImage: "/image/background/bg_image_5.png",
-    link: "/explore/details"
+    link: "https://berribot.substack.com/p/the-five-rules-of-building-empathetic?r=5zrtcb&utm_campaign=post&utm_medium=web&triedRedirect=true"
   }
 ];
 

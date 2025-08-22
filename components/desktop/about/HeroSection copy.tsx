@@ -187,19 +187,19 @@ export default function MobileAboutHeroSection() {
             lineHeight: '1.2'
           }}
         >
-          We build digital agents
+          We build digital <br />
+           agents that let recruiters do 
           <br />
-           that let recruiters
-          <br />
-           do their best work 
+           their best work.
+           
         </h1>
       </div>
 
       {/* Description */}
-      <div className="text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[280px] text-center sm:max-w-3xl mx-auto relative z-10" style={{ fontFamily: 'Manrope, sans-serif' }}>
+      <div className="text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[380px] text-center sm:max-w-7xl mx-auto relative z-10" style={{ fontFamily: 'Manrope, sans-serif' }}>
         {isMounted && (
           <AnimatedTextWithBreaks 
-            text="From automating candidate outreach to running unbiased interviews;<br/>From real-time fraud detection to intelligent matching;<br/>Berribot integrates seamlessly into your hiring process. We make it faster, fairer, and more efficient."
+            text="From automating candidate outreach to running unbiased interviews;<br/>From real-time fraud detection to intelligent matching;<br/>Berribot integrates seamlessly into your hiring process.<br/> We make it faster, fairer, and more efficient."
             scrollProgress={scrollYProgress}
             className="leading-[1.4] font-light mx-auto"
             
