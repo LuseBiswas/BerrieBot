@@ -123,8 +123,8 @@ export default function LineSection() {
               BerriConnect reaches out,<br />
               confirms availability, sends reminders.
             </p>
-            <div className="flex items-center space-x-6 mt-6">
-              {/* Send Icon */}
+            {/* <div className="flex items-center space-x-6 mt-6">
+              
               <div className="w-12 h-12 bg-transparent rounded-lg flex items-center justify-center">
                 <Image 
                   src="/image/icons/send.png" 
@@ -135,14 +135,14 @@ export default function LineSection() {
                 />
               </div>
               
-              {/* Connection line with circles */}
+             
               <div className="flex items-center space-x-0">
                 <div className="w-2 h-2 bg-[#04BBA6] rounded-full"></div>
                 <div className="w-6 h-[2px] bg-[#04BBA6]"></div>
                 <div className="w-2 h-2 bg-[#04BBA6] rounded-full"></div>
               </div>
               
-              {/* Calendar Icon */}
+             
               <div className="w-12 h-12 bg-transparent rounded-lg flex items-center justify-center">
                 <Image 
                   src="/image/icons/calander.png" 
@@ -153,14 +153,14 @@ export default function LineSection() {
                 />
               </div>
               
-              {/* Connection line with circles */}
+              
               <div className="flex items-center space-x-0">
                 <div className="w-2 h-2 bg-[#04BBA6] rounded-full"></div>
                 <div className="w-6 h-[2px] bg-[#04BBA6]"></div>
                 <div className="w-2 h-2 bg-[#04BBA6] rounded-full"></div>
               </div>
               
-              {/* Bell Icon */}
+              
               <div className="w-12 h-12 bg-transparent rounded-lg flex items-center justify-center">
                 <Image 
                   src="/image/icons/bell.png" 
@@ -170,7 +170,7 @@ export default function LineSection() {
                   className="w-[45px] h-[45px]"
                 />
               </div>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Step 2: Screen & Shortlist */}
