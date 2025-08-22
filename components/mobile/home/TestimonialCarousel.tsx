@@ -24,12 +24,6 @@ const TESTIMONIALS = [
     name: "CXO",
     company: "CXO of a billion dollar US based Mortgage Refinancing business"
   },
-  {
-    id: 4,
-    quote: "The ROI from<br/>Berribot exceeded<br/>all our initial<br/>expectations.",
-    name: "David Thompson",
-    company: "Director - HR, Cognizant"
-  }
 ];
 
 export default function MobileTestimonialCarousel() {

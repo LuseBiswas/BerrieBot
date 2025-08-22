@@ -128,7 +128,7 @@ const DisplaySolution: React.FC<DisplaySolutionProps> = ({
                 <div className={`flex-shrink-0 w-[20px] h-[20px] rounded-full flex items-center justify-center ${theme === 'dark' ? 'text-white' : 'text-black'} text-[20px] font-inter font-light`}>
                   {index + 1}
                 </div>
-                <p className="text-[19px] font-inter font-light leading-relaxed flex-1 text-left text-white">
+                <p className={`text-[19px] font-inter font-light leading-relaxed flex-1 text-left ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
                   {point}
                 </p>
               </div>

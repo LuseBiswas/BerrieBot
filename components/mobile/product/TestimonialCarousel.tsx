@@ -9,24 +9,24 @@ const FOUNDERS = [
   {
     id: 1,
     image: "/image/Founder/img_1.png",
-    name: "Raja Lingappaa",
-    heading: "Raja <br/> Lingappaa",
-    company: "CEO, AI innovator, <br/> ex-Meta & SAP, 5 AI patents."
+    name: "CXO",
+    heading: "AI is the future <br/> of Interviewing. GenZ's will look forward to <br/> using Berribot",
+    company: "CXO of a Fortune 500 IT Services firm"
   },
   {
     id: 2,
     image: "/image/Founder/img_2.png",
-    name: "Vishnuvardhan M",
-    heading: "Berribot <br/> changed L1 <br/> interviews <br/> forever.",
-    company: "COO, serial entrepreneur, <br/> built large-scale hiring ops."
+    name: "Director",
+    heading: "Berribot <br/> changed the <br/> way L1 interviews <br/> are <br/> conducted for us",
+    company: "Director of a Fortune 500 IT Services firm"
   },
   {
     id: 3,
     image: "/image/Founder/img_3.png",
-    name: "Satish Jeyaraman",
-    heading: "Satish Jeyaraman",
-    company: "CGO, ex-Cognizant HR leader, <br/> scaled hiring to 60K+ annually."
-  }
+    name: "CXO",
+    heading: "Berribot delivers the  <br/> exact need of the hour with their <br/> exceptional products",
+    company: "CXO of a billion dollar US based Mortgage Refinancing business"
+  },
 ];
 
 export default function MobileProductTestimonialCarousel() {
@@ -128,7 +128,7 @@ export default function MobileProductTestimonialCarousel() {
                 <div 
                   className="text-black text-center"
                   style={{ 
-                    fontSize: '48px', 
+                    fontSize: '38px', 
                     fontFamily: 'Manrope, sans-serif',
                     fontWeight: 300,
                     lineHeight: 1.1

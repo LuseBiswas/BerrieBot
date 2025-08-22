@@ -646,9 +646,9 @@ export default function EllipseOrbit({
         }}
       >
         <div className="font-['Dogica_Pixel'] text-xl tracking-[1px] text-white">
-          From
+          FROM
           <br />
-          Apply
+          APPLY
         </div>
       </div>
       
@@ -661,9 +661,9 @@ export default function EllipseOrbit({
         }}
       >
         <div className="font-['Dogica_Pixel'] text-xl tracking-[1px] text-white">
-          To
+          TO
           <br />
-          Offer
+          OFFER
         </div>
       </div>
       

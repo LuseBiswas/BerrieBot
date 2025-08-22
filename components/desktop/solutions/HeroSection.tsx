@@ -112,7 +112,7 @@ export default function HeroSection() {
     >
       {/* ---- "We are Berribot" pill ---- */}
       <div className="mb-12 relative z-10">
-        <div className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
+        <div className="bg-[#028374] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
           Solutions
         </div>
       </div>

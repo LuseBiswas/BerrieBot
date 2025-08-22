@@ -63,12 +63,30 @@ export default function CompanyTestimonialSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 }); // Triggers when 50% of component is in view (centered)
   const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [direction, setDirection] = useState(0); // Track slide direction
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      opacity: 0,
+      x: direction > 0 ? 100 : -100,
+    }),
+    center: {
+      opacity: 1,
+      x: 0,
+    },
+    exit: (direction: number) => ({
+      opacity: 0,
+      x: direction > 0 ? -100 : 100,
+    }),
+  };
 
   const nextTestimonial = () => {
+    setDirection(1); // Moving forward (slide left)
     setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
   };
 
   const prevTestimonial = () => {
+    setDirection(-1); // Moving backward (slide right)
     setActiveTestimonial((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
   };
 
@@ -165,20 +183,20 @@ export default function CompanyTestimonialSection() {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   layout
                 >
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={activeTestimonial}
+                    custom={direction}
                     className="flex flex-col justify-center"
+                    variants={slideVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
                     layout
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <motion.h2
                       className="text-4xl sm:text-[44px] lg:text-[44px] font-inter font-light leading-tight mb-12"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      layout
                       dangerouslySetInnerHTML={{ 
                         __html: `&ldquo;${TESTIMONIALS[activeTestimonial].quote}&rdquo;` 
                       }}
@@ -186,11 +204,6 @@ export default function CompanyTestimonialSection() {
 
                     <motion.div
                       className="flex flex-col justify-center"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      layout
                     >
                       <h3 className="text-2xl font-inter font-medium text-[#04BBA6] mb-2">
                         {TESTIMONIALS[activeTestimonial].author}

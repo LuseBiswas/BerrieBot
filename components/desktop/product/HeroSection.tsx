@@ -28,7 +28,7 @@ export default function HeroSection() {
 
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-7xl mx-auto relative z-10 mb-12"style={{ fontFamily: 'Manrope, sans-serif' }}>
-        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text">
+        <h1 className="text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl">
           Let the Berri Platform do the
           <br />
           work. So your teams can hire.
@@ -37,7 +37,7 @@ export default function HeroSection() {
 
       {/* ---- Description ---- */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-8"style={{ fontFamily: 'Manrope, sans-serif' }}>
-        <p className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light text-[#969696] max-w-5xl mx-auto">
+        <p className="text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[280px] sm:max-w-5xl mx-auto">
         Berribot&apos;s suite of AI-powered recruitment agents automates outreach, <br /> interviews, fraud detection, and screening.
         </p>
       </div>
@@ -45,7 +45,7 @@ export default function HeroSection() {
       {/* ---- Book a Demo Button ---- */}
       <div className="relative z-10">
         <Link href="/schedule">
-          <button className="bg-[#04BBA6] text-white font-inter font-medium text-lg px-8 py-3 rounded-full hover:bg-[#00AFA7] hover:cursor-pointer transition-colors duration-300">
+          <button className="bg-[#028374] text-white font-inter font-medium text-lg px-8 py-3 rounded-full hover:bg-[#00AFA7] hover:cursor-pointer transition-colors duration-300">
             Book a Demo
           </button>
         </Link>
