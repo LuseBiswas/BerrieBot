@@ -95,7 +95,7 @@ export default function CarouselSection_2() {
   const descriptionY = useTransform(scrollYProgress, [0.2, 0.4, 0.6, 0.8], [30, 0, 0, -30]);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center mt-[-40px] ">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center mt-12 ">
       {/* Background grid pattern */}
       <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-0" />
       

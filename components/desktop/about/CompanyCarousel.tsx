@@ -11,70 +11,41 @@ const COMPANY_LOGOS = [
 ];
 
 export default function MobileCompanyCarousel() {
+  // Create the repeating pattern: Logo -> Dot -> Logo -> Dot -> etc.
+  const createLogoPattern = (keyPrefix: string) => {
+    return COMPANY_LOGOS.map((logo) => (
+      <React.Fragment key={`${keyPrefix}-${logo.id}`}>
+        <div className="flex items-center justify-center mx-8 flex-shrink-0">
+          <Image
+            src={logo.src}
+            alt={logo.alt}
+            width={100}
+            height={32}
+            className="object-contain"
+            style={{ height: '31.75px', width: 'auto' }}
+          />
+        </div>
+        <div 
+          className="rounded-full mx-4 flex-shrink-0"
+          style={{
+            width: '12.13px',
+            height: '12.13px',
+            backgroundColor: '#0BECD2'
+          }}
+        />
+      </React.Fragment>
+    ));
+  };
+
   return (
     <div className="w-full overflow-hidden" style={{ height: '60px', backgroundColor: '#028374' }}>
       <div className="flex items-center h-full animate-scroll">
-        {/* First set of logos */}
-        {COMPANY_LOGOS.map((logo, index) => (
-          <React.Fragment key={`first-${logo.id}`}>
-            <div className="flex items-center justify-center mx-8">
-              <Image
-                src={logo.src}
-                alt={logo.alt}
-                width={100}
-                height={32}
-                className="object-contain"
-                style={{ height: '31.75px', width: 'auto' }}
-              />
-            </div>
-            {/* Separator circle (except after last logo) */}
-            {index < COMPANY_LOGOS.length - 1 && (
-              <div 
-                className="rounded-full mx-4"
-                style={{
-                  width: '12.13px',
-                  height: '12.13px',
-                  backgroundColor: '#0BECD2'
-                }}
-              />
-            )}
-          </React.Fragment>
-        ))}
-        
-        {/* Duplicate set for seamless loop */}
-        {COMPANY_LOGOS.map((logo, index) => (
-          <React.Fragment key={`second-${logo.id}`}>
-            <div 
-              className="rounded-full mx-4"
-              style={{
-                width: '12.13px',
-                height: '12.13px',
-                backgroundColor: '#0BECD2'
-              }}
-            />
-            <div className="flex items-center justify-center mx-8">
-              <Image
-                src={logo.src}
-                alt={logo.alt}
-                width={100}
-                height={32}
-                className="object-contain"
-                style={{ height: '31.75px', width: 'auto' }}
-              />
-            </div>
-            {/* Separator circle (except after last logo) */}
-            {index < COMPANY_LOGOS.length - 1 && (
-              <div 
-                className="rounded-full mx-4"
-                style={{
-                  width: '12.13px',
-                  height: '12.13px',
-                  backgroundColor: '#0BECD2'
-                }}
-              />
-            )}
-          </React.Fragment>
-        ))}
+        {/* First set */}
+        {createLogoPattern('first')}
+        {/* Second set - exact duplicate for seamless loop */}
+        {createLogoPattern('second')}
+        {/* Third set - extra safety for perfect loop */}
+        {createLogoPattern('third')}
       </div>
       
       <style jsx>{`
@@ -83,12 +54,12 @@ export default function MobileCompanyCarousel() {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-50%);
+            transform: translateX(-33.333%);
           }
         }
         
         .animate-scroll {
-          animation: scroll 30s linear infinite;
+          animation: scroll 20s linear infinite;
           width: max-content;
         }
       `}</style>

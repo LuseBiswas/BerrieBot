@@ -92,14 +92,14 @@ export default function HeroSection() {
     <section ref={ref} className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent">
       {/* ---- "We are Berribot" pill ---- */}
       <div className="mb-12 relative z-10">
-        <div className="bg-[#00C7BEB2] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
+        <div className="bg-[#028374] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
           Get Started
         </div>
       </div>
 
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-12">
-        <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium bg-white text-transparent bg-clip-text">
+        <h1 className="text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl" style={{ fontFamily: 'Manrope, sans-serif' }}>
           Help is one form or one call
           <br />
           away . What&apos;s your pick? 
@@ -107,9 +107,9 @@ export default function HeroSection() {
       </div>
 
       {/* ---- Description ---- */}
-      <div className="text-center w-full max-w-4xl mx-auto relative z-10">
+      <div className="text-center text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[280px] sm:max-w-3xl mx-auto relative z-10">
         {mounted && (
-          <div className="font-inter text-[36px] sm:text-2xl md:text-[36px] leading-[1.4] sm:leading-[1.5] font-light text-white max-w-5xl mx-auto">
+          <div className="text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[280px] sm:max-w-3xl mx-auto">
             <AnimatedText 
               text="Got questions?"
               scrollProgress={scrollYProgress}

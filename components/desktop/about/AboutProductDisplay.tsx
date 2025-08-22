@@ -50,7 +50,7 @@ export default function MobileAboutProductDisplay() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-[76px] font-medium text-white leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
+          <h2 className="text-[76px] font-normal text-white leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
             Recruitment
             <br />
             has a problem

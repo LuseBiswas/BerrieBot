@@ -484,7 +484,7 @@ export default function MobileStatsSection() {
                   />
                 </div>
                 <div className={`${statsSizes.statLabelSize} font-extralight text-[#060606] leading-tight`} style={{ fontFamily: 'Manrope, sans-serif' }}>
-                  In ROI reported<br />by Cognizant
+                In ROI reported<br />by Fortune 200 client
                 </div>
               </div>
             </div>

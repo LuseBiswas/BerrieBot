@@ -172,21 +172,13 @@ export default function MobileAboutHeroSection() {
 
       {/* "Get Started" pill */}
       <div className="mb-8 relative z-10">
-        <div 
-          className="bg-white text-[#00BCA3] px-6 py-1 rounded-full font-bold flex items-center justify-center"
-          style={{
-            width: '155px',
-            height: '25px',
-            fontSize: '14px',
-            fontFamily: 'Manrope, sans-serif'
-          }}
-        >
+      <div className="bg-[#028374] text-white px-6 py-1 rounded-full font-inter font-medium text-lg">
           We are BerriBot
         </div>
       </div>
 
       {/* Main Heading */}
-      <div className="text-center w-full max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto relative z-10 mb-6">
+      <div className="text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl text-center relative z-10 mb-6" style={{ fontFamily: 'Manrope, sans-serif' }}>
         <h1 
           className="tracking-tight mb-6 font-medium text-white"
           style={{
@@ -204,16 +196,13 @@ export default function MobileAboutHeroSection() {
       </div>
 
       {/* Description */}
-      <div className="text-center w-full max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto relative z-10">
+      <div className="text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[280px] text-center sm:max-w-3xl mx-auto relative z-10" style={{ fontFamily: 'Manrope, sans-serif' }}>
         {isMounted && (
           <AnimatedTextWithBreaks 
             text="From automating candidate outreach to running unbiased interviews;<br/>From real-time fraud detection to intelligent matching;<br/>Berribot integrates seamlessly into your hiring process. We make it faster, fairer, and more efficient."
             scrollProgress={scrollYProgress}
             className="leading-[1.4] font-light mx-auto"
-            style={{
-              fontSize: '36px',
-              fontFamily: 'Manrope, sans-serif'
-            }}
+            
           />
         )}
       </div>

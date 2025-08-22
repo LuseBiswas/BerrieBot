@@ -111,6 +111,7 @@ export default function MobileAboutSubHeroSection() {
       className={sectionClassName}
       suppressHydrationWarning={true}
       style={isMounted ? {} : { marginTop: '5rem' }}
+      
     >
       {/* Background Image */}
       <div className="absolute pointer-events-none" style={{ top: '-80px', left: '-230px', zIndex: 1 }}>
@@ -135,7 +136,7 @@ export default function MobileAboutSubHeroSection() {
       </div>
       
       {/* Main Heading */}
-      <div className="text-center w-full max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto relative z-10 mb-6">
+      <div className="text-center text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl relative z-10 mb-6" style={{ fontFamily: 'Manrope, sans-serif' }}>
         <h1 
           className="tracking-tight mb-6 font-medium text-white"
           style={{
@@ -149,16 +150,13 @@ export default function MobileAboutSubHeroSection() {
       </div>
 
       {/* Description */}
-      <div className="text-center w-full max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto relative z-10">
+      <div className="text-center text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[280px] sm:max-w-3xl mx-auto relative z-10" style={{ fontFamily: 'Manrope, sans-serif' }}>
         {isMounted && (
           <AnimatedTextWithBreaks 
             text="At Berribot, we believe the future belongs to businesses where people focus on creativity, problem-solving, and strategy while AI handles the repetitive, time-consuming work.<br/>Our mission is simple: unleash human ingenuity by giving organizations intelligent digital agents that work at scale, without compromise."
             scrollProgress={scrollYProgress}
             className="leading-[1.4] font-light mx-auto"
-            style={{
-              fontSize: '36px',
-              fontFamily: 'Manrope, sans-serif'
-            }}
+            
           />
         )}
       </div>

@@ -131,7 +131,7 @@ export default function BottomBanner() {
         <div className="max-w-7xl mx-auto text-center">
           {/* Heading */}
           <motion.h2
-            className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-medium text-[#252527] bg-clip-text"
+            className="text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] mb-8 font-normal text-[#252527] leading-[1.25]"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -183,7 +183,7 @@ export default function BottomBanner() {
 
       {/* Blue ribbon with marquee - Full width */}
       <motion.div
-        className="w-full bg-[#04BBA6] py-8 relative"
+        className="w-full bg-[#028374] py-8 relative"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
