@@ -292,10 +292,12 @@ export default function MobileStatsSection() {
       {/* Top Left - 7.png */}
       <div className="absolute z-1 pointer-events-none overflow-hidden" style={{ top: '0px', left: '-200px', height: '250px' }}>
         <Image 
-          src="/image/mobile/7.png"
+          src="/image/mobile/7.webp"
           alt="Background Image Top Left"
           width={377}
           height={336}
+          loading="lazy"
+          sizes="377px"
           className={`w-[${sizes.bgImage1Width}] h-[${sizes.bgImage1Height}] opacity-[70%]`}
           style={{ marginTop: screenSize === 'large' ? '-160px' : screenSize === 'tablet' ? '-140px' : '-120px' }}
         />
@@ -304,10 +306,12 @@ export default function MobileStatsSection() {
       {/* Top Right - 8.png */}
       <div className="absolute z-1 pointer-events-none" style={{ top: '-00px', right: '-200px' }}>
         <Image 
-          src="/image/mobile/8.png"
+          src="/image/mobile/8.webp"
           alt="Background Image Top Right"
           width={544}
           height={462}
+          loading="lazy"
+          sizes="544px"
           className={`w-[${sizes.bgImage2Width}] h-[${sizes.bgImage2Height}]`}
         />
       </div>
@@ -315,10 +319,12 @@ export default function MobileStatsSection() {
       {/* Bottom Right - 8.png behind stats container */}
       <div className="absolute z-5 pointer-events-none" style={{ bottom: '-211px', right: '-150px' }}>
         <Image 
-          src="/image/mobile/8.png"
+          src="/image/mobile/8.webp"
           alt="Background Image Bottom Right"
           width={544}
           height={462}
+          loading="lazy"
+          sizes="544px"
           className={`w-[${sizes.bgImage2Width}] h-[${sizes.bgImage3Height}] opacity-[30%]`}
         />
       </div>

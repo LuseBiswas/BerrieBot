@@ -22,10 +22,12 @@ export default function MobileCTASection() {
       {/* Top Left - 7.png */}
       <div className="absolute z-1 pointer-events-none" style={{ top: '-120px', left: '-200px' }}>
         <Image 
-          src="/image/mobile/7.png"
+          src="/image/mobile/7.webp"
           alt="Background Image Top Left"
           width={377}
           height={336}
+          loading="lazy"
+          sizes="377px"
           className="w-[377.31px] h-[336px] opacity-[70%]"
         />
       </div>
@@ -33,10 +35,12 @@ export default function MobileCTASection() {
       {/* Top Right - 8.png */}
       <div className="absolute z-1 pointer-events-none" style={{ top: '0px', right: '-200px' }}>
         <Image 
-          src="/image/mobile/8.png"
+          src="/image/mobile/8.webp"
           alt="Background Image Top Right"
           width={544}
           height={462}
+          loading="lazy"
+          sizes="544px"
           className="w-[543.6px] h-[462px]"
         />
       </div>

@@ -128,10 +128,12 @@ export default function MobileProductDisplay() {
       {/* Background Image */}
       <div className="absolute top-0 left-0 z-0 pointer-events-none">
         <Image
-          src="/image/mobile/5.png"
+          src="/image/mobile/5.webp"
           alt="Background"
           width={1266}
           height={956}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, 1266px"
           className="object-cover"
         />
       </div>

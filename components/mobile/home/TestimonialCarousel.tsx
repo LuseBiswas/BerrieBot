@@ -81,10 +81,12 @@ export default function MobileTestimonialCarousel() {
       {/* Top Right - 8.png */}
       <div className="absolute z-1 pointer-events-none" style={{ top: '150px', right: '-150px' }}>
         <Image 
-          src="/image/mobile/8.png"
+          src="/image/mobile/8.webp"
           alt="Background Image Top Right"
           width={544}
           height={462}
+          loading="lazy"
+          sizes="544px"
           className="w-[543.6px] h-[462px] rotate-90 opacity-[50%]"
         />
       </div>

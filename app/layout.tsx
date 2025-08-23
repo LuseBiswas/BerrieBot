@@ -12,8 +12,9 @@ const inter = Inter({
 
 const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700"],
   variable: "--font-manrope",
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script src="https://cdn.lordicon.com/lordicon.js" strategy="beforeInteractive" />
+        <Script src="https://cdn.lordicon.com/lordicon.js" strategy="lazyOnload" />
         {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-9FN9N7N8SS"
