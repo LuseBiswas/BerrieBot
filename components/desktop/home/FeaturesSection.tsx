@@ -7,6 +7,8 @@ export default function FeaturesSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const stepRef = useRef<number>(0);
   const isResettingRef = useRef(false);
+  const measureStepTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const cachedStepRef = useRef<number | null>(null);
 
   const features = [
     {
@@ -34,21 +36,36 @@ export default function FeaturesSection() {
   // Just use original features - no copies needed
   const L = features.length;
 
-  const measureStep = () => {
+  const measureStep = useCallback(() => {
     const container = scrollRef.current;
     if (!container) return;
 
-    // Use requestAnimationFrame to batch DOM measurements and prevent forced reflows
-    requestAnimationFrame(() => {
-      const children = Array.from(container.children) as HTMLElement[];
-      if (children.length >= 2) {
-        const step = children[1].offsetLeft - children[0].offsetLeft || children[0].offsetWidth;
-        stepRef.current = step;
-      } else if (children.length === 1) {
-        stepRef.current = children[0].offsetWidth;
-      }
-    });
-  };
+    // Debounce measurements to prevent excessive reflows
+    if (measureStepTimeoutRef.current) {
+      clearTimeout(measureStepTimeoutRef.current);
+    }
+
+    measureStepTimeoutRef.current = setTimeout(() => {
+      // Use requestAnimationFrame to batch DOM measurements and prevent forced reflows
+      requestAnimationFrame(() => {
+        const children = Array.from(container.children) as HTMLElement[];
+        if (children.length >= 2) {
+          const step = children[1].offsetLeft - children[0].offsetLeft || children[0].offsetWidth;
+          // Only update if value actually changed to prevent unnecessary updates
+          if (cachedStepRef.current !== step) {
+            stepRef.current = step;
+            cachedStepRef.current = step;
+          }
+        } else if (children.length === 1) {
+          const step = children[0].offsetWidth;
+          if (cachedStepRef.current !== step) {
+            stepRef.current = step;
+            cachedStepRef.current = step;
+          }
+        }
+      });
+    }, 16); // Debounce to ~60fps
+  }, []);
 
   const silentSetScrollLeft = (val: number) => {
     const container = scrollRef.current;
@@ -117,7 +134,7 @@ export default function FeaturesSection() {
       ro.disconnect();
       container.removeEventListener("scroll", onScroll);
     };
-  }, [L, ensureInfiniteLoop]);
+  }, [L, ensureInfiniteLoop, measureStep]);
 
   return (
     <>

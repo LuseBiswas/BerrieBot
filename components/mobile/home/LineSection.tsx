@@ -6,7 +6,7 @@ import {
   useTransform,
   useMotionValue,
 } from "framer-motion";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, Check } from "lucide-react";
@@ -136,25 +136,37 @@ export default function MobileLineSection() {
   });
 
   // Measure positions of each step center relative to the rail
-  const measure = () => {
+  const measureTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
+  const measure = useCallback(() => {
     const rail = railRef.current;
     if (!rail) return;
-    const r = rail.getBoundingClientRect();
-    const topAbs = window.scrollY + r.top;
-    const height = r.height;
 
-    const ys = stepRefs.current.map((el) => {
-      if (!el) return 0;
-      const br = el.getBoundingClientRect();
-      const centerAbs = window.scrollY + br.top + br.height / 2;
-      const rel = centerAbs - topAbs; // relative to rail top
-      return Math.max(0, Math.min(height, rel));
-    });
+    // Debounce measurements to prevent excessive reflows
+    if (measureTimeoutRef.current) {
+      clearTimeout(measureTimeoutRef.current);
+    }
 
-    setCircleYs(ys);
-    setRailTopAbs(topAbs);
-    setRailHeight(height);
-  };
+    measureTimeoutRef.current = setTimeout(() => {
+      requestAnimationFrame(() => {
+        const r = rail.getBoundingClientRect();
+        const topAbs = window.scrollY + r.top;
+        const height = r.height;
+
+        const ys = stepRefs.current.map((el) => {
+          if (!el) return 0;
+          const br = el.getBoundingClientRect();
+          const centerAbs = window.scrollY + br.top + br.height / 2;
+          const rel = centerAbs - topAbs; // relative to rail top
+          return Math.max(0, Math.min(height, rel)); // clamp to rail bounds
+        });
+
+        setCircleYs(ys);
+        setRailTopAbs(topAbs);
+        setRailHeight(height);
+      });
+    }, 16); // Debounce to ~60fps
+  }, []);
 
   // Measure on mount + resize + font load
   useEffect(() => {
@@ -172,13 +184,35 @@ export default function MobileLineSection() {
       window.removeEventListener("resize", onResize);
       window.removeEventListener("orientationchange", onResize);
     };
-  }, []);
+  }, [measure]); // Add measure to dependencies
 
   // Re-measure when content animations complete
   useEffect(() => {
-    const id = setTimeout(measure, 2000); // after all step animations
-    return () => clearTimeout(id);
-  }, []);
+    const checkAnimations = () => {
+      const ids = [
+        setTimeout(measure, 800),   // re-measure after potential transitions
+        setTimeout(measure, 1500),  // re-measure after longer animations
+      ];
+      return () => ids.forEach(clearTimeout);
+    };
+
+    return checkAnimations();
+  }, [measure]); // Add measure to dependencies
+
+  // Force re-measure on scroll end (debounced)
+  useEffect(() => {
+    let debounceTimer: NodeJS.Timeout;
+    const onScrollEnd = () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(measure, 100);
+    };
+
+    window.addEventListener("scroll", onScrollEnd, { passive: true });
+    return () => {
+      clearTimeout(debounceTimer);
+      window.removeEventListener("scroll", onScrollEnd);
+    };
+  }, [measure]); // Add measure to dependencies
 
   // Drive progress so it crosses a dot when that step is centered in the viewport
   useEffect(() => {
@@ -208,7 +242,7 @@ export default function MobileLineSection() {
       setActiveStep(currentActiveStep);
     });
     return () => unsub();
-  }, [scrollY, railTopAbs, railHeight, progressPx, circleYs]);
+  }, [scrollY, railTopAbs, railHeight, progressPx, circleYs, measure]); // Add measure to dependencies
 
   return (
     <section 

@@ -29,6 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+
         {/* Preload critical fonts to prevent render blocking */}
         <link
           rel="preload"
@@ -54,6 +55,7 @@ export default function RootLayout({
             gtag('config', 'G-9FN9N7N8SS');
           `}
         </Script>
+
       </head>
       <body className={`${inter.variable} ${manrope.variable} antialiased`}>
         <DeviceWrapper>

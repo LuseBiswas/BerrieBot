@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     // Increase the limit for image optimization
     minimumCacheTTL: 60,
   },
+
 };
 
 export default nextConfig;
