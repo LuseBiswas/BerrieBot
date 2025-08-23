@@ -130,11 +130,11 @@ export default function MobileProductDisplay() {
         <Image
           src="/image/mobile/5.webp"
           alt="Background"
-          width={1266}
-          height={956}
+          width={750}
+          height={1184}
           loading="lazy"
-          sizes="(max-width: 768px) 100vw, 1266px"
-          className="object-cover"
+          sizes="(max-width: 768px) 412px, (max-width: 1024px) 750px, 1200px"
+          className="object-cover w-[412px] h-[650px]"
         />
       </div>
       {/* Background Grid Pattern */}
