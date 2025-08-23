@@ -54,6 +54,7 @@ export default function NavBar() {
                   height={32}
                   className="object-contain"
                   priority
+                  sizes="32px"
                 />
               </div>
               <span className="text-xl font-bold text-white">BerriBot</span>
