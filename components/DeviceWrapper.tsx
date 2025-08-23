@@ -2,52 +2,57 @@
 
 import { useDeviceType } from "@/hooks/useDeviceType";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import NavBar from "@/components/desktop/home/NavBar";
-import Footer from "@/components/desktop/Footer";
-import DynamicBackground from "@/components/desktop/DynamicBackground";
-import MobileNavBar from "@/components/mobile/NavBar";
-import MobileFooter from "@/components/mobile/Footer";
-import MobileDynamicBackground from "@/components/mobile/DynamicBackground";
-import MobileHeroSection from "@/components/mobile/home/HeroSection";
-import MobileLineSection from "@/components/mobile/home/LineSection";
-import MobileBrandCarousel from "@/components/mobile/home/BrandCarousel";
-import BottomNavBar from "@/components/mobile/BottomNavBar";
-import MobileProductDisplay from "./mobile/home/ProductDisplay";
-import MobileFeatureCard from "./mobile/home/FeatureCard";
-import MobileComparisonSection from "./mobile/home/ComparisonSection";
-import MobileProductFeature from "./mobile/home/ProductFeature";
-import MobileStatsSection from "./mobile/home/StatsSection";
-import MobileTestimonialCarousel from "./mobile/home/TestimonialCarousel";
-import MobileCTASection from "./mobile/home/CTASection";
-import MobileResourcesHeroSection from "./mobile/resources/HeroSection";
-import MobileFAQComponent from "./mobile/resources/faq/faqComponent";
-import MobileBlogResource from "./mobile/resources/blogResource";
-import MobileSolutionsHeroSection from "./mobile/solutions/HeroSection";
-import MobileSolutionsCarousel from "./mobile/solutions/SolutionsCarousel";
-import MobileSolutionsCarousel_2 from "./mobile/solutions/SolutionsCarousel_2";
-import MobileSolutionsCarousel_3 from "./mobile/solutions/SolutionsCarousel_3";
-import MobileDemoHeroSection from "./mobile/demo/HeroSection";
-import MobileContactForm from "./mobile/demo/ContactForm";
-import MobileAboutHeroSection from "./mobile/about/HeroSection";
-import MobileCompanyCarousel from "./mobile/about/CompanyCarousel";
-import MobileAboutSubHeroSection from "./mobile/about/SubHeroSection";
-import MobileAboutProductDisplay from "./mobile/about/AboutProductDisplay";
-import MobileAboutStatsSection from "./mobile/about/AboutStatsSection";
-import MobileAboutFounderCarousel from "./mobile/about/FounderCarousel";
-import MobileResourceCTASection from "./mobile/resources/CTASection";
-import MobileProductHeroSection from "./mobile/product/HeroSection";
-import MobileProductCarousel from "./mobile/product/ProductCarousel";
-import MobileProductXFeature from "./mobile/product/Product2Feature";
-import MobileComparisonXSection from "./mobile/product/ComparisonXSection";
-import MobileProductTestimonialCarousel from "./mobile/product/TestimonialCarousel";
-import MobileCookiesHeroSection from "./mobile/cookies/HeroSection";
-import MobileCookiesComponent from "./mobile/cookies/cookies";
-import MobilePolicyHeroSection from "./mobile/policy/HeroSection";
-import MobilePrivacyPolicyComponent from "./mobile/policy/privacy";
-import MobileBottomBanner from "./mobile/product/BottomBanner";
+import dynamic from "next/dynamic";
+
+// Dynamic imports for desktop components - only load on desktop
+const NavBar = dynamic(() => import("@/components/desktop/home/NavBar"));
+const Footer = dynamic(() => import("@/components/desktop/Footer"));
+const DynamicBackground = dynamic(() => import("@/components/desktop/DynamicBackground"));
+
+// Dynamic imports for mobile components - only load on mobile
+const MobileNavBar = dynamic(() => import("@/components/mobile/NavBar"));
+const MobileFooter = dynamic(() => import("@/components/mobile/Footer"));
+const MobileDynamicBackground = dynamic(() => import("@/components/mobile/DynamicBackground"));
+const MobileHeroSection = dynamic(() => import("@/components/mobile/home/HeroSection"));
+const MobileLineSection = dynamic(() => import("@/components/mobile/home/LineSection"));
+const MobileBrandCarousel = dynamic(() => import("@/components/mobile/home/BrandCarousel"));
+const BottomNavBar = dynamic(() => import("@/components/mobile/BottomNavBar"));
+const MobileProductDisplay = dynamic(() => import("./mobile/home/ProductDisplay"));
+const MobileFeatureCard = dynamic(() => import("./mobile/home/FeatureCard"));
+const MobileComparisonSection = dynamic(() => import("./mobile/home/ComparisonSection"));
+const MobileProductFeature = dynamic(() => import("./mobile/home/ProductFeature"));
+const MobileStatsSection = dynamic(() => import("./mobile/home/StatsSection"));
+const MobileTestimonialCarousel = dynamic(() => import("./mobile/home/TestimonialCarousel"));
+const MobileCTASection = dynamic(() => import("./mobile/home/CTASection"));
+const MobileResourcesHeroSection = dynamic(() => import("./mobile/resources/HeroSection"));
+const MobileFAQComponent = dynamic(() => import("./mobile/resources/faq/faqComponent"));
+const MobileBlogResource = dynamic(() => import("./mobile/resources/blogResource"));
+const MobileSolutionsHeroSection = dynamic(() => import("./mobile/solutions/HeroSection"));
+const MobileSolutionsCarousel = dynamic(() => import("./mobile/solutions/SolutionsCarousel"));
+const MobileSolutionsCarousel_2 = dynamic(() => import("./mobile/solutions/SolutionsCarousel_2"));
+const MobileSolutionsCarousel_3 = dynamic(() => import("./mobile/solutions/SolutionsCarousel_3"));
+const MobileDemoHeroSection = dynamic(() => import("./mobile/demo/HeroSection"));
+const MobileContactForm = dynamic(() => import("./mobile/demo/ContactForm"));
+const MobileAboutHeroSection = dynamic(() => import("./mobile/about/HeroSection"));
+const MobileCompanyCarousel = dynamic(() => import("./mobile/about/CompanyCarousel"));
+const MobileAboutSubHeroSection = dynamic(() => import("./mobile/about/SubHeroSection"));
+const MobileAboutProductDisplay = dynamic(() => import("./mobile/about/AboutProductDisplay"));
+const MobileAboutStatsSection = dynamic(() => import("./mobile/about/AboutStatsSection"));
+const MobileAboutFounderCarousel = dynamic(() => import("./mobile/about/FounderCarousel"));
+const MobileResourceCTASection = dynamic(() => import("./mobile/resources/CTASection"));
+const MobileProductHeroSection = dynamic(() => import("./mobile/product/HeroSection"));
+const MobileProductCarousel = dynamic(() => import("./mobile/product/ProductCarousel"));
+const MobileProductXFeature = dynamic(() => import("./mobile/product/Product2Feature"));
+const MobileComparisonXSection = dynamic(() => import("./mobile/product/ComparisonXSection"));
+const MobileProductTestimonialCarousel = dynamic(() => import("./mobile/product/TestimonialCarousel"));
+const MobileCookiesHeroSection = dynamic(() => import("./mobile/cookies/HeroSection"));
+const MobileCookiesComponent = dynamic(() => import("./mobile/cookies/cookies"));
+const MobilePolicyHeroSection = dynamic(() => import("./mobile/policy/HeroSection"));
+const MobilePrivacyPolicyComponent = dynamic(() => import("./mobile/policy/privacy"));
+const MobileBottomBanner = dynamic(() => import("./mobile/product/BottomBanner"));
 
 interface DeviceWrapperProps {
   children: React.ReactNode;
@@ -198,124 +203,156 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
     const hasMobileVersion = pathname === "/" || pathname === "/resources" || pathname === "/solutions" || pathname === "/schedule" || pathname === "/about" || pathname === "/product" || pathname === "/cookies" || pathname === "/policy";
     
     return (
-      <MobileDynamicBackground>
-        <MobileNavBar />
-        <BottomNavBar />
-        <main className="flex-1 w-full">
-          {hasMobileVersion ? (
-            // Show mobile-specific components
-            pathname === "/" ? (
-              <>
-                <MobileHeroSection />
-                <MobileLineSection />
-                <MobileBrandCarousel />
-                <MobileProductDisplay />
-                <MobileFeatureCard />
-                <MobileComparisonSection/>
-                <MobileProductFeature/>
-                <MobileStatsSection/>
-                <MobileTestimonialCarousel/>
-                <MobileCTASection/>
-              </>
-            ) : pathname === "/resources" ? (
-              <>
-                <MobileResourcesHeroSection />
-                <MobileFAQComponent/>
-                <MobileBlogResource/>
-                <MobileResourceCTASection/>
-              </>
-            ) : pathname === "/solutions" ? (
-              <>
-                <MobileSolutionsHeroSection />
-                <MobileSolutionsCarousel />
-                <MobileSolutionsCarousel_2/>
-                <MobileSolutionsCarousel_3/>
-                <MobileCTASection/>
-              </>
-            ) : pathname === "/schedule" ? (
-              <>
-                
-                <MobileDemoHeroSection/>
-                <MobileContactForm/>
-              </>
-            ) : pathname === "/about" ? (
-              <>
-                <MobileAboutHeroSection/>
-                <MobileCompanyCarousel/>
-                <MobileAboutSubHeroSection/>
-                <MobileAboutProductDisplay/>
-                <MobileAboutStatsSection/>
-                <MobileAboutFounderCarousel/>
-                <MobileCTASection/>
-              </>
-            ) : pathname === "/product" ? (
-              <>
-                <MobileProductHeroSection/>
-                <MobileProductCarousel/>
-                <MobileProductXFeature/>
-                <MobileComparisonXSection/>
-                <MobileProductTestimonialCarousel/>
-                <MobileBottomBanner/>
-                <MobileCTASection/>
-              </>
-            ) : pathname === "/cookies" ? (
-              <>
-                <MobileCookiesHeroSection 
-                  showConfirmationText={mobilePrivacyState === 'confirmation'} 
-                  onConfirmationChoice={handleMobileConfirmationChoice}
-                  onReadPrivacy={handleMobileReadPrivacy}
-                />
-                <MobileCookiesComponent 
-                  state={mobilePrivacyState} 
-                  onStateChange={setMobilePrivacyState} 
-                />
-                
-              </>
-            ) : pathname === "/policy" ? (
-              <>
-                <MobilePolicyHeroSection 
-                  showConfirmationText={mobilePolicyState === 'confirmation'} 
-                  onConfirmationChoice={handleMobilePolicyConfirmationChoice}
-                  onReadPrivacy={handleMobilePolicyReadPrivacy}
-                />
-                <MobilePrivacyPolicyComponent 
-                  state={mobilePolicyState} 
-                  onStateChange={setMobilePolicyState} 
-                />
-                
-              </>
-            ) : children
-          ) : (
-            // Show coming soon for pages without mobile components
-            <div className="min-h-screen flex items-center justify-center px-4">
-              <div className="text-center max-w-sm">
-                <h1 className="text-2xl font-bold mb-4">Mobile Version</h1>
-                <p className="text-gray-400 mb-6">
-                  This page is being optimized for mobile. Please visit on desktop for the full experience.
-                </p>
-                <button 
-                  onClick={() => window.history.back()} 
-                  className="bg-[#04BBA6] text-white px-6 py-3 rounded-lg hover:bg-[#03a693] transition-colors"
-                >
-                  Go Back
-                </button>
+      <Suspense fallback={<div className="min-h-screen bg-black" />}>
+        <MobileDynamicBackground>
+          <Suspense fallback={<div className="h-16 bg-black" />}>
+            <MobileNavBar />
+          </Suspense>
+          <Suspense fallback={<div className="h-16 bg-black" />}>
+            <BottomNavBar />
+          </Suspense>
+          <main className="flex-1 w-full">
+            {hasMobileVersion ? (
+              // Show mobile-specific components with progressive loading
+              pathname === "/" ? (
+                <>
+                  <Suspense fallback={<div className="min-h-screen bg-black" />}>
+                    <MobileHeroSection />
+                  </Suspense>
+                  <Suspense fallback={<div className="min-h-[400px] bg-black" />}>
+                    <MobileLineSection />
+                  </Suspense>
+                  <Suspense fallback={<div className="min-h-[300px] bg-black" />}>
+                    <MobileBrandCarousel />
+                  </Suspense>
+                  <Suspense fallback={<div className="min-h-[500px] bg-black" />}>
+                    <MobileProductDisplay />
+                  </Suspense>
+                  <Suspense fallback={<div className="min-h-[600px] bg-black" />}>
+                    <MobileFeatureCard />
+                  </Suspense>
+                  <Suspense fallback={<div className="min-h-[500px] bg-black" />}>
+                    <MobileComparisonSection/>
+                  </Suspense>
+                  <Suspense fallback={<div className="min-h-[400px] bg-black" />}>
+                    <MobileProductFeature/>
+                  </Suspense>
+                  <Suspense fallback={<div className="min-h-[500px] bg-black" />}>
+                    <MobileStatsSection/>
+                  </Suspense>
+                  <Suspense fallback={<div className="min-h-[400px] bg-black" />}>
+                    <MobileTestimonialCarousel/>
+                  </Suspense>
+                  <Suspense fallback={<div className="min-h-[300px] bg-black" />}>
+                    <MobileCTASection/>
+                  </Suspense>
+                </>
+              ) : pathname === "/resources" ? (
+                <>
+                  <MobileResourcesHeroSection />
+                  <MobileFAQComponent/>
+                  <MobileBlogResource/>
+                  <MobileResourceCTASection/>
+                </>
+              ) : pathname === "/solutions" ? (
+                <>
+                  <MobileSolutionsHeroSection />
+                  <MobileSolutionsCarousel />
+                  <MobileSolutionsCarousel_2/>
+                  <MobileSolutionsCarousel_3/>
+                  <MobileCTASection/>
+                </>
+              ) : pathname === "/schedule" ? (
+                <>
+                  
+                  <MobileDemoHeroSection/>
+                  <MobileContactForm/>
+                </>
+              ) : pathname === "/about" ? (
+                <>
+                  <MobileAboutHeroSection/>
+                  <MobileCompanyCarousel/>
+                  <MobileAboutSubHeroSection/>
+                  <MobileAboutProductDisplay/>
+                  <MobileAboutStatsSection/>
+                  <MobileAboutFounderCarousel/>
+                  <MobileCTASection/>
+                </>
+              ) : pathname === "/product" ? (
+                <>
+                  <MobileProductHeroSection/>
+                  <MobileProductCarousel/>
+                  <MobileProductXFeature/>
+                  <MobileComparisonXSection/>
+                  <MobileProductTestimonialCarousel/>
+                  <MobileBottomBanner/>
+                  <MobileCTASection/>
+                </>
+              ) : pathname === "/cookies" ? (
+                <>
+                  <MobileCookiesHeroSection 
+                    showConfirmationText={mobilePrivacyState === 'confirmation'} 
+                    onConfirmationChoice={handleMobileConfirmationChoice}
+                    onReadPrivacy={handleMobileReadPrivacy}
+                  />
+                  <MobileCookiesComponent 
+                    state={mobilePrivacyState} 
+                    onStateChange={setMobilePrivacyState} 
+                  />
+                  
+                </>
+              ) : pathname === "/policy" ? (
+                <>
+                  <MobilePolicyHeroSection 
+                    showConfirmationText={mobilePolicyState === 'confirmation'} 
+                    onConfirmationChoice={handleMobilePolicyConfirmationChoice}
+                    onReadPrivacy={handleMobilePolicyReadPrivacy}
+                  />
+                  <MobilePrivacyPolicyComponent 
+                    state={mobilePolicyState} 
+                    onStateChange={setMobilePolicyState} 
+                  />
+                  
+                </>
+              ) : children
+            ) : (
+              // Show coming soon for pages without mobile components
+              <div className="min-h-screen flex items-center justify-center px-4">
+                <div className="text-center max-w-sm">
+                  <h1 className="text-2xl font-bold mb-4">Mobile Version</h1>
+                  <p className="text-gray-400 mb-6">
+                    This page is being optimized for mobile. Please visit on desktop for the full experience.
+                  </p>
+                  <button 
+                    onClick={() => window.history.back()} 
+                    className="bg-[#04BBA6] text-white px-6 py-3 rounded-lg hover:bg-[#03a693] transition-colors"
+                  >
+                    Go Back
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-        </main>
-        <MobileFooter />
-      </MobileDynamicBackground>
+            )}
+          </main>
+          <MobileFooter />
+        </MobileDynamicBackground>
+      </Suspense>
     );
   }
 
   // Desktop experience - existing components
   return (
-    <DynamicBackground>
-      <NavBar />
-      <main className="flex-1 w-full">
-        {children}
-      </main>
-      <Footer />
-    </DynamicBackground>
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <DynamicBackground>
+        <Suspense fallback={<div className="h-16 bg-black" />}>
+          <NavBar />
+        </Suspense>
+        <main className="flex-1 w-full">
+          {children}
+        </main>
+        <Suspense fallback={<div className="h-16 bg-black" />}>
+          <Footer />
+        </Suspense>
+      </DynamicBackground>
+    </Suspense>
   );
 } 
