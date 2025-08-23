@@ -2,52 +2,197 @@
 
 import { useDeviceType } from "@/hooks/useDeviceType";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import NavBar from "@/components/desktop/home/NavBar";
-import Footer from "@/components/desktop/Footer";
-import DynamicBackground from "@/components/desktop/DynamicBackground";
-import MobileNavBar from "@/components/mobile/NavBar";
-import MobileFooter from "@/components/mobile/Footer";
-import MobileDynamicBackground from "@/components/mobile/DynamicBackground";
-import MobileHeroSection from "@/components/mobile/home/HeroSection";
-import MobileLineSection from "@/components/mobile/home/LineSection";
-import MobileBrandCarousel from "@/components/mobile/home/BrandCarousel";
-import BottomNavBar from "@/components/mobile/BottomNavBar";
-import MobileProductDisplay from "./mobile/home/ProductDisplay";
-import MobileFeatureCard from "./mobile/home/FeatureCard";
-import MobileComparisonSection from "./mobile/home/ComparisonSection";
-import MobileProductFeature from "./mobile/home/ProductFeature";
-import MobileStatsSection from "./mobile/home/StatsSection";
-import MobileTestimonialCarousel from "./mobile/home/TestimonialCarousel";
-import MobileCTASection from "./mobile/home/CTASection";
-import MobileResourcesHeroSection from "./mobile/resources/HeroSection";
-import MobileFAQComponent from "./mobile/resources/faq/faqComponent";
-import MobileBlogResource from "./mobile/resources/blogResource";
-import MobileSolutionsHeroSection from "./mobile/solutions/HeroSection";
-import MobileSolutionsCarousel from "./mobile/solutions/SolutionsCarousel";
-import MobileSolutionsCarousel_2 from "./mobile/solutions/SolutionsCarousel_2";
-import MobileSolutionsCarousel_3 from "./mobile/solutions/SolutionsCarousel_3";
-import MobileDemoHeroSection from "./mobile/demo/HeroSection";
-import MobileContactForm from "./mobile/demo/ContactForm";
-import MobileAboutHeroSection from "./mobile/about/HeroSection";
-import MobileCompanyCarousel from "./mobile/about/CompanyCarousel";
-import MobileAboutSubHeroSection from "./mobile/about/SubHeroSection";
-import MobileAboutProductDisplay from "./mobile/about/AboutProductDisplay";
-import MobileAboutStatsSection from "./mobile/about/AboutStatsSection";
-import MobileAboutFounderCarousel from "./mobile/about/FounderCarousel";
-import MobileResourceCTASection from "./mobile/resources/CTASection";
-import MobileProductHeroSection from "./mobile/product/HeroSection";
-import MobileProductCarousel from "./mobile/product/ProductCarousel";
-import MobileProductXFeature from "./mobile/product/Product2Feature";
-import MobileComparisonXSection from "./mobile/product/ComparisonXSection";
-import MobileProductTestimonialCarousel from "./mobile/product/TestimonialCarousel";
-import MobileCookiesHeroSection from "./mobile/cookies/HeroSection";
-import MobileCookiesComponent from "./mobile/cookies/cookies";
-import MobilePolicyHeroSection from "./mobile/policy/HeroSection";
-import MobilePrivacyPolicyComponent from "./mobile/policy/privacy";
-import MobileBottomBanner from "./mobile/product/BottomBanner";
+import dynamic from "next/dynamic";
+
+// Desktop components - only load on desktop
+const NavBar = dynamic(() => import("@/components/desktop/home/NavBar"), {
+  ssr: true,
+  loading: () => <div className="h-16 bg-black" />
+});
+const Footer = dynamic(() => import("@/components/desktop/Footer"), {
+  ssr: true,
+  loading: () => <div className="h-32 bg-black" />
+});
+const DynamicBackground = dynamic(() => import("@/components/desktop/DynamicBackground"), {
+  ssr: true,
+  loading: () => <div className="min-h-screen bg-black" />
+});
+
+// Mobile components - only load on mobile
+const MobileNavBar = dynamic(() => import("@/components/mobile/NavBar"), {
+  ssr: false,
+  loading: () => <div className="h-16 bg-black" />
+});
+const MobileFooter = dynamic(() => import("@/components/mobile/Footer"), {
+  ssr: false,
+  loading: () => <div className="h-32 bg-black" />
+});
+const MobileDynamicBackground = dynamic(() => import("@/components/mobile/DynamicBackground"), {
+  ssr: false,
+  loading: () => <div className="min-h-screen bg-black" />
+});
+const BottomNavBar = dynamic(() => import("@/components/mobile/BottomNavBar"), {
+  ssr: false,
+  loading: () => <div className="h-16 bg-black" />
+});
+
+// Mobile page components - conditionally load based on route and device
+const MobileHeroSection = dynamic(() => import("@/components/mobile/home/HeroSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileLineSection = dynamic(() => import("@/components/mobile/home/LineSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileBrandCarousel = dynamic(() => import("@/components/mobile/home/BrandCarousel"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileProductDisplay = dynamic(() => import("@/components/mobile/home/ProductDisplay"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileFeatureCard = dynamic(() => import("@/components/mobile/home/FeatureCard"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileComparisonSection = dynamic(() => import("@/components/mobile/home/ComparisonSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileProductFeature = dynamic(() => import("@/components/mobile/home/ProductFeature"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileStatsSection = dynamic(() => import("@/components/mobile/home/StatsSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileTestimonialCarousel = dynamic(() => import("@/components/mobile/home/TestimonialCarousel"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileCTASection = dynamic(() => import("@/components/mobile/home/CTASection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+
+// Mobile resource components
+const MobileResourcesHeroSection = dynamic(() => import("@/components/mobile/resources/HeroSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileFAQComponent = dynamic(() => import("@/components/mobile/resources/faq/faqComponent"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileBlogResource = dynamic(() => import("@/components/mobile/resources/blogResource"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileResourceCTASection = dynamic(() => import("@/components/mobile/resources/CTASection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+
+// Other mobile page components - only loaded when needed
+const MobileSolutionsHeroSection = dynamic(() => import("@/components/mobile/solutions/HeroSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileSolutionsCarousel = dynamic(() => import("@/components/mobile/solutions/SolutionsCarousel"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileSolutionsCarousel_2 = dynamic(() => import("@/components/mobile/solutions/SolutionsCarousel_2"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileSolutionsCarousel_3 = dynamic(() => import("@/components/mobile/solutions/SolutionsCarousel_3"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+
+const MobileDemoHeroSection = dynamic(() => import("@/components/mobile/demo/HeroSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileContactForm = dynamic(() => import("@/components/mobile/demo/ContactForm"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+
+const MobileAboutHeroSection = dynamic(() => import("@/components/mobile/about/HeroSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileCompanyCarousel = dynamic(() => import("@/components/mobile/about/CompanyCarousel"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileAboutSubHeroSection = dynamic(() => import("@/components/mobile/about/SubHeroSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileAboutProductDisplay = dynamic(() => import("@/components/mobile/about/AboutProductDisplay"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileAboutStatsSection = dynamic(() => import("@/components/mobile/about/AboutStatsSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileAboutFounderCarousel = dynamic(() => import("@/components/mobile/about/FounderCarousel"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+
+const MobileProductHeroSection = dynamic(() => import("@/components/mobile/product/HeroSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileProductCarousel = dynamic(() => import("@/components/mobile/product/ProductCarousel"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileProductXFeature = dynamic(() => import("@/components/mobile/product/Product2Feature"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileComparisonXSection = dynamic(() => import("@/components/mobile/product/ComparisonXSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileProductTestimonialCarousel = dynamic(() => import("@/components/mobile/product/TestimonialCarousel"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileBottomBanner = dynamic(() => import("@/components/mobile/product/BottomBanner"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+
+const MobileCookiesHeroSection = dynamic(() => import("@/components/mobile/cookies/HeroSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobileCookiesComponent = dynamic(() => import("@/components/mobile/cookies/cookies"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+
+const MobilePolicyHeroSection = dynamic(() => import("@/components/mobile/policy/HeroSection"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
+const MobilePrivacyPolicyComponent = dynamic(() => import("@/components/mobile/policy/privacy"), {
+  ssr: false,
+  loading: () => <div className="h-96 bg-black" />
+});
 
 interface DeviceWrapperProps {
   children: React.ReactNode;
@@ -167,7 +312,8 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
               alt="BerriBot Logo" 
               width={80} 
               height={80} 
-              className="object-contain" 
+              className="object-contain"
+              priority
             />
           </motion.div>
         </div>
@@ -192,19 +338,15 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
     );
   }
 
-  // Mobile experience - with mobile navbar
+  // Mobile experience - only load mobile components when needed
   if (isMobile) {
-    // Check if we have mobile components for this page
-    const hasMobileVersion = pathname === "/" || pathname === "/resources" || pathname === "/solutions" || pathname === "/schedule" || pathname === "/about" || pathname === "/product" || pathname === "/cookies" || pathname === "/policy";
-    
     return (
-      <MobileDynamicBackground>
-        <MobileNavBar />
-        <BottomNavBar />
-        <main className="flex-1 w-full">
-          {hasMobileVersion ? (
-            // Show mobile-specific components
-            pathname === "/" ? (
+      <Suspense fallback={<div className="min-h-screen bg-black" />}>
+        <MobileDynamicBackground>
+          <MobileNavBar />
+          <BottomNavBar />
+          <main className="flex-1 w-full">
+            {pathname === "/" ? (
               <>
                 <MobileHeroSection />
                 <MobileLineSection />
@@ -234,7 +376,6 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
               </>
             ) : pathname === "/schedule" ? (
               <>
-                
                 <MobileDemoHeroSection/>
                 <MobileContactForm/>
               </>
@@ -269,7 +410,6 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
                   state={mobilePrivacyState} 
                   onStateChange={setMobilePrivacyState} 
                 />
-                
               </>
             ) : pathname === "/policy" ? (
               <>
@@ -282,40 +422,41 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
                   state={mobilePolicyState} 
                   onStateChange={setMobilePolicyState} 
                 />
-                
               </>
-            ) : children
-          ) : (
-            // Show coming soon for pages without mobile components
-            <div className="min-h-screen flex items-center justify-center px-4">
-              <div className="text-center max-w-sm">
-                <h1 className="text-2xl font-bold mb-4">Mobile Version</h1>
-                <p className="text-gray-400 mb-6">
-                  This page is being optimized for mobile. Please visit on desktop for the full experience.
-                </p>
-                <button 
-                  onClick={() => window.history.back()} 
-                  className="bg-[#04BBA6] text-white px-6 py-3 rounded-lg hover:bg-[#03a693] transition-colors"
-                >
-                  Go Back
-                </button>
+            ) : (
+              // Fallback for unknown routes
+              <div className="min-h-screen flex items-center justify-center px-4">
+                <div className="text-center max-w-sm">
+                  <h1 className="text-2xl font-bold mb-4">Mobile Version</h1>
+                  <p className="text-gray-400 mb-6">
+                    This page is being optimized for mobile. Please visit on desktop for the full experience.
+                  </p>
+                  <button 
+                    onClick={() => window.history.back()} 
+                    className="bg-[#04BBA6] text-white px-6 py-3 rounded-lg hover:bg-[#03a693] transition-colors"
+                  >
+                    Go Back
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-        </main>
-        <MobileFooter />
-      </MobileDynamicBackground>
+            )}
+          </main>
+          <MobileFooter />
+        </MobileDynamicBackground>
+      </Suspense>
     );
   }
 
-  // Desktop experience - existing components
+  // Desktop experience - only load desktop components
   return (
-    <DynamicBackground>
-      <NavBar />
-      <main className="flex-1 w-full">
-        {children}
-      </main>
-      <Footer />
-    </DynamicBackground>
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <DynamicBackground>
+        <NavBar />
+        <main className="flex-1 w-full">
+          {children}
+        </main>
+        <Footer />
+      </DynamicBackground>
+    </Suspense>
   );
 } 

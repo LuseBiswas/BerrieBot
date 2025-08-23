@@ -1,41 +1,69 @@
-import CompaniesSection from "@/components/desktop/home/CompaniesSection";
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
-import FeatureCard from "@/components/desktop/home/FeatureCard";
-import ComparisonSection from "@/components/desktop/home/ComparisonSection";
-import TestimonialSection from "@/components/desktop/home/TestimonialSection";
-import ProductFeature from "@/components/desktop/home/ProductFeature";
-import StatsSection from "@/components/desktop/home/StatsSection";
-import CompanyTestimonialSection from "@/components/desktop/home/CompanyTestimonialSection";
-import CTASection from "@/components/desktop/home/CTASection";
-import CarouselSection_2 from "@/components/desktop/product/CarouselSection";
-import YtTestimonial from "@/components/desktop/product/ytTestimonial";
-import AgeticSpcae from "@/components/desktop/home/AgeticSpcae";
+// Dynamic imports for better code splitting
+const CompaniesSection = dynamic(() => import("@/components/desktop/home/CompaniesSection"));
+const FeatureCard = dynamic(() => import("@/components/desktop/home/FeatureCard"));
+const ComparisonSection = dynamic(() => import("@/components/desktop/home/ComparisonSection"));
+const TestimonialSection = dynamic(() => import("@/components/desktop/home/TestimonialSection"));
+const ProductFeature = dynamic(() => import("@/components/desktop/home/ProductFeature"));
+const StatsSection = dynamic(() => import("@/components/desktop/home/StatsSection"));
+const CompanyTestimonialSection = dynamic(() => import("@/components/desktop/home/CompanyTestimonialSection"));
+const CTASection = dynamic(() => import("@/components/desktop/home/CTASection"));
+const CarouselSection_2 = dynamic(() => import("@/components/desktop/product/CarouselSection"));
+
+// Critical components - load immediately
+const YtTestimonial = dynamic(() => import("@/components/desktop/product/ytTestimonial"), {
+  ssr: true // Keep SSR for above-fold content
+});
+const AgeticSpcae = dynamic(() => import("@/components/desktop/home/AgeticSpcae"), {
+  ssr: true // Keep SSR for important visual component
+});
 
 export default function Home() {
   return (
     <>
-      {/* <HeroSection /> */}
+      {/* Critical above-fold content - loads immediately */}
       <YtTestimonial />
-      {/* <StarCardBG className="min-h-screen p-8">
-        <Card
-          heading="Your Heading Here"
-          description="Your description text here..."
-          className="max-w-md mx-auto"
-        />
-      </StarCardBG> */}
       <AgeticSpcae />
-      <CarouselSection_2 />
-      <CompaniesSection />
-      <TestimonialSection />
       
-      <FeatureCard />
-     
+      {/* Important content - loads with minimal delay */}
+      <Suspense fallback={<div className="h-96 bg-black" />}>
+        <CarouselSection_2 />
+      </Suspense>
       
-      <ComparisonSection />
-      <ProductFeature />
-      <StatsSection />
-      <CompanyTestimonialSection />
-      <CTASection />
+      <Suspense fallback={<div className="h-96 bg-black" />}>
+        <CompaniesSection />
+      </Suspense>
+      
+      <Suspense fallback={<div className="h-96 bg-black" />}>
+        <TestimonialSection />
+      </Suspense>
+      
+      {/* Below-fold content - loads as user scrolls */}
+      <Suspense fallback={<div className="h-96 bg-black" />}>
+        <FeatureCard />
+      </Suspense>
+      
+      <Suspense fallback={<div className="h-96 bg-black" />}>
+        <ComparisonSection />
+      </Suspense>
+      
+      <Suspense fallback={<div className="h-96 bg-black" />}>
+        <ProductFeature />
+      </Suspense>
+      
+      <Suspense fallback={<div className="h-96 bg-black" />}>
+        <StatsSection />
+      </Suspense>
+      
+      <Suspense fallback={<div className="h-96 bg-black" />}>
+        <CompanyTestimonialSection />
+      </Suspense>
+      
+      <Suspense fallback={<div className="h-96 bg-black" />}>
+        <CTASection />
+      </Suspense>
     </>
   );
 }
