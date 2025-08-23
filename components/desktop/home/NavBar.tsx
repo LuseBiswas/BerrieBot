@@ -1,0 +1,208 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import AnimatedButton from "./AnimatedButton";
+
+export default function NavBar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
+  
+  // Define routes that should have black navbar background
+  const whiteBackgroundRoutes = [ "/resources","/explore/details", "/resources/faq","/product"];
+  
+  // Check if current path starts with any of the white background routes
+  const shouldUseBlackNavbar = whiteBackgroundRoutes.some(route => 
+    pathname?.startsWith(route)
+  );
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show navbar when at top of page
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+      }
+      // Hide when scrolling down, show when scrolling up
+      else if (currentScrollY > lastScrollY) {
+        setIsVisible(false); // Scrolling down
+      } else {
+        setIsVisible(true); // Scrolling up
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
+  return (
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
+        <div className={`mx-2 my-3 rounded-2xl ${shouldUseBlackNavbar ? 'bg-black' : 'bg-[#028374]'}`}>
+          <div className="mx-auto flex max-w-8xl items-center justify-between px-16 py-3">
+            {/* Left side - Logo */}
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="w-8 h-8 flex items-center justify-center">
+                <Image
+                  src="/image/logo.png"
+                  alt="BerriBot Logo"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <span className="text-2xl font-bold text-white">BerriBot</span>
+            </Link>
+
+            {/* Center - Navigation Links */}
+            <div className="hidden lg:flex items-center space-x-8">
+              {/* <Dropdown
+                trigger={
+                  <div className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                    Product
+                    <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                }
+                sections={productSections}
+              /> */}
+
+              <Link href="/product" className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                Product
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg> */}
+              </Link>
+              
+              <Link href="/solutions" className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                Solution
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg> */}
+              </Link>
+              
+              <Link href="/resources" className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                Resource
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg> */}
+              </Link>
+              
+              <Link href="/about" className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                About
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg> */}
+              </Link>
+            </div>
+
+            {/* Mobile - Hamburger Menu */}
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden text-white hover:text-white/80 transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
+            {/* Right side - Get Started Button */}
+            <div className="hidden lg:flex items-center">
+              <AnimatedButton 
+                href="/schedule"
+                className="bg-white text-black hover:bg-gray-50 transition-colors"
+              >
+                Book a Demo
+              </AnimatedButton>
+            </div>
+
+            {/* Mobile - Empty div to maintain center alignment */}
+            <div className="lg:hidden w-6"></div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden">
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={toggleMobileMenu}
+          ></div>
+          
+          {/* Mobile Menu */}
+          <div className="fixed top-20 left-4 right-4 bg-white rounded-2xl shadow-xl p-6">
+            <div className="flex flex-col space-y-4">
+              {/* Navigation Links */}
+              <div className="flex flex-col space-y-4 pb-4 border-b border-gray-200">
+                <Link 
+                  href="/product" 
+                  className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
+                  onClick={toggleMobileMenu}
+                >
+                  Product
+                </Link>
+                <Link 
+                  href="/solution" 
+                  className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
+                  onClick={toggleMobileMenu}
+                >
+                  Solution
+                </Link>
+                <Link 
+                  href="/resources" 
+                  className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
+                  onClick={toggleMobileMenu}
+                >
+                  Resources
+                </Link>
+                <Link 
+                  href="/pricing" 
+                  className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
+                  onClick={toggleMobileMenu}
+                >
+                  Pricing
+                </Link>
+              </div>
+              
+              {/* Action Buttons */}
+              <div className="flex flex-col space-y-3 pt-2">
+                <Link 
+                  href="/login" 
+                  className="px-6 py-3 text-center text-teal-500 border-2 border-teal-500 rounded-full font-medium hover:bg-teal-50 transition-colors"
+                  onClick={toggleMobileMenu}
+                >
+                  Login
+                </Link>
+                <div onClick={toggleMobileMenu}>
+                  <AnimatedButton 
+                    href="/schedule"
+                    className="px-6 py-3 text-center bg-teal-400 text-white hover:bg-teal-500 transition-colors w-full"
+                  >
+                    Book a Demo
+                  </AnimatedButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

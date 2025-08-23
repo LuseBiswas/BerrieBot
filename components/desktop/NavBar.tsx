@@ -1,0 +1,220 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { trackNavbarClick } from "@/utils/analytics";
+
+export default function NavBar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show navbar when at top of page
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+      }
+      // Hide when scrolling down, show when scrolling up
+      else if (currentScrollY > lastScrollY) {
+        setIsVisible(false); // Scrolling down
+      } else {
+        setIsVisible(true); // Scrolling up
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
+  return (
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
+        <div className="mx-2 my-3 rounded-2xl bg-[#028374]">
+          <div className="mx-auto flex max-w-8xl items-center justify-between px-16 py-12">
+            {/* Left side - Logo */}
+            <Link href="/" className="flex items-center space-x-2">
+              <div className="w-8 h-8 flex items-center justify-center">
+                <Image
+                  src="/image/logo.png"
+                  alt="BerriBot Logo"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <span className="text-xl font-bold text-white">BerriBot</span>
+            </Link>
+
+            {/* Center - Navigation Links */}
+            <div className="hidden lg:flex items-center space-x-8">
+              {/* <Dropdown
+                trigger={
+                  <div className=" text-white font-medium hover:text-white/80 transition-colors flex items-center">
+                    Product
+                    <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                }
+                sections={productSections}
+              /> */}
+
+              <Link 
+                href="/product" 
+                className="text-white font-medium hover:text-white/80 transition-colors flex items-center"
+                onClick={() => trackNavbarClick('Product', 'desktop')}
+              >
+                Product
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg> */}
+              </Link>
+              
+              <Link 
+                href="/solutions" 
+                className="text-white font-medium hover:text-white/80 transition-colors flex items-center"
+                onClick={() => trackNavbarClick('Solution', 'desktop')}
+              >
+                Solution
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg> */}
+              </Link>
+              
+              <Link 
+                href="/resources" 
+                className="text-white font-medium hover:text-white/80 transition-colors flex items-center"
+                onClick={() => trackNavbarClick('Resource', 'desktop')}
+              >
+                Resource
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg> */}
+              </Link>
+              
+              <Link 
+                href="/about" 
+                className="text-white font-medium hover:text-white/80 transition-colors flex items-center"
+                onClick={() => trackNavbarClick('About', 'desktop')}
+              >
+                About
+                {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg> */}
+              </Link>
+            </div>
+
+            {/* Mobile - Hamburger Menu */}
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden text-white hover:text-white/80 transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+
+            {/* Right side - Get Started Button */}
+            <div className="hidden lg:flex items-center">
+              <Link 
+                href="/schedule" 
+                className="px-6 py-2 bg-white rounded-full font-medium text-black hover:bg-gray-50 transition-colors"
+                onClick={() => trackNavbarClick('Book a Demo', 'desktop')}
+              >
+                Book a Demo
+              </Link>
+            </div>
+
+            {/* Mobile - Empty div to maintain center alignment */}
+            <div className="lg:hidden w-6"></div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden">
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={toggleMobileMenu}
+          ></div>
+          
+          {/* Mobile Menu */}
+          <div className="fixed top-20 left-4 right-4 bg-white rounded-2xl shadow-xl p-6">
+            <div className="flex flex-col space-y-4">
+              {/* Navigation Links */}
+              <div className="flex flex-col space-y-4 pb-4 border-b border-gray-200">
+                <Link 
+                  href="/product" 
+                  className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
+                  onClick={() => {
+                    trackNavbarClick('Product', 'desktop');
+                    toggleMobileMenu();
+                  }}
+                >
+                  Product
+                </Link>
+                <Link 
+                  href="/solutions" 
+                  className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
+                  onClick={() => {
+                    trackNavbarClick('Solution', 'desktop');
+                    toggleMobileMenu();
+                  }}
+                >
+                  Solution
+                </Link>
+                <Link 
+                  href="/resources" 
+                  className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
+                  onClick={() => {
+                    trackNavbarClick('Resource', 'desktop');
+                    toggleMobileMenu();
+                  }}
+                >
+                  Resource
+                </Link>
+                <Link 
+                  href="/about" 
+                  className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
+                  onClick={() => {
+                    trackNavbarClick('About', 'desktop');
+                    toggleMobileMenu();
+                  }}
+                >
+                  About
+                </Link>
+              </div>
+              
+              {/* CTA Button */}
+              <Link 
+                href="/schedule" 
+                className="w-full px-6 py-3 bg-teal-600 text-white text-center rounded-lg font-medium hover:bg-teal-700 transition-colors"
+                onClick={() => {
+                  trackNavbarClick('Book a Demo', 'desktop');
+                  toggleMobileMenu();
+                }}
+              >
+                Book a Demo
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
