@@ -62,7 +62,7 @@ export default function ComparisonSection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center py-20 bg-[#FFFFFF] bg-transparent"
+      className="relative min-h-screen flex items-center justify-center py-20 bg-[#FFFFFF]"
       style={{ fontFamily: 'Manrope, sans-serif' }}
     >
 
