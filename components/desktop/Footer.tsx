@@ -20,6 +20,8 @@ export default function Footer() {
                 width={32}
                 height={32}
                 className="w-8 h-8"
+                loading="lazy"
+                sizes="32px"
               />
               <span className="text-xl font-semibold">BerriBot</span>
             </div>
@@ -115,16 +117,16 @@ export default function Footer() {
             <span className="text-gray-400">Connect</span>
             <div className="flex gap-3">
               <Link href="https://www.linkedin.com/company/berribot/?originalSubdomain=sg" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('linkedin')}>
-                <Image src="/image/footer/linkedin.png" alt="LinkedIn" width={16} height={16} className="w-8 h-8" />
+                <Image src="/image/footer/linkedin.png" alt="LinkedIn" width={16} height={16} className="w-8 h-8" loading="lazy" sizes="32px" />
               </Link>
               <Link href="https://www.facebook.com/Berribot/?_rdr" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('facebook')}>
-                <Image src="/image/footer/facebook.png" alt="Facebook" width={16} height={16} className="w-8 h-8" />
+                <Image src="/image/footer/facebook.png" alt="Facebook" width={16} height={16} className="w-8 h-8" loading="lazy" sizes="32px" />
               </Link>
               <Link href="https://www.instagram.com/berribot.official/" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('instagram')}>
-                <Image src="/image/footer/instagram.png" alt="Instagram" width={16} height={16} className="w-8 h-8" />
+                <Image src="/image/footer/instagram.png" alt="Instagram" width={16} height={16} className="w-8 h-8" loading="lazy" sizes="32px" />
               </Link>
               <Link href="https://x.com/Berribot1" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('twitter')}>
-                <Image src="/image/footer/twitter.png" alt="Twitter" width={16} height={16} className="w-8 h-8" />
+                <Image src="/image/footer/twitter.png" alt="Twitter" width={16} height={16} className="w-8 h-8" loading="lazy" sizes="32px" />
               </Link>
             </div>
           </div>

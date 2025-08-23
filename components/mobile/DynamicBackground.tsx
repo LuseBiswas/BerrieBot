@@ -53,6 +53,8 @@ export default function MobileDynamicBackground({ children }: MobileDynamicBackg
               width={294.21}
               height={262}
               className="object-cover"
+              loading="lazy" // Decorative background - lazy load
+              sizes="(max-width: 768px) 300px, 294px"
             />
           </motion.div>
 
@@ -77,6 +79,8 @@ export default function MobileDynamicBackground({ children }: MobileDynamicBackg
               width={294.21}
               height={262}
               className="object-cover"
+              loading="lazy" // Decorative background - lazy load
+              sizes="(max-width: 768px) 300px, 294px"
             />
           </motion.div>
         </>

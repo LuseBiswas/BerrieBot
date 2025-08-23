@@ -19,6 +19,10 @@ type TiltProps = {
   hoverScale?: number;
   /** floating animation */
   floating?: boolean;
+  /** image priority */
+  priority?: boolean;
+  /** image loading strategy */
+  loading?: "lazy" | "eager" | undefined;
 };
 
 export const TiltImage = React.memo(({
@@ -32,7 +36,12 @@ export const TiltImage = React.memo(({
   perspective = 900,
   hoverScale = 1.04,
   floating = false,
-}: TiltProps) => {
+  priority = false, // Add priority as optional prop
+  loading = "lazy", // Default to lazy loading
+}: TiltProps & { 
+  priority?: boolean; 
+  loading?: "lazy" | "eager" | undefined; 
+}) => {
   const rootRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [dims, setDims] = useState({ w: width, h: height });
@@ -156,7 +165,9 @@ export const TiltImage = React.memo(({
               width={hoverWidth}
               height={hoverHeight}
               draggable={false}
-              priority={true} // Add priority for performance
+              priority={priority}
+              loading={loading}
+              sizes={`${Math.max(width, hoverWidth)}px`}
               style={{ 
                 display: "block", 
                 userSelect: "none",
@@ -255,7 +266,8 @@ const FlippableCard = React.memo(({
   className, 
   style,
   floating = false,
-  icons = []
+  icons = [],
+  priority = false // Add priority prop to FlippableCard
 }: {
   frontSrc: string;
   backSrc: string;
@@ -267,6 +279,7 @@ const FlippableCard = React.memo(({
   className?: string;
   style?: React.CSSProperties;
   floating?: boolean;
+  priority?: boolean; // Add to interface
   icons?: Array<{
     lordicon: string;
     position: {
@@ -374,6 +387,8 @@ const FlippableCard = React.memo(({
               width={width}
               height={height}
               floating={false}
+              priority={priority} // Only first card gets priority
+              loading={priority ? "eager" : "lazy"}
             />
           </div>
 
@@ -393,7 +408,9 @@ const FlippableCard = React.memo(({
                 alt={`${alt} back`}
                 width={backWidth}
                 height={backHeight}
-                priority={true} // Add priority for performance
+                priority={false} // Back side should never have priority
+                loading="lazy" // Always lazy load back side
+                sizes={`${backWidth}px`}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -591,7 +608,8 @@ export default function EllipseOrbit({
         width={1920}
         height={1080}
         className="absolute"
-        priority={true}
+        priority={true} // Keep priority for first background
+        sizes="100vw"
         style={{
           width: "100%",
           height: "auto",
@@ -608,7 +626,8 @@ export default function EllipseOrbit({
         width={1920}
         height={1080}
         className="absolute"
-        priority={true}
+        loading="lazy" // Remove priority from 11MB image!
+        sizes="100vw"
         style={{
           width: "100%",
           height: "auto",
@@ -687,6 +706,7 @@ export default function EllipseOrbit({
         width={127.5}
         height={127.5}
         priority={true}
+        sizes="128px"
         style={{
           top: "49.5%",
           left: "20%",
@@ -767,7 +787,8 @@ export default function EllipseOrbit({
             alt="Glow effect"
             width={246.5}
             height={246.5}
-            priority={true}
+            loading="lazy"
+            sizes="247px"
           />
         </motion.div>
       
@@ -813,6 +834,7 @@ export default function EllipseOrbit({
             }
           }
         ]}
+        priority={true} // Pass priority to FlippableCard
       />
       
       {/* Search1 card */}
@@ -857,6 +879,7 @@ export default function EllipseOrbit({
             }
           }
         ]}
+        priority={false} // Pass priority to FlippableCard
       />
       
       {/* Mastermind1 card */}
@@ -901,6 +924,7 @@ export default function EllipseOrbit({
             }
           }
         ]}
+        priority={false} // Pass priority to FlippableCard
       />
       
       {/* Proctor1 card */}
@@ -945,6 +969,7 @@ export default function EllipseOrbit({
             }
           }
         ]}
+        priority={false} // Pass priority to FlippableCard
       />
       
       <div 

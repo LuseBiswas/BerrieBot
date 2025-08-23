@@ -235,11 +235,13 @@ MobileAnimatedIcon.displayName = 'MobileAnimatedIcon';
 const MobileFlippableCard = React.memo(({ 
   product, 
   className, 
-  style
+  style,
+  index
 }: {
   product: ProductData;
   className?: string;
   style?: React.CSSProperties;
+  index: number;
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
@@ -330,7 +332,9 @@ const MobileFlippableCard = React.memo(({
               alt={`${product.heading} front`}
               width={frontWidth}
               height={frontHeight}
-              priority={true}
+              priority={index === 0} // Only first card gets priority
+              loading={index === 0 ? "eager" : "lazy"}
+              sizes={`${frontWidth}px`}
               style={{
                 width: "100%",
                 height: "100%",
@@ -356,7 +360,9 @@ const MobileFlippableCard = React.memo(({
                 alt={`${product.heading} back`}
                 width={backWidth}
                 height={backHeight}
-                priority={true}
+                priority={false} // Back side never gets priority
+                loading="lazy" // Always lazy load back side
+                sizes={`${backWidth}px`}
                 style={{
                   width: "100%",
                   height: "100%",
@@ -411,6 +417,8 @@ export default function MobileProductCarousel() {
           width={1266}
           height={956}
           className="w-[1266px] h-[956px]"
+          priority={true} // First background gets priority
+          sizes="(max-width: 768px) 100vw, 1266px"
         />
       </div>
       
@@ -422,6 +430,8 @@ export default function MobileProductCarousel() {
           width={800}
           height={600}
           className="w-[800px] h-[600px] opacity-[50%]"
+          loading="lazy" // Below fold - lazy load
+          sizes="(max-width: 768px) 100vw, 800px"
         />
       </div>
       
@@ -433,6 +443,8 @@ export default function MobileProductCarousel() {
           width={700}
           height={700}
           className="w-[700px] h-[500px] opacity-[50%] rotate-419"
+          loading="lazy" // Below fold - lazy load
+          sizes="(max-width: 768px) 100vw, 700px"
         />
       </div>
       
@@ -470,12 +482,13 @@ export default function MobileProductCarousel() {
 
         {/* FlippableCards Grid */}
         <div className="space-y-8">
-          {productsData.map((product) => (
+          {productsData.map((product, index) => (
             <div key={product.id} className="flex justify-center">
               <div id={`${product.heading.toLowerCase().replace(/\s+/g, '').replace('<br/>', '')}`}>
                 <MobileFlippableCard
                   product={product}
                   className="relative"
+                  index={index}
                 />
               </div>
             </div>
