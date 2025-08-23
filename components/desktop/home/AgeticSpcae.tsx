@@ -592,6 +592,7 @@ export default function EllipseOrbit({
         height={1080}
         className="absolute"
         priority={true}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
         style={{
           width: "100%",
           height: "auto",
@@ -603,12 +604,13 @@ export default function EllipseOrbit({
       />
       
       <Image
-        src="/image/space/BG/BG_Glow2.png"
+        src="/image/space/BG/BG_Glow2.webp"
         alt="Background Glow 2"
         width={1920}
         height={1080}
         className="absolute"
-        priority={true}
+        loading="lazy"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
         style={{
           width: "100%",
           height: "auto",

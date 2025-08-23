@@ -4,13 +4,13 @@ import Image from "next/image";
 
 const slides = [
   {
-    image: "/image/screenshot_3.png",
+    image: "/image/screenshot_1.webp",
     title: "BerriMasterMind",
     subtitle: "Our 24/7 asynchronous AI interviewer",
     description: "Custom JD-based questions, real-time scoring, and even coding tests with no human scheduling needed.",
   },
   {
-    image: "/image/screenshot_1.png",
+    image: "/image/screenshot_1.webp",
     title: "Another Feature",
     subtitle: "Brief description of this feature",
     description: "More details about how this amazing feature will change your life and make hiring a breeze.",
