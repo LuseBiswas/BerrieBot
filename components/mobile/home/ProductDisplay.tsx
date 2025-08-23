@@ -52,21 +52,38 @@ export default function MobileProductDisplay() {
     window.location.href = url;
   };
 
-  // Screen size detection
+  // Optimized screen size detection with debouncing
   useEffect(() => {
     const updateScreenSize = () => {
-      if (window.innerWidth >= 1024) {
-        setScreenSize('large');
-      } else if (window.innerWidth >= 768) {
-        setScreenSize('tablet');
-      } else {
-        setScreenSize('mobile');
-      }
+      // Batch DOM reads to prevent forced reflows
+      requestAnimationFrame(() => {
+        const width = window.innerWidth;
+        if (width >= 1024) {
+          setScreenSize('large');
+        } else if (width >= 768) {
+          setScreenSize('tablet');
+        } else {
+          setScreenSize('mobile');
+        }
+      });
     };
 
     updateScreenSize();
-    window.addEventListener('resize', updateScreenSize);
-    return () => window.removeEventListener('resize', updateScreenSize);
+    
+         // Debounce resize events to reduce reflow frequency  
+     const debounceTimer = 150;
+     let timeoutId: NodeJS.Timeout;
+     const debouncedResize = () => {
+       clearTimeout(timeoutId);
+       timeoutId = setTimeout(updateScreenSize, debounceTimer);
+     };
+     
+     window.addEventListener('resize', debouncedResize);
+     
+     return () => {
+       clearTimeout(timeoutId);
+       window.removeEventListener('resize', debouncedResize);
+     };
   }, []);
 
   // Responsive sizing based on mobile dimensions
@@ -130,9 +147,11 @@ export default function MobileProductDisplay() {
         <Image
           src="/image/mobile/5.png"
           alt="Background"
-          width={1266}
-          height={956}
-          className="object-cover"
+          width={750}
+          height={1184}
+          sizes="(max-width: 768px) 412px, (max-width: 1024px) 750px, 1200px"
+          priority={false}
+          className="object-cover w-[412px] h-[650px]"
         />
       </div>
       {/* Background Grid Pattern */}

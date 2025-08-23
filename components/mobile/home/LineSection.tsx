@@ -6,9 +6,10 @@ import {
   useTransform,
   useMotionValue,
 } from "framer-motion";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { debounce } from "@/utils/performanceUtils";
 import { ChevronRight, Check } from "lucide-react";
 
 /* ---------- text-scramble helper ---------- */
@@ -136,49 +137,70 @@ export default function MobileLineSection() {
   });
 
   // Measure positions of each step center relative to the rail
-  const measure = () => {
+  const measure = useCallback(() => {
     const rail = railRef.current;
     if (!rail) return;
-    const r = rail.getBoundingClientRect();
-    const topAbs = window.scrollY + r.top;
-    const height = r.height;
+    
+    // Batch all DOM reads together to prevent forced reflows
+    requestAnimationFrame(() => {
+      const r = rail.getBoundingClientRect();
+      const topAbs = window.scrollY + r.top;
+      const height = r.height;
 
-    const ys = stepRefs.current.map((el) => {
-      if (!el) return 0;
-      const br = el.getBoundingClientRect();
-      const centerAbs = window.scrollY + br.top + br.height / 2;
-      const rel = centerAbs - topAbs; // relative to rail top
-      return Math.max(0, Math.min(height, rel));
+      const ys = stepRefs.current.map((el) => {
+        if (!el) return 0;
+        const br = el.getBoundingClientRect();
+        const centerAbs = window.scrollY + br.top + br.height / 2;
+        const rel = centerAbs - topAbs; // relative to rail top
+        return Math.max(0, Math.min(height, rel));
+      });
+
+      // Batch all DOM writes together
+      setCircleYs(ys);
+      setRailTopAbs(topAbs);
+      setRailHeight(height);
     });
-
-    setCircleYs(ys);
-    setRailTopAbs(topAbs);
-    setRailHeight(height);
-  };
-
-  // Measure on mount + resize + font load
-  useEffect(() => {
-    measure();
-    const onResize = () => measure();
-    window.addEventListener("resize", onResize);
-    window.addEventListener("orientationchange", onResize);
-    const id1 = setTimeout(measure, 100); // settle layout
-    const id2 = setTimeout(measure, 500); // extra settle time for increased spacing
-    const id3 = setTimeout(measure, 1000); // ensure full layout completion
-    return () => {
-      clearTimeout(id1);
-      clearTimeout(id2);
-      clearTimeout(id3);
-      window.removeEventListener("resize", onResize);
-      window.removeEventListener("orientationchange", onResize);
-    };
   }, []);
+
+  // Optimized resize handling with ResizeObserver
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+
+    measure(); // Initial measurement
+    
+    // Use ResizeObserver instead of window resize for better performance
+    const resizeObserver = new ResizeObserver((_entries) => {
+      // Debounce measurements to prevent excessive reflows
+      const measureDebounced = debounce(measure, 100);
+      measureDebounced();
+    });
+    
+    resizeObserver.observe(rail);
+    
+    // Fallback for orientation changes
+    const handleOrientationChange = debounce(measure, 200);
+    window.addEventListener("orientationchange", handleOrientationChange);
+    
+    // Measure after layout settles
+    const timeouts = [
+      setTimeout(measure, 100),
+      setTimeout(measure, 500),
+      setTimeout(measure, 1000)
+    ];
+    
+    return () => {
+      resizeObserver.disconnect();
+      timeouts.forEach(clearTimeout);
+      window.removeEventListener("orientationchange", handleOrientationChange);
+    };
+  }, [measure]);
 
   // Re-measure when content animations complete
   useEffect(() => {
     const id = setTimeout(measure, 2000); // after all step animations
     return () => clearTimeout(id);
-  }, []);
+  }, [measure]);
 
   // Drive progress so it crosses a dot when that step is centered in the viewport
   useEffect(() => {
@@ -239,9 +261,11 @@ export default function MobileLineSection() {
         <Image
           src="/image/mobile/3.1.png"
           alt="Background"
-          width={543.6}
-          height={462}
-          className="object-cover"
+          width={978}
+          height={1386}
+          sizes="(max-width: 768px) 412px, (max-width: 1024px) 750px, 1200px"
+          priority={false}
+          className="object-cover w-[412px] h-[584px]"
         />
       </div>
       <div className="w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto relative z-10">
