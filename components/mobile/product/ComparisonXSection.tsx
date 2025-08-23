@@ -6,10 +6,6 @@ import Image from "next/image";
 
 const COMPARISON_DATA = [
   {
-    before: "Fortune <br/> 200 IT <br/> services",
-    after: "Fortune <br/> 500 Tech & <br/> Digital Service",
-  },
-  {
     before: "48,283 recruiter <br/> hours saved",
     after: "78% reduction <br/> in cost per hire",
   },
@@ -316,14 +312,28 @@ export default function MobileComparisonXSection() {
 
         {/* Comparison table with individual content animations - Mobile Layout */}
         <div className="w-full mx-auto mt-8 relative">
-          <table className="w-full">
+          <table className="w-full table-fixed">
+            <thead>
+              <tr>
+                <th className="w-1/2 p-4 pr-8 text-center border-b border-white/20">
+                  <span className="text-white text-[24px] font-medium uppercase tracking-wider" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                  Fortune <br/> 200 IT <br/> services
+                  </span>
+                </th>
+                <th className="w-1/2 p-4 pl-8 text-center border-b border-white/20">
+                  <span className="text-white text-[24px] font-medium uppercase tracking-wider" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                  Fortune <br/> 500 Tech & <br/> Digital Service
+                  </span>
+                </th>
+              </tr>
+            </thead>
             <tbody>
               {COMPARISON_DATA.map((item, index) => {
                 const { opacity, y } = rowAnimations[index];
                 
                 return (
                   <tr key={index}>
-                    <td className="p-4 text-center border-t border-white/20">
+                    <td className="w-1/2 p-4 pr-8 text-center border-t border-white/20">
                       <div className="w-full mx-auto">
                         <motion.p 
                           className="text-white text-[18px] md:text-[22px] lg:text-[25px] leading-relaxed"
@@ -337,7 +347,7 @@ export default function MobileComparisonXSection() {
                         />
                       </div>
                     </td>
-                    <td className="p-4 text-center border-t border-white/20">
+                    <td className="w-1/2 p-4 pl-8 text-center border-t border-white/20">
                       <div className="w-full mx-auto">
                         <motion.p 
                           className="text-white text-[18px] md:text-[22px] lg:text-[25px] leading-relaxed font-medium"

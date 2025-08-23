@@ -50,10 +50,11 @@ export default function MobileAboutProductDisplay() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mb-16"
         >
-          <h2 className="text-[58px] font-medium text-white leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
+          <h2 className="text-center text-[58px] font-medium text-white leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
             Recruitment
             <br />
-            has a problem
+            has a few <br />
+             problems.
           </h2>
         </motion.div>
 

@@ -5,12 +5,13 @@ import Image from 'next/image';
 
 export interface StackCard {
   id: string;
-  top?: React.ReactNode; // Made optional
-  ribbon?: React.ReactNode; // Made optional
-  bottom?: React.ReactNode; // Made optional
-  topImage?: string; // Optional image for top section
-  bottomImage?: string; // Optional image for bottom section
-  ribbonImage?: string; // Optional image for ribbon section
+  top?: React.ReactNode;
+  ribbon?: React.ReactNode;
+  ribbonStatic?: React.ReactNode; // Added ribbonStatic like desktop
+  bottom?: React.ReactNode;
+  topImage?: string; // Keep for backward compatibility
+  bottomImage?: string; // Keep for backward compatibility
+  ribbonImage?: string; // Keep for backward compatibility
 }
 
 interface StackByStackProps {
@@ -111,27 +112,27 @@ export default function MobileStackByStack({
     switch (screenSize) {
       case 'large':
         return {
-          cardText: 'text-xl', // larger than mobile text-lg
-          ribbonText: 'text-sm', // larger than mobile text-xs
-          imageSize: 'max-h-20', // larger than mobile max-h-16
-          ribbonImageSize: 'h-10', // larger than mobile h-8
-          cardPadding: 'px-4 py-5', // larger than mobile px-3 py-4
+          cardText: 'text-[40px]', // Closer to desktop 45px
+          ribbonText: 'text-sm',
+          imageSize: 'max-h-20',
+          ribbonImageSize: 'h-10',
+          cardPadding: 'px-6 py-8', // Match desktop padding
         };
       case 'tablet':
         return {
-          cardText: 'text-[34px]', // slightly larger than mobile
-          ribbonText: 'text-xs', // same as mobile but will look better with larger container
-          imageSize: 'max-h-18', // slightly larger than mobile max-h-16
-          ribbonImageSize: 'h-9', // slightly larger than mobile h-8
-          cardPadding: 'px-3 py-4', // same as mobile
+          cardText: 'text-[32px]', // Larger for better desktop match
+          ribbonText: 'text-sm',
+          imageSize: 'max-h-18',
+          ribbonImageSize: 'h-9',
+          cardPadding: 'px-5 py-6',
         };
       default: // mobile
         return {
-          cardText: 'text-[24px]',
-          ribbonText: 'text-xs',
+          cardText: 'text-[28px]', // Larger for better visual match
+          ribbonText: 'text-sm', // Larger ribbon text
           imageSize: 'max-h-16',
           ribbonImageSize: 'h-8',
-          cardPadding: 'px-3 py-4',
+          cardPadding: 'px-4 py-6', // Better padding
         };
     }
   };
@@ -245,20 +246,20 @@ export default function MobileStackByStack({
                   : {}
               }
             >
-              {/* Main card container - mobile optimized */}
+              {/* Main card container - white design like desktop */}
               <div
                 className={`
-                  relative flex flex-col justify-between h-full rounded-4xl 
+                  relative flex flex-col justify-between h-full rounded-2xl 
                   bg-[#1E1E1E] text-white overflow-hidden 
-                  ${isFront ? 'shadow-2xl shadow-black/40' : depth === 1 ? 'shadow-xl shadow-black/30' : 'shadow-lg shadow-black/20'}
+                  ${isFront ? 'shadow-2xl shadow-black/25' : depth === 1 ? 'shadow-xl shadow-black/20' : 'shadow-lg shadow-black/15'}
                 `}
                 style={{
                   transform: 'translateZ(0)',
                   backfaceVisibility: 'hidden',
                 }}
               >
-                {/* Top section - responsive */}
-                <div className={`flex-1 flex items-center justify-center ${textSizes.cardPadding}`}>
+                {/* Top section - dynamic sizing based on bottom content */}
+                <div className={`${card.bottom ? 'flex-1' : 'flex-[2]'} flex items-center justify-center ${textSizes.cardPadding}`}>
                   <div className="text-center space-y-2">
                     {card.topImage && (
                       <div>
@@ -272,22 +273,27 @@ export default function MobileStackByStack({
                       </div>
                     )}
                     {card.top && (
-                      <div className={`${textSizes.cardText} font-light leading-tight text-white`}>
+                      <div className={`${textSizes.cardText} font-light leading-tight text-white break-words`}>
                         {card.top}
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* Ribbon section - mobile optimized */}
-                {(card.ribbon || card.ribbonImage) && (
-                  <div className={`relative w-full overflow-hidden flex items-center ${
-                    card.ribbonImage ? 'py-3' : 'py-2 bg-gradient-to-r from-teal-600 to-teal-500'
-                  }`}>
-                    <div className="relative w-full flex items-center">
-                      {card.ribbonImage ? (
-                        // Static image in ribbon without background
-                        <div className="w-full flex justify-center">
+                {/* Teal ribbon section - simplified for debugging */}
+                {(card.ribbon || card.ribbonStatic || card.ribbonImage) && (
+                  <div className="relative w-full py-4 bg-gradient-to-r from-teal-500 to-teal-400 overflow-hidden">
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      {card.ribbonStatic ? (
+                        // Static ribbon without marquee effect - like desktop
+                        <div className="text-center w-full">
+                          <span className="text-white font-semibold text-sm uppercase tracking-wider" style={{ color: '#FFFFFF', fontSize: '14px' }}>
+                            {card.ribbonStatic}
+                          </span>
+                        </div>
+                      ) : card.ribbonImage ? (
+                        // Static image in ribbon
+                        <div className="w-full flex justify-center items-center">
                           <Image 
                             src={card.ribbonImage} 
                             alt="Ribbon" 
@@ -297,47 +303,106 @@ export default function MobileStackByStack({
                           />
                         </div>
                       ) : (
-                        // Scrolling text marquee - responsive
-                        <div className="flex animate-marquee whitespace-nowrap items-center">
-                          <span className={`text-white font-semibold ${textSizes.ribbonText} uppercase tracking-wide mx-4`}>
-                            {card.ribbon}
-                          </span>
-                          <span className={`text-white font-semibold ${textSizes.ribbonText} uppercase tracking-wide mx-4`}>
-                            {card.ribbon}
-                          </span>
-                          <span className={`text-white font-semibold ${textSizes.ribbonText} uppercase tracking-wide mx-4`}>
-                            {card.ribbon}
-                          </span>
-                          <span className={`text-white font-semibold ${textSizes.ribbonText} uppercase tracking-wide mx-4`}>
-                            {card.ribbon}
-                          </span>
+                        // Framer Motion marquee ribbon with keyword replacement
+                        <div className="relative w-full overflow-hidden">
+                          <motion.div 
+                            className="flex items-center whitespace-nowrap"
+                            animate={{ x: [0, -300] }}
+                            transition={{
+                              duration: 15,
+                              ease: "linear",
+                              repeat: Infinity
+                            }}
+                          >
+                            {(() => {
+                              // Function to process ribbon content and replace keywords with dots
+                              const processRibbonContent = (content: React.ReactNode) => {
+                                // Convert React content to string for processing
+                                let textContent = '';
+                                if (typeof content === 'string') {
+                                  textContent = content;
+                                } else if (React.isValidElement(content)) {
+                                  // Extract text from JSX like <>SOC 2&nbsp;ISO&nbsp;27001</>
+                                  const extractText = (node: React.ReactNode): string => {
+                                    if (typeof node === 'string') return node;
+                                    if (typeof node === 'number') return node.toString();
+                                    if (React.isValidElement(node)) {
+                                      const element = node as React.ReactElement<any>;
+                                      if (typeof element.props.children === 'string') {
+                                        return element.props.children;
+                                      }
+                                      if (Array.isArray(element.props.children)) {
+                                        return element.props.children.map(extractText).join('');
+                                      }
+                                      return extractText(element.props.children);
+                                    }
+                                    if (Array.isArray(node)) {
+                                      return node.map(extractText).join('');
+                                    }
+                                    return '';
+                                  };
+                                  textContent = extractText(content);
+                                }
+
+                                // Replace &nbsp; or •DOT• with our special marker
+                                const parts = textContent.replace(/&nbsp;/g, '•DOT•').split('•DOT•');
+                                
+                                return parts.map((part, index) => (
+                                  <React.Fragment key={index}>
+                                    <span className="text-white font-semibold text-sm uppercase tracking-wider" style={{ color: '#FFFFFF', fontSize: '14px' }}>
+                                      {part}
+                                    </span>
+                                    {index < parts.length - 1 && (
+                                      <span className="mx-2" style={{ color: '#0BECD2', fontSize: '14px' }}>•</span>
+                                    )}
+                                  </React.Fragment>
+                                ));
+                              };
+
+                              const processedContent = processRibbonContent(card.ribbon);
+                              
+                              // Create multiple repetitions for seamless scroll
+                              return (
+                                <>
+                                  {[...Array(6)].map((_, index) => (
+                                    <React.Fragment key={index}>
+                                      {processedContent}
+                                      <span className="mx-4" style={{ color: '#0BECD2', fontSize: '14px' }}>•</span>
+                                    </React.Fragment>
+                                  ))}
+                                </>
+                              );
+                            })()}
+                          </motion.div>
                         </div>
                       )}
                     </div>
                   </div>
                 )}
 
-                {/* Bottom section - responsive */}
-                <div className={`flex-1 flex items-center justify-center ${textSizes.cardPadding}`}>
-                  <div className="text-center space-y-2">
-                    {card.bottomImage && (
-                      <div>
-                        <Image 
-                          src={card.bottomImage} 
-                          alt="Bottom section" 
-                          width={96}
-                          height={96}
-                          className={`mx-auto max-w-full h-auto ${textSizes.imageSize} object-contain`}
-                        />
-                      </div>
-                    )}
-                    {card.bottom && (
-                      <div className={`${textSizes.cardText} font-light leading-tight text-white`}>
-                        {card.bottom}
-                      </div>
-                    )}
+                {/* Bottom section - only render if content exists */}
+                {(card.bottom || card.bottomImage) && (
+                  <div className={`flex-1 flex items-center justify-center ${textSizes.cardPadding}`}>
+                    <div className="text-center space-y-2">
+                      {card.bottomImage && (
+                        <div>
+                          <Image 
+                            src={card.bottomImage} 
+                            alt="Bottom section" 
+                            width={96}
+                            height={96}
+                            className={`mx-auto max-w-full h-auto ${textSizes.imageSize} object-contain`}
+                          />
+                        </div>
+                      )}
+                      {card.bottom && (
+                        <div className={`${textSizes.cardText} font-light leading-tight text-white break-words`}>
+                          {card.bottom}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
               {/* Subtle glow effect for front card */}
@@ -352,14 +417,23 @@ export default function MobileStackByStack({
       {/* Click blocker during dismiss animation */}
       {isDismissing && <div className="absolute inset-0 z-50 pointer-events-auto" />}
 
-      {/* Marquee CSS */}
+      {/* Marquee CSS - simpler approach for reliable visibility */}
       <style jsx>{`
+        @keyframes marquee-simple {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+        .animate-marquee-simple {
+          animation: marquee-simple 20s linear infinite;
+          white-space: nowrap;
+        }
+        
         @keyframes marquee {
           0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-25%); }
         }
         .animate-marquee {
-          animation: marquee 15s linear infinite;
+          animation: marquee 16s linear infinite;
         }
       `}</style>
     </div>

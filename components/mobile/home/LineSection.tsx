@@ -8,6 +8,7 @@ import {
 } from "framer-motion";
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronRight, Check } from "lucide-react";
 
 /* ---------- text-scramble helper ---------- */
@@ -210,7 +211,29 @@ export default function MobileLineSection() {
   }, [scrollY, railTopAbs, railHeight, progressPx, circleYs]);
 
   return (
-    <section ref={sectionRef} className="relative bg-black py-8 px-4">
+    <section 
+      ref={sectionRef} 
+      className="relative bg-black py-8 px-4"
+    >
+      {/* Animated Stars Background */}
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: 'url(/image/space/BG_Stars.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+        animate={{
+          opacity: [0.2, 0.35, 0.2]
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      
       {/* Background Image */}
       <div className="absolute top-0 right-0 z-0">
         <Image
@@ -361,50 +384,52 @@ export default function MobileLineSection() {
                     </div>
 
                     {/* Step Card */}
-                    <div className="bg-gray-700/30 backdrop-blur-sm rounded-xl p-4 border border-gray-600/30" >
-                      <h4 className="text-[24px] font-medium text-white mb-4" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                        {step.cardTitle}
-                      </h4>
+                    <Link href={`/product#${step.cardTitle.toLowerCase().replace(/\s+/g, '').replace('&', '')}`}>
+                      <div className="bg-gray-700/30 backdrop-blur-sm rounded-xl p-4 border border-gray-600/30 cursor-pointer hover:bg-gray-600/40 transition-colors" >
+                        <h4 className="text-[24px] font-medium text-white mb-4" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                          {step.cardTitle}
+                        </h4>
 
-                      <div className="space-y-3">
-                        {step.features.map((feature, featureIndex) => (
-                          <motion.div
-                            key={featureIndex}
-                            className="flex items-start gap-2"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                            transition={{
-                              duration: 0.4,
-                              ease: "easeOut",
-                              delay: isActive ? 0.2 + featureIndex * 0.1 : 0,
-                            }}
-                          >
-                            <div className="w-4 h-4 bg-[#00AD96] rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
-                              <Check className="w-2.5 h-2.5 text-white" />
-                            </div>
-                            <p className="text-[#D4D4D4] font-normal text-[14px] leading-relaxed" style={{ fontFamily: 'Manrope, sans-serif' }}>
-                              {feature}
-                            </p>
-                          </motion.div>
-                        ))}
-                      </div>
-
-                      {/* Arrow button */}
-                      <motion.div
-                        className="flex justify-end mt-4"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                        transition={{ 
-                          duration: 0.3, 
-                          ease: "easeOut",
-                          delay: isActive ? 0.4 : 0 
-                        }}
-                      >
-                        <div className="w-8 h-8 bg-[#00AD96] rounded-full flex items-center justify-center">
-                          <ChevronRight className="w-4 h-4 text-white" />
+                        <div className="space-y-3">
+                          {step.features.map((feature, featureIndex) => (
+                            <motion.div
+                              key={featureIndex}
+                              className="flex items-start gap-2"
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                              transition={{
+                                duration: 0.4,
+                                ease: "easeOut",
+                                delay: isActive ? 0.2 + featureIndex * 0.1 : 0,
+                              }}
+                            >
+                              <div className="w-4 h-4 bg-[#00AD96] rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                                <Check className="w-2.5 h-2.5 text-white" />
+                              </div>
+                              <p className="text-[#D4D4D4] font-normal text-[14px] leading-relaxed" style={{ fontFamily: 'Manrope, sans-serif' }}>
+                                {feature}
+                              </p>
+                            </motion.div>
+                          ))}
                         </div>
-                      </motion.div>
-                    </div>
+
+                        {/* Arrow button */}
+                        <motion.div
+                          className="flex justify-end mt-4"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                          transition={{ 
+                            duration: 0.3, 
+                            ease: "easeOut",
+                            delay: isActive ? 0.4 : 0 
+                          }}
+                        >
+                          <div className="w-8 h-8 bg-[#00AD96] rounded-full flex items-center justify-center">
+                            <ChevronRight className="w-4 h-4 text-white" />
+                          </div>
+                        </motion.div>
+                      </div>
+                    </Link>
                   </motion.div>
                   );
                 })}

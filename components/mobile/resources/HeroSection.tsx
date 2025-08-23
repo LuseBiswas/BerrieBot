@@ -50,15 +50,15 @@ export default function MobileResourcesHeroSection() {
       {/* ---- Description ---- */}
       <div className="text-center w-full max-w-sm mx-auto relative z-10">
         <p 
-          className="leading-[1.4] font-light text-[#969696] mx-auto"
+          className="leading-[1.4] font-light text-[#3d3d3d] mx-auto"
           style={{
             fontSize: '20px',
             fontFamily: 'Manrope, sans-serif'
           }}
         >
-          <span className="text-[#3d3d3d]">Welcome to your go-to hub for all </span> things Berribot and beyond. <br />
-          Whether you&apos;re curious about AI, exploring automation strategies, <br />
-          or just want to see how others are scaling smarter —not harder <br />
+          Welcome to your go-to hub <br />for all things Berribot and beyond. 
+          Whether you&apos;re curious about AI, <br /> exploring automation strategies, <br />
+          or just want to see how others are <br /> scaling smarter —not harder <br />
           —you&apos;re in the right place.
         </p>
       </div>

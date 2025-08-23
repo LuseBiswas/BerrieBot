@@ -47,6 +47,7 @@ import MobileCookiesHeroSection from "./mobile/cookies/HeroSection";
 import MobileCookiesComponent from "./mobile/cookies/cookies";
 import MobilePolicyHeroSection from "./mobile/policy/HeroSection";
 import MobilePrivacyPolicyComponent from "./mobile/policy/privacy";
+import MobileBottomBanner from "./mobile/product/BottomBanner";
 
 interface DeviceWrapperProps {
   children: React.ReactNode;
@@ -254,6 +255,7 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
                 <MobileProductXFeature/>
                 <MobileComparisonXSection/>
                 <MobileProductTestimonialCarousel/>
+                <MobileBottomBanner/>
                 <MobileCTASection/>
               </>
             ) : pathname === "/cookies" ? (

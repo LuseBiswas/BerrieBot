@@ -80,7 +80,7 @@ export default function MobileAboutHeroSection() {
       {/* "Get Started" pill */}
       <div className="mb-8 relative z-10">
         <div 
-          className="bg-white text-[#00BCA3] px-6 py-1 rounded-full font-bold flex items-center justify-center"
+          className="bg-[#028374] text-white px-6 py-1 rounded-full font-bold flex items-center justify-center"
           style={{
             width: '155px',
             height: '25px',
