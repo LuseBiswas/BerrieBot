@@ -1,80 +1,7 @@
 "use client";
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-
-/* ---------- Custom Hook for Word Animation ---------- */
-function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
-  const lineDelay = lineIndex * 0.15; // Delay between lines
-  const wordDelay = wordIndex * 0.02; // Delay between words
-  const startPoint = 0.1 + lineDelay + wordDelay; // Early start point
-  const endPoint = startPoint + 0.1; // Animation duration
-  
-  const wordProgress = useTransform(
-    scrollProgress,
-    [startPoint, endPoint],
-    [0, 1]
-  );
-  
-  const colorTransform = useTransform(
-    wordProgress,
-    [0, 1],
-    ["#6B7280", "#FFFFFF"] // grey to white (since background is black)
-  );
-  
-  return { wordProgress, colorTransform };
-}
-
-/* ---------- Animated Word Component ---------- */
-function AnimatedWord({ 
-  word, 
-  wordIndex, 
-  scrollProgress, 
-  lineIndex 
-}: { 
-  word: string; 
-  wordIndex: number; 
-  scrollProgress: MotionValue<number>; 
-  lineIndex: number; 
-}) {
-  const { colorTransform } = useWordAnimation(scrollProgress, wordIndex, lineIndex);
-  
-  return (
-    <motion.span
-      style={{ color: colorTransform }}
-      className="inline-block mr-1"
-    >
-      {word}
-    </motion.span>
-  );
-}
-
-/* ---------- Animated Text Component ---------- */
-function AnimatedText({ 
-  text, 
-  scrollProgress,
-  lineIndex = 0
-}: { 
-  text: string; 
-  scrollProgress: MotionValue<number>;
-  lineIndex?: number;
-}) {
-  const words = text.split(' ');
-  
-  return (
-    <span>
-      {words.map((word, wordIndex) => (
-        <AnimatedWord
-          key={wordIndex}
-          word={word}
-          wordIndex={wordIndex}
-          scrollProgress={scrollProgress}
-          lineIndex={lineIndex}
-        />
-      ))}
-    </span>
-  );
-}
 
 // Company logos data - mobile optimized sizes
 const COMPANY_LOGOS = [
@@ -117,12 +44,6 @@ const COMPANY_LOGOS = [
 
 export default function MobileBottomBanner() {
   const ref = useRef(null);
-  
-  // Scroll progress for animations
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
 
   return (
     <section ref={ref} className="relative py-12 bg-black text-white overflow-hidden" style={{ fontFamily: 'Manrope, sans-serif' }}>
@@ -298,7 +219,7 @@ export default function MobileBottomBanner() {
               <br />
               No matter your infra, timezone,
               <br />
-              or region - we've got you covered.
+              or region - we&apos;ve got you covered.
             </div>
           </motion.div>
 
