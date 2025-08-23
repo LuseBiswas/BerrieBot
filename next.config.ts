@@ -46,6 +46,8 @@ const nextConfig: NextConfig = {
     esmExternals: true,
     // Image optimization improvements
     optimizeServerReact: true,
+    // Optimize CSS loading
+    optimizeCss: false, // Let Tailwind handle optimization
   },
 
   // Headers for better caching and security
@@ -100,6 +102,19 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: '/fonts/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable', // 1 year for fonts
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
+          }
+        ],
+      },
+      {
         source: '/image/(.*)',
         headers: [
           {
@@ -135,6 +150,15 @@ const nextConfig: NextConfig = {
               priority: 10,
               reuseExistingChunk: true,
             },
+            // Separate CSS chunks to reduce blocking
+            styles: {
+              name: 'styles',
+              test: /\.(css|scss|sass)$/,
+              chunks: 'all',
+              minChunks: 1,
+              priority: 20,
+              enforce: true,
+            },
           },
         },
       };
@@ -145,6 +169,19 @@ const nextConfig: NextConfig = {
         type: 'javascript/auto',
         resolve: {
           fullySpecified: false,
+        },
+      });
+
+      // Optimize font loading
+      config.module.rules.push({
+        test: /\.(woff|woff2|ttf|otf)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[contenthash].[ext]',
+            outputPath: 'static/fonts/',
+            publicPath: '/_next/static/fonts/',
+          },
         },
       });
 
