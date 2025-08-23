@@ -1,58 +1,94 @@
 @import "tailwindcss";
 
-/* Critical CSS - loaded immediately */
 @layer base {
-  /* Font face optimizations */
+  /* Optimized font loading */
   @font-face {
-    font-family: 'Dogica Pixel';
+    font-family: 'DogicaPixel';
     src: url('/fonts/dogicapixel.ttf') format('truetype');
-    font-display: swap; /* Improve font loading performance */
+    font-display: swap;
     font-weight: normal;
     font-style: normal;
   }
 
-  /* Reduce layout shift */
+  /* Base styles for performance */
   html {
     scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeSpeed; /* Prioritize speed over quality */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    /* Prevent layout shift */
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 
-  /* Prevent layout shift for images */
-  img {
+  /* Prevent forced reflows by avoiding layout-triggering properties */
+  img, video, iframe {
     max-width: 100%;
     height: auto;
+    /* Prevent layout shift */
+    aspect-ratio: attr(width) / attr(height);
   }
 
-  /* Optimize video elements */
-  video, iframe {
-    max-width: 100%;
-    height: auto;
+  /* GPU acceleration for better performance */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Optimize background patterns */
+  .bg-pinstripes {
+    background-image: linear-gradient(
+      135deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.05) 25%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 50%,
+      transparent 75%,
+      rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 20px 20px;
+    /* Use transform for better performance */
+    transform: translateZ(0);
+    will-change: auto;
+  }
+
+  .bg-pinstripes-white {
+    background-image: linear-gradient(
+      135deg,
+      transparent 25%,
+      rgba(0, 0, 0, 0.05) 25%,
+      rgba(0, 0, 0, 0.05) 50%,
+      transparent 50%,
+      transparent 75%,
+      rgba(0, 0, 0, 0.05) 75%
+    );
+    background-size: 20px 20px;
+    transform: translateZ(0);
+    will-change: auto;
   }
 }
 
-/* Utility classes for performance */
 @layer utilities {
+  /* Performance utilities */
   .will-change-transform {
     will-change: transform;
   }
-  
+
   .will-change-opacity {
     will-change: opacity;
   }
-  
+
   .gpu-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
   }
 
-  /* Loading states */
   .loading-skeleton {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
@@ -60,52 +96,23 @@
   }
 
   @keyframes loading {
-    0% {
-      background-position: 200% 0;
-    }
-    100% {
-      background-position: -200% 0;
-    }
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
 
-  /* Background patterns for performance */
-  .bg-pinstripes {
-    background-color: #000;
-    background-image: repeating-linear-gradient(
-      90deg,
-      #111 0px,
-      #111 1px,
-      transparent 1px,
-      transparent 60px
-    );
-    position: relative;
-  }
-  
-  .bg-pinstripes-white {
-    background-color: #fff;
-    background-image: repeating-linear-gradient(
-      90deg,
-      rgba(0, 199, 190, 0.08) 0px,
-      rgba(0, 199, 190, 0.08) 1px,
-      transparent 1px,
-      transparent 60px
-    );
-    position: relative;
-  }
-}
-
-/* Critical animations only */
-@layer components {
-  .fade-in {
-    animation: fadeIn 0.3s ease-in-out;
+  /* Prevent reflow-causing styles */
+  .no-reflow {
+    contain: layout style;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+  /* Optimize animations */
+  .smooth-transform {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .smooth-opacity {
+    transition: opacity 0.3s ease;
+    will-change: opacity;
   }
 }
