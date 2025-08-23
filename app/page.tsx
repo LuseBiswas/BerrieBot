@@ -1,36 +1,53 @@
+import dynamic from 'next/dynamic';
 import CompaniesSection from "@/components/desktop/home/CompaniesSection";
-
-import FeatureCard from "@/components/desktop/home/FeatureCard";
-import ComparisonSection from "@/components/desktop/home/ComparisonSection";
-import TestimonialSection from "@/components/desktop/home/TestimonialSection";
-import ProductFeature from "@/components/desktop/home/ProductFeature";
-import StatsSection from "@/components/desktop/home/StatsSection";
-import CompanyTestimonialSection from "@/components/desktop/home/CompanyTestimonialSection";
-import CTASection from "@/components/desktop/home/CTASection";
-import CarouselSection_2 from "@/components/desktop/product/CarouselSection";
 import YtTestimonial from "@/components/desktop/product/ytTestimonial";
 import AgeticSpcae from "@/components/desktop/home/AgeticSpcae";
+
+// Dynamic imports for non-critical components to improve initial load
+const FeatureCard = dynamic(() => import("@/components/desktop/home/FeatureCard"), {
+  loading: () => <div className="min-h-[400px] animate-pulse bg-gray-100" />
+});
+
+const ComparisonSection = dynamic(() => import("@/components/desktop/home/ComparisonSection"), {
+  loading: () => <div className="min-h-[500px] animate-pulse bg-gray-100" />
+});
+
+const TestimonialSection = dynamic(() => import("@/components/desktop/home/TestimonialSection"), {
+  loading: () => <div className="min-h-[400px] animate-pulse bg-gray-100" />
+});
+
+const ProductFeature = dynamic(() => import("@/components/desktop/home/ProductFeature"), {
+  loading: () => <div className="min-h-[600px] animate-pulse bg-gray-100" />
+});
+
+const StatsSection = dynamic(() => import("@/components/desktop/home/StatsSection"), {
+  loading: () => <div className="min-h-[300px] animate-pulse bg-gray-100" />
+});
+
+const CompanyTestimonialSection = dynamic(() => import("@/components/desktop/home/CompanyTestimonialSection"), {
+  loading: () => <div className="min-h-[400px] animate-pulse bg-gray-100" />
+});
+
+const CTASection = dynamic(() => import("@/components/desktop/home/CTASection"), {
+  loading: () => <div className="min-h-[300px] animate-pulse bg-gray-100" />
+});
+
+const CarouselSection_2 = dynamic(() => import("@/components/desktop/product/CarouselSection"), {
+  loading: () => <div className="min-h-[500px] animate-pulse bg-gray-100" />
+});
 
 export default function Home() {
   return (
     <>
-      {/* <HeroSection /> */}
+      {/* Critical above-the-fold content loads immediately */}
       <YtTestimonial />
-      {/* <StarCardBG className="min-h-screen p-8">
-        <Card
-          heading="Your Heading Here"
-          description="Your description text here..."
-          className="max-w-md mx-auto"
-        />
-      </StarCardBG> */}
       <AgeticSpcae />
+      
+      {/* Non-critical content loads dynamically */}
       <CarouselSection_2 />
       <CompaniesSection />
       <TestimonialSection />
-      
       <FeatureCard />
-     
-      
       <ComparisonSection />
       <ProductFeature />
       <StatsSection />
