@@ -38,13 +38,16 @@ export default function FeaturesSection() {
     const container = scrollRef.current;
     if (!container) return;
 
-    const children = Array.from(container.children) as HTMLElement[];
-    if (children.length >= 2) {
-      const step = children[1].offsetLeft - children[0].offsetLeft || children[0].offsetWidth;
-      stepRef.current = step;
-    } else if (children.length === 1) {
-      stepRef.current = children[0].offsetWidth;
-    }
+    // Use requestAnimationFrame to batch DOM measurements and prevent forced reflows
+    requestAnimationFrame(() => {
+      const children = Array.from(container.children) as HTMLElement[];
+      if (children.length >= 2) {
+        const step = children[1].offsetLeft - children[0].offsetLeft || children[0].offsetWidth;
+        stepRef.current = step;
+      } else if (children.length === 1) {
+        stepRef.current = children[0].offsetWidth;
+      }
+    });
   };
 
   const silentSetScrollLeft = (val: number) => {

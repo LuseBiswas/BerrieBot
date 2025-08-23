@@ -29,6 +29,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Preload critical fonts to prevent render blocking */}
+        <link
+          rel="preload"
+          href="/fonts/dogicapixel.ttf"
+          as="font"
+          type="font/truetype"
+          crossOrigin="anonymous"
+        />
+        {/* Preload critical Google Fonts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <Script src="https://cdn.lordicon.com/lordicon.js" strategy="beforeInteractive" />
         {/* Google Analytics */}
         <Script
@@ -44,7 +55,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${inter.variable} ${manrope.variable} font-manrope`}>
+      <body className={`${inter.variable} ${manrope.variable} antialiased`}>
         <DeviceWrapper>
           {children}
         </DeviceWrapper>
