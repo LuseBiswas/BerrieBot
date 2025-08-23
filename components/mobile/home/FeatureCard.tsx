@@ -1,6 +1,6 @@
 "use client";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import FeatureCardItem from "./FeatureCardItem";
 
@@ -43,24 +43,42 @@ export default function MobileFeatureCard() {
   const [sectionTop, setSectionTop] = useState(0);
   const [sectionHeight, setSectionHeight] = useState(0);
   
-  useEffect(() => {
-    const measure = () => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
+  // Optimized measurement with batched DOM reads
+  const measureSection = useCallback(() => {
+    if (!ref.current) return;
+    
+    // Batch DOM reads to prevent forced reflows
+    requestAnimationFrame(() => {
+      const rect = ref.current!.getBoundingClientRect();
       setSectionTop(window.scrollY + rect.top);
       setSectionHeight(rect.height);
-    };
-    
-    measure();
-    const onResize = () => measure();
-    window.addEventListener("resize", onResize);
-    const timeout = setTimeout(measure, 100);
-    
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener("resize", onResize);
-    };
+    });
   }, []);
+  
+  useEffect(() => {
+    measureSection();
+    
+         // Use ResizeObserver for more efficient resize handling
+     const resizeObserver = new ResizeObserver((_entries) => {
+       // Debounce measurements
+       const timeoutId = setTimeout(measureSection, 100);
+       return () => clearTimeout(timeoutId);
+     });
+     
+     if (ref.current) {
+       resizeObserver.observe(ref.current);
+     }
+     
+     const onResize = () => measureSection();
+    window.addEventListener("resize", onResize);
+    const timeout = setTimeout(measureSection, 100);
+    
+         return () => {
+       resizeObserver.disconnect();
+       clearTimeout(timeout);
+       window.removeEventListener("resize", onResize);
+     };
+  }, [measureSection]);
   
   // Calculate line height based on scroll position
   const lineHeight = useTransform(scrollY, (y) => {

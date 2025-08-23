@@ -1,127 +1,118 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Dogica Pixel';
-  src: url('/fonts/dogicapixel.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+@layer base {
+  /* Optimized font loading */
+  @font-face {
+    font-family: 'DogicaPixel';
+    src: url('/fonts/dogicapixel.ttf') format('truetype');
+    font-display: swap;
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  /* Base styles for performance */
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    /* Prevent layout shift */
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Prevent forced reflows by avoiding layout-triggering properties */
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
+    /* Prevent layout shift */
+    aspect-ratio: attr(width) / attr(height);
+  }
+
+  /* GPU acceleration for better performance */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Optimize background patterns */
+  .bg-pinstripes {
+    background-image: linear-gradient(
+      135deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.05) 25%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 50%,
+      transparent 75%,
+      rgba(255, 255, 255, 0.05) 75%
+    );
+    background-size: 20px 20px;
+    /* Use transform for better performance */
+    transform: translateZ(0);
+    will-change: auto;
+  }
+
+  .bg-pinstripes-white {
+    background-image: linear-gradient(
+      135deg,
+      transparent 25%,
+      rgba(0, 0, 0, 0.05) 25%,
+      rgba(0, 0, 0, 0.05) 50%,
+      transparent 50%,
+      transparent 75%,
+      rgba(0, 0, 0, 0.05) 75%
+    );
+    background-size: 20px 20px;
+    transform: translateZ(0);
+    will-change: auto;
+  }
 }
 
 @layer utilities {
-  .bg-pinstripes {
-    background-color: #000;
-    background-image: repeating-linear-gradient(
-      90deg,
-      #111 0px,
-      #111 1px,
-      transparent 1px,
-      transparent 60px
-    );
-    position: relative;
-  }
-  
-  /* Line 1 - using ::before */
-  .bg-pinstripes::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 120px;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.8) 30%, rgba(0, 199, 190, 0.4) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-    transform: translateY(-200px);
-    animation: matrix-shine-move 6s linear infinite;
-    pointer-events: none;
-  }
-  
-  /* Line 2 - using ::after */
-  .bg-pinstripes::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 600px;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.8) 30%, rgba(0, 199, 190, 0.4) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-    transform: translateY(-200px);
-    animation: matrix-shine-move 6s linear infinite 2s;
-    pointer-events: none;
-  }
-  
-  /* Line 3 - using dedicated element */
-  .matrix-line-3 {
-    position: absolute;
-    top: 0;
-    left: 1320px;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.8) 30%, rgba(0, 199, 190, 0.4) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-    transform: translateY(-200px);
-    animation: matrix-shine-move 6s linear infinite 4s;
-    pointer-events: none;
-    z-index: 1;
-  }
-  
-  .bg-pinstripes-white .matrix-line-3 {
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.6) 30%, rgba(0, 199, 190, 0.3) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-  }
-  
-  .bg-pinstripes-white {
-    background-color: #fff;
-    background-image: repeating-linear-gradient(
-      90deg,
-      rgba(0, 199, 190, 0.08) 0px,
-      rgba(0, 199, 190, 0.08) 1px,
-      transparent 1px,
-      transparent 60px
-    );
-    position: relative;
-  }
-  
-  /* Line 1 - using ::before */
-  .bg-pinstripes-white::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 120px;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.6) 30%, rgba(0, 199, 190, 0.3) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-    transform: translateY(-200px);
-    animation: matrix-shine-move 6s linear infinite;
-    pointer-events: none;
-  }
-  
-  /* Line 2 - using ::after */
-  .bg-pinstripes-white::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 600px;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.6) 30%, rgba(0, 199, 190, 0.3) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-    transform: translateY(-200px);
-    animation: matrix-shine-move 6s linear infinite 2s;
-    pointer-events: none;
-  }
-  
-
-  
-  @keyframes matrix-shine-move {
-    0% {
-      transform: translateY(-200px);
-    }
-    100% {
-      transform: translateY(calc(100vh + 200px));
-    }
+  /* Performance utilities */
+  .will-change-transform {
+    will-change: transform;
   }
 
-  /* 3D Card Flip Animation */
-  .perspective-1000 {
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
     perspective: 1000px;
   }
-  
 
+  .loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Prevent reflow-causing styles */
+  .no-reflow {
+    contain: layout style;
+  }
+
+  /* Optimize animations */
+  .smooth-transform {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .smooth-opacity {
+    transition: opacity 0.3s ease;
+    will-change: opacity;
+  }
 }

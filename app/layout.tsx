@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
-import DeviceWrapper from "@/components/DeviceWrapper";
 import Script from "next/script";
 
-
-const inter = Inter({
+// Optimized font loading to reduce critical path
+const inter = Inter({ 
   subsets: ["latin"],
-  variable: "--font-inter",
+  display: 'swap',
+  preload: true,
+  variable: '--font-inter',
+  fallback: ['system-ui', 'arial']
 });
 
 const manrope = Manrope({
@@ -20,17 +22,20 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "BerriBot - AI Recruiting Platform",
-  description: "The most complete AI recruiting platform",
+  title: "BerriBot - AI-Powered Recruitment Assistant",
+  description: "Streamline your hiring process with BerriBot's AI-powered recruitment solutions. Find the best candidates faster and more efficiently.",
+  keywords: "AI recruitment, hiring assistant, talent acquisition, automated screening",
+  robots: "index, follow",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
       <head>
         {/* Critical resource hints - moved to head for faster loading */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -76,19 +81,25 @@ export default function RootLayout({
         }} />
         
         {/* Google Analytics */}
+
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-9FN9N7N8SS"
           strategy="afterInteractive"
+          async
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-9FN9N7N8SS');
+            gtag('config', 'G-9FN9N7N8SS', {
+              page_title: document.title,
+              page_location: window.location.href,
+              send_page_view: true
+            });
           `}
         </Script>
-      </head>
+ </head>
       <body className={`${inter.variable} ${manrope.variable} font-manrope`}>
         <DeviceWrapper>
           {children}

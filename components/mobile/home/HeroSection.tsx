@@ -79,6 +79,8 @@ export default function MobileHeroSection() {
 
   // Load YouTube IFrame API
   useEffect(() => {
+    if (typeof window === 'undefined') return; // Prevent SSR issues
+    
     if (!window.YT) {
       const tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
@@ -94,6 +96,8 @@ export default function MobileHeroSection() {
   }, []);
 
   const handleStateChange = useCallback((event: YTEvent) => {
+    if (typeof window === 'undefined') return; // Prevent SSR issues
+    
     const state = event.data;
     const currentTime = player?.getCurrentTime() || 0;
     const duration = player?.getDuration() || 0;
@@ -123,6 +127,8 @@ export default function MobileHeroSection() {
 
   // Initialize YouTube player when API is ready
   useEffect(() => {
+    if (typeof window === 'undefined') return; // Prevent SSR issues
+    
     if (isAPIReady && playerRef.current && !player) {
       new window.YT.Player(playerRef.current, {
         videoId: VIDEO_ID,

@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import { debounce } from "@/utils/performanceUtils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 type Slide = {
@@ -64,35 +65,37 @@ export default function AccoladesCarousel() {
   const [lefts, setLefts] = useState<number[]>([]); // each card's left offset
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Recompute card positions on mount & resize
-  useLayoutEffect(() => {
-    const compute = () => {
-      if (!listRef.current) return;
-      const nodes = Array.from(listRef.current.querySelectorAll<HTMLElement>("[data-card]"));
+  // Optimized recomputation with batched DOM reads
+  const computePositions = useCallback(() => {
+    if (!listRef.current) return;
+    
+    // Batch all DOM reads to prevent forced reflows
+    requestAnimationFrame(() => {
+      const nodes = Array.from(listRef.current!.querySelectorAll<HTMLElement>("[data-card]"));
       const positions = nodes.map((n) => n.offsetLeft);
       setLefts(positions);
-    };
+    });
+  }, []);
+  
+  // Recompute card positions on mount & resize with optimized observers
+  useLayoutEffect(() => {
+    computePositions();
     
-    compute();
-    
-    // Add resize observer
-    const ro = new ResizeObserver(() => {
-      // Debounce the computation
-      setTimeout(compute, 100);
+    // Use ResizeObserver for better performance than window resize
+    const resizeObserver = new ResizeObserver((_entries) => {
+      // Debounce the computation to prevent excessive reflows
+      const debouncedCompute = debounce(computePositions, 150);
+      debouncedCompute();
     });
     
     if (listRef.current) {
-      ro.observe(listRef.current);
+      resizeObserver.observe(listRef.current);
     }
     
-    // Also listen to window resize as fallback
-    window.addEventListener('resize', compute);
-    
     return () => {
-      ro.disconnect();
-      window.removeEventListener('resize', compute);
+      resizeObserver.disconnect();
     };
-  }, []);
+  }, [computePositions]);
 
   // Snap to idx
   useEffect(() => {

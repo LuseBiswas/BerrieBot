@@ -23,10 +23,11 @@ export default function MobileCompanyCarousel() {
           <Image
             src={logo.src}
             alt={logo.alt}
-            width={100}
+            width={120}
             height={32}
-            className="object-contain filter brightness-0 invert"
-            style={{ height: '31.75px', width: 'auto' }}
+            sizes="96px"
+            className="object-contain filter brightness-0 invert w-24 h-6"
+            style={{ maxHeight: '24px', width: 'auto' }}
           />
         </div>
         <div 
