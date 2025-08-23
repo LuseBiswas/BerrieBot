@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
+import DeviceWrapper from "@/components/DeviceWrapper";
 import Script from "next/script";
 
 // Optimized font loading to reduce critical path
