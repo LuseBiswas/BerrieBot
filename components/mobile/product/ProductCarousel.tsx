@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
@@ -391,11 +391,36 @@ const MobileFlippableCard = React.memo(({
 MobileFlippableCard.displayName = 'MobileFlippableCard';
 
 export default function MobileProductCarousel() {
-  // Load lordicon script
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Load lordicon script only when component is visible (intersection observer)
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Load script only once
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Load lordicon script only when visible
+  useEffect(() => {
+    if (!isVisible) return;
+
     const script = document.createElement('script');
     script.src = 'https://cdn.lordicon.com/lordicon.js';
     script.async = true;
+    script.defer = true; // Add defer for better performance
     document.head.appendChild(script);
 
     return () => {
@@ -405,10 +430,10 @@ export default function MobileProductCarousel() {
         document.head.removeChild(existingScript);
       }
     };
-  }, []);
+  }, [isVisible]);
 
   return (
-    <div className="bg-black pt-16 pb-8 px-4 relative overflow-hidden">
+    <div ref={ref} className="bg-black pt-16 pb-8 px-4 relative overflow-hidden">
       {/* Background Image 1 */}
       <div className="absolute pointer-events-none" style={{ top: '-100px', left: '-200px', zIndex: 1 }}>
         <Image
