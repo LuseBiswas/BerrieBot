@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Mail } from 'lucide-react';
+import { trackFooterClick, trackSocialClick } from '@/utils/analytics';
 
 export default function Footer() {
   return (
@@ -56,10 +57,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Products</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="/product?product=berriconnect#products" className="hover:text-white transition-colors">BerriConnect</Link></li>
-              <li><Link href="/product?product=berrisearch#products" className="hover:text-white transition-colors">BerriSearch</Link></li>
-              <li><Link href="/product?product=berrimastermind#products" className="hover:text-white transition-colors">BerriMasterMind</Link></li>
-              <li><Link href="/product?product=berriproctor#products" className="hover:text-white transition-colors">BerriProctor</Link></li>
+              <li><Link href="/product?product=berriconnect#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriConnect', 'products')}>BerriConnect</Link></li>
+              <li><Link href="/product?product=berrisearch#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriSearch', 'products')}>BerriSearch</Link></li>
+              <li><Link href="/product?product=berrimastermind#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriMasterMind', 'products')}>BerriMasterMind</Link></li>
+              <li><Link href="/product?product=berriproctor#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriProctor', 'products')}>BerriProctor</Link></li>
  
             </ul>
           </div>
@@ -68,9 +69,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Solutions</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors">Recruitment Assistant</Link></li>
-              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors">Real-time  Proctoring</Link></li>
-              <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors">Live Texting</Link></li>
+              <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Recruitment Assistant', 'solutions')}>Recruitment Assistant</Link></li>
+              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Real-time Proctoring', 'solutions')}>Real-time  Proctoring</Link></li>
+              <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Live Texting', 'solutions')}>Live Texting</Link></li>
             </ul>
           </div>
           
@@ -78,8 +79,8 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Resources</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="/resources#faq" className="hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link href="/resources#blogs" className="hover:text-white transition-colors">Blog</Link></li>
+              <li><Link href="/resources#faq" className="hover:text-white transition-colors" onClick={() => trackFooterClick('FAQ', 'resources')}>FAQ</Link></li>
+              <li><Link href="/resources#blogs" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Blog', 'resources')}>Blog</Link></li>
               
             </ul>
           </div>
@@ -88,10 +89,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">About</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="/about#we-are-berribot" className="hover:text-white transition-colors">We are Berribot</Link></li>
-              <li><Link href="/about#our-mission" className="hover:text-white transition-colors">Our Mission</Link></li>
-              <li><Link href="/about#what-we-do" className="hover:text-white transition-colors">What we do</Link></li>
-              <li><Link href="/about#our-leaders" className="hover:text-white transition-colors">Our Leaders</Link></li>
+              <li><Link href="/about#we-are-berribot" className="hover:text-white transition-colors" onClick={() => trackFooterClick('We are Berribot', 'about')}>We are Berribot</Link></li>
+              <li><Link href="/about#our-mission" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Mission', 'about')}>Our Mission</Link></li>
+              <li><Link href="/about#what-we-do" className="hover:text-white transition-colors" onClick={() => trackFooterClick('What we do', 'about')}>What we do</Link></li>
+              <li><Link href="/about#our-leaders" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Leaders', 'about')}>Our Leaders</Link></li>
             </ul>
           </div>
           
@@ -100,8 +101,8 @@ export default function Footer() {
             <h3 className="text-lg font-medium mb-6">Legal</h3>
             <ul className="space-y-4 text-gray-400">
               
-              <li><Link href="/policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link></li>
+              <li><Link href="/policy" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Privacy Policy', 'legal')}>Privacy Policy</Link></li>
+              <li><Link href="/cookies" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Cookies', 'legal')}>Cookies</Link></li>
               
             </ul>
           </div>
@@ -113,16 +114,16 @@ export default function Footer() {
           <div className="flex items-center gap-2">
             <span className="text-gray-400">Connect</span>
             <div className="flex gap-3">
-              <Link href="https://www.linkedin.com/company/berribot/?originalSubdomain=sg" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+              <Link href="https://www.linkedin.com/company/berribot/?originalSubdomain=sg" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('linkedin')}>
                 <Image src="/image/footer/linkedin.png" alt="LinkedIn" width={16} height={16} className="w-8 h-8" />
               </Link>
-              <Link href="https://www.facebook.com/Berribot/?_rdr" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+              <Link href="https://www.facebook.com/Berribot/?_rdr" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('facebook')}>
                 <Image src="/image/footer/facebook.png" alt="Facebook" width={16} height={16} className="w-8 h-8" />
               </Link>
-              <Link href="https://www.instagram.com/berribot.official/" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+              <Link href="https://www.instagram.com/berribot.official/" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('instagram')}>
                 <Image src="/image/footer/instagram.png" alt="Instagram" width={16} height={16} className="w-8 h-8" />
               </Link>
-              <Link href="https://x.com/Berribot1" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+              <Link href="https://x.com/Berribot1" className=" rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('twitter')}>
                 <Image src="/image/footer/twitter.png" alt="Twitter" width={16} height={16} className="w-8 h-8" />
               </Link>
             </div>

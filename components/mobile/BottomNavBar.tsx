@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Home, Package, Lightbulb, BookOpen, Info, Shield, Cookie } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackNavbarClick } from "@/utils/analytics";
 
 export default function BottomNavBar() {
   const [isVisible, setIsVisible] = useState(false);
@@ -144,6 +145,7 @@ export default function BottomNavBar() {
                         ? "text-white w-[125px] h-[52px] px-3"
                         : "bg-[#3D3D3D] backdrop-blur-sm w-[52px] h-[52px] text-white/80 hover:text-white hover:bg-white/30 rounded-full"
                     }`}
+                    onClick={() => trackNavbarClick(item.name, 'mobile')}
                   >
                     {/* Animated background for active state */}
                     {active && (

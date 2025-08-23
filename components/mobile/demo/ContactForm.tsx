@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { trackDemoFormSubmission, trackDemoFormStart } from '@/utils/analytics';
 
 export default function MobileContactForm() {
   const [formData, setFormData] = useState({
@@ -8,6 +9,14 @@ export default function MobileContactForm() {
     workEmail: '',
     message: ''
   });
+  const [hasStartedForm, setHasStartedForm] = useState(false);
+
+  const handleFormStart = () => {
+    if (!hasStartedForm) {
+      setHasStartedForm(true);
+      trackDemoFormStart('mobile');
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -19,6 +28,8 @@ export default function MobileContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Track form submission
+    trackDemoFormSubmission('mobile');
     // Handle form submission
     console.log('Form submitted:', formData);
   };
@@ -74,6 +85,7 @@ export default function MobileContactForm() {
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleInputChange}
+                onFocus={handleFormStart}
                 placeholder="John Smith"
                 className="bg-gray-200 rounded-2xl px-4 py-4 text-gray-600 placeholder-gray-500 border-none outline-none"
                 style={{

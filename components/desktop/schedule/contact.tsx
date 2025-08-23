@@ -1,16 +1,26 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { trackDemoFormSubmission, trackDemoFormStart } from '@/utils/analytics';
 
 const Contact = () => {
   const [fullName, setFullName] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [workEmail, setWorkEmail] = useState('');
   const [demoMessage, setDemoMessage] = useState('');
+  const [hasStartedForm, setHasStartedForm] = useState(false);
+
+  const handleFormStart = () => {
+    if (!hasStartedForm) {
+      setHasStartedForm(true);
+      trackDemoFormStart('desktop');
+    }
+  };
 
   const handleDemoSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Track form submission
+    trackDemoFormSubmission('desktop');
     // Handle demo form submission logic here
     console.log({ fullName, companyName, workEmail, demoMessage });
   };
@@ -60,6 +70,7 @@ const Contact = () => {
                   type="text"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
+                  onFocus={handleFormStart}
                   placeholder="John Smith"
                   className="bg-gray-200 rounded-2xl px-4 py-4 text-gray-600 placeholder-gray-500 border-none outline-none"
                   style={{
