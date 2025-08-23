@@ -195,6 +195,8 @@ export default function YtTestimonial() {
                           alt="Background"
                           width={80}
                           height={80}
+                          priority
+                          sizes="80px"
                           className="absolute inset-0 w-full h-full object-cover rounded-full"
                         />
                       </div>
