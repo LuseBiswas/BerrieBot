@@ -1,14 +1,74 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Dogica Pixel';
-  src: url('/fonts/dogicapixel.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+/* Critical CSS - loaded immediately */
+@layer base {
+  /* Font face optimizations */
+  @font-face {
+    font-family: 'Dogica Pixel';
+    src: url('/fonts/dogicapixel.ttf') format('truetype');
+    font-display: swap; /* Improve font loading performance */
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  /* Reduce layout shift */
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed; /* Prioritize speed over quality */
+  }
+
+  /* Prevent layout shift for images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Optimize video elements */
+  video, iframe {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
+/* Utility classes for performance */
 @layer utilities {
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Loading states */
+  .loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Background patterns for performance */
   .bg-pinstripes {
     background-color: #000;
     background-image: repeating-linear-gradient(
@@ -19,52 +79,6 @@
       transparent 60px
     );
     position: relative;
-  }
-  
-  /* Line 1 - using ::before */
-  .bg-pinstripes::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 120px;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.8) 30%, rgba(0, 199, 190, 0.4) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-    transform: translateY(-200px);
-    animation: matrix-shine-move 6s linear infinite;
-    pointer-events: none;
-  }
-  
-  /* Line 2 - using ::after */
-  .bg-pinstripes::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 600px;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.8) 30%, rgba(0, 199, 190, 0.4) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-    transform: translateY(-200px);
-    animation: matrix-shine-move 6s linear infinite 2s;
-    pointer-events: none;
-  }
-  
-  /* Line 3 - using dedicated element */
-  .matrix-line-3 {
-    position: absolute;
-    top: 0;
-    left: 1320px;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.8) 30%, rgba(0, 199, 190, 0.4) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-    transform: translateY(-200px);
-    animation: matrix-shine-move 6s linear infinite 4s;
-    pointer-events: none;
-    z-index: 1;
-  }
-  
-  .bg-pinstripes-white .matrix-line-3 {
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.6) 30%, rgba(0, 199, 190, 0.3) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
   }
   
   .bg-pinstripes-white {
@@ -78,50 +92,20 @@
     );
     position: relative;
   }
-  
-  /* Line 1 - using ::before */
-  .bg-pinstripes-white::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 120px;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.6) 30%, rgba(0, 199, 190, 0.3) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-    transform: translateY(-200px);
-    animation: matrix-shine-move 6s linear infinite;
-    pointer-events: none;
-  }
-  
-  /* Line 2 - using ::after */
-  .bg-pinstripes-white::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 600px;
-    width: 1px;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 199, 190, 0.6) 30%, rgba(0, 199, 190, 0.3) 50%, rgba(0, 199, 190, 0.1) 80%, transparent 100%);
-    transform: translateY(-200px);
-    animation: matrix-shine-move 6s linear infinite 2s;
-    pointer-events: none;
-  }
-  
+}
 
-  
-  @keyframes matrix-shine-move {
-    0% {
-      transform: translateY(-200px);
+/* Critical animations only */
+@layer components {
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
     }
-    100% {
-      transform: translateY(calc(100vh + 200px));
+    to {
+      opacity: 1;
     }
   }
-
-  /* 3D Card Flip Animation */
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-  
-
 }

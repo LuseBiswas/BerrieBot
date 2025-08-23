@@ -40,11 +40,11 @@ export default function MobileBrandCarousel() {
                 <div className="flex-shrink-0 w-24 h-12 flex items-center justify-center rounded-lg">
                   <Image
                     src={brand.logo}
-                    alt={brand.name}
-                    width={96}
-                    height={48}
-                    unoptimized
-                    className="object-contain max-w-full max-h-full transition-all duration-300"
+                    alt={`${brand.name} logo`}
+                    width={150}
+                    height={40}
+                    sizes="96px"
+                    className="h-6 w-24 object-contain filter brightness-0 invert"
                   />
                 </div>
                 {index < duplicatedBrands.length - 1 && (
