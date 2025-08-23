@@ -2,6 +2,7 @@
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 
+// hello
 const COMPARISON_DATA = [
   {
     before: "48,283 recruiter <br/> hours saved",
