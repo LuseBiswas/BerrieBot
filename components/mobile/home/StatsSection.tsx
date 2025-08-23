@@ -323,32 +323,12 @@ export default function MobileStatsSection() {
         />
       </div>
       
-      {/* Grid pattern with + signs at grid intersections - section level */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Grid lines */}
-        <div className="absolute inset-0 grid grid-cols-8 grid-rows-12">
-          {Array.from({ length: 96 }, (_, i) => (
-            <div key={i} className="border border-white/20 opacity-[5%]" />
+      {/* Simplified background grid for mobile performance */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="grid grid-cols-6 grid-rows-8 h-full">
+          {Array.from({ length: 48 }).map((_, i) => (
+            <div key={i} className="border border-white/20" />
           ))}
-        </div>
-        
-        {/* + signs at every grid intersection */}
-        <div className="absolute top-0 left-0 w-full h-full">
-          {Array.from({ length: 9 }, (_, row) => 
-            Array.from({ length: 13 }, (_, col) => (
-              <div 
-                key={`${row}-${col}`}
-                className="absolute text-white/20 opacity-[10%]"
-                style={{
-                  top: `${row * (100/8)}%`,
-                  left: `${col * (100/12)}%`,
-                  transform: 'translate(-50%, -50%)'
-                }}
-              >
-                <Plus className="w-4 h-4" />
-              </div>
-            ))
-          )}
         </div>
       </div>
 

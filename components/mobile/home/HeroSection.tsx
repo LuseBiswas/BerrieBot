@@ -49,16 +49,43 @@ declare global {
 
 export default function MobileHeroSection() {
   const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'large'>('mobile');
-  const [player, setPlayer] = useState<YTPlayer | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const [isAPIReady, setIsAPIReady] = useState(false);
+  const [player, setPlayer] = useState<YTPlayer | null>(null);
   const [progressMarkers, setProgressMarkers] = useState<Record<number, boolean>>({
     25: false, 50: false, 75: false, 100: false
   });
+  const [isVisible, setIsVisible] = useState(false); // Add visibility state
   const playerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null); // Add section ref
   const pathname = usePathname();
   const lastSeekTime = useRef<number>(0);
 
   const VIDEO_ID = "ww3flTt--Xw";
+
+  // Component mount detection
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Intersection observer for deferred loading
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Load only once
+        }
+      },
+      { threshold: 0.1, rootMargin: '50px' } // Start loading when close to viewport
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   // Screen size detection
   useEffect(() => {
@@ -77,11 +104,15 @@ export default function MobileHeroSection() {
     return () => window.removeEventListener('resize', updateScreenSize);
   }, []);
 
-  // Load YouTube IFrame API
+  // Load YouTube IFrame API only when visible
   useEffect(() => {
+    if (!isVisible || !isMounted) return;
+
     if (!window.YT) {
       const tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
+      tag.async = true;
+      tag.defer = true; // Add defer for better performance
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
 
@@ -91,7 +122,7 @@ export default function MobileHeroSection() {
     } else {
       setIsAPIReady(true);
     }
-  }, []);
+  }, [isVisible, isMounted]);
 
   const handleStateChange = useCallback((event: YTEvent) => {
     const state = event.data;
@@ -220,13 +251,14 @@ export default function MobileHeroSection() {
       className="bg-transparent flex flex-col items-center justify-start px-4 pt-20 pb-8 relative overflow-visible"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.4, ease: "easeOut" }} // Reduced duration for mobile
+      ref={sectionRef} // Add ref to the section
     >
       <motion.div 
         className="max-w-sm md:max-w-md lg:max-w-lg mx-auto relative flex flex-col items-center"
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }} // Reduced movement
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+        transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }} // Faster animation
       >
         {/* YouTube Video with Analytics Tracking */}
         <motion.div 
@@ -235,9 +267,9 @@ export default function MobileHeroSection() {
             width: sizes.videoWidth,
             height: sizes.videoHeight
           }}
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          initial={isVisible ? { opacity: 0, scale: 0.95 } : false} // Only animate if visible
+          animate={isVisible ? { opacity: 1, scale: 1 } : false}
+          transition={{ duration: 0.3, delay: 0.2, ease: "easeOut" }} // Faster for mobile
         >
           <div
             ref={playerRef}
@@ -253,9 +285,9 @@ export default function MobileHeroSection() {
         {/* Text Content */}
         <motion.div 
           className="text-center px-4 max-w-sm mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          initial={isVisible ? { opacity: 0 } : false} // Simplified animation
+          animate={isVisible ? { opacity: 1 } : false}
+          transition={{ duration: 0.3, delay: 0.3, ease: "easeOut" }}
         >
           <p 
             className="text-white leading-relaxed text-[24px] md:text-[28px] lg:text-[32px]"

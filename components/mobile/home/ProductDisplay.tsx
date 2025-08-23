@@ -1,13 +1,15 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Code, Mic, Users, ChevronRight } from "lucide-react";
 
 export default function MobileProductDisplay() {
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
   const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'large'>('mobile');
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const productCards = [
     {
@@ -51,6 +53,25 @@ export default function MobileProductDisplay() {
   const handleRedirect = (url: string) => {
     window.location.href = url;
   };
+
+  // Intersection observer for background image loading
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   // Screen size detection
   useEffect(() => {
@@ -124,17 +145,21 @@ export default function MobileProductDisplay() {
     expandedCard === cardId ? sizes.cardWidthExpanded : sizes.cardWidthCollapsed;
 
   return (
-    <section className="relative min-h-screen bg-transparent px-4 py-16 overflow-visible">
-      {/* Background Image */}
-      <div className="absolute top-0 left-0 z-0 pointer-events-none">
-        <Image
-          src="/image/mobile/5.png"
-          alt="Background"
-          width={1266}
-          height={956}
-          className="object-cover"
-        />
-      </div>
+    <section ref={sectionRef} className="relative min-h-screen bg-transparent px-4 py-16 overflow-visible">
+      {/* Background Image - Only load when visible */}
+      {isVisible && (
+        <div className="absolute top-0 left-0 z-0 pointer-events-none">
+          <Image
+            src="/image/mobile/5.png"
+            alt="Background"
+            width={1266}
+            height={956}
+            className="object-cover"
+            loading="lazy"
+            sizes="(max-width: 768px) 100vw, 1266px"
+          />
+        </div>
+      )}
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="grid grid-cols-8 grid-rows-12 h-full">
