@@ -239,9 +239,11 @@ export default function MobileLineSection() {
         <Image
           src="/image/mobile/3.1.png"
           alt="Background"
-          width={543.6}
-          height={462}
-          className="object-cover"
+          width={978}
+          height={1386}
+          sizes="(max-width: 768px) 412px, (max-width: 1024px) 750px, 1200px"
+          priority={false}
+          className="object-cover w-[412px] h-[584px]"
         />
       </div>
       <div className="w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto relative z-10">

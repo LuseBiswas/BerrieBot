@@ -19,14 +19,23 @@ const nextConfig: NextConfig = {
   
   // SWC is enabled by default in Next.js 15.4+
   
-  // Image optimization settings
+  // Enhanced image optimization settings for 262 KiB savings
   images: {
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    formats: ['image/avif', 'image/webp'], // Prioritize AVIF (better compression)
+    deviceSizes: [96, 128, 256, 384, 412, 640, 750, 828, 1080, 1200, 1920], // Added specific mobile sizes
+    imageSizes: [16, 24, 32, 48, 64, 96, 128, 200, 256, 384, 412], // Added specific display sizes
     minimumCacheTTL: 31536000, // 1 year cache for images
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Aggressive optimization settings
+    loader: 'default',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+    unoptimized: false, // Ensure all images are optimized
   },
 
   // Experimental features for better performance
@@ -35,6 +44,8 @@ const nextConfig: NextConfig = {
     scrollRestoration: true,
     // Modern bundling
     esmExternals: true,
+    // Image optimization improvements
+    optimizeServerReact: true,
   },
 
   // Headers for better caching and security
@@ -80,11 +91,20 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: '/images/(.*)',
+        source: '/_next/image(.*)',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable', // 1 year
+            value: 'public, max-age=31536000, immutable', // 1 year for optimized images
+          },
+        ],
+      },
+      {
+        source: '/image/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable', // 1 year for static images
           },
         ],
       },
