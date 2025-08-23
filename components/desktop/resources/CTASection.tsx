@@ -2,12 +2,15 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { trackNewsletterSignup } from '@/utils/analytics';
 
 export default function CTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const pathname = usePathname();
   
   // Load lord-icon script
   useEffect(() => {
@@ -34,6 +37,8 @@ export default function CTASection() {
   const handleSubmit = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email.trim() && emailRegex.test(email.trim())) {
+      // Track newsletter signup
+      trackNewsletterSignup(pathname, 'desktop', email);
       setIsSubmitted(true);
       // Here you can add actual email submission logic
       console.log('Email submitted:', email);

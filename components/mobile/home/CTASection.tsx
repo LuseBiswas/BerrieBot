@@ -4,10 +4,17 @@ import React, { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { trackCTAClick } from '@/utils/analytics';
 
 export default function MobileCTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const pathname = usePathname();
+
+  const handleCTAClick = () => {
+    trackCTAClick('Book a Demo', pathname, 'mobile', '/schedule');
+  };
 
   return (
     <section ref={ref} className="relative bg-black py-16 px-4 overflow-hidden">
@@ -86,6 +93,7 @@ export default function MobileCTASection() {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleCTAClick}
             >
               <motion.div 
                 className="flex absolute top-1/2 -translate-y-1/2 left-[207px] -translate-x-1/2"

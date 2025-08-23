@@ -3,10 +3,13 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { trackCTAClick } from '@/utils/analytics';
 
 export default function CTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const pathname = usePathname();
   
   // Scroll progress for this specific section
   const { scrollYProgress } = useScroll({
@@ -17,6 +20,10 @@ export default function CTASection() {
   // Transform scroll progress to slide up from behind footer
   const y = useTransform(scrollYProgress, [0, 0.65, 1], [400, 0, -200]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0, 1, 1, 0]);
+
+  const handleCTAClick = () => {
+    trackCTAClick('Book a Demo', pathname, 'desktop', '/schedule');
+  };
 
   return (
     <section ref={ref} className="relative flex items-center justify-center mt-44 z-0">
@@ -76,6 +83,7 @@ export default function CTASection() {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: 0.8 }}
+            onClick={handleCTAClick}
           >
             <motion.div 
               className="flex absolute top-1/2 -translate-y-1/2 left-[180px] -translate-x-1/2"

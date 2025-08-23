@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Mail } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { trackFooterClick, trackSocialClick } from '@/utils/analytics';
 
 export default function MobileFooter() {
   const [screenSize, setScreenSize] = useState<'mobile' | 'tablet' | 'large'>('mobile');
@@ -126,10 +127,10 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Products</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-              <li><Link href="/product" className="hover:text-white transition-colors">BerriConnect</Link></li>
-              <li><Link href="/product" className="hover:text-white transition-colors">BerriSearch</Link></li>
-              <li><Link href="/product" className="hover:text-white transition-colors">BerriMasterMind</Link></li>
-              <li><Link href="/product" className="hover:text-white transition-colors">BerriProctor</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriConnect', 'products')}>BerriConnect</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriSearch', 'products')}>BerriSearch</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriMasterMind', 'products')}>BerriMasterMind</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriProctor', 'products')}>BerriProctor</Link></li>
           </ul>
         </div>
         
@@ -137,9 +138,9 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Solutions</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-          <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors">Recruitment Assistant</Link></li>
-              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors">Real-time Proctoring</Link></li>
-              <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors">Live Texting</Link></li>
+          <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Recruitment Assistant', 'solutions')}>Recruitment Assistant</Link></li>
+              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Real-time Proctoring', 'solutions')}>Real-time Proctoring</Link></li>
+              <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Live Texting', 'solutions')}>Live Texting</Link></li>
           </ul>
         </div>
         
@@ -147,8 +148,8 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Resources</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-          <li><Link href="/resources#faq" className="hover:text-white transition-colors">FAQ</Link></li>
-          <li><Link href="/resources#blogs" className="hover:text-white transition-colors">Blogs</Link></li>
+          <li><Link href="/resources#faq" className="hover:text-white transition-colors" onClick={() => trackFooterClick('FAQ', 'resources')}>FAQ</Link></li>
+          <li><Link href="/resources#blogs" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Blogs', 'resources')}>Blogs</Link></li>
           </ul>
         </div>
         
@@ -156,11 +157,11 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>About</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-            <li><Link href="/about" className="hover:text-white transition-colors">About us</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors">Our Journey</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors">Our Values</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors">Our Teams</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors">Join us</Link></li>
+            <li><Link href="/about" className="hover:text-white transition-colors" onClick={() => trackFooterClick('About us', 'about')}>About us</Link></li>
+            <li><Link href="#" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Journey', 'about')}>Our Journey</Link></li>
+            <li><Link href="#" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Values', 'about')}>Our Values</Link></li>
+            <li><Link href="#" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Teams', 'about')}>Our Teams</Link></li>
+            <li><Link href="#" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Join us', 'about')}>Join us</Link></li>
           </ul>
         </div>
         
@@ -168,8 +169,8 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Legal</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-          <li><Link href="/policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link></li>
+          <li><Link href="/policy" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Privacy Policy', 'legal')}>Privacy Policy</Link></li>
+              <li><Link href="/cookies" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Cookies', 'legal')}>Cookies</Link></li>
 
           </ul>
         </div>
@@ -180,16 +181,16 @@ export default function MobileFooter() {
             <div className="flex items-center gap-2">
               <span className={`${sizes.contactTextSize}`}>Connect</span>
               <div className="flex gap-3">
-                <Link href="https://www.linkedin.com/company/berribot/?originalSubdomain=sg" className="rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+                <Link href="https://www.linkedin.com/company/berribot/?originalSubdomain=sg" className="rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('linkedin')}>
                   <Image src="/image/footer/linkedin.png" alt="LinkedIn" width={16} height={16} className={sizes.socialIconSize} />
                 </Link>
-                <Link href="https://www.facebook.com/Berribot/?_rdr" className="rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+                <Link href="https://www.facebook.com/Berribot/?_rdr" className="rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('facebook')}>
                   <Image src="/image/footer/facebook.png" alt="Facebook" width={16} height={16} className={sizes.socialIconSize} />
                 </Link>
-                <Link href="#" className="rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+                <Link href="#" className="rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('instagram')}>
                   <Image src="/image/footer/instagram.png" alt="Instagram" width={16} height={16} className={sizes.socialIconSize} />
                 </Link>
-                <Link href="https://x.com/Berribot1" className="rounded flex items-center justify-center hover:opacity-80 transition-opacity">
+                <Link href="https://x.com/Berribot1" className="rounded flex items-center justify-center hover:opacity-80 transition-opacity" onClick={() => trackSocialClick('twitter')}>
                   <Image src="/image/footer/twitter.png" alt="Twitter" width={16} height={16} className={sizes.socialIconSize} />
                 </Link>
               </div>

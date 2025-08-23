@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import { trackNavbarClick } from "@/utils/analytics";
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -72,28 +73,44 @@ export default function NavBar() {
                 sections={productSections}
               /> */}
 
-              <Link href="/product" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+              <Link 
+                href="/product" 
+                className="text-white font-medium hover:text-white/80 transition-colors flex items-center"
+                onClick={() => trackNavbarClick('Product', 'desktop')}
+              >
                 Product
                 {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg> */}
               </Link>
               
-              <Link href="/solutions" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+              <Link 
+                href="/solutions" 
+                className="text-white font-medium hover:text-white/80 transition-colors flex items-center"
+                onClick={() => trackNavbarClick('Solution', 'desktop')}
+              >
                 Solution
                 {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg> */}
               </Link>
               
-              <Link href="/resources" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+              <Link 
+                href="/resources" 
+                className="text-white font-medium hover:text-white/80 transition-colors flex items-center"
+                onClick={() => trackNavbarClick('Resource', 'desktop')}
+              >
                 Resource
                 {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg> */}
               </Link>
               
-              <Link href="/about" className="text-white font-medium hover:text-white/80 transition-colors flex items-center">
+              <Link 
+                href="/about" 
+                className="text-white font-medium hover:text-white/80 transition-colors flex items-center"
+                onClick={() => trackNavbarClick('About', 'desktop')}
+              >
                 About
                 {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -115,6 +132,7 @@ export default function NavBar() {
               <Link 
                 href="/schedule" 
                 className="px-6 py-2 bg-white rounded-full font-medium text-black hover:bg-gray-50 transition-colors"
+                onClick={() => trackNavbarClick('Book a Demo', 'desktop')}
               >
                 Book a Demo
               </Link>
@@ -143,50 +161,56 @@ export default function NavBar() {
                 <Link 
                   href="/product" 
                   className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
-                  onClick={toggleMobileMenu}
+                  onClick={() => {
+                    trackNavbarClick('Product', 'desktop');
+                    toggleMobileMenu();
+                  }}
                 >
                   Product
                 </Link>
                 <Link 
-                  href="/solution" 
+                  href="/solutions" 
                   className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
-                  onClick={toggleMobileMenu}
+                  onClick={() => {
+                    trackNavbarClick('Solution', 'desktop');
+                    toggleMobileMenu();
+                  }}
                 >
                   Solution
                 </Link>
                 <Link 
                   href="/resources" 
                   className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
-                  onClick={toggleMobileMenu}
+                  onClick={() => {
+                    trackNavbarClick('Resource', 'desktop');
+                    toggleMobileMenu();
+                  }}
                 >
-                  Resources
+                  Resource
                 </Link>
                 <Link 
-                  href="/pricing" 
+                  href="/about" 
                   className="text-gray-800 font-medium hover:text-teal-500 transition-colors py-2"
-                  onClick={toggleMobileMenu}
+                  onClick={() => {
+                    trackNavbarClick('About', 'desktop');
+                    toggleMobileMenu();
+                  }}
                 >
-                  Pricing
+                  About
                 </Link>
               </div>
               
-              {/* Action Buttons */}
-              <div className="flex flex-col space-y-3 pt-2">
-                <Link 
-                  href="/login" 
-                  className="px-6 py-3 text-center text-teal-500 border-2 border-teal-500 rounded-full font-medium hover:bg-teal-50 transition-colors"
-                  onClick={toggleMobileMenu}
-                >
-                  Login
-                </Link>
-                <Link 
-                  href="/schedule" 
-                  className="px-6 py-3 text-center bg-teal-400 text-white rounded-full font-medium hover:bg-teal-500 transition-colors"
-                  onClick={toggleMobileMenu}
-                >
-                  Book a Demo
-                </Link>
-              </div>
+              {/* CTA Button */}
+              <Link 
+                href="/schedule" 
+                className="w-full px-6 py-3 bg-teal-600 text-white text-center rounded-lg font-medium hover:bg-teal-700 transition-colors"
+                onClick={() => {
+                  trackNavbarClick('Book a Demo', 'desktop');
+                  toggleMobileMenu();
+                }}
+              >
+                Book a Demo
+              </Link>
             </div>
           </div>
         </div>

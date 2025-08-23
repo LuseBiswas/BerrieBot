@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { trackNavbarClick } from "@/utils/analytics";
 
 export default function MobileNavBar() {
   const [open, setOpen] = useState(false);
@@ -197,7 +198,10 @@ export default function MobileNavBar() {
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        onClick={close}
+                        onClick={() => {
+                          trackNavbarClick(item.name, 'mobile');
+                          close();
+                        }}
                             className={`block font-normal leading-tight tracking-tight text-[30px] md:text-[34px] lg:text-[36px] ${
                           isActive(item.href) 
                             ? (shouldUseWhiteBackground ? "text-[#00F5D8]" : "text-[#00AD96]")
@@ -214,7 +218,10 @@ export default function MobileNavBar() {
                 <div className="mt-8">
                   <Link
                     href="/schedule"
-                    onClick={close}
+                    onClick={() => {
+                      trackNavbarClick("Get Started Free", 'mobile');
+                      close();
+                    }}
                     className={`block text-[30px] md:text-[34px] lg:text-[36px] font-normal leading-tight tracking-tight ${
                       shouldUseWhiteBackground ? "text-white" : "text-black"
                     }`}

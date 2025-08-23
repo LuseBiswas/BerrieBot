@@ -2,14 +2,16 @@
 import { motion, useInView } from 'framer-motion';
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { trackNewsletterSignup } from '@/utils/analytics';
 
 export default function MobileResourceCTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const pathname = usePathname();
   
   // Load lord-icon script
   useEffect(() => {
@@ -26,6 +28,8 @@ export default function MobileResourceCTASection() {
   const handleSubmit = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email.trim() && emailRegex.test(email.trim())) {
+      // Track newsletter signup
+      trackNewsletterSignup(pathname, 'mobile', email);
       setIsSubmitted(true);
       // Here you can add actual email submission logic
       console.log('Email submitted:', email);
