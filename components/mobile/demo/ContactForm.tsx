@@ -218,7 +218,7 @@ Best,"
             >
               FAQs
             </a> or write to our support team <a 
-              href="/resources" 
+              href="mailto:support@berribot.com"
               className="font-bold underline text-black hover:text-[#00C7BEB2] transition-colors"
             >here</a>.
           </p>

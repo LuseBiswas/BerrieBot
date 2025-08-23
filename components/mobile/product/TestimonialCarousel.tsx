@@ -10,22 +10,43 @@ const FOUNDERS = [
     id: 1,
     image: "/image/Founder/img_1.png",
     name: "CXO",
-    heading: "AI is the future <br/> of Interviewing. GenZ's will look forward to <br/> using Berribot",
+    heading: "AI is the future <br/> of Interviewing. <br/> GenZ's will look <br/> forward to <br/> using Berribot",
     company: "CXO of a Fortune 500 IT Services firm"
   },
   {
     id: 2,
     image: "/image/Founder/img_2.png",
     name: "Director",
-    heading: "Berribot <br/> changed the <br/> way L1 interviews <br/> are <br/> conducted for us",
+    heading: "Berribot <br/> changed the way <br/> L1 interviews are <br/> conducted for us",
     company: "Director of a Fortune 500 IT Services firm"
   },
   {
     id: 3,
     image: "/image/Founder/img_3.png",
     name: "CXO",
-    heading: "Berribot delivers the  <br/> exact need of the hour with their <br/> exceptional products",
+    heading: "Berribot delivers the  <br/> exact need of the hour <br/> with their <br/> exceptional products",
     company: "CXO of a billion dollar US based Mortgage Refinancing business"
+  },
+  {
+    id: 4,
+    image: "/image/Founder/img_3.png",
+    name: "Global Recruitment Head",
+    heading: "We should learn to <br/> adapt ourselves with <br/> the use of AI tools in <br/> Hiring and Berribot <br/> has just stepped up <br/> their game.",
+    company: "of a billion dollar IT firm"
+  },
+  {
+    id: 5,
+    image: "/image/Founder/img_3.png",
+    name: "Head of Talent Acquisition",
+    heading: "Berribot has significantly Revolutionalized the <br/> way we hire and also lead the way to the future <br/> of Gen AI hiring",
+    company: "of a Fortune 200 Digital and Technology Enterprise"
+  },
+  {
+    id: 6,
+    image: "/image/Founder/img_3.png",
+    name: "Global Head of TA",
+    heading: "Berribot has helped enhance our candidate experience and improved our hiring turn around <br/> times especially in the LATAM markets",
+    company: "Digital Engineering Firm"
   },
 ];
 
@@ -128,7 +149,7 @@ export default function MobileProductTestimonialCarousel() {
                 <div 
                   className="text-black text-center"
                   style={{ 
-                    fontSize: '38px', 
+                    fontSize: '30px', 
                     fontFamily: 'Manrope, sans-serif',
                     fontWeight: 300,
                     lineHeight: 1.1

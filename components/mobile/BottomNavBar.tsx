@@ -120,7 +120,7 @@ export default function BottomNavBar() {
         >
           {/* Pill-shaped container with dynamic width */}
           <motion.div 
-            className={`bg-white/10 backdrop-blur-sm rounded-full px-4 py-3 flex items-center ${itemSpacing} relative ${containerWidth} h-[68px]`}
+            className={`bg-[#DEDEDE] backdrop-blur-sm rounded-full px-4 py-3 flex items-center ${itemSpacing} relative ${containerWidth} h-[68px]`}
             layout
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
@@ -142,7 +142,7 @@ export default function BottomNavBar() {
                     className={`flex items-center justify-center transition-all duration-300 relative ${
                       active
                         ? "text-white w-[125px] h-[52px] px-3"
-                        : "bg-white/20 backdrop-blur-sm w-[52px] h-[52px] text-white/80 hover:text-white hover:bg-white/30 rounded-full"
+                        : "bg-[#3D3D3D] backdrop-blur-sm w-[52px] h-[52px] text-white/80 hover:text-white hover:bg-white/30 rounded-full"
                     }`}
                   >
                     {/* Animated background for active state */}

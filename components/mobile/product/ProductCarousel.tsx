@@ -472,10 +472,12 @@ export default function MobileProductCarousel() {
         <div className="space-y-8">
           {productsData.map((product) => (
             <div key={product.id} className="flex justify-center">
-              <MobileFlippableCard
-                product={product}
-                className="relative"
-              />
+              <div id={`${product.heading.toLowerCase().replace(/\s+/g, '').replace('<br/>', '')}`}>
+                <MobileFlippableCard
+                  product={product}
+                  className="relative"
+                />
+              </div>
             </div>
           ))}
         </div>

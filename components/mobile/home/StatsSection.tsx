@@ -385,7 +385,7 @@ export default function MobileStatsSection() {
           >
             <div className={`text-[20px] md:text-[23px] lg:text-[26px] leading-relaxed font-light ${sizes.descriptionMaxWidth} mx-auto`} style={{ fontFamily: 'Manrope, sans-serif' }}>
               <AnimatedText 
-                text="Fortune 200 or 500 Berribot helps companies save millions in recruiter hours and cut hiring time in half."
+                text="Berribot helps companies save millions in recruiter hours and cut hiring time in half."
                 scrollProgress={scrollYProgress}
                 lineIndex={0}
               />

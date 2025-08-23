@@ -177,7 +177,7 @@ export default function MobileFeatureCard() {
           <FeatureCardItem
             icon="/image/icons/clock.png"
             lordicon="https://cdn.lordicon.com/vnlbhttp.json"
-            title="The Interviewer that Never Sleeps"
+            title="The interviewer that never sleeps"
             description="Candidates interview anytime. Recruiters wake up to scored reports."
             index={0}
             isInView={true}
@@ -204,8 +204,9 @@ export default function MobileFeatureCard() {
           }}
         >
           <FeatureCardItem
-            lordicon="https://cdn.lordicon.com/adbkylwa.json"
-            title="An Agent that feels Human"
+          
+            lordicon="https://cdn.lordicon.com/bmkseyni.json"
+            title="An AI agent that feels human"
             description="Natural voice and chat interactions, localised, empathetic, and fluid."
             index={1}
             isInView={true}
@@ -232,8 +233,8 @@ export default function MobileFeatureCard() {
           }}
         >
           <FeatureCardItem
-          lordicon="https://cdn.lordicon.com/bmkseyni.json"
-            title="Fits Your Workflow"
+          lordicon="https://cdn.lordicon.com/adbkylwa.json"
+            title="Fits your workflow"
             description="Integrates with ATS systems like Workday, SAP, SuccessFactors, and MS Teams."
             index={2}
             isInView={true}
@@ -261,7 +262,7 @@ export default function MobileFeatureCard() {
         >
           <FeatureCardItem
             lordicon="https://cdn.lordicon.com/xxmxrhzj.json"
-            title="Built-In Fraud Detection"
+            title="Built-in fraud detection"
             description="Catch impersonators before they waste your time. 3D liveness, lip-sync, and more."
             index={3}
             isInView={true}
@@ -289,8 +290,8 @@ export default function MobileFeatureCard() {
         >
           <FeatureCardItem
             lordicon="https://cdn.lordicon.com/jwpaspoo.json"
-            title="Flexible Pricing"
-            description="Use what you need. P credits or pay-as-you-go."
+            title="Flexible pricing"
+            description="Use what you need. Pre-paid credits."
             index={4}
             isInView={true}
           />

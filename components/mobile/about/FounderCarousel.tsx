@@ -8,21 +8,24 @@ import Image from 'next/image';
 const FOUNDERS = [
   {
     id: 1,
-    image: "/image/Founder/img_1.png",
+    image: "/image/profile/Raja.png",
     name: "Raja Lingappaa",
-    company: "CEO, AI innovator, <br/> ex-Meta & SAP, 5 AI patents."
+    company: "Founder and CEO,<br/> AI innovator, ex-Meta & SAP, 5 AI patents, 7 books",
+    link: "https://www.linkedin.com/in/rajacheers" // Add actual LinkedIn URL
   },
   {
     id: 2,
-    image: "/image/Founder/img_2.png",
+    image: "/image/profile/Vishnu.png",
     name: "Vishnuvardhan M",
-    company: "COO, serial entrepreneur, <br/> built large-scale hiring ops."
+    company: "Founder and COO,<br/> serial entrepreneur, built large-scale hiring ops.",
+    link: "https://www.linkedin.com/in/vishnuvardhan-m-9bb6aa20a/" // Add actual LinkedIn URL
   },
   {
     id: 3,
-    image: "/image/Founder/img_3.png",
+    image: "/image/profile/Satish.png",
     name: "Satish Jeyaraman",
-    company: "CGO, ex-Cognizant HR leader, <br/> scaled hiring to 60K+ annually."
+    company: "Cofounder and CGO,<br/> ex-Cognizant HR leader, scaled hiring to 60K+ annually.",
+    link: "https://www.linkedin.com/in/satishjeyaraman" // Add actual LinkedIn URL
   }
 ];
 
@@ -149,25 +152,32 @@ export default function MobileAboutFounderCarousel() {
             >
               {/* Circular Image */}
               <div className="flex justify-center">
-                <div 
-                  className="rounded-full overflow-hidden"
-                  style={{
-                    width: '185px',
-                    height: '185px',
-                    backgroundColor: '#D9D9D9'
-                  }}
+                <a 
+                  href={currentFounder.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group cursor-pointer"
                 >
-                  <Image 
-                    src={currentFounder.image}
-                    alt={currentFounder.name}
-                    width={185}
-                    height={185}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
+                  <div 
+                    className="rounded-full overflow-hidden transition-transform duration-300 ease-out group-hover:scale-105"
+                    style={{
+                      width: '185px',
+                      height: '185px',
+                      backgroundColor: '#D9D9D9'
                     }}
-                  />
-                </div>
+                  >
+                    <Image 
+                      src={currentFounder.image}
+                      alt={currentFounder.name}
+                      width={185}
+                      height={185}
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                </a>
               </div>
 
               {/* Person Name */}

@@ -6,25 +6,23 @@ const PRODUCT_FEATURES: StackCard[] = [
   {
     id: 'sec-speed',
     top: <>Enterprise-Grade<br/><span className="text-teal-400">Security</span></>,
-    ribbon: <>SOC 2&nbsp;•&nbsp;ISO&nbsp;27001&nbsp;•&nbsp;GDPR&nbsp;•&nbsp;DPDP-complimant&nbsp;•</>,
+    ribbon: "SOC 2&nbsp;ISO&nbsp;27001",
     bottom: <>Startup-Grade<br/><span className="text-teal-400">Speed</span></>,
   },
   {
     id: 'ai-ready',
-    topImage:'/image/Stack/shield-star 1.png',
-    bottom: <><span className="text-teal-400">End-to-end</span> <br />encryption</>
+    top: 'Built by AI Natives',
+    ribbonStatic: 'Patents, exits, and 10M+ minutes of AI assessments power this platform.',
   },
   {
     id: 'obs-five',
-    topImage:'/image/Stack/scales 1.png',
-    ribbon: <>Demographic parity&nbsp;•&nbsp;Bias mitigation&nbsp;Explainaibilty</>,
-    bottom: <><span className="text-teal-400">AI Fairness</span><br/>Framework</>,
+    top: 'Modular. Scalable. Predictable Pricing.',
+    ribbonStatic:'Use what you need, when you need. Flexible prepaid commerical plans.',
   },
   {
-    id: 'auto-scale',
-    top: <>Explainable<br/><span className="text-teal-400">AI logs</span></>,
-    ribbonImage: "/image/Stack/&.png",
-    bottom: <><span className="text-teal-400">Human-in-loop</span><br/>fallback</>,
+    id: 'global-deploy',
+    top: 'Zero Vendor Bloat',
+    ribbonStatic: 'Why juggle 6 tools when one platform does it all?'
   },
 ];
 

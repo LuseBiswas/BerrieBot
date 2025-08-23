@@ -8,21 +8,39 @@ import Image from 'next/image';
 const TESTIMONIALS = [
   {
     id: 1,
-    quote: "AI is the future <br/> of Interviewing. GenZ's will look forward to <br/> using Berribot",
+    quote: "AI is the future <br/> of Interviewing.<br/> GenZ's will look<br/> forward to <br/> using Berribot",
     name: "CXO",
     company: "CXO of a Fortune 500 IT Services firm"
   },
   {
     id: 2,
-    quote: "Berribot <br/> changed the <br/> way L1 interviews <br/> are <br/> conducted for us",
+    quote: "Berribot <br/> changed the way <br/> L1 interviews are <br/> conducted for us",
     name: "Director",
     company: "Director of a Fortune 500 IT Services firm"
   },
   {
     id: 3,
-    quote: "Berribot delivers the exact need <br/> of the hour with their <br/> exceptional products",
+    quote: "Berribot delivers the  <br/> exact need of the hour <br/> with their  exceptional <br/> products",
     name: "CXO",
     company: "CXO of a billion dollar US based Mortgage Refinancing business"
+  },
+  {
+    id: 4,
+    quote: "We should learn to <br/> adapt ourselves with <br/> the use of AI tools in <br/> Hiring and Berribot <br/> has just stepped up <br/> their game",
+    name: "Global Recruitment Head",
+    company: "of a billion dollar IT firm"
+  },
+  {
+    id: 5,
+    quote: "Berribot has significantly Revolutionalized the <br/> way we hire and also lead the way to the future <br/> of Gen AI hiring",
+    name: "Head of Talent Acquisition",
+    company: "of a Fortune 200 Digital and Technology Enterprise"
+  },
+  {
+    id: 6,
+    quote: "Berribot has helped enhance our candidate experience and improved our hiring turn around <br/> times especially in the LATAM markets",
+    name: "Global Head of TA",
+    company: "Digital Engineering Firm"
   },
 ];
 
@@ -119,7 +137,7 @@ export default function MobileTestimonialCarousel() {
               <div 
                 className="text-white leading-tight"
                 style={{ 
-                  fontSize: '48px', 
+                  fontSize: '30px', 
                   fontFamily: 'Manrope, sans-serif',
                   fontWeight: '300'
                 }}
