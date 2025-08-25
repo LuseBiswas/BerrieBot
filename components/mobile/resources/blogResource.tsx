@@ -148,7 +148,7 @@ export default function MobileBlogResource() {
                       ease: "easeOut" 
                     }}
                   >
-                    <Link href={post.link}>
+                    <Link href={post.link} target="_blank" rel="noopener noreferrer">
                       <MobileBlogCard post={post} />
                     </Link>
                   </motion.div>

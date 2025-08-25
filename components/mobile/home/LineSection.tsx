@@ -86,7 +86,7 @@ export default function MobileLineSection() {
       title: "Step 2: Screen & Shortlist",
       description:
         "BerriSearch parses your Job Descriptions and resumes to shortlist high-fit candidates.",
-      cardTitle: "BerriSearch",
+      cardTitle: "BerriSearch & Match",
       features: [
         "Intelligent resume parsing and analysis",
         "Job description matching algorithms",

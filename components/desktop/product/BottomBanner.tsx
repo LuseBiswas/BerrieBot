@@ -80,34 +80,27 @@ function AnimatedText({
 const COMPANY_LOGOS = [
   {
     id: 1,
-    name: "Microsoft Teams",
-    logo: "/image/product/Microsoft.png",
-    width: 240,
-    height: 120,
-  },
-  {
-    id: 2,
     name: "SAP",
     logo: "/image/product/SAP_1.png",
     width: 150,
     height: 75,
   },
   {
-    id: 3,
+    id: 2,
     name: "SuccessFactors",
     logo: "/image/product/successfactors.png",
     width: 320,
     height: 110,
   },
   {
-    id: 4,
+    id: 3,
     name: "Workday",
     logo: "/image/product/workdays1.png",
     width: 165,
     height: 60,
   },
   {
-    id: 5,
+    id: 4,
     name: "And Many More",
     logo: "/image/product/&manymore.png",
     width: 200,

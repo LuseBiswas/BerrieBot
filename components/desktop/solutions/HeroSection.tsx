@@ -120,9 +120,9 @@ export default function HeroSection() {
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-7xl mx-auto relative z-10 mb-12"style={{ fontFamily: 'Manrope, sans-serif' }}>
         <h1 className="font-inter text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-3.69px] mb-8 font-normal text-[#252527] bg-clip-text">
-        Smart bots.
+        Smarter Hiring.
           <br />
-          Less busy work.
+          Stronger Outcomes.
         </h1>
       </div>
 
@@ -130,7 +130,7 @@ export default function HeroSection() {
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-8"style={{ fontFamily: 'Manrope, sans-serif' }}>
         {isMounted && (
           <AnimatedTextWithBreaks 
-            text="At Berribot, we believe in tag-teaming with AI to take the grind out of <br/>everyday workflows. Whether you're hiring at scale, vetting online <br/>participants, or texting leads like a boss—we've got a bot for that."
+            text="Cut time-to-hire in half, prevent fraud before it happens, and hire at scale. <br/> From first ping to final offer, Berribot automates the grind and makes every candidate feel like your top candidate."
             scrollProgress={scrollYProgress}
             className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-5xl mx-auto"
           />

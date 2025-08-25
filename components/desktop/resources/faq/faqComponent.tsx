@@ -18,7 +18,7 @@ const faqData: FAQItem[] = [
   {
     id: 2,
     question: "Can Berribot scale for large enterprises?",
-    answer: "Yes. Berribot handles up to 10,000 calls or chats per minute across 36+ languages and 130+ countries, making it suitable for both SMBs and global enterprises."
+    answer: "Yes. Berribot handles 10K+ calls concurrently across 36+ languages and 130+ countries, making it suitable for both SMBs and global enterprises."
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const faqData: FAQItem[] = [
   {
     id: 6,
     question: "What ROI can companies expect?",
-    answer: "Clients like Cognizant and Wipro have reported:\n\n• 50% faster time-to-hire\n• 75% cost savings on interviews\n• $3M+ in annual productivity savings."
+    answer: "Top tier IT companies have reported:\n\n• 50% faster time-to-hire\n• 75% cost savings on interviews\n• $3M+ in annual productivity savings."
   },
   {
     id: 7,

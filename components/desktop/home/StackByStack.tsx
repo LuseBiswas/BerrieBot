@@ -207,7 +207,7 @@ export default function StackByStack({
                 {/* Ribbon section - teal background only for text, transparent for image */}
                 {(card.ribbon || card.ribbonImage) && (
                   <div className={`relative w-full overflow-hidden flex items-center ${
-                    card.ribbonImage ? 'py-8' : 'py-6 bg-gradient-to-r from-teal-600 to-teal-500'
+                    card.ribbonImage ? 'py-8' : 'py-6 bg-[#028374]'
                   }`}>
                     <div className="relative w-full flex items-center">
                       {card.ribbonImage ? (
@@ -224,16 +224,16 @@ export default function StackByStack({
                       ) : (
                         // Scrolling text marquee
                         <div className="flex animate-marquee whitespace-nowrap items-center">
-                          <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
+                          <span className="text-white font-semibold text-[16px] uppercase tracking-widest mx-8">
                             {card.ribbon}
                           </span>
-                          <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
+                          <span className="text-white font-semibold text-[16px] uppercase tracking-widest mx-8">
                             {card.ribbon}
                           </span>
-                          <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
+                          <span className="text-white font-semibold text-[16px] uppercase tracking-widest mx-8">
                             {card.ribbon}
                           </span>
-                          <span className="text-white font-semibold text-sm uppercase tracking-widest mx-8">
+                          <span className="text-white font-semibold text-[16px] uppercase tracking-widest mx-8">
                             {card.ribbon}
                           </span>
                         </div>

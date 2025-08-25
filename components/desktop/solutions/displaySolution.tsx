@@ -112,10 +112,11 @@ const DisplaySolution: React.FC<DisplaySolutionProps> = ({
 
   const ContentComponent = () => (
     <div className={`flex flex-col justify-start space-y-6 px-8 ${textColorClass} h-[669px]`}>
-      <div className="flex-1 flex flex-col justify-start space-y-6 pt-4">
-        <h1 className="text-[34px] font-inter font-light leading-tight text-center">
-          {heading}
-        </h1>
+      <div className="flex-1 flex flex-col justify-start space-y-6 -mt-10">
+        <h1 
+          className="text-[34px] font-inter font-light leading-tight text-center"
+          dangerouslySetInnerHTML={{ __html: heading }}
+        />
         
         <p className="text-[20px] font-inter font-extralight leading-relaxed opacity-90 text-center">
           {subheading}

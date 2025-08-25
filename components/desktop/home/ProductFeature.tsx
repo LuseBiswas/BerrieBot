@@ -5,9 +5,9 @@ import StackByStack, { StackCard } from './StackByStack';
 const PRODUCT_FEATURES: StackCard[] = [
   {
     id: 'sec-speed',
-    top: <>Enterprise-Grade<br/><span className="text-teal-400">Security</span></>,
-    ribbon: <>SOC 2&nbsp;•&nbsp;ISO&nbsp;27001&nbsp;•&nbsp;GDPR&nbsp;•&nbsp;DPDP-complimant&nbsp;•</>,
-    bottom: <>Startup-Grade<br/><span className="text-teal-400">Speed</span></>,
+    top: <>Enterprise-Grade<br/><span className="text-[#028374]">Security</span></>,
+    ribbon: <>ISO 27001&nbsp;•&nbsp;Soc2Type2&nbsp;•&nbsp;GDPR&nbsp;•&nbsp;DPDP</>,
+    bottom: <>Startup-Grade<br/><span className="text-[#028374]">Speed</span></>,
   },
   {
     id: 'ai-ready',

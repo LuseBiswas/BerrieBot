@@ -114,7 +114,7 @@ export default function BlogResource() {
                       ease: "easeOut" 
                     }}
                   >
-                    <Link href={post.link}>
+                    <Link href={post.link} target="_blank" rel="noopener noreferrer">
                       <BlogCard 
                         post={post} 
                       />

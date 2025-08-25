@@ -127,10 +127,10 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Products</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriConnect', 'products')}>BerriConnect</Link></li>
-              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriSearch', 'products')}>BerriSearch</Link></li>
-              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriMasterMind', 'products')}>BerriMasterMind</Link></li>
-              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriProctor', 'products')}>BerriProctor</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriConnect', 'products')}>Berri Connect</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriSearch', 'products')}>Berri Search & Match</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriMasterMind', 'products')}>Berri MasterMind</Link></li>
+              <li><Link href="/product" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriProctor', 'products')}>Berri Proctor</Link></li>
           </ul>
         </div>
         

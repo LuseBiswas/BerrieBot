@@ -143,7 +143,16 @@ export default function CompanyTestimonialSection() {
 
             {/* Main content */}
             <motion.div className="py-32" style={{ opacity: contentProgress }}>
-            
+              {/* Header */}
+              <motion.h1
+                className="text-[64px] font-medium text-white text-center mb-16"
+                style={{ fontFamily: 'Manrope, sans-serif' }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                &ldquo;What do our clients say&rdquo;
+              </motion.h1>
 
               {/* Testimonial content with arrows */}
               <div className="relative max-w-6xl mx-auto flex items-center min-h-[400px]">

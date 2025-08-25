@@ -234,7 +234,7 @@ export default function FeatureCard() {
           <FeatureCardItem
           lordicon="https://cdn.lordicon.com/adbkylwa.json"
             title="Fits your workflow"
-            description="Integrates with ATS systems like Workday, SAP, SuccessFactors, and MS Teams."
+            description="Integrates with ATS systems like Workday, Successfactors and many more."
             index={2}
             isInView={true}
           />

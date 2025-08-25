@@ -272,8 +272,7 @@ export default function MobileAboutStatsSection() {
                   fontFamily: "Manrope, sans-serif",
                 }}
               >
-                customers including Cognizant, <br />
-                Wipro, Mphasis, & more.
+                Top Tier Technology firms
               </p>
             </div>
           </motion.div>

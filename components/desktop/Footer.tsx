@@ -59,10 +59,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Products</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="/product?product=berriconnect#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriConnect', 'products')}>BerriConnect</Link></li>
-              <li><Link href="/product?product=berrisearch#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriSearch', 'products')}>BerriSearch</Link></li>
-              <li><Link href="/product?product=berrimastermind#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriMasterMind', 'products')}>BerriMasterMind</Link></li>
-              <li><Link href="/product?product=berriproctor#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriProctor', 'products')}>BerriProctor</Link></li>
+              <li><Link href="/product?product=berriconnect#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriConnect', 'products')}>Berri Connect</Link></li>
+              <li><Link href="/product?product=berrisearch#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriSearch', 'products')}>Berri Search & Match</Link></li>
+              <li><Link href="/product?product=berrimastermind#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriMasterMind', 'products')}>Berri MasterMind</Link></li>
+              <li><Link href="/product?product=berriproctor#products" className="hover:text-white transition-colors" onClick={() => trackFooterClick('BerriProctor', 'products')}>Berri Proctor</Link></li>
  
             </ul>
           </div>

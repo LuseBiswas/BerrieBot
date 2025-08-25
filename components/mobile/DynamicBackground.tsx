@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 interface MobileDynamicBackgroundProps {
   children: React.ReactNode;

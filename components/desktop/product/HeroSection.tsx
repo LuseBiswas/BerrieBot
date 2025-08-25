@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 
 export default function HeroSection() {
   const [isMounted, setIsMounted] = useState(false);
@@ -29,7 +28,7 @@ export default function HeroSection() {
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-7xl mx-auto relative z-10 mb-8"style={{ fontFamily: 'Manrope, sans-serif' }}>
         <h1 className="text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl">
-        Berribot handles the busywork.
+        Berribot handles the <br /> busywork
         </h1>
       </div>
 
@@ -37,14 +36,14 @@ export default function HeroSection() {
         <h2 
           className="leading-[1.4] font-light text-[#666666] mx-auto text-[22px]"
         >
-          while your team focus on hiring the right people, faster.
+          - while your teams focus on hiring the <br /> right people, faster.
         </h2>
       </div>
 
       {/* ---- Description ----&apos; */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-8"style={{ fontFamily: 'Manrope, sans-serif' }}>
         <p className="text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-[280px] sm:max-w-5xl mx-auto">
-        Berribot&apos;s suite of AI-powered recruitment agents automates outreach, <br /> interviews, fraud detection, and screening.
+        Berribot&apos;s suite of AI-powered recruitment agents automate outreach, <br /> interviews, fraud detection, and screening.
         </p>
       </div>
 

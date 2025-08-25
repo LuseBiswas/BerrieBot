@@ -752,11 +752,7 @@ export default function EllipseOrbit({
           fontFamily: 'Manrope, sans-serif'
         }}
       >
-        Berri is your complete
-        <br />
-        360° Agentic Stack
-        <br />
-        for hiring
+        Berri is your 360° Agentic hiring stack
       </div>
       
       {/* Main Content Container - Everything below the heading */}
@@ -794,8 +790,8 @@ export default function EllipseOrbit({
       
       {/* Connect1 card */}
       <FlippableCard
-        frontSrc="/image/space/FrontCards/Connect1.png"
-        backSrc="/image/space/BackCards/Connect2.png"
+      frontSrc="/image/space/FrontCards/Search1_2.png"
+        backSrc="/image/space/BackCards/Search2.png"
         alt="Connect1 card"
         width={238}
         height={336.6}
@@ -839,8 +835,8 @@ export default function EllipseOrbit({
       
       {/* Search1 card */}
       <FlippableCard
-        frontSrc="/image/space/FrontCards/Search1.png"
-        backSrc="/image/space/BackCards/Search2.png"
+         frontSrc="/image/space/FrontCards/Connect1_2.png"
+        backSrc="/image/space/BackCards/Connect2.png"
         alt="Search1 card"
         width={238}
         height={336.6}
@@ -884,7 +880,7 @@ export default function EllipseOrbit({
       
       {/* Mastermind1 card */}
       <FlippableCard
-        frontSrc="/image/space/FrontCards/Mastermind1.png"
+        frontSrc="/image/space/FrontCards/Mastermind1_2.png"
         backSrc="/image/space/BackCards/Mastermind2.png"
         alt="Mastermind1 card"
         width={238}
@@ -893,7 +889,7 @@ export default function EllipseOrbit({
         backHeight={375.36}
         className="absolute z-30"
         style={{
-          top: "34%",
+          top: "30%",
           left: "70%",
           transform: "translate(-50%, -50%)"
         }}
@@ -929,7 +925,7 @@ export default function EllipseOrbit({
       
       {/* Proctor1 card */}
       <FlippableCard
-        frontSrc="/image/space/FrontCards/Proctor1.png"
+        frontSrc="/image/space/FrontCards/Proctor1_2.png"
         backSrc="/image/space/BackCards/Proctor2.png"
         alt="Proctor1 card"
         width={238}

@@ -80,25 +80,7 @@ function AnimatedText({
 const CAROUSEL_SLIDES = [
   {
     id: 1,
-    title: "BerriConnect",
-    subtitle: "Automated Candidate Communication & Scheduling.",
-    
-    image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
-    lordicons: [
-      "https://cdn.lordicon.com/vpbspaec.json", // Box 1
-      "https://cdn.lordicon.com/odpyouay.json", // Box 2
-      "https://cdn.lordicon.com/sylzqxek.json"  // Box 3
-    ],
-    keyHighlights: [
-      "Bulk calling, WhatsApp, SMS, email follow-ups",
-      "Live reminders & interview confirmations",
-      "High-volume hiring, dormant ATS database activation, time-sensitive roles."
-    ],
-    useCase: "High-volume hiring, dormant ATS database activation, time-sensitive roles."
-  },
-  {
-    id: 2,
-    title: "BerriSearch",
+    title: "Berri Search & Match",
     subtitle: "AI-Powered Resume Screening & Matching.",
     
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
@@ -115,8 +97,26 @@ const CAROUSEL_SLIDES = [
     useCase: "Large-scale recruitment with thousands of applications requiring efficient screening."
   },
   {
+    id: 2,
+    title: "Berri Connect",
+    subtitle: "Automated Candidate Communication & Scheduling.",
+    
+    image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
+    lordicons: [
+      "https://cdn.lordicon.com/vpbspaec.json", // Box 1
+      "https://cdn.lordicon.com/odpyouay.json", // Box 2
+      "https://cdn.lordicon.com/sylzqxek.json"  // Box 3
+    ],
+    keyHighlights: [
+      "Bulk calling, WhatsApp, SMS, email follow-ups",
+      "Live reminders & interview confirmations",
+      "High-volume hiring, dormant ATS database activation, time-sensitive roles."
+    ],
+    useCase: "High-volume hiring, dormant ATS database activation, time-sensitive roles."
+  },
+  {
     id: 3,
-    title: "BerriMastermind",
+    title: "Berri Mastermind",
     subtitle: "Intelligent Interview Automation Platform.",
     
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
@@ -134,7 +134,7 @@ const CAROUSEL_SLIDES = [
   },
   {
     id: 4,
-    title: "BerriProctor",
+    title: "Berri Proctor",
     subtitle: "Fraud Detection & Verification System.",
     description: "Ensure interview integrity with advanced proctoring technology that detects and prevents fraudulent activities.",
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
@@ -149,25 +149,7 @@ const CAROUSEL_SLIDES = [
       "Comprehensive interview monitoring"
     ],
     useCase: "Remote hiring with enhanced security and integrity verification requirements."
-  },
-  {
-    id: 5,
-    title: "Berri360",
-    subtitle: "Comprehensive Recruitment Management Suite.",
-    description: "Complete end-to-end recruitment solution that integrates all Berri products for seamless hiring workflow.",
-    image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
-    lordicons: [
-      "https://cdn.lordicon.com/adbkylwa.json", // Box 1
-      "https://cdn.lordicon.com/xxmxrhzj.json", // Box 2
-      "https://cdn.lordicon.com/jwpaspoo.json"  // Box 3
-    ],
-    keyHighlights: [
-      "Unified dashboard for all recruitment activities",
-      "Advanced analytics and reporting",
-      "Complete hiring workflow automation"
-    ],
-    useCase: "Enterprise-scale recruitment requiring comprehensive management and oversight across all hiring stages."
-  },
+  }
 ];
 
 // Product name to slide index mapping
@@ -208,7 +190,7 @@ export default function CommentCarousel() {
       if (!window.location.hash) {
         setActiveSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
       }
-    }, 5000); // Change slide every 5 seconds
+    }, 10000); // Change slide every 5 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -343,7 +325,7 @@ export default function CommentCarousel() {
                         width: '252px', 
                         height: '167.8px',
                         top: '210px',
-                        left: '280px',
+                        left: '230px',
                         boxShadow: '0 0 22.2px rgba(4, 187, 166, 0.3)'
                       }}
                       initial={{ opacity: 0, scale: 0.8 }}
@@ -392,7 +374,7 @@ export default function CommentCarousel() {
                   </div>
 
                   {/* Right Side - Key Highlights and Use Case */}
-                  <div className="flex-1 text-left flex flex-col justify-between min-h-[669px]">
+                  <div className="flex-1 text-left flex flex-col min-h-[669px] mt-20">
                     {/* Key Highlights Section */}
                     <div>
                       <h5 className="text-[34px] font-inter font-light text-black mb-6 text-left">
@@ -417,7 +399,7 @@ export default function CommentCarousel() {
                     </div>
 
                     {/* Use Case Section - Positioned at bottom */}
-                    <div className="mt-auto">
+                    <div className="mt-8">
                       <h5 className="text-[34px] font-inter font-light text-black mb-6">
                         Use Case:
                       </h5>

@@ -1,10 +1,5 @@
 "use client";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import React, { useEffect, useState, useRef } from "react";
 
 /* ---------- text-scramble helper ---------- */
@@ -46,7 +41,7 @@ export default function LineSection() {
     target: ref,
     offset: ["start 80%", "end start"],
   });
-  
+
   const scaleY = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -56,13 +51,13 @@ export default function LineSection() {
   // Scroll-based animations for each step - sync with vertical line (entrance only)
   const step1Opacity = useTransform(scrollYProgress, [0.1, 0.25], [0, 1]);
   const step1X = useTransform(scrollYProgress, [0.1, 0.25], [50, 0]);
-  
+
   const step2Opacity = useTransform(scrollYProgress, [0.25, 0.4], [0, 1]);
   const step2X = useTransform(scrollYProgress, [0.25, 0.4], [50, 0]);
-  
+
   const step3Opacity = useTransform(scrollYProgress, [0.4, 0.55], [0, 1]);
   const step3X = useTransform(scrollYProgress, [0.4, 0.55], [50, 0]);
-  
+
   const step4Opacity = useTransform(scrollYProgress, [0.55, 0.7], [0, 1]);
   const step4X = useTransform(scrollYProgress, [0.55, 0.7], [50, 0]);
 
@@ -77,24 +72,27 @@ export default function LineSection() {
   }, [scrollYProgress]);
 
   return (
-    <section 
-      ref={ref} 
+    <section
+      ref={ref}
       className="relative bg-transparent"
       style={{ height: "1457px" }}
     >
-      <div className="flex h-full" style={{ fontFamily: 'Manrope, sans-serif' }}>
+      <div
+        className="flex h-full"
+        style={{ fontFamily: "Manrope, sans-serif" }}
+      >
         {/* Left side - 40% with vertical line */}
         <div className="w-2/5 relative flex flex-col items-center justify-center">
           {/* Background vertical line */}
           <div className="absolute left-1/2 top-0 w-[2px] h-full bg-black transform -translate-x-1/2 opacity-30" />
-          
+
           {/* Animated progress line */}
-          <motion.div 
+          <motion.div
             className="absolute left-1/2 top-0 w-[2px] bg-[#04BBA6] transform -translate-x-1/2 origin-top"
-            style={{ 
+            style={{
               scaleY,
               height: "100%",
-              boxShadow: '0 0 10px #04BBA6, 0 0 20px #04BBA6, 0 0 40px #04BBA6',
+              boxShadow: "0 0 10px #04BBA6, 0 0 20px #04BBA6, 0 0 40px #04BBA6",
             }}
           />
 
@@ -107,20 +105,21 @@ export default function LineSection() {
         {/* Right side - 60% with content */}
         <div className="w-3/5 flex flex-col justify-center px-0 space-y-24">
           {/* Step 1: Smart Outreach */}
-          <motion.div 
+          <motion.div
             className="space-y-6"
-            style={{ 
-              opacity: step1Opacity, 
+            style={{
+              opacity: step1Opacity,
               x: step1X,
-              willChange: 'transform'
+              willChange: "transform",
             }}
           >
             <h3 className="text-4xl font-inter font-semibold text-black mb-4">
-              Step 1: Smart Outreach
+              Step 1: Screen & Shortlist
             </h3>
             <p className="text-lg font-inter font-light text-gray-700 leading-relaxed">
-              BerriConnect reaches out,<br />
-              confirms availability, sends reminders.
+              BerriSearch parses your Job Descriptions
+              <br />
+              and resumes to shortlist high-fit candidates.
             </p>
             {/* <div className="flex items-center space-x-6 mt-6">
               
@@ -173,55 +172,58 @@ export default function LineSection() {
           </motion.div>
 
           {/* Step 2: Screen & Shortlist */}
-          <motion.div 
+          <motion.div
             className="space-y-6"
-            style={{ 
-              opacity: step2Opacity, 
+            style={{
+              opacity: step2Opacity,
               x: step2X,
-              willChange: 'transform'
+              willChange: "transform",
             }}
           >
             <h3 className="text-4xl font-inter font-semibold text-black mb-4">
-              Step 2: Screen & Shortlist
+              Step 2: Smart Outreach
             </h3>
             <p className="text-lg font-inter font-light text-gray-700 leading-relaxed">
-              BerriSearch parses your Job Descriptions<br />
-              and resumes to shortlist high-fit candidates.
+              BerriConnect reaches out,
+              <br />
+              confirms availability, sends reminders.
             </p>
           </motion.div>
 
           {/* Step 3: Interview at Scale */}
-          <motion.div 
+          <motion.div
             className="space-y-6"
-            style={{ 
-              opacity: step3Opacity, 
+            style={{
+              opacity: step3Opacity,
               x: step3X,
-              willChange: 'transform'
+              willChange: "transform",
             }}
           >
             <h3 className="text-4xl font-bold text-black mb-4">
               Step 3: Interview at Scale
             </h3>
             <p className="text-lg font-inter font-light text-gray-700 leading-relaxed">
-              BerriMastermind handles interviews 24/7<br />
+              BerriMastermind handles interviews 24/7
+              <br />
               -with coding tests and soft-skill scoring.
             </p>
           </motion.div>
 
           {/* Step 4: Verify & Protect */}
-          <motion.div 
+          <motion.div
             className="space-y-6"
-            style={{ 
-              opacity: step4Opacity, 
+            style={{
+              opacity: step4Opacity,
               x: step4X,
-              willChange: 'transform'
+              willChange: "transform",
             }}
           >
             <h3 className="text-4xl font-inter font-semibold text-black mb-4">
               Step 4: Verify & Protect
             </h3>
             <p className="text-lg font-inter font-light text-gray-700 leading-relaxed">
-              BerriProctor ensures no fakes slip through.<br />
+              BerriProctor ensures no fakes slip through.
+              <br />
               Every interview is real and compliant.
             </p>
           </motion.div>
@@ -229,4 +231,4 @@ export default function LineSection() {
       </div>
     </section>
   );
-} 
+}

@@ -135,6 +135,40 @@ export default function TestimonialSection() {
                 className="w-12 h-12 sm:w-14 sm:h-14"
               />
             </motion.div>
+
+            {/* Second Floating Inverted Comma Image (Flipped) */}
+            <motion.div
+              className="absolute top-25 right-10"
+              initial={{ opacity: 0, y: -20 }}
+              animate={isInView ? { 
+                opacity: 1, 
+                y: [0, -8, 0], // Floating up and down
+                rotate: [0, -2, 2, 0] // Slight rotation (opposite direction)
+              } : { opacity: 0, y: -20 }}
+              transition={{ 
+                opacity: { duration: 0.8, delay: 0.4 },
+                y: { 
+                  duration: 3, 
+                  repeat: Infinity, 
+                  ease: "easeInOut",
+                  delay: 1.2
+                },
+                rotate: { 
+                  duration: 4, 
+                  repeat: Infinity, 
+                  ease: "easeInOut",
+                  delay: 1.8
+                }
+              }}
+            >
+              <Image
+                src="/image/components/inverted_comma.png"
+                alt="Inverted Comma"
+                width={40}
+                height={40}
+                className="w-12 h-12 sm:w-14 sm:h-14 scale-x-[-1] rotate-40"
+              />
+            </motion.div>
             
             <motion.h2 
               className="font-inter text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl"
