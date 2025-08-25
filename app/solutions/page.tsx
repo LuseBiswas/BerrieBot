@@ -13,14 +13,14 @@ export default function Product() {
           <DisplaySolution
             theme="dark"
             position="left"
-            heading="Recruitment Assistant:Your New Favourite Team Member"
-            subheading="Hiring's hard. Endless screening calls? Even harder. With Berri360, your recruitment team gets a super-assistant that works 24/7 (and doesn't even need coffee)."
+            heading="Always-on proactive scheduling assistant that gets you conversations that convert"
+            subheading="Never lose a candidate to scheduling delays or missed follow-ups. BerriConnect is your always-on outreach and scheduling assistant, ensuring every conversation happens on time and drives outcomes."
             bulletPoints={[
-              "Schedules interviews, confirms call letters, and keeps your career site buzzing.",
-              "Follows up with candidates, manages panel confirmations, and tracks offer acceptances.).",
-              "Even post-hire, it keeps the engine running -engaging employees, sharing updates, and nudging for compliance checks.",
+              "Automated Outreach & Reminders: Sends bulk calls, chats, and SMS nudges to keep candidates engaged and informed.",
+              "Interactive Scheduling: Collects availability, confirms slots, and reschedules seamlessly across channels like WhatsApp, SMS, or email.",
+              "Follow-Up & Status Tracking: Provides real-time updates on interview status and reminders to improve show rates.",
             ]}
-            outro="Companies using AI-powered recruitment have cut screening costs by up to 75%. You could be next."
+            outro="With BerriConnect, recruiters reclaim hours lost to repetitive tasks, candidates feel valued with timely communication, and every conversation moves you closer to a hire."
             lordicons={[
               "https://cdn.lordicon.com/cfoaotmk.json", // Box 1
               "https://cdn.lordicon.com/wsvtrygf.json", // Box 2
@@ -32,14 +32,14 @@ export default function Product() {
           <DisplaySolution
             theme="light"
             position="right"
-            heading="Real-Time Proctoring: Eyes on Screen. Always On Guard"
-            subheading="Secure online meetings or assessments shouldn't feel like a gamble. BerriProctor is your AI-powered watchdog for all things video - interviews, tests or meetings - you name it."
+            heading="Seamless AI recruiter to <br/> convert your best candidates"
+            subheading="You very own 24/7 AI recruiter that runs structured, bias-free technical, behavioral, or coding interviews so you can move fast on top talent without overloading your panels."
             bulletPoints={[
-              "Verifies participant identity using trusted databases.",
-              "Flags red flags like impersonation, deepfakes, audio-lipsync issues (yes, really).",
-              "Makes sure only the right people get in - and stay in.",
+              "End-to-End Interviewing: From greeting and question delivery to scoring and reporting, fully automated.",
+              "Adaptive Assessments: Questions evolve in real-time to mimic a live interviewer and measure true capability.",
+              "Integrated Coding & Scoring: In-platform code editor plus AI-based evaluation of both technical and soft skills.",
             ]}
-            outro="And when it's all done, BerriProctor wraps it up with handy post-meeting workflows to keep things moving."
+            outro="Hiring becomes scalable, consistent, and candidate-friendly reducing time-to-hire by 50% and boosting conversion rates on your best talent."
             lordicons={[
               "https://cdn.lordicon.com/gjopwtdp.json", // Box 1
               "https://cdn.lordicon.com/jwpaspoo.json", // Box 2
@@ -51,18 +51,18 @@ export default function Product() {
           <DisplaySolution
             theme="dark"
             position="left"
-            heading="Live Texting Assistant: Conversations That Convert"
-            subheading="Say hello to BerriConnect, your always-on, never-boring, AI chat buddy. From answering customer questions to helping close deals - this is not your average chatbot."
+            heading="Real-Time Proctoring: Eyes on Screen. Always On Guard"
+            subheading="Protect the integrity of every interview and assessment. BerriProctor ensures you’re always speaking to the right person by detecting fraud, impersonation, and suspicious behavior in real time."
             bulletPoints={[
-              "Personalized conversations via SMS, WhatsApp, Insta, and more.",
-              "Handles bookings, confirms calls, sends quotes, and even demos products.",
-              "Available 24/7, so you never miss a lead (or a customer craving attention).",
+              "Identity Verification: Facial recognition, voice matching, and biometric cues confirm the candidate is who they claim to be.",
+              "Environment & Behavior Monitoring: Detects second screens, external help, lip-sync, or other anomalies during tests.",
+              "Live Alerts & Reporting: Flags risks instantly and provides detailed logs for compliance and audit trails.",
             ]}
-            outro="It's not just reactive—it's proactive. BerriConnect knows when to follow up and how to make it feel human."
+            outro="BerriProctor saves you from costly mis-hires, protects your brand reputation, and ensures every evaluation is fair, compliant, and trustworthy."
             lordicons={[
-              "https://cdn.lordicon.com/cfoaotmk.json", // Box 1
-              "https://cdn.lordicon.com/sylzqxek.json", // Box 2
-              "https://cdn.lordicon.com/kqsbkjmb.json"  // Box 3
+              "https://cdn.lordicon.com/kdibbosx.json", // Box 1
+              "https://cdn.lordicon.com/cfoaotmk.json", // Box 2
+              "https://cdn.lordicon.com/lltgvngb.json"  // Box 3
             ]}
           />
         </div>

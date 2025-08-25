@@ -14,7 +14,7 @@ export default function YtTestimonial() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             {/* Left Side - Content */}
-            <div className="lg:w-1/2 text-left">
+            <div className="lg:w-1/2 text-left mt-22">
               {/* Main Heading */}
               <motion.h2
                 className="text-[64px] sm:text-[64px] md:text-[64px] lg:text-[64px] tracking-[-2.5px] sm:tracking-[-2.5px] font-medium text-[#252527] bg-clip-text mb-8 leading-[1]"
@@ -80,7 +80,7 @@ export default function YtTestimonial() {
             </div>
 
             {/* Right Side - YouTube Video with Overlay */}
-            <div className="lg:w-1/2 relative">
+            <div className="lg:w-1/2 relative mt-22">
               <motion.div
                 className="relative"
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -113,7 +113,7 @@ export default function YtTestimonial() {
 
                 {/* Testimonial Overlay - Outside video container for free positioning */}
                 <motion.div
-                  className="absolute bottom-[400px] right-[0px] text-white p-3 rounded-[42px] w-[384px] h-[141px] shadow-lg z-20"
+                  className="absolute bottom-[350px] right-[-50px] text-white p-3 rounded-[42px] w-[384px] h-[141px] shadow-lg z-20"
                   style={{
                     backgroundImage: "url('/image/BG_1.png')",
                     backgroundSize: "cover",
@@ -133,8 +133,7 @@ export default function YtTestimonial() {
                     
                     <div>
                       <p className="text-white text-[18px] font-inter font-light text-center leading-relaxed">
-                        Hi, This is Berri! Your AI recruiter <br />
-                         who interviews hundreds of candidates <br /> while you focus on real work.
+                      &ldquo;Welcome to Berribot! I&apos;m Berri, your <br /> AI recruiter who interviews hundreds of candidates while you focus on real work&rdquo;
                         
                       </p>
                     </div>

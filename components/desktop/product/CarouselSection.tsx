@@ -158,7 +158,7 @@ export default function CarouselSection_2() {
               }}
             >
               <AnimatedText 
-                text="Modern hiring is slow, expensive, and riddled with inefficiencies. Your best recruiters are stuck doing repetitive tasks. Your best candidates drop off. Fraudsters sneak in."
+                text="Modern hiring is slow, expensive,and riddled with inefficiencies. Your best recruiters are stuck doing repetitive tasks while your best candidates drop off."
                 scrollProgress={scrollYProgress}
                 lineIndex={0}
               />
@@ -233,11 +233,11 @@ export default function CarouselSection_2() {
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
           >
             <AnimatedText 
-              text="We built Berribot to flip the script. With autonomous AI agents that handle"
+              text="We built Berribot to flip the script. With autonomous AI agents that handle communication, screening, interviewing and fraud checks, we help you hire faster, better and with zero drama."
               scrollProgress={scrollYProgress}
               lineIndex={1}
             />
-            <br />
+            {/* <br />
             <AnimatedText 
               text="communication, screening, interviews, and fraud checks, we help you hire"
               scrollProgress={scrollYProgress}
@@ -248,7 +248,7 @@ export default function CarouselSection_2() {
               text="faster, better - and with zero drama."
               scrollProgress={scrollYProgress}
               lineIndex={3}
-            />
+            /> */}
           </motion.div>
 
        

@@ -6,14 +6,14 @@ import StackByStack, { StackCard } from '../product/StackByStack';
 const PRODUCT_FEATURES: StackCard[] = [
   {
     id: 'sec-speed',
-    top: <>Enterprise-Grade<br/><span className="text-teal-400">Security</span></>,
-    ribbon: <>SOC 2&nbsp;•&nbsp;ISO&nbsp;27001</>,
-    bottom: <>Startup-Grade<br/><span className="text-teal-400">Speed</span></>,
+    top: <>Enterprise-Grade<br/><span className="text-[#028374]">Security</span></>,
+    ribbon: <>ISO 27001&nbsp;•&nbsp;Soc2Type2&nbsp;•&nbsp;GDPR&nbsp;•&nbsp;DPDP</>,
+    bottom: <>Startup-Grade<br/><span className="text-[#028374]">Speed</span></>,
   },
   {
     id: 'ai-ready',
     top: 'Built by AI Natives',
-    ribbonStatic: 'Patents, exits, and 10M+ minutes of AI assessments power this platform.',
+    ribbonStatic: 'Patents, Successful Start-ups, <br/> exits, and 10M+ minutes of AI assessments power this platform.',
   },
   {
     id: 'obs-five',
@@ -23,7 +23,7 @@ const PRODUCT_FEATURES: StackCard[] = [
   {
     id: 'global-deploy',
     top: 'Zero Vendor Bloat',
-    ribbonStatic: 'Why juggle 6 tools when one platform does it all?'
+    ribbonStatic: 'Why juggle 6 tools when <br/> one platform does it all?'
   },
 ];
 

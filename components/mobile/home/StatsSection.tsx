@@ -1,7 +1,6 @@
 'use client';
 import { motion, useInView, useScroll, useTransform, MotionValue } from 'framer-motion';
 import React, { useRef, useEffect, useState } from 'react';
-import { Plus } from 'lucide-react';
 import Image from 'next/image';
 
 /* ---------- Custom Hook for Word Animation ---------- */

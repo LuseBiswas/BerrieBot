@@ -84,21 +84,21 @@ export default function NavBar() {
               /> */}
 
               <Link href="/product" className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
-                Product
+                Products
                 {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg> */}
               </Link>
               
               <Link href="/solutions" className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
-                Solution
+                Solutions
                 {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg> */}
               </Link>
               
               <Link href="/resources" className="text-[20px] text-white font-medium hover:text-white/80 transition-colors flex items-center">
-                Resource
+                Resources
                 {/* <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg> */}
