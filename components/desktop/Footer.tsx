@@ -78,9 +78,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Solutions</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Recruitment Assistant', 'solutions')}>Recruitment Assistant</Link></li>
-              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Real-time Proctoring', 'solutions')}>Real-time  Proctoring</Link></li>
-              <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Live Texting', 'solutions')}>Live Texting</Link></li>
+              <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Recruitment Assistant', 'solutions')}>Scheduling Assistant</Link></li>
+              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Real-time Proctoring', 'solutions')}>Real-Time Proctoring</Link></li>
+              <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Live Texting', 'solutions')}>Seamless AI Recruiter</Link></li>
             </ul>
           </div>
           
@@ -88,8 +88,8 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-medium mb-6">Resources</h3>
             <ul className="space-y-4 text-gray-400">
-              <li><Link href="/resources#faq" className="hover:text-white transition-colors" onClick={() => trackFooterClick('FAQ', 'resources')}>FAQ</Link></li>
               <li><Link href="/resources#blogs" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Blog', 'resources')}>Blog</Link></li>
+              <li><Link href="/resources#faq" className="hover:text-white transition-colors" onClick={() => trackFooterClick('FAQ', 'resources')}>FAQ</Link></li>
               
             </ul>
           </div>

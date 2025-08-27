@@ -31,8 +31,8 @@ export default function CTASection() {
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0, 1, 1, 0]);
 
   const handleSubmit = () => {
-    // Open new tab with the desired URL
-    window.open('https://berribot.com', '_blank');
+    // Open new tab with the Substack embed URL
+    window.open('https://berribot.substack.com/embed', '_blank');
     // Show thank you message
     setIsSubmitted(true);
   };

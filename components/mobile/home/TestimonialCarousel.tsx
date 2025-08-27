@@ -131,7 +131,7 @@ export default function MobileTestimonialCarousel() {
             fontWeight: 500
           }}
         >
-          "What do <br /> our clients say"
+          &quot;What do <br /> our clients say&quot;
         </h2>
 
         {/* Testimonial Content */}

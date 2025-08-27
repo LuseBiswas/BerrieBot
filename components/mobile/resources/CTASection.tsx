@@ -23,7 +23,7 @@ export default function MobileResourceCTASection() {
 
   const handleSubmit = () => {
     // Open new tab with the desired URL
-    window.open('https://berribot.com', '_blank');
+    window.open('https://berribot.substack.com/embed', '_blank');
     // Show thank you message
     setIsSubmitted(true);
   };

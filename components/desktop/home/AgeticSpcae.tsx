@@ -807,7 +807,7 @@ export default function EllipseOrbit({
         icons={[
           {
             
-            lordicon: "https://cdn.lordicon.com/ypagsvdy.json",
+            lordicon: "https://cdn.lordicon.com/itlfjzxp.json",
             position: {
               top: "-10%",
               left: "105%",
@@ -854,7 +854,7 @@ export default function EllipseOrbit({
         floating={true}
         icons={[
           {
-            lordicon: "https://cdn.lordicon.com/vpbspaec.json",
+            lordicon: "https://cdn.lordicon.com/ucbznuay.json",
             position: {
               top: "-5%",
               left: "-45%",
@@ -870,7 +870,7 @@ export default function EllipseOrbit({
             }
           },
           {
-            lordicon: "https://cdn.lordicon.com/adbkylwa.json",
+            lordicon: "https://cdn.lordicon.com/cfoaotmk.json",
             position: {
               bottom: "-10%",
               left: "-50%",
@@ -899,7 +899,7 @@ export default function EllipseOrbit({
         floating={true}
         icons={[
           {
-            lordicon: "https://cdn.lordicon.com/ailnzwyn.json",
+            lordicon: "https://cdn.lordicon.com/sylzqxek.json",
             position: {
               top: "0%",
               left: "-45%",
@@ -907,7 +907,7 @@ export default function EllipseOrbit({
             }
           },
           {
-            lordicon: "https://cdn.lordicon.com/idpbgtvy.json",
+            lordicon: "https://cdn.lordicon.com/heqlbljj.json",
             position: {
               top: "35%",
               right: "140%",

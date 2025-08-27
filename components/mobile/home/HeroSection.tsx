@@ -61,7 +61,7 @@ export default function MobileHeroSection() {
   const pathname = usePathname();
   const lastSeekTime = useRef<number>(0);
 
-  const VIDEO_ID = "ww3flTt--Xw";
+  const VIDEO_ID = "P6MaB1hcThU";
 
   // Component mount detection
   useEffect(() => {
@@ -158,8 +158,8 @@ export default function MobileHeroSection() {
       new window.YT.Player(playerRef.current, {
         videoId: VIDEO_ID,
         playerVars: {
-          autoplay: 1,
-          mute: 1,
+          autoplay: 0,
+          mute: 0,
           loop: 1,
           playlist: VIDEO_ID,
           controls: 1,
@@ -205,7 +205,7 @@ export default function MobileHeroSection() {
   useEffect(() => {
     if (!player) return;
 
-    let lastMuteState = true; // Video starts muted
+    let lastMuteState = false; // Video starts unmuted
     const checkMuteState = setInterval(() => {
       if (player.isMuted && player.isMuted() !== lastMuteState) {
         const isMuted = player.isMuted();
@@ -276,7 +276,7 @@ export default function MobileHeroSection() {
             className="absolute top-0 left-0 w-full h-full"
             style={{ 
               border: 'none',
-              transform: 'scale(1.9)',
+              transform: 'scale(1.5)',
               transformOrigin: 'center center'
             }}
           />

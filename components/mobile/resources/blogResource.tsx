@@ -56,19 +56,115 @@ const blogPosts: BlogPost[] = [
 const linkedInPosts: LinkedInPost[] = [
   {
     id: 4,
-    date: "Sep 5, 2025",
-    title: "The Future of AI-Powered Recruitment is Here",
-    description: "Transforming how companies discover and engage with top talent through intelligent automation.",
-    backgroundImage: "/image/background/bg_image_6.png",
-    link: "https://linkedin.com/company/berribot"
+    date: "Aug 22, 2025",
+    title: "Recruitment has been a $600 B problem solved with extra phone calls.",
+    description: "What if technology could rewrite that?",
+    backgroundImage: "/image/background/Rectangle45.png",
+    link: "https://www.linkedin.com/posts/activity-7364499088538599425-NGN0?utm_source=share&utm_medium=member_android&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM"
   },
   {
     id: 5,
-    date: "Sep 15, 2025",
-    title: "Building Trust in AI Hiring Systems",
-    description: "How transparency and ethical AI practices are reshaping the recruitment landscape.",
-    backgroundImage: "/image/background/bg_image_7.png",
-    link: "https://linkedin.com/company/berribot"
+    date: "Aug 13, 2025",
+    title: "There is a ghost in the hiring machine",
+    description: "U.S. hiring managers have been ghosted by Gen Z candidates, sometimes even after an offer was accepted.",
+    backgroundImage: "/image/background/2.png",
+    link: "https://www.linkedin.com/posts/activity-7361362291948208128-tHMR?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 6,
+    date: "Aug 06, 2025",
+    title: "Candidates hate talking to bots!",
+    description: "Everyone disconnects the moment they hear ‘Hello!’",
+    backgroundImage: "/image/background/3.png",
+    link: "https://www.linkedin.com/posts/activity-7361362291948208128-tHMR?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 7,
+    date: "July 30, 2025",
+    title: "Many recruiters are still living on excel sheets.",
+    description: "Dozens of email threads just to share info. Systems that don’t talk to each other.",
+    backgroundImage: "/image/background/4.png",
+    link: "https://www.linkedin.com/posts/activity-7351936512747327491-b-eO?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 8,
+    date: "August 08, 2025",
+    title: "Hiring can literally make or break your brand.",
+    description: " If you think that the candidate experience is just about hiring, you’re dead wrong.",
+    backgroundImage: "/image/background/5.png",
+    link: "https://www.linkedin.com/posts/activity-7351936512747327491-b-eO?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 9,
+    date: "August 20, 2025",
+    title: "Speed.",
+    description: " One recruitment variable can now make or break effectiveness of modern recruiting.",
+    backgroundImage: "/image/background/Variant6.png",
+    link: "https://www.linkedin.com/posts/satishjeyaraman_one-recruitment-variable-can-now-make-or-activity-7361717177827184640-f8qs?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 10,
+    date: "August 13, 2025",
+    title: "Record-setting recruitment event.",
+    description: "Hired 1,900+ people in a single day for a major services firm",
+    backgroundImage: "/image/background/7.png",
+    link: "https://www.linkedin.com/posts/satishjeyaraman_talentleadership-aiinhiring-recruitmentinnovation-activity-7359187811494707200-U0Sd?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 11,
+    date: "August 06, 2025",
+    title: "Lot of time and effort to convince.",
+    description: "A senior leader of a business unit hated the idea of AI in recruiting.",
+    backgroundImage: "/image/background/8.png",
+    link: "https://www.linkedin.com/posts/satishjeyaraman_airecruiting-futureofwork-talentleadership-activity-7356647460968022018-6LPY?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 12,
+    date: "August 26, 2025",
+    title: "40% of companies now use AI.",
+    description: "It’s becoming the foundation of how talent acquisition runs.",
+    backgroundImage: "/image/background/9.png",
+    link: "https://www.linkedin.com/posts/berribot_over-40-of-companies-now-use-ai-in-their-activity-7365965592689823744-xRKw?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 13,
+    date: "August 21, 2025",
+    title: "What’s worse than a bad interview?",
+    description: "A bad interview with a bot.",
+    backgroundImage: "/image/background/10.png",
+    link: "https://www.linkedin.com/posts/berribot_empathetic-hiring-with-ai-activity-7363423489657069569-bMtS?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 14,
+    date: "August 21, 2025",
+    title: "78% in savings.",
+    description: "One of our big customers cut offer TAT from 25 to 10 days.",
+    backgroundImage: "/image/background/11.png",
+    link: "https://www.linkedin.com/posts/berribot_berrimastermind-aihiring-smartscreening-activity-7361592478795194370-jkbT?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 15,
+    date: "August 13, 2025",
+    title: "You don’t need more recruiters.",
+    description: "Hiring at scale often feels like chasing your own tail.",
+    backgroundImage: "/image/background/12.png",
+    link: "https://www.linkedin.com/posts/berribot_berriconnect-candidateengagement-recruitmentops-activity-7359070962983555076-KqEl?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 16,
+    date: "August 13, 2025",
+    title: "Juggling a dozen tools?",
+    description: "We get it. We've been there.",
+    backgroundImage: "/image/background/13.png",
+    link: "https://www.linkedin.com/posts/berribot_we-get-it-weve-been-there-juggling-a-activity-7357983831397711872-qy3U?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
+  },
+  {
+    id: 17,
+    date: "July 30, 2025",
+    title: "Reality for many recruiters today,",
+    description: "Imagine screening 3,000 resumes to make 30 offers.",
+    backgroundImage: "/image/background/14.png",
+    link: "https://www.linkedin.com/posts/berribot_imagine-screening-3000-resumes-to-make-30-activity-7355801920105537536-zMwI?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAAF3CMYB_1d51Dr4a4TvfbxFzNYGEXVpeIM&utm_campaign=copy_link"
   }
 ];
 

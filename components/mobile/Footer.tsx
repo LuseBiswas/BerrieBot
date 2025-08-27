@@ -144,9 +144,9 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Solutions</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-          <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Recruitment Assistant', 'solutions')}>Recruitment Assistant</Link></li>
-              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Real-time Proctoring', 'solutions')}>Real-time Proctoring</Link></li>
-              <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Live Texting', 'solutions')}>Live Texting</Link></li>
+          <li><Link href="/solutions#recruitment-assistant" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Recruitment Assistant', 'solutions')}>Scheduling Assistant</Link></li>
+              <li><Link href="/solutions#real-time-proctoring" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Real-time Proctoring', 'solutions')}>Real-Time Proctoring</Link></li>
+              <li><Link href="/solutions#live-texting" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Live Texting', 'solutions')}>Seamless AI Recruiter</Link></li>
           </ul>
         </div>
         
@@ -154,8 +154,8 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>Resources</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-          <li><Link href="/resources#faq" className="hover:text-white transition-colors" onClick={() => trackFooterClick('FAQ', 'resources')}>FAQ</Link></li>
           <li><Link href="/resources#blogs" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Blogs', 'resources')}>Blogs</Link></li>
+          <li><Link href="/resources#faq" className="hover:text-white transition-colors" onClick={() => trackFooterClick('FAQ', 'resources')}>FAQ</Link></li>
           </ul>
         </div>
         
@@ -163,11 +163,10 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>About</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-            <li><Link href="/about" className="hover:text-white transition-colors" onClick={() => trackFooterClick('About us', 'about')}>About us</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Journey', 'about')}>Our Journey</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Values', 'about')}>Our Values</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Teams', 'about')}>Our Teams</Link></li>
-            <li><Link href="#" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Join us', 'about')}>Join us</Link></li>
+            <li><Link href="/about" className="hover:text-white transition-colors" onClick={() => trackFooterClick('We are Berribot', 'about')}>We are Berribot</Link></li>
+            <li><Link href="/about" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Mission', 'about')}>Our Mission</Link></li>
+            <li><Link href="/about" className="hover:text-white transition-colors" onClick={() => trackFooterClick('What we do', 'about')}>What we do</Link></li>
+            <li><Link href="/about" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Leaders', 'about')}>Our Leaders</Link></li>
           </ul>
         </div>
         

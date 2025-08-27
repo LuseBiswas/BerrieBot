@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { trackDemoFormSubmission, trackDemoFormStart } from '@/utils/analytics';
 
 const Contact = () => {
@@ -10,7 +10,21 @@ const Contact = () => {
   const [demoMessage, setDemoMessage] = useState('');
   const [hasStartedForm, setHasStartedForm] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [showSuccessScreen, setShowSuccessScreen] = useState(false);
+
+  // Load lord-icon script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.lordicon.com/lordicon.js';
+    script.async = true;
+    document.head.appendChild(script);
+    
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
 
   const handleFormStart = () => {
     if (!hasStartedForm) {
@@ -22,44 +36,92 @@ const Contact = () => {
   const handleDemoSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitMessage('');
 
-    try {
-      // Track form submission
-      trackDemoFormSubmission('desktop');
+    // Track form submission
+    trackDemoFormSubmission('desktop');
 
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fullName,
-          companyName,
-          workEmail,
-          demoMessage,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        setSubmitMessage('Email sent successfully! We\'ll get back to you soon.');
-        // Clear form
-        setFullName('');
-        setCompanyName('');
-        setWorkEmail('');
-        setDemoMessage('');
-      } else {
-        setSubmitMessage('Failed to send email. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitMessage('An error occurred. Please try again.');
-    } finally {
+    // Simulate form processing delay
+    setTimeout(() => {
+      setShowSuccessScreen(true);
+      // Clear form
+      setFullName('');
+      setCompanyName('');
+      setWorkEmail('');
+      setDemoMessage('');
       setIsSubmitting(false);
-    }
+    }, 1500);
   };
+
+  // Success Screen Component
+  if (showSuccessScreen) {
+    return (
+      <div className="bg-white py-16 px-4">
+        <div className="max-w-md mx-auto text-center">
+          {/* Thank you pill */}
+          <div className="mb-8 flex justify-center">
+            <div 
+              className="bg-[#028374] text-white px-6 py-2 rounded-full font-medium flex items-center justify-center"
+              style={{
+                fontSize: '16px',
+                fontFamily: 'Manrope, sans-serif'
+              }}
+            >
+              Thank you
+            </div>
+          </div>
+
+          {/* Animated Icon */}
+          <div className="mb-8 flex justify-center">
+            <div 
+              dangerouslySetInnerHTML={{
+                __html: `<lord-icon
+                  src="https://cdn.lordicon.com/ohcuigqh.json"
+                  trigger="loop"
+                  style="width:250px;height:250px">
+                </lord-icon>`
+              }}
+            />
+          </div>
+
+          {/* Main Heading */}
+          <h2 
+            className="text-black font-medium mb-6"
+            style={{
+              fontSize: '24px',
+              fontFamily: 'Manrope, sans-serif',
+              lineHeight: '1.4'
+            }}
+          >
+            Thanks for scheduling<br />a demo with us!
+          </h2>
+
+          {/* First Subheading */}
+          <p 
+            className="text-black font-light mb-4"
+            style={{
+              fontSize: '20px',
+              fontFamily: 'Manrope, sans-serif',
+              lineHeight: '1.5'
+            }}
+          >
+            We can&apos;t wait to show you how Berribot makes hiring faster, smarter, and more human.
+          </p>
+
+          {/* Second Subheading */}
+          <p 
+            className="text-black font-light"
+            style={{
+              fontSize: '20px',
+              fontFamily: 'Manrope, sans-serif',
+              lineHeight: '1.5'
+            }}
+          >
+            Our team will be in touch shortly with all the details you need to join your personalized session.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white py-16 px-4">
@@ -206,23 +268,6 @@ Best,"
                 {isSubmitting ? 'Sending...' : 'Contact support'}
               </button>
             </div>
-
-            {/* Submit Message */}
-            {submitMessage && (
-              <div className="text-center mt-4">
-                <p 
-                  className={`font-medium ${
-                    submitMessage.includes('successfully') ? 'text-green-600' : 'text-red-600'
-                  }`}
-                  style={{
-                    fontSize: '14px',
-                    fontFamily: 'Manrope, sans-serif'
-                  }}
-                >
-                  {submitMessage}
-                </p>
-              </div>
-            )}
           </form>
 
           {/* Support section */}

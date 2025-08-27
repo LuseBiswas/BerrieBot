@@ -59,10 +59,6 @@ export default function StackByStack({
   // Render first N in the current order; depth = array index
   const visible = orderedCards.slice(0, Math.min(visibleCount, orderedCards.length));
 
-  const onFrontClick = useCallback(() => {
-    if (!isDismissing) setIsDismissing(true);
-  }, [isDismissing]);
-
   const onCardClick = useCallback((cardId: string, depth: number) => {
     if (isDismissing) return;
     

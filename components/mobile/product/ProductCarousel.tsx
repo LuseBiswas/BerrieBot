@@ -35,7 +35,7 @@ const productsData: ProductData[] = [
     backImage: "/image/space/BackCards/Search2.png",
     features: [
       {
-        lordicon: "https://cdn.lordicon.com/ypagsvdy.json",
+        lordicon: "https://cdn.lordicon.com/itlfjzxp.json",
         content: "Bulk calling, WhatsApp, <br/> SMS, email follow-ups",
         position: {
           top: "-30%",
@@ -72,7 +72,7 @@ const productsData: ProductData[] = [
     backImage: "/image/space/BackCards/Connect2.png",
     features: [
       {
-        lordicon: "https://cdn.lordicon.com/vpbspaec.json",
+        lordicon: "https://cdn.lordicon.com/ucbznuay.json",
         content: "AI-based skill mapping <br/> and contextual analysis",
         position: {
           top: "-30%",
@@ -90,7 +90,7 @@ const productsData: ProductData[] = [
         }
       },
       {
-        lordicon: "https://cdn.lordicon.com/adbkylwa.json",
+        lordicon: "https://cdn.lordicon.com/cfoaotmk.json",
         content: "ATS integration <br/> with tagging <br/> and auto-suggestions",
         position: {
           bottom: "30%",
@@ -109,7 +109,7 @@ const productsData: ProductData[] = [
     backImage: "/image/space/BackCards/Mastermind2.png",
     features: [
       {
-        lordicon: "https://cdn.lordicon.com/ailnzwyn.json",
+        lordicon: "https://cdn.lordicon.com/sylzqxek.json",
         content: "Adaptive Q&A <br/> + coding environments",
         position: {
           top: "40%",
@@ -118,7 +118,7 @@ const productsData: ProductData[] = [
         }
       },
       {
-        lordicon: "https://cdn.lordicon.com/idpbgtvy.json",
+        lordicon: "https://cdn.lordicon.com/heqlbljj.json",
         content: "AI scoring for <br/> tech, soft skills,<br/> and communication",
         position: {
           top: "100%",

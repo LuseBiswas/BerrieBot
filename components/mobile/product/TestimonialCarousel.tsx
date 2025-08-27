@@ -142,7 +142,7 @@ export default function MobileProductTestimonialCarousel() {
             fontWeight: 500
           }}
         >
-          "What do <br /> our clients say"
+          &quot;What do <br /> our clients say&quot;
         </h2>
 
         {/* Founder Carousel Content */}
