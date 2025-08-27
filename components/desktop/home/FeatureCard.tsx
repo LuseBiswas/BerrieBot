@@ -350,7 +350,7 @@ export default function FeatureCard() {
           }}
         >
           <FeatureCardItem
-            lordicon="https://cdn.lordicon.com/jwpaspoo.json"
+            lordicon="https://cdn.lordicon.com/yndmpipg.json"
             title="Flexible pricing"
             description="Use what you need.<br/> Pre-paid credits."
             index={4}
