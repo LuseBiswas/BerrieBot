@@ -163,10 +163,10 @@ export default function MobileFooter() {
         <div className="mb-8">
           <h3 className={`${sizes.sectionTitleSize} font-medium mb-6 text-left`}>About</h3>
           <ul className={`space-y-4 ${sizes.linkSize} text-left`}>
-            <li><Link href="/about" className="hover:text-white transition-colors" onClick={() => trackFooterClick('We are Berribot', 'about')}>We are Berribot</Link></li>
-            <li><Link href="/about" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Mission', 'about')}>Our Mission</Link></li>
-            <li><Link href="/about" className="hover:text-white transition-colors" onClick={() => trackFooterClick('What we do', 'about')}>What we do</Link></li>
-            <li><Link href="/about" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Leaders', 'about')}>Our Leaders</Link></li>
+            <li><Link href="/about#we-are-berribot" className="hover:text-white transition-colors" onClick={() => trackFooterClick('We are Berribot', 'about')}>We are Berribot</Link></li>
+            <li><Link href="/about#our-mission" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Mission', 'about')}>Our Mission</Link></li>
+            <li><Link href="/about#what-we-do" className="hover:text-white transition-colors" onClick={() => trackFooterClick('What we do', 'about')}>What we do</Link></li>
+            <li><Link href="/about#our-leaders" className="hover:text-white transition-colors" onClick={() => trackFooterClick('Our Leaders', 'about')}>Our Leaders</Link></li>
           </ul>
         </div>
         
