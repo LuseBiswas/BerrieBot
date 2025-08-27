@@ -5,10 +5,10 @@ import { Plus } from 'lucide-react';
 
 /* ---------- Custom Hook for Word Animation ---------- */
 function useWordAnimation(scrollProgress: MotionValue<number>, wordIndex: number, lineIndex: number) {
-  const lineDelay = lineIndex * 0.15;
-  const wordDelay = wordIndex * 0.015;
+  const lineDelay = lineIndex * 0.08; // Reduced from 0.15
+  const wordDelay = wordIndex * 0.008; // Reduced from 0.015
   const startPoint = 0.2 + lineDelay + wordDelay;
-  const endPoint = startPoint + 0.06;
+  const endPoint = startPoint + 0.03; // Reduced from 0.06
   
   const wordProgress = useTransform(
     scrollProgress,

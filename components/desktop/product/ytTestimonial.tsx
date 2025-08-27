@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -100,7 +99,7 @@ export default function YtTestimonial() {
                     <iframe
                       width="100%"
                       height="100%"
-                      src="https://www.youtube.com/embed/ww3flTt--Xw?autoplay=1&mute=1&loop=1&playlist=ww3flTt--Xw"
+                      src="https://www.youtube.com/embed/P6MaB1hcThU?si=E2nqc0HVtvxaV-0y&rel=0"
                       title="YouTube video player"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -112,94 +111,10 @@ export default function YtTestimonial() {
                 </div>
 
                 {/* Testimonial Overlay - Outside video container for free positioning */}
-                <motion.div
-                  className="absolute bottom-[350px] right-[-50px] text-white p-3 rounded-[42px] w-[384px] h-[141px] shadow-lg z-20"
-                  style={{
-                    backgroundImage: "url('/image/BG_1.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat"
-                  }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                  viewport={{ once: true }}
-                >
-                  {/* Inverted Comma Image */}
-                  
-                    
-                  <div className="flex items-center justify-center h-full">
-                    {/* Testimonial Content */}
-                    
-                    <div>
-                      <p className="text-white text-[18px] font-inter font-light text-center leading-relaxed">
-                      &ldquo;Welcome to Berribot! I&apos;m Berri, your <br /> AI recruiter who interviews hundreds of candidates while you focus on real work&rdquo;
-                        
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
+                
 
                 {/* Decorative Elements */}
-                <div className="absolute bottom-[-120] left-[-120] transform translate-y-8 -translate-x-8">
-                  <div className="relative w-32 h-32 flex items-center justify-center">
-                    {/* Ripple Effect Circles */}
-                    <motion.div
-                      className="absolute w-32 h-32 border border-white/20 rounded-full"
-                      animate={{
-                        scale: [1, 1.8],
-                        opacity: [0, 0.6, 0.3, 0],
-                      }}
-                      transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: "easeOut",
-                        times: [0, 0.2, 0.7, 1],
-                      }}
-                    />
-                    <motion.div
-                      className="absolute w-32 h-32 border border-white/20 rounded-full"
-                      animate={{
-                        scale: [1, 1.8],
-                        opacity: [0, 0.6, 0.3, 0],
-                      }}
-                      transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: "easeOut",
-                        delay: 0.8,
-                        times: [0, 0.2, 0.7, 1],
-                      }}
-                    />
-                    <motion.div
-                      className="absolute w-32 h-32 border border-white/20 rounded-full"
-                      animate={{
-                        scale: [1, 1.8],
-                        opacity: [0, 0.6, 0.3, 0],
-                      }}
-                      transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: "easeOut",
-                        delay: 1.6,
-                        times: [0, 0.2, 0.7, 1],
-                      }}
-                    />
-
-                    {/* Main Circle */}
-                    <div className="flex items-center justify-center relative z-10">
-                      <div className="w-20 h-20 relative rounded-full flex items-center justify-center overflow-hidden">
-                        <Image
-                          src="/image/logo_2.png"
-                          alt="Background"
-                          width={80}
-                          height={80}
-                          className="absolute inset-0 w-full h-full object-cover rounded-full"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+               
               </motion.div>
             </div>
           </div>

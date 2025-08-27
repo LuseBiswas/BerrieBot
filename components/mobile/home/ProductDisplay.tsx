@@ -145,7 +145,7 @@ export default function MobileProductDisplay() {
     expandedCard === cardId ? sizes.cardWidthExpanded : sizes.cardWidthCollapsed;
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen bg-transparent px-4 py-16 overflow-visible">
+    <section ref={sectionRef} className="relative min-h-screen bg-black px-4 py-16 overflow-visible">
       {/* Background Image - Only load when visible */}
       {isVisible && (
         <div className="absolute top-0 left-0 z-0 pointer-events-none">

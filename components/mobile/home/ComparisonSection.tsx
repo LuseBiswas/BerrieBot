@@ -19,7 +19,7 @@ const COMPARISON_DATA = [
   },
   {
     before: "Fraud detection = Human-led or absent",
-    after: "$198 saved per candidate interview",
+    after: "99.99% foolproof fraud detection",
   },
 ];
 
@@ -149,7 +149,7 @@ export default function MobileComparisonSection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center py-10 px-4 bg-transparent"
+      className="relative min-h-screen flex items-center justify-center py-10 px-4 bg-black"
     >
       {/* Background grid pattern */}
       <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-20" />
@@ -199,8 +199,8 @@ export default function MobileComparisonSection() {
         className="pointer-events-none absolute left-1/2 top-0 w-[2px] bg-[#04BBA6] transform -translate-x-1/2"
         style={{ 
           height: lineHeight,
-          boxShadow: '0 0 15px #04BBA6, 0 0 20px #04BBA6, 0 0 40px #04BBA6, 0 0 80px rgba(4, 187, 166, 0.5)',
-          filter: 'blur(0.9px)'
+          boxShadow: '0 0 10px #04BBA6, 0 0 20px #04BBA6, 0 0 40px #04BBA6, 0 0 80px rgba(4, 187, 166, 0.5)',
+          filter: 'blur(0.5px)'
         }}
       />
 

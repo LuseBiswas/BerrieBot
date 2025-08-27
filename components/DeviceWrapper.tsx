@@ -361,10 +361,13 @@ export default function DeviceWrapper({ children }: DeviceWrapperProps) {
               </>
             ) : pathname === "/resources" ? (
               <>
+                <MobileBlogResource/>
                 <MobileResourcesHeroSection />
                 <MobileFAQComponent/>
-                <MobileBlogResource/>
+                <div className="-mt-12">
                 <MobileResourceCTASection/>
+                </div>
+                
               </>
             ) : pathname === "/solutions" ? (
               <>

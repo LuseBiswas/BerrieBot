@@ -66,10 +66,10 @@ export default function ProductFeature() {
         {/* Tagline */}
         <div className="text-center mb-32 text-[64px] sm:text-6xl md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.25px]  font-normal text-white bg-clip-text "style={{ fontFamily: 'Manrope, sans-serif' }}>
           <h2 className=" mb-4">
-            We&apos;re Not Just
+            We&apos;re not just
           </h2>
           <p className="">
-            Another Hiring Tool
+            another hiring tool
           </p>
         </div>
 

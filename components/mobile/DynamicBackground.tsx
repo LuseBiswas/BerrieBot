@@ -11,7 +11,7 @@ export default function MobileDynamicBackground({ children }: MobileDynamicBackg
   const pathname = usePathname();
   
   // Define routes that should use white background
-  const whiteBackgroundRoutes = ["/resources", "/explore/details", "/resources/faq", "/product", "/solutions"];
+  const whiteBackgroundRoutes = [ "/explore/details", "/product", "/solutions"];
   
   // Check if current path starts with any of the white background routes
   const shouldUseWhiteBackground = whiteBackgroundRoutes.some(route => 
@@ -30,7 +30,7 @@ export default function MobileDynamicBackground({ children }: MobileDynamicBackg
     <div className={`min-h-screen w-full flex flex-col ${backgroundClass} ${textColor} overflow-x-hidden relative`}>
       {/* Background Images - Only show on black background routes */}
       {!shouldUseWhiteBackground && (
-        <div className="fixed inset-0 z-0 pointer-events-none bg-black">
+        <div className="absolute inset-0 z-0 pointer-events-none bg-black">
           <div className="absolute inset-0">
             {/* First background image - CSS animation for better mobile performance */}
             <div 

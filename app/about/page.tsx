@@ -21,7 +21,7 @@ export default function AboutPage() {
         <MobileAboutProductDisplay/>
       </div>
       <MobileAboutStatsSection/>
-      <div id="our-leaders">
+      <div id="our-leaders" className="-mb-44">
         <MobileAboutFounderCarousel/>
       </div>
       <CTASection/>

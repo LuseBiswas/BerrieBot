@@ -83,10 +83,9 @@ export default function MobileFeatureCard() {
   return (
     <section
       ref={ref}
-      className="relative h-[2120px] flex items-center justify-center py-10 px-4"
+      className="relative h-[2120px] flex items-center justify-center py-10 px-4 bg-transparent"
     >
-      {/* background grid */}
-      <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-20" />
+
 
       {/* vertical teal line - animated with scroll */}
       <motion.div 
@@ -110,7 +109,7 @@ export default function MobileFeatureCard() {
       </div>
 
       {/* ---------- CENTERED HEADLINE + SUBTITLE (mobile optimized) ---------- */}
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-start pt-165 text-center z-20">
+      <div className="pointer-events-none absolute top-0 left-0 right-0 flex flex-col items-center justify-start mt-20 text-center z-20">
         
         {/* Background Image - positioned between radial blur and text */}
         <div className="absolute z-8 pointer-events-none" style={{ top: '530px', right: '-300px', transform: 'translateX(-50%)' }}>
@@ -157,7 +156,7 @@ export default function MobileFeatureCard() {
       <div className="relative w-full h-[1200px] max-w-sm mx-auto mt-200">
         {/* Top Left */}
         <motion.div 
-          className="absolute bottom-[1750px] left-[0px] w-full"
+          className="absolute bottom-[1300px] left-[0px] w-full"
           style={{ 
             x: leftCardX,
             opacity: cardOpacity
@@ -186,7 +185,7 @@ export default function MobileFeatureCard() {
 
         {/* Top Right */}
         <motion.div 
-          className="absolute bottom-[1450px] right-[-110px] w-full"
+          className="absolute bottom-[1000px] right-[-110px] w-full"
           style={{ 
             x: rightCardX,
             opacity: cardOpacity

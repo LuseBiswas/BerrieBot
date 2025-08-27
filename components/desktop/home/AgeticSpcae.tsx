@@ -648,7 +648,7 @@ export default function EllipseOrbit({
         style={{
           width: "1049.4px",
           height: "534px",
-          top: "50%",
+          top: "60%",
           left: "45%",
           transform: "translate(-50%, -50%)",
           border: "4px solid rgba(255, 255, 255, 0.04)",
@@ -670,11 +670,11 @@ export default function EllipseOrbit({
           APPLY
         </div>
       </div>
-      
+      {/* Ellipse 31 */}
       <div 
         className="absolute z-40 text-center"
         style={{
-          top: "66%",
+          top: "83%",
           left: "55%",
           transform: "translate(-50%, -50%)"
         }}
@@ -691,7 +691,7 @@ export default function EllipseOrbit({
         style={{
           width: "847px",
           height: "354px",
-          top: "50%",
+          top: "60%",
           left: "40%",
           transform: "translate(-50%, -50%)",
           border: "4px solid rgba(255, 255, 255, 0.03)",
@@ -708,7 +708,7 @@ export default function EllipseOrbit({
         priority={true}
         sizes="128px"
         style={{
-          top: "49.5%",
+          top: "58.5%",
           left: "20%",
           transform: "translate(-50%, -50%)"
         }}
@@ -717,7 +717,7 @@ export default function EllipseOrbit({
   ), []);
 
   return (
-    <section className="w-full h-[1994px] bg-black flex flex-col items-center justify-center relative z-50">
+    <section className="w-full h-[1304px] bg-black flex flex-col items-center justify-center relative z-50">
       {/* Background glow images - behind stars but above black bg */}
       {backgroundImages}
       
@@ -763,7 +763,7 @@ export default function EllipseOrbit({
         <motion.div
           className="absolute z-10"
           style={{
-            top: "43%",
+            top: "50%",
             left: "12%",
             transform: "translate(-50%, -50%)"
           }}
@@ -806,7 +806,8 @@ export default function EllipseOrbit({
         floating={true}
         icons={[
           {
-            lordicon: "https://cdn.lordicon.com/vpbspaec.json",
+            
+            lordicon: "https://cdn.lordicon.com/itlfjzxp.json",
             position: {
               top: "-10%",
               left: "105%",
@@ -814,7 +815,8 @@ export default function EllipseOrbit({
             }
           },
           {
-            lordicon: "https://cdn.lordicon.com/odpyouay.json",
+            
+            lordicon: "https://cdn.lordicon.com/hcsnfpqp.json",
             position: {
               top: "30%",
               right: "-85%",
@@ -822,7 +824,8 @@ export default function EllipseOrbit({
             }
           },
           {
-            lordicon: "https://cdn.lordicon.com/adbkylwa.json",
+            
+            lordicon: "https://cdn.lordicon.com/gnxqymui.json",
             position: {
               bottom: "-12%",
               left: "110%",
@@ -851,7 +854,7 @@ export default function EllipseOrbit({
         floating={true}
         icons={[
           {
-            lordicon: "https://cdn.lordicon.com/ypagsvdy.json",
+            lordicon: "https://cdn.lordicon.com/ucbznuay.json",
             position: {
               top: "-5%",
               left: "-45%",
@@ -859,7 +862,7 @@ export default function EllipseOrbit({
             }
           },
           {
-            lordicon: "https://cdn.lordicon.com/hcsnfpqp.json",
+            lordicon: "https://cdn.lordicon.com/odpyouay.json",
             position: {
               top: "35%",
               right: "130%",
@@ -867,7 +870,7 @@ export default function EllipseOrbit({
             }
           },
           {
-            lordicon: "https://cdn.lordicon.com/gnxqymui.json",
+            lordicon: "https://cdn.lordicon.com/cfoaotmk.json",
             position: {
               bottom: "-10%",
               left: "-50%",
@@ -896,7 +899,7 @@ export default function EllipseOrbit({
         floating={true}
         icons={[
           {
-            lordicon: "https://cdn.lordicon.com/ailnzwyn.json",
+            lordicon: "https://cdn.lordicon.com/sylzqxek.json",
             position: {
               top: "0%",
               left: "-45%",
@@ -904,7 +907,7 @@ export default function EllipseOrbit({
             }
           },
           {
-            lordicon: "https://cdn.lordicon.com/idpbgtvy.json",
+            lordicon: "https://cdn.lordicon.com/heqlbljj.json",
             position: {
               top: "35%",
               right: "140%",
@@ -934,7 +937,7 @@ export default function EllipseOrbit({
         backHeight={375.36}
         className="absolute z-30"
         style={{
-          top: "53%",
+          top: "68%",
           left: "60%",
           transform: "translate(-50%, -50%)"
         }}

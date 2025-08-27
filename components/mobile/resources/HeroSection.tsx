@@ -9,7 +9,7 @@ export default function MobileResourcesHeroSection() {
   }, []);
 
   // Force consistent className after hydration
-  const sectionClassName = "relative mt-20 flex flex-col items-center justify-center px-4 bg-transparent";
+  const sectionClassName = "relative mt-20 flex flex-col items-center justify-center px-4 bg-white pt-20";
 
   return (
     <section 

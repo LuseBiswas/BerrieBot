@@ -85,7 +85,7 @@ const CAROUSEL_SLIDES = [
     
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
     lordicons: [
-      "https://cdn.lordicon.com/ypagsvdy.json", // Box 1
+      "https://cdn.lordicon.com/itlfjzxp.json", // Box 1
       "https://cdn.lordicon.com/hcsnfpqp.json", // Box 2
       "https://cdn.lordicon.com/gnxqymui.json"  // Box 3
     ],
@@ -103,9 +103,9 @@ const CAROUSEL_SLIDES = [
     
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
     lordicons: [
-      "https://cdn.lordicon.com/vpbspaec.json", // Box 1
+      "https://cdn.lordicon.com/ucbznuay.json", // Box 1
       "https://cdn.lordicon.com/odpyouay.json", // Box 2
-      "https://cdn.lordicon.com/sylzqxek.json"  // Box 3
+      "https://cdn.lordicon.com/cfoaotmk.json"  // Box 3
     ],
     keyHighlights: [
       "Bulk calling, WhatsApp, SMS, email follow-ups",
@@ -121,8 +121,8 @@ const CAROUSEL_SLIDES = [
     
     image: "/image/prodcut/ProductImagery_1.png", // Update with actual image path
     lordicons: [
-      "https://cdn.lordicon.com/ailnzwyn.json", // Box 1
-      "https://cdn.lordicon.com/idpbgtvy.json", // Box 2
+      "https://cdn.lordicon.com/sylzqxek.json", // Box 1
+      "https://cdn.lordicon.com/heqlbljj.json", // Box 2
       "https://cdn.lordicon.com/euflfcqp.json"  // Box 3
     ],
     keyHighlights: [
@@ -236,7 +236,7 @@ export default function CommentCarousel() {
 
           {/* Carousel Indicators - Pill shaped */}
           <motion.div
-            className="flex justify-center items-center gap-4 mb-16"
+            className="flex justify-center items-center gap-4 mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -283,9 +283,9 @@ export default function CommentCarousel() {
                 </h4>
 
                 {/* Slide Description */}
-                <p className="text-lg sm:text-xl font-inter font-light text-gray-600 leading-relaxed mb-12 text-center">
+                {/* <p className="text-lg sm:text-xl font-inter font-light text-gray-600 leading-relaxed mb-12 text-center">
                   {CAROUSEL_SLIDES[activeSlide].description}
-                </p>
+                </p> */}
 
                 {/* Main Content Layout - Animated Boxes Left, Content Right */}
                 <div className="flex flex-col lg:flex-row gap-12 items-start">

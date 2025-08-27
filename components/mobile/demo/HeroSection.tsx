@@ -58,9 +58,10 @@ export default function MobileDemoHeroSection() {
             lineHeight: '1.2'
           }}
         >
-          Help is just
+          Your demo
           <br />
-          one form away!
+          is just one <br />
+          form away!
         </h1>
       </div>
 

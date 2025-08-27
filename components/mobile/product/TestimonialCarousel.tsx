@@ -133,6 +133,18 @@ export default function MobileProductTestimonialCarousel() {
       {/* Main Content Container */}
       <div className="max-w-sm mx-auto relative z-10">
 
+        {/* Heading */}
+        <h2 
+          className="text-black text-center mb-8"
+          style={{ 
+            fontSize: '38px', 
+            fontFamily: 'Manrope, sans-serif',
+            fontWeight: 500
+          }}
+        >
+          &quot;What do <br /> our clients say&quot;
+        </h2>
+
         {/* Founder Carousel Content */}
         <div className="text-center h-[400px] flex flex-col justify-center">
           <AnimatePresence mode="wait">

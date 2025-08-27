@@ -7,9 +7,10 @@ import HeroSection from "@/components/desktop/resources/HeroSection";
 export default function ResourcePage() {
   return (
     <>
+    <BlogResource/>
     <HeroSection />
     <FAQComponent/>
-    <BlogResource/>
+    
     
     <CTASection/>
     </>

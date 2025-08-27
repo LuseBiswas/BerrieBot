@@ -2,15 +2,11 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { trackNewsletterSignup } from '@/utils/analytics';
 
 export default function CTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const pathname = usePathname();
   
   // Load lord-icon script
   useEffect(() => {
@@ -31,24 +27,18 @@ export default function CTASection() {
   });
   
   // Transform scroll progress to slide up from behind footer
-  const y = useTransform(scrollYProgress, [0, 0.7, 1], [400, 0, -200]);
+  const y = useTransform(scrollYProgress, [0, 0.7, 1], [400, 0, -0]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0, 1, 1, 0]);
 
   const handleSubmit = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email.trim() && emailRegex.test(email.trim())) {
-      // Track newsletter signup
-      trackNewsletterSignup(pathname, 'desktop', email);
-      setIsSubmitted(true);
-      // Here you can add actual email submission logic
-      console.log('Email submitted:', email);
-    }
+    // Open new tab with the Substack embed URL
+    window.open('https://berribot.substack.com/embed', '_blank');
+    // Show thank you message
+    setIsSubmitted(true);
   };
 
-  const isValidEmail = email.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
-
   return (
-    <section ref={ref} className="relative flex items-center justify-center  z-0 bg-black">
+    <section ref={ref} className="relative flex items-center justify-center  z-0 bg-transparent">
               <motion.div 
           className="bg-[url('/image/background/bg_image_7.png')] bg-cover bg-center rounded-t-3xl p-12 flex items-center justify-between shadow-lg"
         style={{ 
@@ -85,24 +75,9 @@ export default function CTASection() {
             className="text-center flex flex-col items-center"
           >
             {!isSubmitted ? (
-              <>
-                <p className="text-[24px] text-white font-inter font-extralight leading-relaxed mb-4">
-                  Want to be notified <br /> when something new drops?
-                </p>
-                <textarea
-                  placeholder="your.email@here.org"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-white text-black px-4 rounded-[9px] font-inter text-[16px] resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 text-center"
-                  style={{
-                    width: '261px',
-                    height: '42px',
-                    lineHeight: '42px',
-                    paddingTop: '0',
-                    paddingBottom: '0'
-                  }}
-                />
-              </>
+              <p className="text-[24px] text-white font-inter font-extralight leading-relaxed">
+                Want to be notified <br /> when something new drops?
+              </p>
             ) : (
               <motion.p 
                 className="text-[24px] text-white font-inter font-extralight leading-relaxed"
@@ -110,7 +85,7 @@ export default function CTASection() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
               >
-                Thank you. <br /> See you in your mailbox!
+                Thanks for subscribing <br /> - we glad to have you with us!
               </motion.p>
             )}
           </motion.div>
@@ -121,14 +96,9 @@ export default function CTASection() {
           {!isSubmitted ? (
             <motion.button
               onClick={handleSubmit}
-              disabled={!isValidEmail}
-              className={`px-8 py-4 rounded-md font-inter font-light text-[16px] transition-colors relative overflow-hidden w-[180px] h-[56px] ${
-                isValidEmail 
-                  ? 'bg-white text-black hover:cursor-pointer' 
-                  : 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-50'
-              }`}
-              whileHover={isValidEmail ? { scale: 1.05 } : {}}
-              whileTap={isValidEmail ? { scale: 0.95 } : {}}
+              className="px-8 py-4 rounded-md font-inter font-light text-[16px] transition-colors relative overflow-hidden w-[180px] h-[56px] bg-white text-black hover:cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.8, delay: 0.8 }}

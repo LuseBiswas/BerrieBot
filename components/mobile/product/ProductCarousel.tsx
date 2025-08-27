@@ -31,11 +31,11 @@ const productsData: ProductData[] = [
     heading: "BerriConnect",
     subheading: "Automated Candidate <br/> Communication & Scheduling.",
     description: "Boost your show-up rates, <br/> eliminate manual scheduling,<br/> and more than 7 million minutes <br/> of candidate engagement.",
-    frontImage: "/image/space/FrontCards/Connect1.png",
-    backImage: "/image/space/BackCards/Connect2.png",
+    frontImage: "/image/space/FrontCards/Search1_2.png",
+    backImage: "/image/space/BackCards/Search2.png",
     features: [
       {
-        lordicon: "https://cdn.lordicon.com/vpbspaec.json",
+        lordicon: "https://cdn.lordicon.com/itlfjzxp.json",
         content: "Bulk calling, WhatsApp, <br/> SMS, email follow-ups",
         position: {
           top: "-30%",
@@ -44,7 +44,7 @@ const productsData: ProductData[] = [
         }
       },
       {
-        lordicon: "https://cdn.lordicon.com/odpyouay.json",
+        lordicon: "https://cdn.lordicon.com/hcsnfpqp.json",
         content: "Live reminders <br/> & interview <br/> confirmations",
         position: {
           top: "-20%",
@@ -53,7 +53,7 @@ const productsData: ProductData[] = [
         }
       },
       {
-        lordicon: "https://cdn.lordicon.com/adbkylwa.json",
+        lordicon: "https://cdn.lordicon.com/gnxqymui.json",
         content: "AI-powered calendar <br/> conflict resolution",
         position: {
           bottom: "25%",
@@ -68,11 +68,11 @@ const productsData: ProductData[] = [
     heading: "BerriSearch <br/> & Match",
     subheading: "AI-Powered Resume <br/> Screening & Matching.",
     description: "Shortlist high-fit candidates <br/> in seconds. Minimize <br/> bias and hiring errors.",
-    frontImage: "/image/space/FrontCards/Search1.png",
-    backImage: "/image/space/BackCards/Search2.png",
+    frontImage: "/image/space/FrontCards/Connect1_2.png",
+    backImage: "/image/space/BackCards/Connect2.png",
     features: [
       {
-        lordicon: "https://cdn.lordicon.com/ypagsvdy.json",
+        lordicon: "https://cdn.lordicon.com/ucbznuay.json",
         content: "AI-based skill mapping <br/> and contextual analysis",
         position: {
           top: "-30%",
@@ -81,7 +81,7 @@ const productsData: ProductData[] = [
         }
       },
       {
-        lordicon: "https://cdn.lordicon.com/hcsnfpqp.json",
+        lordicon: "https://cdn.lordicon.com/odpyouay.json",
         content: "1:1 and 1:N <br/> JD comparisons",
         position: {
           top: "-25%",
@@ -90,7 +90,7 @@ const productsData: ProductData[] = [
         }
       },
       {
-        lordicon: "https://cdn.lordicon.com/gnxqymui.json",
+        lordicon: "https://cdn.lordicon.com/cfoaotmk.json",
         content: "ATS integration <br/> with tagging <br/> and auto-suggestions",
         position: {
           bottom: "30%",
@@ -109,7 +109,7 @@ const productsData: ProductData[] = [
     backImage: "/image/space/BackCards/Mastermind2.png",
     features: [
       {
-        lordicon: "https://cdn.lordicon.com/ailnzwyn.json",
+        lordicon: "https://cdn.lordicon.com/sylzqxek.json",
         content: "Adaptive Q&A <br/> + coding environments",
         position: {
           top: "40%",
@@ -118,7 +118,7 @@ const productsData: ProductData[] = [
         }
       },
       {
-        lordicon: "https://cdn.lordicon.com/idpbgtvy.json",
+        lordicon: "https://cdn.lordicon.com/heqlbljj.json",
         content: "AI scoring for <br/> tech, soft skills,<br/> and communication",
         position: {
           top: "100%",

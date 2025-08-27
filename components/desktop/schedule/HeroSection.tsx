@@ -100,7 +100,7 @@ export default function HeroSection() {
       {/* ---- Main Heading ---- */}
       <div className="text-center w-full max-w-5xl mx-auto relative z-10 mb-12">
         <h1 className="text-[64px]  md:text-7xl lg:text-8xl tracking-[-2px] sm:tracking-[-2.5px] sm:text-6xl" style={{ fontFamily: 'Manrope, sans-serif' }}>
-         Help is just <br /> one form away!
+        Your Demo is just <br /> one form away!
         </h1>
       </div>
 

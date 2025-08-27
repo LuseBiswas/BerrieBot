@@ -4,14 +4,14 @@ import Image from 'next/image';
 
 // Company logos data - can be extended with more logos
 const COMPANY_LOGOS = [
-  { id: 1, src: '/image/mobile/Home/Teleperformer_3.png', alt: 'Company 1' },
-  { id: 2, src: '/image/mobile/Home/VIT_2.png', alt: 'Company 2' },
-  { id: 3, src: '/image/mobile/Home/encora.png', alt: 'Company 3' },
-  { id: 4, src: '/image/mobile/Home/indium.png', alt: 'Company 4' },
-  { id: 5, src: '/image/mobile/Home/excelencia.png', alt: 'Company 4' },
-  { id: 6, src: '/image/mobile/Home/cognizant.png', alt: 'Company 4' },
-  { id: 7, src: '/image/mobile/Home/LTIMindtree_3.png', alt: 'Company 4' },
-  { id: 8, src: '/image/mobile/Home/Mindsprint_2.png', alt: 'Company 4' },
+  { id: 1, src: '/image/mobile/Home/Teleperformance4.png', alt: 'Company 1', width: 120 },
+  { id: 2, src: '/image/mobile/Home/Mindsprint2.png', alt: 'Company 2', width: 100 },
+  { id: 3, src: '/image/mobile/Home/excelencia2.png', alt: 'Company 3', width: 110 },
+  { id: 4, src: '/image/mobile/Home/cognizant2.png', alt: 'Company 4', width: 90 },
+  { id: 5, src: '/image/mobile/Home/wipro3.png', alt: 'Company 4', width: 85 },
+  { id: 6, src: '/image/mobile/Home/LTIMindtree2.png', alt: 'Company 4', width: 130 },
+  { id: 7, src: '/image/mobile/Home/Citius2.png', alt: 'Company 4', width: 95 },
+  { id: 8, src: '/image/mobile/Home/Mphasis2.png', alt: 'Company 4', width: 105 },
 ];
 
 export default function MobileCompanyCarousel() {
@@ -23,9 +23,9 @@ export default function MobileCompanyCarousel() {
           <Image
             src={logo.src}
             alt={logo.alt}
-            width={100}
+            width={logo.width}
             height={32}
-            className="object-contain filter brightness-0 invert"
+            className="object-contain"
             style={{ height: '31.75px', width: 'auto' }}
           />
         </div>
@@ -34,7 +34,7 @@ export default function MobileCompanyCarousel() {
           style={{
             width: '12.13px',
             height: '12.13px',
-            backgroundColor: '#0BECD2'
+            backgroundColor: '#028374'
           }}
         />
       </React.Fragment>
@@ -42,7 +42,7 @@ export default function MobileCompanyCarousel() {
   };
 
   return (
-    <div className="w-full overflow-hidden" style={{ height: '60px', backgroundColor: '#028374' }}>
+    <div className="w-full overflow-hidden" style={{ height: '60px', backgroundColor: '#FFFF'}}>
       <div className="flex items-center h-full animate-scroll">
         {/* First set */}
         {createLogoPattern('first')}

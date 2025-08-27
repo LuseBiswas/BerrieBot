@@ -14,18 +14,18 @@ interface SolutionSlide {
 const solutionsData: SolutionSlide[] = [
   {
     id: 1,
-    lordicon: "https://cdn.lordicon.com/cfoaotmk.json",
-    content: "Personalized conversations via SMS, Calls, Email, and more."
+    lordicon: "https://cdn.lordicon.com/gjopwtdp.json",
+    content: "Identity Verification: Facial recognition, voice matching, and biometric cues."
   },
   {
     id: 2,
-    lordicon: "https://cdn.lordicon.com/sylzqxek.json",
-    content: "Handles bookings, confirms calls, sends quotes, and even demos products."
+    lordicon: "https://cdn.lordicon.com/kdibbosx.json",
+    content: "Environment & Behavior Monitoring: Detect second screens, tab changes and lip-sync."
   },
   {
     id: 3,
-    lordicon: "https://cdn.lordicon.com/kqsbkjmb.json",
-    content: "Available 24/7, so you never miss a lead (or a customer craving attention)."
+    lordicon: "https://cdn.lordicon.com/lltgvngb.json",
+    content: "Live Alerts & Reporting: Flag risks instantly and provide compliance and audit trails."
   }
 ];
 
@@ -92,7 +92,7 @@ export default function MobileSolutionsCarousel_3() {
               lineHeight: '1.2'
             }}
           >
-            Live Texting <br /> Assistant
+            Real-Time Proctoring
           </h1>
           
           {/* Subtitle */}
@@ -104,7 +104,7 @@ export default function MobileSolutionsCarousel_3() {
               lineHeight: '1.3'
             }}
           >
-            Conversations That Convert
+            Eyes on Screen. Always On Guard
           </h2>
           
           {/* Description */}
@@ -116,7 +116,7 @@ export default function MobileSolutionsCarousel_3() {
               lineHeight: '1.5'
             }}
           >
-           Say hello to BerriConnect, your always-on, never-boring, AI chat buddy. From answering customer questions to helping close deals - this is not your average chatbot.
+           Protect the integrity of every interview and assessment. BerriProctor ensures you’re always speaking to the right person by detecting fraud, impersonation, and suspicious behavior in real time.
           </p>
         </div>
 

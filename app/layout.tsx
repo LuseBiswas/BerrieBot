@@ -44,7 +44,7 @@ export default function RootLayout({
         <Script src="https://cdn.lordicon.com/lordicon.js" strategy="beforeInteractive" />
         {/* Google Analytics */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-9FN9N7N8SS"
+          src="https://www.googletagmanager.com/gtag/js?id=G-WZHBLPB04Y"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -52,7 +52,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-9FN9N7N8SS');
+            gtag('config', 'G-WZHBLPB04Y');
           `}
         </Script>
 

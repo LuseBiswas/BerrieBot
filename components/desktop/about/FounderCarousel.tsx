@@ -1,7 +1,5 @@
 'use client';
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
 import Image from 'next/image';
 
 // JSON data structure for founder carousel
@@ -30,25 +28,6 @@ const FOUNDERS = [
 ];
 
 export default function MobileAboutFounderCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
-
-  const nextSlide = () => {
-    setDirection(1);
-    setCurrentIndex((prevIndex) => 
-      prevIndex === FOUNDERS.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setDirection(-1);
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? FOUNDERS.length - 1 : prevIndex - 1
-    );
-  };
-
-  const currentFounder = FOUNDERS[currentIndex];
-
   return (
     <section className="relative bg-black py-16 px-4 overflow-hidden">
       {/* Heading and Sub-heading Section - Above all decorative elements */}
@@ -71,7 +50,7 @@ export default function MobileAboutFounderCarousel() {
           <p 
             className="leading-[1.4] font-light text-white mb-4"
             style={{
-              fontSize: '36px',
+              fontSize: '26px',
               fontFamily: 'Manrope, sans-serif'
             }}
           >
@@ -113,46 +92,16 @@ export default function MobileAboutFounderCarousel() {
         />
       </div>
 
-      {/* Navigation Arrows - Centered between criss-cross images */}
-      <div 
-        className="absolute left-8 right-8 flex justify-between items-center z-20"
-        style={{ top: 'calc(400px + 300px)' }}
-      >
-        <button
-          onClick={prevSlide}
-          className="p-4 rounded-full backdrop-blur-sm transition-colors"
-          aria-label="Previous testimonial"
-        >
-          <ChevronLeft className="w-8 h-8 text-white" />
-        </button>
-
-        <button
-          onClick={nextSlide}
-          className="p-4 rounded-full backdrop-blur-sm transition-colors"
-          aria-label="Next testimonial"
-        >
-          <ChevronRight className="w-8 h-8 text-white" />
-        </button>
-      </div>
-
       {/* Main Content Container */}
-      <div className="max-w-2xl mx-auto relative z-10">
-
-        {/* Founder Carousel Content */}
-        <div className="text-center h-[600px] flex flex-col justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentFounder.id}
-              initial={{ opacity: 0, x: direction * 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction * -100 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="space-y-10"
-            >
+      <div className="max-w-6xl mx-auto relative z-10 mt-52 mb-52">
+        {/* Founders Grid */}
+        <div className="grid grid-cols-3 gap-8 px-8">
+          {FOUNDERS.map((founder) => (
+            <div key={founder.id} className="text-center space-y-6">
               {/* Circular Image */}
               <div className="flex justify-center">
                 <a 
-                  href={currentFounder.link}
+                  href={founder.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group cursor-pointer"
@@ -160,16 +109,16 @@ export default function MobileAboutFounderCarousel() {
                   <div 
                     className="rounded-full overflow-hidden transition-transform duration-300 ease-out group-hover:scale-105"
                     style={{
-                      width: '300px',
-                      height: '300px',
+                      width: '250px',
+                      height: '250px',
                       backgroundColor: '#D9D9D9'
                     }}
                   >
                     <Image 
-                      src={currentFounder.image}
-                      alt={currentFounder.name}
-                      width={300}
-                      height={300}
+                      src={founder.image}
+                      alt={founder.name}
+                      width={250}
+                      height={250}
                       className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
@@ -183,25 +132,25 @@ export default function MobileAboutFounderCarousel() {
               <div 
                 className="text-white font-medium"
                 style={{ 
-                  fontSize: '32px', 
+                  fontSize: '28px', 
                   fontFamily: 'Manrope, sans-serif' 
                 }}
               >
-                {currentFounder.name}
+                {founder.name}
               </div>
 
               {/* Company Name */}
               <div 
                 className="text-white/80"
                 style={{ 
-                  fontSize: '24px', 
+                  fontSize: '20px', 
                   fontFamily: 'Manrope, sans-serif',
                   fontWeight: '300'
                 }}
-                dangerouslySetInnerHTML={{ __html: currentFounder.company }}
+                dangerouslySetInnerHTML={{ __html: founder.company }}
               />
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          ))}
         </div>
       </div>
 
