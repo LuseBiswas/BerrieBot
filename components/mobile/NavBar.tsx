@@ -15,7 +15,7 @@ export default function MobileNavBar() {
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
   // Define routes that should use white background (same as DynamicBackground)
-  const whiteBackgroundRoutes = ["/resources", "/explore/details", "/resources/faq", "/product", "/solutions"];
+  const whiteBackgroundRoutes = [ "/explore/details", "/resources/faq", "/product", "/solutions"];
   
   // Check if current path starts with any of the white background routes
   const shouldUseWhiteBackground = whiteBackgroundRoutes.some(route => 

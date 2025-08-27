@@ -19,7 +19,7 @@ const COMPARISON_DATA = [
   },
   {
     before: "Fraud detection is manual or absent",
-    after: "$198 saved per candidate interview",
+    after: "99.99% foolproof fraud detection",
   },
 ];
 

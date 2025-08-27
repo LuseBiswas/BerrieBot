@@ -43,13 +43,15 @@ export default function ProductFeature() {
         </div>
 
         {/* StackByStack Component */}
-        <div className="flex justify-center mt-60">
-          <StackByStack 
-            cards={PRODUCT_FEATURES}
-            visibleCount={4}
-            width="w-[396px]"
-            height="h-[396px]"
-          />
+        <div className="relative flex justify-center h-[396px] mt-55 mb-12">
+          <div className="relative left-[-300px]">
+            <StackByStack 
+              cards={PRODUCT_FEATURES}
+              visibleCount={4}
+              width="w-[396px]"
+              height="h-[396px]"
+            />
+          </div>
         </div>
       </div>
     </section>

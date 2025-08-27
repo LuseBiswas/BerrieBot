@@ -64,7 +64,7 @@ export default function MobileAboutFounderCarousel() {
         >
           Our
           <br />
-          Leaders
+          Team
         </h1>
 
         {/* Description */}

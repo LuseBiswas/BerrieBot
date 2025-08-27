@@ -75,10 +75,10 @@ export default function LineSection() {
     <section
       ref={ref}
       className="relative bg-transparent"
-      style={{ height: "1457px" }}
+      style={{ height: "1107px" }}
     >
       <div
-        className="flex h-full"
+        className="flex h-full "
         style={{ fontFamily: "Manrope, sans-serif" }}
       >
         {/* Left side - 40% with vertical line */}
@@ -103,7 +103,7 @@ export default function LineSection() {
         </div>
 
         {/* Right side - 60% with content */}
-        <div className="w-3/5 flex flex-col justify-center px-0 space-y-24">
+        <div className="w-3/5 flex flex-col justify-center px-0 space-y-24 ">
           {/* Step 1: Smart Outreach */}
           <motion.div
             className="space-y-6"

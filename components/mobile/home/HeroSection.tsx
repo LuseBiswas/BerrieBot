@@ -283,7 +283,7 @@ export default function MobileHeroSection() {
         </motion.div>
 
         {/* Text Content */}
-        <motion.div 
+        {/* <motion.div 
           className="text-center px-4 max-w-sm mx-auto"
           initial={isVisible ? { opacity: 0 } : false} // Simplified animation
           animate={isVisible ? { opacity: 1 } : false}
@@ -299,7 +299,7 @@ export default function MobileHeroSection() {
 who interviews hundreds of candidates
 while you focus on real work.
           </p>
-        </motion.div>
+        </motion.div> */}
       </motion.div>
     </motion.section>
   );

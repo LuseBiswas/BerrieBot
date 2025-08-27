@@ -282,7 +282,7 @@ export default function MobileStackByStack({
 
                 {/* Teal ribbon section - simplified for debugging */}
                 {(card.ribbon || card.ribbonStatic || card.ribbonImage) && (
-                  <div className="relative w-full py-4 bg-gradient-to-r from-teal-500 to-teal-400 overflow-hidden">
+                  <div className="relative w-full py-4 bg-[#028374] overflow-hidden">
                     <div className="relative w-full h-full flex items-center justify-center">
                       {card.ribbonStatic ? (
                         // Static ribbon without marquee effect - like desktop

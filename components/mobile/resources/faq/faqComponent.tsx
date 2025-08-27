@@ -147,7 +147,7 @@ export default function MobileFAQComponent() {
   const displayedFAQs = showAll ? faqData : faqData.slice(0, 10);
 
   return (
-    <div className="w-full mb-12 px-4">
+    <div className="w-full mb-12 px-4 bg-white pt-10 pb-10">
       <div className="w-full max-w-sm mx-auto space-y-4 mt-10">
         {displayedFAQs.map((item) => (
           <div key={item.id} className="w-full">

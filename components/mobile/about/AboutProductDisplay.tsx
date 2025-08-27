@@ -10,8 +10,8 @@ export default function MobileAboutProductDisplay() {
       id: 1,
       icon: Code,
       title: "Too much time <br/> on the wrong tasks",
-      description: "Over 60% of recruiter time <br/> is lost to repetitive admin.",
-      position: "top-0 left-7",
+      description: "Over 60% of recruiter <br/> time is lost to repetitive <br/> administrative work.",
+      position: "top-[-20] left-7",
     },
     {
       id: 2,

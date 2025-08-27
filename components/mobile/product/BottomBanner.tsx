@@ -7,34 +7,27 @@ import Image from "next/image";
 const COMPANY_LOGOS = [
   {
     id: 1,
-    name: "Microsoft Teams",
-    logo: "/image/product/Microsoft.png",
-    width: 120,
-    height: 60,
-  },
-  {
-    id: 2,
     name: "SAP",
     logo: "/image/product/SAP_1.png",
     width: 75,
     height: 40,
   },
   {
-    id: 3,
+    id: 2,
     name: "SuccessFactors",
     logo: "/image/product/successfactors.png",
     width: 160,
     height: 55,
   },
   {
-    id: 4,
+    id: 3,
     name: "Workday",
     logo: "/image/product/workdays1.png",
     width: 85,
     height: 30,
   },
   {
-    id: 5,
+    id: 4,
     name: "And Many More",
     logo: "/image/product/&manymore.png",
     width: 100,

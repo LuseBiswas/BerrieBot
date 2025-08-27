@@ -14,6 +14,16 @@ interface BlogPost {
   link: string;
 }
 
+// LinkedIn post data interface (same structure as BlogPost)
+interface LinkedInPost {
+  id: number;
+  date: string;
+  title: string;
+  description: string;
+  backgroundImage: string;
+  link: string;
+}
+
 // Sample blog posts data for resource section
 const blogPosts: BlogPost[] = [
   {
@@ -27,8 +37,8 @@ const blogPosts: BlogPost[] = [
   {
     id: 2,
     date: "Jul 29, 2025",
-    title: "Will ‘Comet’ Replace Recruiters?",
-    description: "AI Will Not Replace Recruiters. But Recruiters Who Use AI Will Replace Those Who Don’t.",
+    title: "Will 'Comet' Replace Recruiters?",
+    description: "AI Will Not Replace Recruiters. But Recruiters Who Use AI Will Replace Those Who Don't.",
     backgroundImage: "/image/background/bg_image_4.png",
     link: "https://berribot.substack.com/p/will-comet-replace-recruiters?r=5zrtcb&utm_campaign=post&utm_medium=web&triedRedirect=true"
   },
@@ -42,17 +52,68 @@ const blogPosts: BlogPost[] = [
   }
 ];
 
+// Sample LinkedIn posts data
+const linkedInPosts: LinkedInPost[] = [
+  {
+    id: 4,
+    date: "Sep 5, 2025",
+    title: "The Future of AI-Powered Recruitment is Here",
+    description: "Transforming how companies discover and engage with top talent through intelligent automation.",
+    backgroundImage: "/image/background/bg_image_6.png",
+    link: "https://linkedin.com/company/berribot"
+  },
+  {
+    id: 5,
+    date: "Sep 15, 2025",
+    title: "Building Trust in AI Hiring Systems",
+    description: "How transparency and ethical AI practices are reshaping the recruitment landscape.",
+    backgroundImage: "/image/background/bg_image_7.png",
+    link: "https://linkedin.com/company/berribot"
+  }
+];
+
 export default function BlogResource() {
-  const [activeTab, setActiveTab] = useState<'sub-task' | 'whitepaper'>('sub-task');
+  const [activeTab, setActiveTab] = useState<'all' | 'sub-task' | 'whitepaper' | 'linkedin'>('all');
+  const [visibleCardsCount, setVisibleCardsCount] = useState(6);
+
+  // Combine all posts for the "All" tab
+  const allPosts = [...blogPosts, ...linkedInPosts];
+  const cardsPerPage = 6;
+  const hasMoreCards = allPosts.length > visibleCardsCount;
+
+  const handleShowMore = () => {
+    setVisibleCardsCount(prev => Math.min(prev + cardsPerPage, allPosts.length));
+  };
+
+  // Reset visible cards when switching tabs
+  const handleTabChange = (tab: 'all' | 'sub-task' | 'whitepaper' | 'linkedin') => {
+    setActiveTab(tab);
+    if (tab === 'all') {
+      setVisibleCardsCount(6);
+    }
+  };
 
   return (
     <div className="bg-black ">
       {/* Hero Section */}
-      <section id="blogs" className="relative  flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent">
+      <section id="blogs" className="relative  flex flex-col items-center justify-center px-4 sm:px-6 bg-transparent pt-20">
         {/* ---- Pills ---- */}
         <div className="mt-12 mb-12 relative z-10 flex gap-4">
           <motion.button
-            onClick={() => setActiveTab('sub-task')}
+            onClick={() => handleTabChange('all')}
+            className={`px-6 py-1 rounded-full font-inter font-medium text-lg cursor-pointer ${
+              activeTab === 'all'
+                ? 'bg-[#00C7BEB2] text-white'
+                : 'bg-white text-black'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            All
+          </motion.button>
+          <motion.button
+            onClick={() => handleTabChange('sub-task')}
             className={`px-6 py-1 rounded-full font-inter font-medium text-lg cursor-pointer ${
               activeTab === 'sub-task'
                 ? 'bg-[#00C7BEB2] text-white'
@@ -65,7 +126,7 @@ export default function BlogResource() {
             Sub-stack
           </motion.button>
           <motion.button
-            onClick={() => setActiveTab('whitepaper')}
+            onClick={() => handleTabChange('whitepaper')}
             className={`px-6 py-1 rounded-full font-inter font-medium text-lg cursor-pointer ${
               activeTab === 'whitepaper'
                 ? 'bg-[#00C7BEB2] text-white'
@@ -76,6 +137,19 @@ export default function BlogResource() {
             transition={{ duration: 0.2 }}
           >
             White Papers
+          </motion.button>
+          <motion.button
+            onClick={() => handleTabChange('linkedin')}
+            className={`px-6 py-1 rounded-full font-inter font-medium text-lg cursor-pointer ${
+              activeTab === 'linkedin'
+                ? 'bg-[#00C7BEB2] text-white'
+                : 'bg-white text-black'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            LinkedIn
           </motion.button>
         </div>
 
@@ -93,8 +167,74 @@ export default function BlogResource() {
       <div className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <AnimatePresence mode="wait">
-            {activeTab === 'sub-task' ? (
-              /* Blog Cards in horizontal layout */
+            {activeTab === 'all' ? (
+              /* All Cards in grid layout */
+              <motion.div 
+                key="all"
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                {/* Cards Grid */}
+                <div className="grid grid-cols-3 gap-6 mb-8">
+                  {allPosts.slice(0, visibleCardsCount).map((post, index) => (
+                    <motion.div
+                      key={post.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ 
+                        duration: 0.4, 
+                        delay: index * 0.1,
+                        ease: "easeOut" 
+                      }}
+                    >
+                      <Link href={post.link} target="_blank" rel="noopener noreferrer">
+                        <BlogCard 
+                          post={post} 
+                        />
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Show More Arrow Button */}
+                {hasMoreCards && (
+                  <motion.button
+                    onClick={handleShowMore}
+                    className="flex flex-col items-center justify-center p-4 group"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.5 }}
+                  >
+                    <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-white/20 transition-colors duration-300 mb-2">
+                      <svg 
+                        width="24" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none"
+                        className="text-white"
+                      >
+                        <path 
+                          d="M7 10l5 5 5-5" 
+                          stroke="currentColor" 
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-white font-inter text-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                      Show More
+                    </span>
+                  </motion.button>
+                )}
+              </motion.div>
+            ) : activeTab === 'sub-task' ? (
+              /* Sub-Stack Blog Cards */
               <motion.div 
                 key="sub-task"
                 className="flex gap-6 justify-center"
@@ -104,6 +244,35 @@ export default function BlogResource() {
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               >
                 {blogPosts.map((post, index) => (
+                  <motion.div
+                    key={post.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: index * 0.1,
+                      ease: "easeOut" 
+                    }}
+                  >
+                    <Link href={post.link} target="_blank" rel="noopener noreferrer">
+                      <BlogCard 
+                        post={post} 
+                      />
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.div>
+            ) : activeTab === 'linkedin' ? (
+              /* LinkedIn Cards */
+              <motion.div 
+                key="linkedin"
+                className="flex gap-6 justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                {linkedInPosts.map((post, index) => (
                   <motion.div
                     key={post.id}
                     initial={{ opacity: 0, y: 30 }}
@@ -167,7 +336,7 @@ export default function BlogResource() {
 
 // Blog Card Component
 interface BlogCardProps {
-  post: BlogPost;
+  post: BlogPost | LinkedInPost;
 }
 
 function BlogCard({ post }: BlogCardProps) {

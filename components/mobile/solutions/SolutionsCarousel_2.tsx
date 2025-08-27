@@ -13,18 +13,18 @@ interface SolutionSlide {
 const solutionsData: SolutionSlide[] = [
   {
     id: 1,
-    lordicon: "https://cdn.lordicon.com/gjopwtdp.json",
-    content: "Verifies participantidentity using trusteddatabases."
+    lordicon: "https://cdn.lordicon.com/cfoaotmk.json",
+    content: "End-to-End Interviewing: From greeting and question delivery to scoring and reporting, fully automated."
   },
   {
     id: 2,
-    lordicon: "https://cdn.lordicon.com/jwpaspoo.json", 
-    content: "Flags red flagslike impersonation,deepfakes, audio-lip sync issues(yes, really)."
+    lordicon: "https://cdn.lordicon.com/nwwurnnq.json", 
+    content: "Adaptive Assessments: Questions evolve in real-time to mimic a live interviewer and measure true capability."
   },
   {
     id: 3,
     lordicon: "https://cdn.lordicon.com/glzqezmf.json",
-    content: "Makes sure only the right people get in - and stay in."
+    content: "Integrated Coding & Scoring: In-platform code editor plus AI-based evaluation of both technical and soft skills."
   }
 ];
 
@@ -81,7 +81,7 @@ export default function MobileSolutionsCarousel_2() {
               lineHeight: '1.2'
             }}
           >
-            Real-Time <br /> Proctoring 
+            Seamless AI recruiter 
           </h1>
           
           {/* Subtitle */}
@@ -93,7 +93,7 @@ export default function MobileSolutionsCarousel_2() {
               lineHeight: '1.3'
             }}
           >
-            Eyes on Screen. Always On Guard.
+            to convert your best candidates
           </h2>
           
           {/* Description */}
@@ -105,7 +105,7 @@ export default function MobileSolutionsCarousel_2() {
               lineHeight: '1.5'
             }}
           >
-            Secure online meetings or assessments shouldn’t feel like a gamble. BerriProctor is your AI-powered watchdog for all things video - interviews, tests or meetings - you name it.
+            You very own 24/7 AI recruiter that runs structured, bias-free technical, behavioral, or coding interviews so you can move fast on top talent without overloading your panels.
           </p>
         </div>
 

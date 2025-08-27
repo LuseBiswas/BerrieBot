@@ -22,13 +22,13 @@ export default function Product() {
             ]}
             outro="With BerriConnect, recruiters reclaim hours lost to repetitive tasks, candidates feel valued with timely communication, and every conversation moves you closer to a hire."
             lordicons={[
-              "https://cdn.lordicon.com/cfoaotmk.json", // Box 1
+              "https://cdn.lordicon.com/ucbznuay.json", // Box 1
               "https://cdn.lordicon.com/wsvtrygf.json", // Box 2
               "https://cdn.lordicon.com/odpyouay.json"  // Box 3
             ]}
           />
         </div>
-        <div id="real-time-proctoring">
+        <div id="live-texting">
           <DisplaySolution
             theme="light"
             position="right"
@@ -41,13 +41,13 @@ export default function Product() {
             ]}
             outro="Hiring becomes scalable, consistent, and candidate-friendly reducing time-to-hire by 50% and boosting conversion rates on your best talent."
             lordicons={[
-              "https://cdn.lordicon.com/gjopwtdp.json", // Box 1
-              "https://cdn.lordicon.com/jwpaspoo.json", // Box 2
+             "https://cdn.lordicon.com/cfoaotmk.json", // Box 1
+              "https://cdn.lordicon.com/nwwurnnq.json", // Box 2
               "https://cdn.lordicon.com/glzqezmf.json"  // Box 3
             ]}
           />
         </div>
-        <div id="live-texting">
+        <div id="real-time-proctoring">
           <DisplaySolution
             theme="dark"
             position="left"
@@ -60,8 +60,8 @@ export default function Product() {
             ]}
             outro="BerriProctor saves you from costly mis-hires, protects your brand reputation, and ensures every evaluation is fair, compliant, and trustworthy."
             lordicons={[
-              "https://cdn.lordicon.com/kdibbosx.json", // Box 1
-              "https://cdn.lordicon.com/cfoaotmk.json", // Box 2
+              "https://cdn.lordicon.com/gjopwtdp.json",
+              "https://cdn.lordicon.com/kdibbosx.json", // Box 1 // Box 2
               "https://cdn.lordicon.com/lltgvngb.json"  // Box 3
             ]}
           />

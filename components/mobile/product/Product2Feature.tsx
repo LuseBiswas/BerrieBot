@@ -5,14 +5,14 @@ import StackByStack, { StackCard } from './StackByStack';
 const PRODUCT_FEATURES: StackCard[] = [
   {
     id: 'sec-speed',
-    top: <>Enterprise-Grade<br/><span className="text-teal-400">Security</span></>,
-    ribbon: "SOC 2&nbsp;ISO&nbsp;27001",
-    bottom: <>Startup-Grade<br/><span className="text-teal-400">Speed</span></>,
+    top: <>Enterprise-Grade<br/><span className="text-[#028374]">Security</span></>,
+    ribbon: <>ISO 27001&nbsp;•&nbsp;Soc2Type2&nbsp;•&nbsp;GDPR&nbsp;•&nbsp;DPDP</>,
+    bottom: <>Startup-Grade<br/><span className="text-[#028374]">Speed</span></>,
   },
   {
     id: 'ai-ready',
     top: 'Built by AI Natives',
-    ribbonStatic: 'Patents, exits, and 10M+ minutes of AI assessments power this platform.',
+    ribbonStatic: 'Patents, Successful Start-ups, exits, and 10M+ minutes of AI assessments power this platform.',
   },
   {
     id: 'obs-five',
@@ -78,10 +78,10 @@ export default function MobileProductXFeature() {
         {/* Tagline */}
         <div className="text-center text-[58px] md:text-[68px] lg:text-[77px] tracking-[-1px] mb-30 font-medium text-[#252527] bg-clip-text leading-none">
           <h2 className="text-black mb-2" style={{ fontFamily: 'Manrope, sans-serif' }}>
-            Built on <br />Trust.
+          We&apos;re not 
           </h2>
           <p className="text-black" style={{ fontFamily: 'Manrope, sans-serif' }}>
-            Secured by <br /> Design.
+          just another <br /> hiring tool
           </p>
         </div>
 

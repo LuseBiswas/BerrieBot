@@ -29,7 +29,9 @@ export default function Home() {
       
       {/* Important content - loads with minimal delay */}
       <Suspense fallback={<div className="h-96 bg-black" />}>
+      <div className='-mt-12'>
         <CarouselSection_2 />
+      </div>
       </Suspense>
       
       <Suspense fallback={<div className="h-96 bg-black" />}>
@@ -58,7 +60,10 @@ export default function Home() {
       </Suspense>
       
       <Suspense fallback={<div className="h-96 bg-black" />}>
+        <div className='-mb-30'>
         <CompanyTestimonialSection />
+        </div>
+        
       </Suspense>
       
       <Suspense fallback={<div className="h-96 bg-black" />}>

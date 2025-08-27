@@ -283,7 +283,7 @@ export default function MobileStatsSection() {
   const statsSizes = getStatsSizes();
 
   return (
-    <section ref={ref} className="relative flex items-center justify-center py-10 px-4 overflow-visible">
+    <section ref={ref} className="relative flex items-center justify-center py-10 px-4 overflow-visible bg-black">
       {/* Background grid pattern */}
       <div className="absolute inset-0 bg-pinstripes bg-fixed opacity-20" />
       
@@ -364,7 +364,7 @@ export default function MobileStatsSection() {
           >
             <div className={`text-[20px] md:text-[23px] lg:text-[26px] leading-relaxed font-light ${sizes.descriptionMaxWidth} mx-auto`} style={{ fontFamily: 'Manrope, sans-serif' }}>
               <AnimatedText 
-                text="Berribot helps companies save millions in recruiter hours and cut hiring time in half."
+                text="Berribot helps companies save countless recruiter hours and cut hiring time in half."
                 scrollProgress={scrollYProgress}
                 lineIndex={0}
               />

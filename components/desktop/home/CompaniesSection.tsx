@@ -64,7 +64,7 @@ export default function CompaniesSection() {
                 <div className="flex items-center justify-center w-full h-full">
                   <Image
                   
-                    src="/image/mobile/Home/firstsource.png"
+                    src="/image/mobile/Home/firstsource2.png"
                     alt="Wipro"
                     width={400}
                     height={50}
@@ -83,7 +83,7 @@ export default function CompaniesSection() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/image/mobile/Home/Teleperformer_copy.png"
+                  src="/image/mobile/Home/Teleperformance4.png"
                   alt="Canva"
                   width={400}
                   height={45}
@@ -101,7 +101,7 @@ export default function CompaniesSection() {
               >
                 <div className="flex items-center justify-center w-full h-full">
                   <Image
-                    src="/image/mobile/Home/Wipro2.png"
+                    src="/image/mobile/Home/wipro3.png"
                     alt="Stripe"
                     width={400}
                     height={52}
@@ -120,7 +120,7 @@ export default function CompaniesSection() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/image/mobile/Home/encora.png"
+                  src="/image/mobile/Home/encora2.png"
                   alt="Booking.com"
                   width={420}
                   height={48}
@@ -137,7 +137,7 @@ export default function CompaniesSection() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/image/mobile/Home/indium.png"
+                  src="/image/mobile/Home/indium2.png"
                   alt="Amazon"
                   width={360}
                   height={52}
@@ -155,10 +155,10 @@ export default function CompaniesSection() {
               >
                 <div className="flex items-center justify-center w-full h-full">
                   <Image
-                    src="/image/mobile/Home/mphasis.png"
+                    src="/image/mobile/Home/Mphasis2.png"
                     alt="Mphaisi"
-                    width={500}
-                    height={55}
+                    width={600}
+                    height={75}
                     className="object-contain"
                     style={{ maxWidth: '100%', maxHeight: '100%' }}
                   />
@@ -188,7 +188,7 @@ export default function CompaniesSection() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/image/mobile/Home/citiustech.png"
+                  src="/image/mobile/Home/Citius2.png"
                   alt="VIT"
                   width={450}
                   height={30}
@@ -205,7 +205,7 @@ export default function CompaniesSection() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/image/mobile/Home/excelencia.png"
+                  src="/image/mobile/Home/excelencia2.png"
                   alt="Excelencia"
                   width={420}
                   height={35}
@@ -222,7 +222,7 @@ export default function CompaniesSection() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/image/mobile/Home/cognizant.png"
+                  src="/image/mobile/Home/cognizant2.png"
                   alt="Cognizant"
                   width={380}
                   height={42}
@@ -239,7 +239,7 @@ export default function CompaniesSection() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/image/mobile/Home/LTIMindtree_3.png"
+                  src="/image/mobile/Home/LTIMindtree2.png"
                   alt="LTIMindtree"
                   width={500}
                   height={28}
@@ -256,7 +256,7 @@ export default function CompaniesSection() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/image/mobile/Home/Mindsprint_2.png"
+                  src="/image/mobile/Home/Mindsprint2.png"
                   alt="Mindsprint"
                   width={460}
                   height={38}
@@ -273,7 +273,7 @@ export default function CompaniesSection() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/image/mobile/Home/congruent.png"
+                  src="/image/mobile/Home/Congruent2.png"
                   alt="Teleperformer"
                   width={450}
                   height={30}

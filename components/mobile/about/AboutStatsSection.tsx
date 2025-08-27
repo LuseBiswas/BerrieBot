@@ -273,8 +273,7 @@ export default function MobileAboutStatsSection() {
                   fontFamily: 'Manrope, sans-serif'
                 }}
               >
-                customers including Cognizant, <br />
-                Wipro, Mphasis, & more.
+                Top Tier Technology firms
               </p>
             </div>
           </motion.div>
@@ -315,7 +314,7 @@ export default function MobileAboutStatsSection() {
                     targetValue={78}
                     format={(num) => `${Math.round(num)}%`}
                     showActual={showActualValues}
-                  />%
+                  />
                 </div>
                 <div className="text-[14px] font-extralight text-[#060606] leading-tight" style={{ fontFamily: 'Manrope, sans-serif' }}>
                 savings in<br />recruiter & panel <br /> hours

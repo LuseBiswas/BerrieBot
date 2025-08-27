@@ -18,7 +18,7 @@ export default function CTASection() {
   });
   
   // Transform scroll progress to slide up from behind footer
-  const y = useTransform(scrollYProgress, [0, 0.65, 1], [400, 0, -200]);
+  const y = useTransform(scrollYProgress, [0, 0.65, 1], [400, 0, -0]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [0, 1, 1, 0]);
 
   const handleCTAClick = () => {
@@ -77,7 +77,7 @@ export default function CTASection() {
         <div className="flex-1 flex items-center justify-center">
           <Link href="/schedule">
           <motion.button
-            className="bg-[#028374] text-black px-8 py-4 rounded-2xl font-inter font-light text-[16px] hover:bg-[#039a87] hover:cursor-pointer transition-colors relative overflow-hidden w-[180px] h-[56px]"
+            className="bg-[#04BBA6] text-black px-8 py-4 rounded-md font-inter font-light text-[16px] hover:bg-[#039a87] hover:cursor-pointer transition-colors relative overflow-hidden w-[180px] h-[56px]"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, x: 50 }}

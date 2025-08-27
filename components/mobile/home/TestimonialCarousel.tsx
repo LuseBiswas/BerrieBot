@@ -79,7 +79,7 @@ export default function MobileTestimonialCarousel() {
       </div> */}
       
       {/* Top Right - 8.png */}
-      <div className="absolute z-1 pointer-events-none" style={{ top: '150px', right: '-150px' }}>
+      <div className="absolute z-1 pointer-events-none" style={{ top: '200px', right: '-150px' }}>
         <Image 
           src="/image/mobile/8.png"
           alt="Background Image Top Right"
@@ -121,6 +121,18 @@ export default function MobileTestimonialCarousel() {
 
       {/* Main Content Container */}
       <div className="max-w-sm mx-auto relative z-10">
+
+        {/* Heading */}
+        <h2 
+          className="text-white text-center mb-8"
+          style={{ 
+            fontSize: '38px', 
+            fontFamily: 'Manrope, sans-serif',
+            fontWeight: 500
+          }}
+        >
+          "What do <br /> our clients say"
+        </h2>
 
         {/* Testimonial Content */}
         <div className="text-center h-[400px] flex flex-col justify-center">

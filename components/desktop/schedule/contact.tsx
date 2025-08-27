@@ -9,6 +9,8 @@ const Contact = () => {
   const [workEmail, setWorkEmail] = useState('');
   const [demoMessage, setDemoMessage] = useState('');
   const [hasStartedForm, setHasStartedForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const handleFormStart = () => {
     if (!hasStartedForm) {
@@ -17,12 +19,46 @@ const Contact = () => {
     }
   };
 
-  const handleDemoSubmit = (e: React.FormEvent) => {
+  const handleDemoSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Track form submission
-    trackDemoFormSubmission('desktop');
-    // Handle demo form submission logic here
-    console.log({ fullName, companyName, workEmail, demoMessage });
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      // Track form submission
+      trackDemoFormSubmission('desktop');
+
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName,
+          companyName,
+          workEmail,
+          demoMessage,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitMessage('Email sent successfully! We\'ll get back to you soon.');
+        // Clear form
+        setFullName('');
+        setCompanyName('');
+        setWorkEmail('');
+        setDemoMessage('');
+      } else {
+        setSubmitMessage('Failed to send email. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitMessage('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -156,15 +192,37 @@ Best,"
             <div className="flex justify-center mt-8">
               <button
                 type="submit"
-                className="bg-[#028374] text-white px-8 py-3 rounded-2xl font-medium hover:bg-[#4a847c] transition-colors"
+                disabled={isSubmitting}
+                className={`px-8 py-3 rounded-2xl font-medium transition-colors ${
+                  isSubmitting 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-[#028374] hover:bg-[#4a847c]'
+                } text-white`}
                 style={{
                   fontSize: '16px',
                   fontFamily: 'Manrope, sans-serif'
                 }}
               >
-                Contact support
+                {isSubmitting ? 'Sending...' : 'Contact support'}
               </button>
             </div>
+
+            {/* Submit Message */}
+            {submitMessage && (
+              <div className="text-center mt-4">
+                <p 
+                  className={`font-medium ${
+                    submitMessage.includes('successfully') ? 'text-green-600' : 'text-red-600'
+                  }`}
+                  style={{
+                    fontSize: '14px',
+                    fontFamily: 'Manrope, sans-serif'
+                  }}
+                >
+                  {submitMessage}
+                </p>
+              </div>
+            )}
           </form>
 
           {/* Support section */}

@@ -14,18 +14,18 @@ interface SolutionSlide {
 const solutionsData: SolutionSlide[] = [
   {
     id: 1,
-    lordicon: "https://cdn.lordicon.com/cfoaotmk.json",
-    content: "Schedules interviews, confirms call letters, and keeps your career site buzzing."
+    lordicon: "https://cdn.lordicon.com/ucbznuay.json",
+    content: "Automated Outreach & Reminders: Sends bulk calls, chats, and SMS nudges to keep candidates engaged and informed."
   },
   {
     id: 2,
     lordicon: "https://cdn.lordicon.com/wsvtrygf.json", 
-    content: "Automates candidate screening and handles initial assessments with precision."
+    content: "Interactive Scheduling: Collects availability, confirms slots, and reschedules seamlessly across channels like WhatsApp, SMS, or email."
   },
   {
     id: 3,
     lordicon: "https://cdn.lordicon.com/odpyouay.json",
-    content: "Manages recruitment workflows and tracks candidate progress 24/7."
+    content: "Follow-Up & Status Tracking: Provides real-time updates on interview status and reminders to improve show rates."
   }
 ];
 
@@ -82,7 +82,7 @@ export default function MobileSolutionsCarousel() {
               lineHeight: '1.2'
             }}
           >
-            Recruitment Assistant
+            Always-on 
           </h1>
           
           {/* Subtitle */}
@@ -94,7 +94,7 @@ export default function MobileSolutionsCarousel() {
               lineHeight: '1.3'
             }}
           >
-            Your New Favourite Team Member
+            proactive scheduling assistant that gets you conversations that convert
           </h2>
           
           {/* Description */}
@@ -106,7 +106,7 @@ export default function MobileSolutionsCarousel() {
               lineHeight: '1.5'
             }}
           >
-            Hiring&apos;s hard. Endless screening calls? Even harder. With Berri360, your recruitment team gets a super-assistant that works 24/7 (and doesn&apos;t even need coffee).
+            Never lose a candidate to scheduling delays or missed follow-ups. BerriConnect is your always-on outreach and scheduling assistant, ensuring every conversation happens on time and drives outcomes.
           </p>
         </div>
 
@@ -156,7 +156,7 @@ export default function MobileSolutionsCarousel() {
             </div>
 
             {/* Content Box Container - Fixed Size */}
-            <div className="relative" style={{ width: '226px', height: '126px' }}>
+            <div className="relative" style={{ width: '226px', height: '146px' }}>
               <AnimatePresence mode="wait" initial={false}>
                                   <motion.div
                     key={`content-${currentIndex}`}

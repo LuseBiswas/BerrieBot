@@ -63,39 +63,61 @@ export default function StackByStack({
     if (!isDismissing) setIsDismissing(true);
   }, [isDismissing]);
 
+  const onCardClick = useCallback((cardId: string, depth: number) => {
+    if (isDismissing) return;
+    
+    if (depth === 0) {
+      // Front card - dismiss it
+      setIsDismissing(true);
+    } else {
+      // Background card - bring it to front
+      setOrder(prev => {
+        const cardIndex = prev.indexOf(cardId);
+        if (cardIndex === -1) return prev;
+        
+        const newOrder = [...prev];
+        const [card] = newOrder.splice(cardIndex, 1);
+        newOrder.unshift(card);
+        return newOrder;
+      });
+    }
+  }, [isDismissing]);
+
   return (
     <div className={`relative mx-auto ${width} ${height} select-none`}>
       <AnimatePresence mode="popLayout">
         {visible.map((card, depth) => {
           const isFront = depth === 0;
 
-          // --- KEEPING YOUR ORIGINAL VISUALS ---
-          const yMove = -60 * depth;             // same vertical gap
-          const scale = 1 - depth * 0.08;        // same scaling
-          const z = 100 - depth;                 // same z-index idea
-          const opacity = 1 - depth * 0.15;      // same opacity falloff
-          const blur = depth > 0 ? Math.min(depth * 2, 4) : 0; // same blur
+          // Enhanced positioning for spread layout with plus signs
+          const xMove = depth * 175; // Move cards to the right - increased gap
+          const yMove = -depth * 45; // Move cards up - increased gap
+          const scale = 1 - depth * 0.05; // Subtle scaling
+          const z = 100 - depth;
+          const opacity = 1 - depth * 0.3; // More pronounced opacity reduction
+          const blur = depth > 0 ? depth * 1.5 : 0; // Progressive blur effect
+          const rotation = depth * 0; // Slight rotation for depth
 
+          // Base transform for stacked appearance
           const baseTransform = {
+            x: xMove,
             y: yMove,
             scale,
             opacity,
-            x: 0,
-            rotate: 0,
+            rotate: rotation,
             filter: blur > 0 ? `blur(${blur}px)` : 'none',
           };
 
-          const dismissTransform =
-            isFront && isDismissing
-              ? {
-                  x: -300,
-                  opacity: 0,
-                  rotate: -15,
-                  scale: scale * 0.8,
-                  y: yMove + 20,
-                  filter: 'none',
-                }
-              : baseTransform;
+          const dismissTransform = isFront && isDismissing
+            ? {
+                x: -200,
+                y: yMove + 20,
+                opacity: 0,
+                rotate: -15,
+                scale: scale * 0.9,
+                filter: 'none',
+              }
+            : baseTransform;
 
           return (
             <motion.div
@@ -105,16 +127,16 @@ export default function StackByStack({
                 opacity: 0,
                 y: yMove + 80,
                 scale: scale * 0.85,
-                x: 60,
-                rotate: 5,
+                x: xMove + 60,
+                rotate: rotation + 5,
               }}
               animate={dismissTransform}
               exit={{
                 opacity: 0,
                 y: yMove + 80,
                 scale: scale * 0.85,
-                x: 60,
-                rotate: 5,
+                x: xMove + 60,
+                rotate: rotation + 5,
               }}
               transition={
                 isFront && isDismissing
@@ -138,8 +160,8 @@ export default function StackByStack({
                 zIndex: z,
                 willChange: 'transform, opacity, filter',
               }}
-              className={`absolute inset-0 ${isFront ? 'cursor-pointer' : 'pointer-events-none'}`}
-              onClick={isFront ? onFrontClick : undefined}
+              className="absolute inset-0 cursor-pointer"
+              onClick={() => onCardClick(card.id, depth)}
               onAnimationComplete={() => {
                 // NEW: after front card finishes dismissing, move it to the back and reset
                 if (isFront && isDismissing) {
@@ -152,16 +174,17 @@ export default function StackByStack({
                 }
               }}
               whileHover={
-                isFront && !isDismissing
+                !isDismissing
                   ? {
                       scale: scale * 1.03,
-                      y: yMove - 5,
+                      y: yMove - 8,
+                      x: xMove - (depth * 5), // Slight movement toward front
                       transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] },
                     }
                   : {}
               }
               whileTap={
-                isFront && !isDismissing
+                !isDismissing
                   ? {
                       scale: scale * 0.97,
                       y: yMove + 2,
@@ -265,10 +288,36 @@ export default function StackByStack({
                 </div>
               </div>
 
-              {/* Subtle glow effect for front card (unchanged) */}
-              {isFront && !isDismissing && (
-                <div className="absolute inset-0 rounded-3xl ring-1 ring-teal-500/20 pointer-events-none" />
+              {/* Enhanced glow effect for front card */}
+              {isFront && (
+                <div className="absolute inset-0 rounded-3xl ring-1 ring-teal-200/40 pointer-events-none" />
               )}
+
+              {/* Plus icon on the right side of each card */}
+              <div 
+                className="absolute pointer-events-none"
+                style={{
+                  right: '-120px', // Position 120px to the right of the card
+                  bottom: '0%',
+                  transform: 'translateY(50%)',
+                  zIndex: z + 1,
+                  opacity: opacity * 0.8, // Slightly more transparent than the card
+                }}
+              >
+                <svg 
+                  width="64" 
+                  height="64" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                  className="text-black"
+                >
+                  <path d="M12 5v14M5 12h14"/>
+                </svg>
+              </div>
             </motion.div>
           );
         })}

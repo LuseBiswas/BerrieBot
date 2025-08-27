@@ -43,6 +43,13 @@ export default function Footer() {
                 <p>1 North Bridge Road,</p>
                 <p>Singapore - 179094</p>
               </div>
+              <br />
+              <div className="text-gray-400 leading-relaxed">
+                <p>No.6/2, Sree Lakshmi Nagar, </p>
+                <p> Thanner Pandal road, Peelamedu,</p>
+                <p> Coimbatore, Tamil Nadu - 641004</p>
+              </div>
+              
             </div>
             
             {/* Contact */}

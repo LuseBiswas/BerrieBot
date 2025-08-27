@@ -222,7 +222,7 @@ export default function MobileAboutStatsSection() {
               <p
                 className="leading-[1.4] font-light text-black mb-4"
                 style={{
-                  fontSize: "36px",
+                  fontSize: "26px",
                   fontFamily: "Manrope, sans-serif",
                 }}
               >
@@ -268,7 +268,7 @@ export default function MobileAboutStatsSection() {
               <p
                 className="leading-[1.4] font-light text-black mb-4"
                 style={{
-                  fontSize: "36px",
+                  fontSize: "26px",
                   fontFamily: "Manrope, sans-serif",
                 }}
               >

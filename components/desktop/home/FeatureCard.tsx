@@ -1,6 +1,7 @@
 "use client";
 import { motion, useInView, useScroll, useTransform, MotionValue } from "framer-motion";
 import React, { useRef } from "react";
+import Image from "next/image";
 import FeatureCardItem from "./FeatureCardItem";
 
 /* ---------- Custom Hook for Word Animation ---------- */
@@ -116,8 +117,8 @@ export default function FeatureCard() {
         }}
       />
 
-      {/* ---------- CENTERED HEADLINE + SUBTITLE (only change) ---------- */}
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center z-20">
+      {/* ---------- TOP POSITIONED HEADLINE + SUBTITLE ---------- */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 flex flex-col items-center text-center z-20 mt-20">
         <div className="relative px-8 py-4 inline-block text-center">
           {/* Background to block the line but preserve grid with fading effect */}
           <div className="absolute inset-0 -mx-12 -my-6 rounded-lg" 
@@ -133,6 +134,67 @@ export default function FeatureCard() {
               <br />
               <span className="text-white">AI Era</span>
             </h2>
+
+            {/* Ripple Effect Icon */}
+            <div className="absolute bottom-[430] left-[315] transform translate-y-8 -translate-x-8">
+              <div className="relative w-32 h-32 flex items-center justify-center">
+                {/* Ripple Effect Circles */}
+                <motion.div
+                  className="absolute w-32 h-32 border border-white/20 rounded-full"
+                  animate={{
+                    scale: [1, 1.8],
+                    opacity: [0, 0.6, 0.3, 0],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                    times: [0, 0.2, 0.7, 1],
+                  }}
+                />
+                <motion.div
+                  className="absolute w-32 h-32 border border-white/20 rounded-full"
+                  animate={{
+                    scale: [1, 1.8],
+                    opacity: [0, 0.6, 0.3, 0],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                    delay: 0.8,
+                    times: [0, 0.2, 0.7, 1],
+                  }}
+                />
+                <motion.div
+                  className="absolute w-32 h-32 border border-white/20 rounded-full"
+                  animate={{
+                    scale: [1, 1.8],
+                    opacity: [0, 0.6, 0.3, 0],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                    delay: 1.6,
+                    times: [0, 0.2, 0.7, 1],
+                  }}
+                />
+
+                {/* Main Circle */}
+                <div className="flex items-center justify-center relative z-10">
+                  <div className="w-20 h-20 relative rounded-full flex items-center justify-center overflow-hidden">
+                    <Image
+                      src="/image/logo_2.png"
+                      alt="Background"
+                      width={80}
+                      height={80}
+                      className="absolute inset-0 w-full h-full object-cover rounded-full bg-black"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
             
           </div>
           
@@ -156,7 +218,7 @@ export default function FeatureCard() {
       <div className="relative w-full h-[1500px] max-w-7xl mx-auto mt-350">
         {/* Top Left */}
         <motion.div 
-          className="absolute bottom-580 right-250 w-80"
+          className="absolute bottom-450 right-250 w-80"
           style={{ 
             x: leftCardX,
             opacity: cardOpacity
@@ -185,7 +247,7 @@ export default function FeatureCard() {
 
         {/* Top Right */}
         <motion.div 
-          className="absolute bottom-520 left-185 w-80"
+          className="absolute bottom-400 left-185 w-80"
           style={{ 
             x: rightCardX,
             opacity: cardOpacity
@@ -214,7 +276,7 @@ export default function FeatureCard() {
 
         {/* Middle Left */}
         <motion.div 
-          className="absolute bottom-400 right-258 transform -translate-y-1/2 w-80"
+          className="absolute bottom-230 right-258 transform -translate-y-1/2 w-80"
           style={{ 
             x: leftCardX,
             opacity: cardOpacity

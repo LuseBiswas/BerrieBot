@@ -14,7 +14,7 @@ export default function NavBar() {
   const pathname = usePathname();
   
   // Define routes that should have black navbar background
-  const whiteBackgroundRoutes = [ "/resources","/explore/details", "/resources/faq","/product"];
+  const whiteBackgroundRoutes = ["/explore/details", "/resources/faq","/product",'/solutions'];
   
   // Check if current path starts with any of the white background routes
   const shouldUseBlackNavbar = whiteBackgroundRoutes.some(route => 

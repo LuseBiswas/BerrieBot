@@ -258,7 +258,7 @@ export default function StatsSection() {
               
               <div className="font-inter text-[20px] sm:text-2xl md:text-[26px] leading-[1.4] sm:leading-[1.5] font-light max-w-5xl mx-auto">
                 <AnimatedText 
-                  text="Berribot helps companies save millions in recruiter hours and cut hiring time in half."
+                  text="Berribot helps companies save countless recruiter hours and cut hiring time in half."
                   scrollProgress={scrollYProgress}
                   lineIndex={0}
                 />

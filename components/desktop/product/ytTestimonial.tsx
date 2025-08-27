@@ -112,33 +112,7 @@ export default function YtTestimonial() {
                 </div>
 
                 {/* Testimonial Overlay - Outside video container for free positioning */}
-                <motion.div
-                  className="absolute bottom-[350px] right-[-50px] text-white p-3 rounded-[42px] w-[384px] h-[141px] shadow-lg z-20"
-                  style={{
-                    backgroundImage: "url('/image/BG_1.png')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat"
-                  }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                  viewport={{ once: true }}
-                >
-                  {/* Inverted Comma Image */}
-                  
-                    
-                  <div className="flex items-center justify-center h-full">
-                    {/* Testimonial Content */}
-                    
-                    <div>
-                      <p className="text-white text-[18px] font-inter font-light text-center leading-relaxed">
-                      &ldquo;Welcome to Berribot! I&apos;m Berri, your <br /> AI recruiter who interviews hundreds of candidates while you focus on real work&rdquo;
-                        
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
+                
 
                 {/* Decorative Elements */}
                 <div className="absolute bottom-[-120] left-[-120] transform translate-y-8 -translate-x-8">
